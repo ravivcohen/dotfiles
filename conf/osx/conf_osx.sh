@@ -86,9 +86,6 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool false
 # Empty Trash securely by default
 defaults write com.apple.finder EmptyTrashSecurely -bool true
 
-# Show the ~/Library folder
-chflags nohidden ~/Library
-
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 # Disable stupid semitransparent menubar
@@ -98,9 +95,9 @@ defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # It's my library. Let me see it.
-chflags nohidden ~/Library/
-chflags nohidden /tmp
-chflags nohidden /usr
+sudo chflags nohidden ~/Library/
+sudo chflags nohidden /tmp
+sudo chflags nohidden /usr
 
 
 
@@ -224,11 +221,11 @@ sudo pmset -a destroyfvkeyonstandby 1 hibernatemode 25
 # to sleep -> hibernate after a period of time.
 # pmset -a hibernatemode 0
 # pmset -a autopoweroff 0
-rm /private/var/vm/sleepimage
+sudo rm -rf /private/var/vm/sleepimage
 
 # Remove the Java browser Plugin.
-rm -rf /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
-touch /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
-chmod 000 /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
-chflags uchg /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
+sudo rm -rf /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
+sudo touch /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
+sudo chmod 000 /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
+sudo chflags uchg /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
 
