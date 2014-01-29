@@ -59,8 +59,9 @@ if [[ "$(type -P brew)" ]]; then
   
   #install and upgrade PIP
   e_header "Install and Upgrade PIP"
-  /usr/local/share/python/easy_install pip
-  /usr/local/share/python/pip install --upgrade distribute
+  pip install --upgrade setuptools
+  pip install --upgrade pip
+  pip install --upgrade distribute
   
   e_header "Install VirualENV + VirtualEnvWrapper"
   ##Actually Install VirtualEnv 
