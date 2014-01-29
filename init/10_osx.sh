@@ -11,7 +11,6 @@
 # Homebrew should already be installed at this point.
 if [[ ! "$(type -P brew)" ]]; then
   e_header "Installing Homebrew"
-  xcode-select --install
   true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 fi
 
