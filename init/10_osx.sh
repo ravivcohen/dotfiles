@@ -43,11 +43,11 @@ if [[ "$(type -P brew)" ]]; then
   
   # Install wget with IRI support
   e_header "Installing wget with IRI"
-  install wget --enable-iri
+  brew install wget --enable-iri
   
   # Install more recent versions of some OS X tools
   e_header "Install and override latest version of VIM"
-  install vim --override-system-vi
+  brew install vim --override-system-vi
   
   #this is needed for the python install below to work
   e_header "Install  readline gdbm sqlite universal"
