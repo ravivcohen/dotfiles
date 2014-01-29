@@ -31,7 +31,7 @@ if [[ "$(type -P brew)" ]]; then
   brew install homebrew/dupes/grep
   
   # Install Homebrew recipes.
-  recipes=(git ssh-copy-id tree nmap git-extras htop-osx coreutils findutils ack lynx pigz rename tree gdbm pkg-config)
+  recipes=(git ssh-copy-id tree nmap git-extras htop-osx coreutils findutils ack lynx pigz rename tree pkg-config p7zip)
 
   list="$(to_install "${recipes[*]}" "$(brew list)")"
   if [[ "$list" ]]; then
@@ -41,13 +41,28 @@ if [[ "$(type -P brew)" ]]; then
   
   echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
   
+  # Install wget with IRI support
+  e_header "Installing wget with IRI"
+  install wget --enable-iri
+  
+  # Install more recent versions of some OS X tools
+  e_header "Install and override latest version of VIM"
+  install vim --override-system-vi
+  
+  #this is needed for the python install below to work
+  e_header "Install  readline gdbm sqlite universal"
+  brew install readline sqlite gdbm --universal
+  
   #update to latest version of python universal == 32/64bit and framework == allows interaction with osx libs
+  e_header "Install  readline gdbm sqlite universal"
   brew install python --universal --framework
   
   #install and upgrade PIP
+  e_header "Install and Upgrade PIP"
   /usr/local/share/python/easy_install pip
   /usr/local/share/python/pip install --upgrade distribute
   
+  e_header "Install VirualENV + VirtualEnvWrapper"
   ##Actually Install VirtualEnv 
   pip install virtualenv 
   pip install virtualenvwrapper
@@ -64,15 +79,67 @@ if [[ "$(type -P brew)" ]]; then
   function installcask() {
   	brew cask install "${@}" 2> /dev/null
   }
-
-  # Install Cask recipes.
-  recipes=(google-chrome iterm2 macvim sublime-text the-unarchiver tor-browser transmission transmit keepass-x x-quartz true-crypt path-finder gpgtools cord adium skype shuttle tunnelblick wireshark)
-
-  list="$(to_install "${recipes[*]}" "$(brew list)")"
-  if [[ "$list" ]]; then
-    e_header "Installing Cask recipes: $list"
-    installcask $list
-  fi
+  
+  e_header "Install google-chrome"
+  brew cask install google-chrome
+  
+  e_header "Install iterm2"
+  brew cask install iterm2
+  
+  e_header "Install macvim"
+  brew cask install macvim
+  
+  e_header "Install sublime-text"
+  brew cask install sublime-text
+  
+  e_header "Install the-unarchiver"
+  brew cask install the-unarchiver
+  
+  e_header "Install tor-browser"
+  brew cask install tor-browser
+  
+  e_header "Install transmission"
+  brew cask install transmission
+  
+  e_header "Install transmit"
+  brew cask install transmit
+  
+  e_header "Install keepass-x"
+  brew cask install keepass-x
+  
+  e_header "Install x-quartz"
+  brew cask install x-quartz
+  
+  e_header "Install true-crypt"
+  brew cask install true-crypt
+  
+  e_header "Install path-finder"
+  brew cask install path-finder
+  
+  e_header "Install gpgtools"
+  brew cask install gpgtools
+  
+  e_header "Install cord"
+  brew cask install cord
+  
+  e_header "Install adium"
+  brew cask install adium
+  
+  e_header "Install skype"
+  brew cask install skype
+  
+  e_header "Install shuttle"
+  brew cask install shuttle
+  
+  e_header "Install tunnelblick"
+  brew cask install tunnelblick
+  
+  e_header "Install wireshark"
+  brew cask install wireshark
+  
+  e_header "Install little-snitch"
+  brew cask install little-snitch
+  
   
   # Remove outdated versions from the cellar
   brew cleanup
