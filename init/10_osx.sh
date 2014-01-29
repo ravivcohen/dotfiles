@@ -78,68 +78,68 @@ if [[ "$(type -P brew)" ]]; then
   brew install brew-cask
 
   function installcask() {
-  	brew cask install "${@}" 2> /dev/null
+  	brew cask install --appdir="/Applications"  "${@}"
   }
   
   e_header "Install google-chrome"
-  brew cask install google-chrome
+  installcask google-chrome
   
   e_header "Install iterm2"
-  brew cask install iterm2
+  installcask iterm2
   
   e_header "Install macvim"
-  brew cask install macvim
+  installcask macvim
   
   e_header "Install sublime-text"
-  brew cask install sublime-text
+  installcask sublime-text
   
   e_header "Install the-unarchiver"
-  brew cask install the-unarchiver
+  installcask the-unarchiver
   
   e_header "Install tor-browser"
-  brew cask install tor-browser
+  installcask tor-browser
   
   e_header "Install transmission"
-  brew cask install transmission
+  installcask transmission
   
   e_header "Install transmit"
-  brew cask install transmit
+  installcask transmit
   
   e_header "Install keepass-x"
-  brew cask install keepass-x
+  installcask keepassx
   
   e_header "Install x-quartz"
-  brew cask install x-quartz
+  installcask xquartz
   
   e_header "Install true-crypt"
-  brew cask install true-crypt
+  installcask truecrypt
   
   e_header "Install path-finder"
-  brew cask install path-finder
+  installcask path-finder
   
   e_header "Install gpgtools"
-  brew cask install gpgtools
+  installcask gpgtools
   
   e_header "Install cord"
-  brew cask install cord
+  installcask cord
   
   e_header "Install adium"
-  brew cask install adium
+  installcask adium
   
   e_header "Install skype"
-  brew cask install skype
+  installcask skype
   
   e_header "Install shuttle"
-  brew cask install shuttle
+  installcask shuttle
   
   e_header "Install tunnelblick"
-  brew cask install tunnelblick
+  installcask tunnelblick
   
   e_header "Install wireshark"
-  brew cask install wireshark
+  installcask wireshark
   
   e_header "Install little-snitch"
-  brew cask install little-snitch
+  installcask little-snitch
   
   
   # Remove outdated versions from the cellar
