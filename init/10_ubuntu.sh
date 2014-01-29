@@ -42,6 +42,8 @@ packages=(
   tree
   nmap telnet
   htop
+  ack-grep
+  git-extras
 )
 
 list=()
