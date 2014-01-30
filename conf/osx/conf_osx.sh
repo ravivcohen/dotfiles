@@ -138,14 +138,6 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 
-# Terminal
-# ========
-
-# Use a modified version of the Pro theme by default in Terminal.app
-open "$pm/dotfiles/terminal/paulmillr.terminal"
-sleep 1 # Wait a bit to make sure the theme is loaded
-defaults write com.apple.terminal 'Default Window Settings' -string 'paulmillr'
-defaults write com.apple.terminal 'Startup Window Settings' -string 'paulmillr'
 
 ##############################################################################
 # Dock, Dashboard, and hot corners                                            #

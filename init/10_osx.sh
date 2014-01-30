@@ -148,11 +148,25 @@ if [[ "$(type -P brew)" ]]; then
 fi
 
 # htop
-  if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wheel" || ! "$(($(stat -L -f "%DMp" "$(which htop)") & 4))" ]]; then
-    e_header "Updating htop permissions"
-    sudo chown root:wheel "$(which htop)"
-    sudo chmod u+s "$(which htop)"
-  fi
-  
-# Setup OXS Config Stugg
-source ~/.dotfiles/conf/osx/conf_osx.sh
+if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wheel" || ! "$(($(stat -L -f "%DMp" "$(which htop)") & 4))" ]]; then
+ e_header "Updating htop permissions"
+ sudo chown root:wheel "$(which htop)"
+ sudo chmod u+s "$(which htop)"
+fi
+
+
+if [[ "$new_dotfiles_install" && -e "conf/firsttime_reminder.sh" ]]; then
+ e_header "First-Time OSX Init"
+ # Terminal
+ # ========
+
+ # Use a modified version of the Pro theme by default in Terminal.app
+ open "~/.oh-my-zsh/custom/terminal/paulmillr.terminal"
+ sleep 1 # Wait a bit to make sure the theme is loaded
+ defaults write com.apple.terminal 'Default Window Settings' -string 'paulmillr'
+ defaults write com.apple.terminal 'Startup Window Settings' -string 'paulmillr'
+
+ # Setup OXS Config Stugg
+ source ~/.dotfiles/conf/osx/conf_osx.sh
+fi
+
