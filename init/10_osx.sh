@@ -23,6 +23,10 @@ if [[ "$(type -P brew)" ]]; then
   # Upgrade any already-installed formulae
   brew upgrade
   
+  #this is needed for the python install below to work
+  e_header "Install  readline gdbm sqlite universal"
+  brew install readline sqlite gdbm --universal
+  
   e_header "Installing ZSH"
   brew install zsh
   chsh -s /usr/local/bin/zsh
@@ -34,10 +38,6 @@ if [[ "$(type -P brew)" ]]; then
   # Install more recent versions of some OS X tools
   e_header "Install and override latest version of VIM"
   brew install vim --override-system-vi
-  
-  #this is needed for the python install below to work
-  e_header "Install  readline gdbm sqlite universal"
-  brew install readline sqlite gdbm --universal
   
   # Install more recent versions of some OS X tools
   brew tap homebrew/dupes
