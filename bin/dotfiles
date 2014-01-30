@@ -194,12 +194,6 @@ function path_remove() {
 }
 
 
-# Lest I forget to do a few additional things...
-if [[ "$new_dotfiles_install" ]]; then
-  e_header "SETUP OH MY ZSH"
-  ##SETUP OH MY ZSH ONLY ON THE FIRST TIME
-  wget --no-check-certificate https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
-fi
 
 # Add binaries into the path
 PATH=~/.dotfiles/bin:$PATH
@@ -230,6 +224,13 @@ fi
 if [[ "$new_dotfiles_install" && -e "conf/firsttime_reminder.sh" ]]; then
   e_header "First-Time Reminders"
   source "conf/firsttime_reminder.sh"
+  ##SETUP OH MY ZSH ONLY ON THE FIRST TIME
+  wget --no-check-certificate https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
+fi
+
+# Lest I forget to do a few additional things...
+if [[ "$new_dotfiles_install" ]]; then
+  e_header "SETUP OH MY ZSH"
   ##SETUP OH MY ZSH ONLY ON THE FIRST TIME
   wget --no-check-certificate https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
 fi
