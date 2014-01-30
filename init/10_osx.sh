@@ -76,6 +76,7 @@ if [[ "$(type -P brew)" ]]; then
   # Install native apps
   brew tap phinze/homebrew-cask
   brew install brew-cask
+  brew tap caskroom/versions
 
   function installcask() {
   	brew cask install --appdir=/Applications  "${@}"
@@ -132,14 +133,20 @@ if [[ "$(type -P brew)" ]]; then
   e_header "Install shuttle"
   installcask shuttle
   
-  e_header "Install tunnelblick"
-  installcask tunnelblick
+  e_header "Install tunnelblick beta"
+  installcask tunnelblick-beta
   
   e_header "Install wireshark"
   installcask wireshark
   
   e_header "Install little-snitch"
   installcask little-snitch
+
+  e_header "Install java"
+  installcask java
+  
+  e_header "Install VMWare fusion"
+  installcask vmware-fusion
   
   
   # Remove outdated versions from the cellar
