@@ -155,7 +155,7 @@ if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wh
 fi
 
 
-if [[ "$new_dotfiles_install" && -e "conf/firsttime_reminder.sh" ]]; then
+if [[ "$new_dotfiles_install" ]]; then
  e_header "First-Time OSX Init"
  # Terminal
  # ========
