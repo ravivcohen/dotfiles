@@ -29,11 +29,7 @@ if [[ "$(type -P brew)" ]]; then
   # Install more recent versions of some OS X tools
   brew tap homebrew/dupes
   brew install homebrew/dupes/grep
-  
-  e_header "Installing ZSH"
-  brew install zsh
-  $ chsh -s /usr/local/bin/zsh
-  
+    
   # Install Homebrew recipes.
   recipes=(git ssh-copy-id tree nmap git-extras htop-osx coreutils findutils ack lynx pigz rename pkg-config p7zip)
 
@@ -71,6 +67,10 @@ if [[ "$(type -P brew)" ]]; then
   ##Actually Install VirtualEnv 
   pip install virtualenv 
   pip install virtualenvwrapper
+  
+  e_header "Installing ZSH"
+  brew install zsh
+  chsh -s /usr/local/bin/zsh
   
   # if [[ ! "$(type -P gcc-4.2)" ]]; then
   #   e_header "Installing Homebrew dupe recipe: apple-gcc42"
