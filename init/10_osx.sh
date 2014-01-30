@@ -30,6 +30,10 @@ if [[ "$(type -P brew)" ]]; then
   brew tap homebrew/dupes
   brew install homebrew/dupes/grep
   
+  e_header "Installing ZSH"
+  brew install zsh
+  $ chsh -s /usr/local/bin/zsh
+  
   # Install Homebrew recipes.
   recipes=(git ssh-copy-id tree nmap git-extras htop-osx coreutils findutils ack lynx pigz rename pkg-config p7zip)
 
