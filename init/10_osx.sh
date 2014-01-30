@@ -78,7 +78,7 @@ if [[ "$(type -P brew)" ]]; then
   brew install brew-cask
 
   function installcask() {
-  	brew cask install --appdir="/Applications"  "${@}"
+  	brew cask install --appdir=/Applications  "${@}"
   }
   
   e_header "Install google-chrome"
