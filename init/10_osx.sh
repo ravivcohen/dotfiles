@@ -22,10 +22,19 @@ if [[ "$(type -P brew)" ]]; then
 
   # Upgrade any already-installed formulae
   brew upgrade
-
+  
   # Install wget with IRI support
+  e_header "Installing wget with IRI"
   brew install wget --enable-iri
-
+  
+  # Install more recent versions of some OS X tools
+  e_header "Install and override latest version of VIM"
+  brew install vim --override-system-vi
+  
+  #this is needed for the python install below to work
+  e_header "Install  readline gdbm sqlite universal"
+  brew install readline sqlite gdbm --universal
+  
   # Install more recent versions of some OS X tools
   brew tap homebrew/dupes
   brew install homebrew/dupes/grep
@@ -40,18 +49,6 @@ if [[ "$(type -P brew)" ]]; then
   fi
   
   echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
-  
-  # Install wget with IRI support
-  e_header "Installing wget with IRI"
-  brew install wget --enable-iri
-  
-  # Install more recent versions of some OS X tools
-  e_header "Install and override latest version of VIM"
-  brew install vim --override-system-vi
-  
-  #this is needed for the python install below to work
-  e_header "Install  readline gdbm sqlite universal"
-  brew install readline sqlite gdbm --universal
   
   #update to latest version of python universal == 32/64bit and framework == allows interaction with osx libs
   e_header "Install  readline gdbm sqlite universal"
