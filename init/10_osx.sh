@@ -23,6 +23,10 @@ if [[ "$(type -P brew)" ]]; then
   # Upgrade any already-installed formulae
   brew upgrade
   
+  e_header "Installing ZSH"
+  brew install zsh
+  chsh -s /usr/local/bin/zsh
+  
   # Install wget with IRI support
   e_header "Installing wget with IRI"
   brew install wget --enable-iri
@@ -64,10 +68,6 @@ if [[ "$(type -P brew)" ]]; then
   ##Actually Install VirtualEnv 
   pip install virtualenv 
   pip install virtualenvwrapper
-  
-  e_header "Installing ZSH"
-  brew install zsh
-  chsh -s /usr/local/bin/zsh
   
   # if [[ ! "$(type -P gcc-4.2)" ]]; then
   #   e_header "Installing Homebrew dupe recipe: apple-gcc42"
