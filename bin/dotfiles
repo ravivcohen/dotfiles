@@ -203,7 +203,7 @@ export PATH
 shopt -s dotglob
 shopt -s nullglob
 
- Lest I forget to do a few additional things...
+#Lest I forget to do a few additional things...
 if [[ "$new_dotfiles_install" ]]; then
   e_header "Setup oh-my-zsh"
   ##SETUP OH MY ZSH ONLY ON THE FIRST TIME
