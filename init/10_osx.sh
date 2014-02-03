@@ -172,10 +172,10 @@ if [[ "$new_dotfiles_install" ]]; then
  # ========
 
  # # Use a modified version of the Pro theme by default in Terminal.app
- # open "~/.dotfiles/link/.oh-my-zsh/custom/terminal/Solarized_Dark_Ver2.terminal"
- # sleep 1 # Wait a bit to make sure the theme is loaded
- # open "~/.dotfiles/link/.oh-my-zsh/custom/terminal/Solarized_Dark.terminal"
- # sleep 1 # Wait a bit to make sure the theme is loade
+ open "~/.dotfiles/link/.oh-my-zsh-custom/custom/terminal/Solarized_Dark_Ver2.terminal"
+ sleep 1 # Wait a bit to make sure the theme is loaded
+ open "~/.dotfiles/link/.oh-my-zsh/custom-custom/terminal/Solarized_Dark.terminal"
+ sleep 1 # Wait a bit to make sure the theme is loade
  # defaults write com.apple.terminal 'Default Window Settings' -string 'paulmillr'
  # defaults write com.apple.terminal 'Startup Window Settings' -string 'paulmillr'
 
