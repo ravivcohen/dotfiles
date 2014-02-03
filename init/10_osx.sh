@@ -29,6 +29,7 @@ if [[ "$(type -P brew)" ]]; then
   
   e_header "Installing ZSH"
   brew install zsh
+  echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
   chsh -s /usr/local/bin/zsh
   
   # Install wget with IRI support
