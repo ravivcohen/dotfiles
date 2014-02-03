@@ -83,7 +83,7 @@ function link_test() {
   [[ "$1" -ef "$2" ]] && echo "same file"
 }
 function link_do() {
-  e_success "Linking ~/$1."
+  e_success "Linking ~/$1. ${2#$HOME/}"
   ln -sf ${2#$HOME/} ~/
 }
 
