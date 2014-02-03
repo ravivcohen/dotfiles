@@ -37,8 +37,13 @@ if [[ "$(type -P brew)" ]]; then
   brew install wget --enable-iri
   
   # Install more recent versions of some OS X tools
-  e_header "Install and override latest version of VIM"
-  brew install vim --override-system-vi
+  e_header "Install and override latest version of VIM + MacVim"
+  brew install vim --enable-cscope --enable-pythoninterp --override-system-vi
+  brew install macvim --enable-cscope --enable-pythoninterp --custom-icons
+  
+  # Install WireShark
+  e_header "Install and override latest version of WireShark with QT"
+  brew install wireshark --devel --with-qt
   
   # Install more recent versions of some OS X tools
   brew tap homebrew/dupes
@@ -58,7 +63,6 @@ if [[ "$(type -P brew)" ]]; then
   #update to latest version of python universal == 32/64bit and framework == allows interaction with osx libs
   e_header "Install  python universal"
   brew install python --universal --framework
-  brew linkapps
   
   #install and upgrade PIP
   e_header "Install and Upgrade PIP"
@@ -92,8 +96,8 @@ if [[ "$(type -P brew)" ]]; then
   e_header "Install iterm2"
   installcask iterm2
   
-  e_header "Install macvim"
-  installcask macvim
+  # e_header "Install macvim"
+  # installcask macvim
   
   e_header "Install sublime-text"
   installcask sublime-text
@@ -140,8 +144,8 @@ if [[ "$(type -P brew)" ]]; then
   e_header "Install tunnelblick beta"
   installcask tunnelblick-beta
   
-  e_header "Install wireshark"
-  installcask wireshark
+  #e_header "Install wireshark"
+  #installcask wireshark
   
   e_header "Install little-snitch"
   installcask little-snitch
@@ -157,6 +161,10 @@ if [[ "$(type -P brew)" ]]; then
   brew cleanup
   
 fi
+
+
+##link all the apps 
+brew linkapps
 
 # htop
 if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wheel" || ! "$(($(stat -L -f "%DMp" "$(which htop)") & 4))" ]]; then
