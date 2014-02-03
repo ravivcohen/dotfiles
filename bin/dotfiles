@@ -203,12 +203,6 @@ export PATH
 shopt -s dotglob
 shopt -s nullglob
 
-#Lest I forget to do a few additional things...
-if [[ "$new_dotfiles_install" ]]; then
-  e_header "Setup oh-my-zsh"
-  ##SETUP OH MY ZSH ONLY ON THE FIRST TIME
-  wget --no-check-certificate https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
-fi
 
 # Create caches directory, if it doesn't already exist.
 mkdir -p "$HOME/.dotfiles/caches"
@@ -225,6 +219,13 @@ do_stuff "link"
 # Alert if backups were made.
 if [[ "$backup" ]]; then
   echo -e "\nBackups were moved to ~/${backup_dir#$HOME/}"
+fi
+
+#Lest I forget to do a few additional things...
+if [[ "$new_dotfiles_install" ]]; then
+  e_header "Setup oh-my-zsh"
+  ##SETUP OH MY ZSH ONLY ON THE FIRST TIME
+  wget --no-check-certificate https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
 fi
 
 # Lest I forget to do a few additional things...
