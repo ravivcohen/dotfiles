@@ -58,6 +58,7 @@ if [[ "$(type -P brew)" ]]; then
   #update to latest version of python universal == 32/64bit and framework == allows interaction with osx libs
   e_header "Install  python universal"
   brew install python --universal --framework
+  brew linkapps
   
   #install and upgrade PIP
   e_header "Install and Upgrade PIP"
@@ -81,7 +82,8 @@ if [[ "$(type -P brew)" ]]; then
   brew tap caskroom/versions
 
   function installcask() {
-  	brew cask install --appdir=/Applications  "${@}"
+  	brew cask install "${@}"
+  	#brew cask install --appdir=/Applications  "${@}"
   }
   
   e_header "Install google-chrome"
