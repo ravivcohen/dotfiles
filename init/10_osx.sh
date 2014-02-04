@@ -99,11 +99,11 @@ if [[ "$(type -P brew)" ]]; then
   	#brew cask install --appdir=/Applications  "${@}"
   }
   
-  e_header "Install google-chrome"
-  installcask google-chrome
+  # e_header "Install google-chrome"
+  # installcask google-chrome
   
-  e_header "Install iterm2"
-  installcask iterm2
+  # e_header "Install iterm2"
+  # installcask iterm2
   
   # e_header "Install macvim"
   # installcask macvim
@@ -135,8 +135,8 @@ if [[ "$(type -P brew)" ]]; then
   e_header "Install path-finder"
   installcask path-finder
   
-  e_header "Install gpgtools"
-  installcask gpgtools
+  # e_header "Install gpgtools"
+  # installcask gpgtools
   
   e_header "Install cord"
   installcask cord
@@ -156,11 +156,8 @@ if [[ "$(type -P brew)" ]]; then
   #e_header "Install wireshark"
   #installcask wireshark
   
-  e_header "Install utorrent"
-  installcask utorrent
-
-  e_header "Install vagrant"
-  installcask vagrant
+  # e_header "Install vagrant"
+  # installcask vagrant
 
   e_header "Install tower"
   installcask tower
@@ -174,8 +171,8 @@ if [[ "$(type -P brew)" ]]; then
   e_header "Install java"
   installcask java
   
-  e_header "Install VMWare fusion"
-  installcask vmware-fusion
+  # e_header "Install VMWare fusion"
+  # installcask vmware-fusion
   
   e_header "Install Needed Inconsolota powershell patch"
   installcask font-inconsolata
@@ -208,8 +205,6 @@ if [[ "$new_dotfiles_install" ]]; then
  sleep 1 # Wait a bit to make sure the theme is loaded
  open "link/.oh-my-zsh-custom/terminal/Solarized_Dark.terminal"
  sleep 1 # Wait a bit to make sure the theme is loade
- # defaults write com.apple.terminal 'Default Window Settings' -string 'paulmillr'
- # defaults write com.apple.terminal 'Startup Window Settings' -string 'paulmillr'
 
  # Setup OXS Config Stugg
  source ~/.dotfiles/conf/osx/conf_osx.sh

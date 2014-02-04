@@ -11,7 +11,3 @@ alias burp='nohup java -jar -Xmx1024m ${burpdirectory}burpsuite_pro.jar >>${burp
 
 ###firefox
 alias firefox='nohup /Applications/Firefox.app/Contents/MacOS/firefox-bin -p > /dev/null 2>&1 &'
-
-
-#more more cowbell
-#alias cowbell='ssh root@moremorecowbell.isecpartners.com -p 19242'
