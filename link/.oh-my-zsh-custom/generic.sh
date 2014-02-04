@@ -5,15 +5,17 @@ umask 022
 
 ##Also Fix ll
 alias ll='ls -ltrh'
+alias lla='ls -altrh'
 
-# Directory listing
-if [[ "$(type -P tree)" ]]; then
-  alias ll='tree --dirsfirst -aLpughDFiC 1'
-  alias lsd='ll -d'
-else
-  alias ll='ls -al'
-  alias lsd='CLICOLOR_FORCE=1 ll | grep --color=never "^d"'
-fi
+
+# # Directory listing
+# if [[ "$(type -P tree)" ]]; then
+#   alias ll='tree --dirsfirst -aLpughDFiC 1'
+#   alias lsd='ll -d'
+# else
+#   alias ll='ls -al'
+#   alias lsd='CLICOLOR_FORCE=1 ll | grep --color=never "^d"'
+# fi
 
 # File size
 alias fs="stat -f '%z bytes'"
