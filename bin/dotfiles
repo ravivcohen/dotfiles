@@ -211,8 +211,19 @@ mkdir -p "$HOME/.dotfiles/caches"
 backup_dir="$HOME/.dotfiles/backups/$(date "+%Y_%m_%d-%H_%M_%S")/"
 backup=
 
-# Execute code for each file in these subdirectories.
+# do_stuff Executes code for each file in these subdirectories.
+
+# 1. First We Init the system
 do_stuff "init"
+
+# 2. Second We Setup OH-MY-ZSH  
+if [[ "$new_dotfiles_install" ]]; then
+  e_header "Setup oh-my-zsh"
+  ##SETUP OH MY ZSH ONLY ON THE FIRST TIME
+  wget --no-check-certificate https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
+fi
+
+# 3. Copy and Link Over Files 
 do_stuff "copy"
 do_stuff "link"
 
@@ -221,12 +232,6 @@ if [[ "$backup" ]]; then
   echo -e "\nBackups were moved to ~/${backup_dir#$HOME/}"
 fi
 
-# Lest I forget to do a few additional things...
-if [[ "$new_dotfiles_install" ]]; then
-  e_header "Setup oh-my-zsh"
-  ##SETUP OH MY ZSH ONLY ON THE FIRST TIME
-  wget --no-check-certificate https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
-fi
 
 # Lest I forget to do a few additional things...
 if [[ "$new_dotfiles_install" && -e "conf/firsttime_reminder.sh" ]]; then
