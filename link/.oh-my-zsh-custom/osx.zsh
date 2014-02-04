@@ -24,7 +24,7 @@ alias ss="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resou
 
 ##Setup DirColors DB to load on start
 alias dircolors='gdircolors'
-eval `dircolors ~/.oh-my-zsh/custom/dircolors-solarized/dircolors.ansi-dark` 
+eval `dircolors ~/.oh-my-zsh-custom/dircolors-solarized/dircolors.ansi-dark` 
 
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache"
