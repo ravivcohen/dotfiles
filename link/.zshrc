@@ -74,7 +74,7 @@ function dotfiles() {
 
 
 # OSX
-if [[ "$OSTYPE" =~ ^darwin ]]; then
+if [[ $(uname) == "Darwin" ]] ; then
 	plugins=(git osx github brew battery)
 
 	# Customize to your needs...
@@ -85,7 +85,7 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	
 
 # Ubuntu.
-elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
+elif [[ $(uname) == "Linux"  ]] ; then
 	plugins=(git github brew battery)
 fi
 
