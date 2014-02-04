@@ -1,3 +1,4 @@
+e_header "Configuring OSX"
 ### UI
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
