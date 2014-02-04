@@ -147,6 +147,18 @@ if [[ "$(type -P brew)" ]]; then
   #e_header "Install wireshark"
   #installcask wireshark
   
+  e_header "Install utorrent"
+  installcask utorrent
+
+  e_header "Install vagrant"
+  installcask vagrant
+
+  e_header "Install tower"
+  installcask tower
+
+  e_header "Install Paragon NTFS"
+  installcask paragon-ntfs
+
   e_header "Install little-snitch"
   installcask little-snitch
 
