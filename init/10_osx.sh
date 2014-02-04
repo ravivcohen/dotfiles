@@ -62,7 +62,7 @@ if [[ "$(type -P brew)" ]]; then
   
   e_header "Install Less PIPE"
   brew install lesspipe --syntax-highlighting
-  
+
   #update to latest version of python universal == 32/64bit and framework == allows interaction with osx libs
   e_header "Install  python universal"
   brew install python --universal --framework
@@ -87,6 +87,7 @@ if [[ "$(type -P brew)" ]]; then
   brew tap phinze/homebrew-cask
   brew install brew-cask
   brew tap caskroom/versions
+  brew tap caskroom/fonts
 
   function installcask() {
   	brew cask install "${@}"
@@ -171,7 +172,10 @@ if [[ "$(type -P brew)" ]]; then
   e_header "Install VMWare fusion"
   installcask vmware-fusion
   
+  e_header "Install Needed Inconsolota powershell patch"
+  installcask font-inconsolata
   
+
   # Remove outdated versions from the cellar
   brew cleanup
   
