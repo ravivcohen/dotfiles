@@ -44,6 +44,11 @@ if [[ "$(type -P brew)" ]]; then
   # Install WireShark
   e_header "Install and override latest version of WireShark with QT"
   brew install wireshark --devel --with-qt
+  # Temp fix for wireshark interfaces
+  curl https://bugs.wireshark.org/bugzilla/attachment.cgi?id=3373 -o ChmodBPF.tar.gz
+  tar zxvf ChmodBPF.tar.gz
+  open ChmodBPF/Install\ ChmodBPF.app
+
   
   # Install more recent versions of some OS X tools
   brew tap homebrew/dupes
