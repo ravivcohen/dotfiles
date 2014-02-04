@@ -60,6 +60,9 @@ if [[ "$(type -P brew)" ]]; then
   
   echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
   
+  e_header "Install Less PIPE"
+  brew install lesspipe --syntax-highlighting
+  
   #update to latest version of python universal == 32/64bit and framework == allows interaction with osx libs
   e_header "Install  python universal"
   brew install python --universal --framework
