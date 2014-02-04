@@ -45,6 +45,22 @@ ZSH_THEME="agnoster_rc"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
+# OSX
+if [[ $(uname) == "Darwin" ]] ; then
+	plugins=(git osx github brew battery)
+
+	# Customize to your needs...
+	#export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/MacGPG2/bin
+
+	export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin::/usr/local/MacGPG2/bin
+	export PATH=/usr/texbin:$PATH
+	
+
+# Ubuntu.
+elif [[ $(uname) == "Linux"  ]] ; then
+	plugins=(git github brew battery)
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 #export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -72,22 +88,6 @@ function dotfiles() {
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-
-# OSX
-if [[ $(uname) == "Darwin" ]] ; then
-	plugins=(git osx github brew battery)
-
-	# Customize to your needs...
-	#export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/MacGPG2/bin
-
-	export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin::/usr/local/MacGPG2/bin
-	export PATH=/usr/texbin:$PATH
-	
-
-# Ubuntu.
-elif [[ $(uname) == "Linux"  ]] ; then
-	plugins=(git github brew battery)
-fi
 
 
 
