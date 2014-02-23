@@ -17,6 +17,8 @@ fi
 if [[ "$(type -P brew)" ]]; then
   e_header "Updating Homebrew"
   
+  brew doctor
+  
   # Make sure we’re using the latest Homebrew
   brew update
 
@@ -38,9 +40,11 @@ if [[ "$(type -P brew)" ]]; then
   
   # Install more recent versions of some OS X tools
   e_header "Install and override latest version of VIM + MacVim"
+
   brew install vim --enable-cscope --enable-pythoninterp --override-system-vi
   brew install macvim --enable-cscope --enable-pythoninterp --custom-icons
-  
+  brew install ctags --HEAD
+
   # Install WireShark
   e_header "Install and override latest version of WireShark with QT"
   brew install wireshark --devel --with-qt
@@ -55,7 +59,7 @@ if [[ "$(type -P brew)" ]]; then
   brew install homebrew/dupes/grep
     
   # Install Homebrew recipes.
-  recipes=(git ssh-copy-id tree nmap git-extras htop-osx coreutils findutils ack lynx pigz rename pkg-config p7zip)
+  recipes=(git ssh-copy-id tree apg nmap git-extras htop-osx djbdns youtube-dl coreutils findutils ack lynx pigz rename pkg-config p7zip)
 
   list="$(to_install "${recipes[*]}" "$(brew list)")"
   if [[ "$list" ]]; then
@@ -108,74 +112,74 @@ if [[ "$(type -P brew)" ]]; then
   # e_header "Install macvim"
   # installcask macvim
   
-  e_header "Install sublime-text"
-  installcask sublime-text
+  # e_header "Install sublime-text"
+  # installcask sublime-text
   
-  e_header "Install the-unarchiver"
-  installcask the-unarchiver
+  # e_header "Install the-unarchiver"
+  # installcask the-unarchiver
   
-  e_header "Install tor-browser"
-  installcask tor-browser
+  # e_header "Install tor-browser"
+  # installcask tor-browser
   
-  e_header "Install transmission"
-  installcask transmission
+  # e_header "Install transmission"
+  # installcask transmission
   
-  e_header "Install transmit"
-  installcask transmit
+  # e_header "Install transmit"
+  # installcask transmit
   
-  e_header "Install keepass-x"
-  installcask keepassx
+  # e_header "Install keepass-x"
+  # installcask keepassx
   
-  e_header "Install x-quartz"
-  installcask xquartz
+  # e_header "Install x-quartz"
+  # installcask xquartz
   
-  e_header "Install true-crypt"
-  installcask truecrypt
+  # e_header "Install true-crypt"
+  # installcask truecrypt
   
-  e_header "Install path-finder"
-  installcask path-finder
+  # e_header "Install path-finder"
+  # installcask path-finder
   
-  # e_header "Install gpgtools"
-  # installcask gpgtools
+  # # e_header "Install gpgtools"
+  # # installcask gpgtools
   
-  e_header "Install cord"
-  installcask cord
+  # e_header "Install cord"
+  # installcask cord
   
-  e_header "Install adium"
-  installcask adium
+  # e_header "Install adium"
+  # installcask adium
   
-  e_header "Install skype"
-  installcask skype
+  # e_header "Install skype"
+  # installcask skype
   
-  e_header "Install shuttle"
-  installcask shuttle
+  # e_header "Install shuttle"
+  # installcask shuttle
   
-  e_header "Install tunnelblick beta"
-  installcask tunnelblick-beta
+  # e_header "Install tunnelblick beta"
+  # installcask tunnelblick-beta
   
-  #e_header "Install wireshark"
-  #installcask wireshark
+  # #e_header "Install wireshark"
+  # #installcask wireshark
   
-  # e_header "Install vagrant"
-  # installcask vagrant
+  # # e_header "Install vagrant"
+  # # installcask vagrant
 
-  e_header "Install tower"
-  installcask tower
+  # e_header "Install tower"
+  # installcask tower
 
-  e_header "Install Paragon NTFS"
-  installcask paragon-ntfs
+  # e_header "Install Paragon NTFS"
+  # installcask paragon-ntfs
 
-  e_header "Install little-snitch"
-  installcask little-snitch
+  # e_header "Install little-snitch"
+  # installcask little-snitch
 
-  e_header "Install java"
-  installcask java
+  # e_header "Install java"
+  # installcask java
   
-  # e_header "Install VMWare fusion"
-  # installcask vmware-fusion
+  # # e_header "Install VMWare fusion"
+  # # installcask vmware-fusion
   
-  e_header "Install Needed Inconsolota powershell patch"
-  installcask font-inconsolata
+  # e_header "Install Needed Inconsolota powershell patch"
+  # installcask font-inconsolata
   
 
   # Remove outdated versions from the cellar

@@ -124,6 +124,11 @@ function do_stuff() {
 }
 
 # Enough with the functions, let's do stuff.
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.osx` has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Ensure that we can actually, like, compile anything.
 if [[ ! "$(type -P gcc)" && "$OSTYPE" =~ ^darwin ]]; then
@@ -161,9 +166,6 @@ if [[ ! "$(type -P git)" ]]; then
   exit 1
 fi
 
-# Update existing sudo time stamp if set, otherwise do nothing.
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
 # Initialize.
 if [[ ! -d ~/.dotfiles ]]; then
   new_dotfiles_install=1
@@ -176,7 +178,8 @@ else
   e_header "Updating dotfiles"
   cd ~/.dotfiles
   git pull
-  git submodule update --init --recursive --quiet
+  #Dont have any submodules installed for now
+  #git submodule update --init --recursive --quiet
 fi
 
 # Utilities, helpers. Moved into here just to make it cleaner
