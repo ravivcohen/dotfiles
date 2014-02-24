@@ -202,7 +202,7 @@ fi
 
 
 #copy fonts
-cp "conf/osx/powerline-fonts/*" "/Library/Fonts/"
+cp ~/.dotfiles/conf/osx/powerline-fonts/* /Library/Fonts/
 if [[ "$new_dotfiles_install" ]]; then
  e_header "First-Time OSX Init"
  # Terminal

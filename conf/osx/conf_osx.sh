@@ -231,7 +231,8 @@ sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Curre
 
 ##Security
 # Turn on firewall, such as it is
-defaults write /Library/Preferences/com.apple.sharing.firewall state -bool YES
+#TODO
+#defaults write /Library/Preferences/com.apple.sharing.firewall state -bool YES
 
 # Disable "safe sleep", saving 8-16G of disk space. Doing so is basically no
 # less secure than the default behavior when it comes to cold boot attacks, as
