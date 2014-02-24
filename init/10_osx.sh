@@ -38,13 +38,7 @@ if [[ "$(type -P brew)" ]]; then
   e_header "Installing wget with IRI"
   brew install wget --enable-iri
   
-  # Install more recent versions of some OS X tools
-  e_header "Install and override latest version of VIM + MacVim"
-
-  brew install vim --enable-cscope --enable-pythoninterp --override-system-vi
-  brew install macvim --enable-cscope --enable-pythoninterp --custom-icons
-  brew install ctags --HEAD
-
+  
   # Install WireShark
   e_header "Install and override latest version of WireShark with QT"
   brew install wireshark --devel --with-qt
@@ -86,6 +80,14 @@ if [[ "$(type -P brew)" ]]; then
   ##Actually Install VirtualEnv 
   pip install virtualenv 
   pip install virtualenvwrapper
+
+  # Install more recent versions of some OS X tools
+  e_header "Install and override latest version of VIM + MacVim"
+
+  brew install vim --with-python --with-ruby --with-perl --enable-cscope --enable-pythoninterp --override-system-vi
+  brew install macvim --enable-cscope --enable-pythoninterp --custom-icons
+  brew install ctags --HEAD
+
   
   # if [[ ! "$(type -P gcc-4.2)" ]]; then
   #   e_header "Installing Homebrew dupe recipe: apple-gcc42"
@@ -199,6 +201,8 @@ if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wh
 fi
 
 
+#copy fonts
+cp "conf/osx/powerline-fonts/*" "/Library/Fonts/"
 if [[ "$new_dotfiles_install" ]]; then
  e_header "First-Time OSX Init"
  # Terminal
