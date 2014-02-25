@@ -94,95 +94,9 @@ if [[ "$(type -P brew)" ]]; then
   #   brew install https://raw.github.com/Homebrew/homebrew-dupes/master/apple-gcc42.rb
   # fi
   
-  # Install native apps
-  brew tap phinze/homebrew-cask
-  brew install brew-cask
-  brew tap caskroom/versions
-  brew tap caskroom/fonts
-
-  function installcask() {
-  	brew cask install "${@}"
-  	#brew cask install --appdir=/Applications  "${@}"
-  }
-  
-  # e_header "Install google-chrome"
-  # installcask google-chrome
-  
-  # e_header "Install iterm2"
-  # installcask iterm2
-  
-  # e_header "Install macvim"
-  # installcask macvim
-  
-  # e_header "Install sublime-text"
-  # installcask sublime-text
-  
-  # e_header "Install the-unarchiver"
-  # installcask the-unarchiver
-  
-  # e_header "Install tor-browser"
-  # installcask tor-browser
-  
-  # e_header "Install transmission"
-  # installcask transmission
-  
-  # e_header "Install transmit"
-  # installcask transmit
-  
-  # e_header "Install keepass-x"
-  # installcask keepassx
-  
-  # e_header "Install x-quartz"
-  # installcask xquartz
-  
-  # e_header "Install true-crypt"
-  # installcask truecrypt
-  
-  # e_header "Install path-finder"
-  # installcask path-finder
-  
-  # # e_header "Install gpgtools"
-  # # installcask gpgtools
-  
-  # e_header "Install cord"
-  # installcask cord
-  
-  # e_header "Install adium"
-  # installcask adium
-  
-  # e_header "Install skype"
-  # installcask skype
-  
-  # e_header "Install shuttle"
-  # installcask shuttle
-  
-  # e_header "Install tunnelblick beta"
-  # installcask tunnelblick-beta
-  
-  # #e_header "Install wireshark"
-  # #installcask wireshark
-  
-  # # e_header "Install vagrant"
-  # # installcask vagrant
-
-  # e_header "Install tower"
-  # installcask tower
-
-  # e_header "Install Paragon NTFS"
-  # installcask paragon-ntfs
-
-  # e_header "Install little-snitch"
-  # installcask little-snitch
-
-  # e_header "Install java"
-  # installcask java
-  
-  # # e_header "Install VMWare fusion"
-  # # installcask vmware-fusion
-  
-  # e_header "Install Needed Inconsolota powershell patch"
-  # installcask font-inconsolata
-  
+  #ToDo install because cask is way to buggy
+  # Install native apps [google-chrome, iterm2, macvim, sublime-text, the-unarchiver, tor-browser, transmission, transmit, keepassx, xquartz, truecrypt, path-finder
+  # gpgtools, cord, adium, skype, shuttle, tunnelblick-beta, wireshark, vagrant, tower, paragon-ntfs, little-snitch, java, vmware-fusion, ]
 
   # Remove outdated versions from the cellar
   brew cleanup
@@ -201,14 +115,13 @@ if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wh
 fi
 
 
-#copy fonts
-#cp ~/.dotfiles/conf/osx/powerline-fonts/* /Library/Fonts/
 
 if [[ "$new_dotfiles_install" ]]; then
  e_header "First-Time OSX Init"
  # Terminal
  # ========
-
+ #copy fonts
+ cp ~/.dotfiles/conf/osx/powerline-fonts/* /Library/Fonts/
  # # Use a modified version of the Pro theme by default in Terminal.app
  open "link/.oh-my-zsh-custom/terminal/Solarized_Dark_Ver2.terminal"
  sleep 1 # Wait a bit to make sure the theme is loaded
