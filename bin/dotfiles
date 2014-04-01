@@ -60,7 +60,11 @@ function skip() {
 
 # Initialize.
 function init_do() {
-  source "$2"
+  if [ "$is_standard_user" = false ]; then
+    source "$2"
+  else
+    su $username -m -p -c "source $2"
+ fi 
 }
 
 # Copy files.
@@ -123,12 +127,51 @@ function do_stuff() {
   done
 }
 
-# Enough with the functions, let's do stuff.
-# Ask for the administrator password upfront
-sudo -v
+function check_std_user_sudo_access() {
+  TEMP_FILE=/tmp/test_root_access$$.$RANDOM
+  #This will kill the tmp file incase any of thses signals are received.
+  trap "rm $TEMP_FILE; exit" SIGHUP SIGINT SIGTERM
+  touch $TEMP_FILE
+  chmod 666 $TEMP_FILE
+  test1=`su $username -c "echo Testing SUDO Acess; sudo whoami &> $TEMP_FILE" 1>&2`
+  test_root_access=$(head -n 1 $TEMP_FILE)
+  rm -rf $TEMP_FILE
+}
+# On OSX we wanna support standard users as well:
+# 1. Install init as root.
+# 2. Switch to regular user for copying/linking/ etc..
+while true; do
+    echo "The config part of this script will require SUDO user"
+    read -p "Do you need to login as an administrator (y/n) ?: " yn
+    case $yn in
+        [Yy]* ) 
+              is_standard_user=true
+              read -p "Enter the Administrator Username to use: " username
+              echo "Please enter password for $username"
+              check_std_user_sudo_access
+              if [[ $test_root_access != "root" ]]; then
+                echo "Sorry, you need root to run parts of this script exiting."
+                exit 1
+              fi
+              break
+              ;;
+        [Nn]* ) 
+              is_standard_user=false
+              echo "Testing SUDO Acess:"
+              if [[ $(sudo whoami) != "root" ]]; then
+                echo "Sorry, you need root to run parts of this script exiting."
+                exit 1
+              fi
+              break
+              ;;
+        * ) echo "Do you wish to login as an administrator (y/n) ?:";;
+    esac
+done
 
 # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+if [ "$is_standard_user" = false ]; then
+  while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+fi
 
 # Ensure that we can actually, like, compile anything.
 if [[ ! "$(type -P gcc)" && "$OSTYPE" =~ ^darwin ]]; then
@@ -218,6 +261,8 @@ backup=
 
 # 1. First We Init the system
 do_stuff "init"
+
+exit
 
 # 2. Second We Setup OH-MY-ZSH  
 if [[ "$new_dotfiles_install" ]]; then
