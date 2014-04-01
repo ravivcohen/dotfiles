@@ -60,7 +60,7 @@ function init_do() {
   if [ "$is_standard_user" = false ]; then
     source "$2"
   else
-    su $username -m -p -c "source $2"
+    su $username -m -p -c "export HOME=$HOME; source $2"
  fi 
 }
 
