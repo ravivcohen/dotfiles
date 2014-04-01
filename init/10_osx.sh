@@ -8,7 +8,7 @@
 #   sudo xcode-select -switch /usr/bin
 # fi
 
-echo $HOME
+echo $HOME . $PWD
 exit
 #include the helper functions we have setup.
 . $HOME/.dotfiles/libs/helper_functions.sh
