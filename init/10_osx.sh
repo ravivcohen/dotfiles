@@ -8,8 +8,10 @@
 #   sudo xcode-select -switch /usr/bin
 # fi
 
+echo $HOME
+exit
 #include the helper functions we have setup.
-source $HOME/.dotfiles/libs/helper_functions.sh
+. $HOME/.dotfiles/libs/helper_functions.sh
 
 # Homebrew should already be installed at this point.
 if [[ ! "$(type -P brew)" ]]; then
