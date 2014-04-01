@@ -8,6 +8,8 @@
 #   sudo xcode-select -switch /usr/bin
 # fi
 
+source $HOME/.dotfiles/libs/helper_functions.sh
+
 # Homebrew should already be installed at this point.
 if [[ ! "$(type -P brew)" ]]; then
   e_header "Installing Homebrew"
