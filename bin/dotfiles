@@ -16,7 +16,7 @@ HELP
 exit; fi
 
 #include the helper functions we have setup.
-source $HOME/.dotfiles/libs/helper_functions.sh
+. $HOME/.dotfiles/libs/helper_functions.sh
 
 # Given a list of desired items and installed items, return a list
 # of uninstalled items. Arrays in bash are insane (not in a good way).
