@@ -15,6 +15,7 @@ http://benalman.com/about/license/
 HELP
 exit; fi
 
+#include the helper functions we have setup.
 source $HOME/.dotfiles/libs/helper_functions.sh
 
 # Given a list of desired items and installed items, return a list
