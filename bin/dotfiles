@@ -135,7 +135,7 @@ function check_std_user_sudo_access() {
   chmod 666 $TEMP_FILE
   test1=`su $username -c "echo Testing SUDO Acess; sudo whoami &> $TEMP_FILE" 1>&2`
   test_root_access=$(head -n 1 $TEMP_FILE)
-  rm -rf $TEMP_FILE
+  #rm -rf $TEMP_FILE
 }
 # On OSX we wanna support standard users as well:
 # 1. Install init as root.
