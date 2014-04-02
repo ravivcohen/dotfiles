@@ -89,7 +89,8 @@ if [[ "$(type -P brew)" ]]; then
 
   brew install vim --with-python --with-ruby --with-perl --enable-cscope --enable-pythoninterp --override-system-vi
   brew install macvim --enable-cscope --enable-pythoninterp --custom-icons
-  brew install ctags --HEAD
+  # CERT Check Fails. Dont like that removing for now.
+  #brew install ctags --HEAD
 
   
   # if [[ ! "$(type -P gcc-4.2)" ]]; then
