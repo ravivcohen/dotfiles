@@ -134,8 +134,9 @@ function check_std_user_sudo_access() {
   touch $TEMP_FILE
   chmod 666 $TEMP_FILE
   test1=`su $username -c "echo Testing SUDO Acess; sudo whoami &> $TEMP_FILE" 1>&2`
-  test_root_access=$(head -n 1 $TEMP_FILE)
-  #rm -rf $TEMP_FILE
+  #Here we read the whole File because sudo on first run displays a warning menu
+  test_root_access=$(< $TEMP_FILE)
+  rm -rf $TEMP_FILE
 }
 # On OSX we wanna support standard users as well:
 # 1. Install init as root.
@@ -149,7 +150,9 @@ while true; do
               read -p "Enter the Administrator Username to use: " username
               echo "Please enter password for $username"
               check_std_user_sudo_access
-              if [[ $test_root_access != "root" ]]; then
+              #since we have the enitre file and it might contain the orginal
+              #sudo warining menu we look for root anywhere in the file.
+              if [[ $test_root_access != *root* ]]; then
                 echo "Sorry, you need root to run parts of this script exiting."
                 exit 1
               fi
