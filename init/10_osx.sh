@@ -8,13 +8,8 @@
 #   sudo xcode-select -switch /usr/bin
 # fi
 
-#Lets check if the .dotfiles was cloned already and use the local file
-if [ -d "$DOTFILES_HOME/.dotfiles" ]; then
-  . $DOTFILES_HOME/.dotfiles/libs/helper_functions.sh
-else
-  #Get the helper functions from github.
-  . $(curl -fsSL http://bit.ly/rc-dotfiles-functions)
-fi
+#All Helper functions can now be found inside libs/helper_functions.
+. $DOTFILES_HOME/.dotfiles/libs/helper_functions.sh
 
 # Homebrew should already be installed at this point.
 if [[ ! "$(type -P brew)" ]]; then

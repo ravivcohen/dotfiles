@@ -1,9 +1,3 @@
-# Logging stuff.
-function e_header()   { echo -e "\n\033[1m$@\033[0m"; }
-function e_success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
-function e_error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
-function e_arrow()    { echo -e " \033[1;33m➜\033[0m  $@"; }
-
 # Given a list of desired items and installed items, return a list
 # of uninstalled items. Arrays in bash are insane (not in a good way).
 function to_install() {
@@ -108,18 +102,6 @@ function do_stuff() {
     # Do stuff.
     "$1_do" "$base" "$file"
   done
-}
-
-function check_std_user_sudo_access() {
-  TEMP_FILE=/tmp/test_root_access$$.$RANDOM
-  #This will kill the tmp file incase any of thses signals are received.
-  trap "rm $TEMP_FILE; exit" SIGHUP SIGINT SIGTERM
-  touch $TEMP_FILE
-  chmod 666 $TEMP_FILE
-  test1=`su $username -c "echo Testing SUDO Acess; sudo whoami &> $TEMP_FILE" 1>&2`
-  #Here we read the whole File because sudo on first run displays a warning menu
-  test_root_access=$(< $TEMP_FILE)
-  rm -rf $TEMP_FILE
 }
 
 # Utilities, helpers. Moved into here just to make it cleaner

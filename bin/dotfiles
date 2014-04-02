@@ -18,11 +18,62 @@ exit; fi
 #Setup the DOTFILES_HOME variable to be the current users home.
 #This is needed when running something as STD user.
 export DOTFILES_HOME=$HOME
+
 # Logging stuff.
 function e_header()   { echo -e "\n\033[1m$@\033[0m"; }
 function e_success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
 function e_error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
 function e_arrow()    { echo -e " \033[1;33m➜\033[0m  $@"; }
+
+function check_std_user_sudo_access() {
+  TEMP_FILE=/tmp/test_root_access$$.$RANDOM
+  #This will kill the tmp file incase any of thses signals are received.
+  trap "rm $TEMP_FILE; exit" SIGHUP SIGINT SIGTERM
+  touch $TEMP_FILE
+  chmod 666 $TEMP_FILE
+  test1=`su $username -c "echo Testing SUDO Acess; sudo whoami &> $TEMP_FILE" 1>&2`
+  #Here we read the whole File because sudo on first run displays a warning menu
+  test_root_access=$(< $TEMP_FILE)
+  rm -rf $TEMP_FILE
+}
+
+# On OSX we wanna support standard users as well:
+# 1. Install init as root.
+# 2. Switch to regular user for copying/linking/ etc..
+while true; do
+    echo "The config part of this script will require SUDO user"
+    read -p "Do you need to login as an administrator (y/n) ?: " yn
+    case $yn in
+        [Yy]* ) 
+              is_standard_user=true
+              read -p "Enter the Administrator Username to use: " username
+              echo "Please enter password for $username"
+              check_std_user_sudo_access
+              #since we have the enitre file and it might contain the orginal
+              #sudo warining menu we look for root anywhere in the file.
+              if [[ $test_root_access != *root* ]]; then
+                echo "Sorry, you need root to run parts of this script exiting."
+                exit 1
+              fi
+              break
+              ;;
+        [Nn]* ) 
+              is_standard_user=false
+              echo "Testing SUDO Acess:"
+              if [[ $(sudo whoami) != "root" ]]; then
+                echo "Sorry, you need root to run parts of this script exiting."
+                exit 1
+              fi
+              break
+              ;;
+        * ) echo "Do you wish to login as an administrator (y/n) ?:";;
+    esac
+done
+
+# Keep-alive: update existing `sudo` time stamp until `.osx` has finished
+if [ "$is_standard_user" = false ]; then
+  while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+fi
 
 # Ensure that we can actually, like, compile anything.
 if [[ ! "$(type -P gcc)" && "$OSTYPE" =~ ^darwin ]]; then
@@ -78,44 +129,6 @@ fi
 
 #All Helper functions can now be found inside libs/helper_functions.
 . $DOTFILES_HOME/.dotfiles/libs/helper_functions.sh
-
-# On OSX we wanna support standard users as well:
-# 1. Install init as root.
-# 2. Switch to regular user for copying/linking/ etc..
-while true; do
-    echo "The config part of this script will require SUDO user"
-    read -p "Do you need to login as an administrator (y/n) ?: " yn
-    case $yn in
-        [Yy]* ) 
-              is_standard_user=true
-              read -p "Enter the Administrator Username to use: " username
-              echo "Please enter password for $username"
-              check_std_user_sudo_access
-              #since we have the enitre file and it might contain the orginal
-              #sudo warining menu we look for root anywhere in the file.
-              if [[ $test_root_access != *root* ]]; then
-                echo "Sorry, you need root to run parts of this script exiting."
-                exit 1
-              fi
-              break
-              ;;
-        [Nn]* ) 
-              is_standard_user=false
-              echo "Testing SUDO Acess:"
-              if [[ $(sudo whoami) != "root" ]]; then
-                echo "Sorry, you need root to run parts of this script exiting."
-                exit 1
-              fi
-              break
-              ;;
-        * ) echo "Do you wish to login as an administrator (y/n) ?:";;
-    esac
-done
-
-# Keep-alive: update existing `sudo` time stamp until `.osx` has finished
-if [ "$is_standard_user" = false ]; then
-  while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-fi
 
 
 # Add binaries into the path
