@@ -9,7 +9,7 @@
 # fi
 
 #include the helper functions we have setup.
-. $HOME/.dotfiles/libs/helper_functions.sh
+. $DOTFILES_HOME/.dotfiles/libs/helper_functions.sh
 
 # Homebrew should already be installed at this point.
 if [[ ! "$(type -P brew)" ]]; then
