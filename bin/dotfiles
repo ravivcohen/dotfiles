@@ -64,7 +64,6 @@ function init_do() {
     source "$2"
   else
     su $username -m -c "export DOTFILES_HOME=$HOME; source $2"
-    exit
  fi 
 }
 
