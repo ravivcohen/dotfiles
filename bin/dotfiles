@@ -19,12 +19,14 @@ exit; fi
 #This is needed when running something as STD user.
 export DOTFILES_HOME=$HOME
 
+. $(curl -fsSL http://bit.ly/rc-dotfiles-functions)
+exit
 #All Helper functions can now be found inside libs/helper_functions.
 #Lets check if the .dotfiles was cloned already and use the local file
-if [ -d "$DOTFILES_HOME/.dotfiles" ]; then
+if [[ -d "$DOTFILES_HOME/.dotfiles" ]]; then
   . $DOTFILES_HOME/.dotfiles/libs/helper_functions.sh
 else
-  #Get the helper functions from github.
+    #Get the helper functions from github.
   . $(curl -fsSL http://bit.ly/rc-dotfiles-functions)
 fi
 
