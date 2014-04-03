@@ -18,6 +18,11 @@ exit; fi
 #Setup the DOTFILES_HOME variable to be the current users home.
 #This is needed when running something as STD user.
 export DOTFILES_HOME=$HOME
+export lib_file=/tmp/lib_file$$.$RANDOM
+
+curl -fsSL https://raw.githubusercontent.com/ravivcohen/dotfiles/master/libs/helper_functions.sh -o $lib_file
+#All Helper functions can now be found inside libs/helper_functions.
+. $lib_file
 
 # On OSX we wanna support standard users as well:
 # 1. Install init as root.
@@ -161,3 +166,7 @@ fi
 
 # All done!
 e_header "All done!"
+
+#Delete the libs file.
+rm $lib_file
+

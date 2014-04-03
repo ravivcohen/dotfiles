@@ -9,7 +9,7 @@
 # fi
 
 #All Helper functions can now be found inside libs/helper_functions.
-. $DOTFILES_HOME/.dotfiles/libs/helper_functions.sh
+. $lib_file
 
 # Homebrew should already be installed at this point.
 if [[ ! "$(type -P brew)" ]]; then
