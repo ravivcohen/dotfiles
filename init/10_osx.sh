@@ -118,6 +118,12 @@ if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wh
  sudo chmod u+s "$(which htop)"
 fi
 
+## Install Sublime Text
+curl -fsSL https://bit.ly/rc-sublime-osx -o /tmp/rc-sublime-osx
+hdiutil attach /tmp/rc-sublime-osx -mountpoint "/tmp/rc-sublime-osx-mnt"
+sudo cp -R /tmp/rc-sublime-osx-mnt/Sublime\ Text.app/ /Applications/
+hdiutil detach "/tmp/rc-sublime-osx-mnt"
+rm /tmp/rc-sublime-osx
 
 
 if [[ "$new_dotfiles_install" ]]; then
