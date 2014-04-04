@@ -42,13 +42,13 @@ if [[ "$(type -P brew)" ]]; then
   brew install wget --enable-iri
   
   
-  # Install WireShark
-  e_header "Install and override latest version of WireShark with QT"
-  brew install wireshark --devel --with-qt
-  # Temp fix for wireshark interfaces
-  curl https://bugs.wireshark.org/bugzilla/attachment.cgi?id=3373 -o ChmodBPF.tar.gz
-  tar zxvf ChmodBPF.tar.gz
-  open ChmodBPF/Install\ ChmodBPF.app
+  # # Install WireShark
+  # e_header "Install latest version of WireShark with QT"
+  # brew install wireshark --devel --with-qt
+  # # Temp fix for wireshark interfaces
+  # curl https://bugs.wireshark.org/bugzilla/attachment.cgi?id=3373 -o ChmodBPF.tar.gz
+  # tar zxvf ChmodBPF.tar.gz
+  # open ChmodBPF/Install\ ChmodBPF.app
 
   
   # Install more recent versions of some OS X tools
@@ -92,12 +92,28 @@ if [[ "$(type -P brew)" ]]; then
   # CERT Check Fails. Dont like that removing for now.
   #brew install ctags --HEAD
 
-  
   # if [[ ! "$(type -P gcc-4.2)" ]]; then
   #   e_header "Installing Homebrew dupe recipe: apple-gcc42"
   #   brew install https://raw.github.com/Homebrew/homebrew-dupes/master/apple-gcc42.rb
   # fi
   
+  ## OK Lets use cask to install some basic stuff since it is *VERY* !! Buggy
+  brew tap phinze/cask
+  brew install brew-cask
+  # Tap to allow us to install Sublime Text 3
+  brew tap caskroom/versions
+  # Change so all casks are installed in the main apps folder.
+  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+  #Ok Lets install sublime text
+  brew cask install SublimeText3
+  # Download latest version of Sublime 3 package manager
+  curl -fsSL https://sublime.wbond.net/Package%20Control.sublime-package -o \ $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
+  
+  # Link our settings into SublimeText
+  sudo rm -rf $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+  ln -s $DOTFILES_HOME/.dotfiles/conf/User $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+
   #ToDo install because cask is way to buggy
   # Install native apps [google-chrome, iterm2, macvim, sublime-text, the-unarchiver, tor-browser, transmission, transmit, keepassx, xquartz, truecrypt, path-finder
   # gpgtools, cord, adium, skype, shuttle, tunnelblick-beta, wireshark, vagrant, tower, paragon-ntfs, little-snitch, java, vmware-fusion, ]
@@ -118,27 +134,23 @@ if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wh
  sudo chmod u+s "$(which htop)"
 fi
 
-## Install Sublime Text
-curl -fsSL https://bit.ly/rc-sublime-osx -o /tmp/rc-sublime-osx
-hdiutil attach /tmp/rc-sublime-osx -mountpoint "/tmp/rc-sublime-osx-mnt"
-sudo cp -R /tmp/rc-sublime-osx-mnt/Sublime\ Text.app/ /Applications/
-hdiutil detach "/tmp/rc-sublime-osx-mnt"
-rm /tmp/rc-sublime-osx
 
+# if [[ "$new_dotfiles_install" ]]; then
+#  e_header "First-Time OSX Init"
+#  # Terminal
+#  # ========
+#  #copy fonts
+#  cp ~/.dotfiles/conf/osx/powerline-fonts/* /Library/Fonts/
+#  # # Use a modified version of the Pro theme by default in Terminal.app
+#  open "link/.oh-my-zsh-custom/terminal/Solarized_Dark_Ver2.terminal"
+#  sleep 1 # Wait a bit to make sure the theme is loaded
+#  open "link/.oh-my-zsh-custom/terminal/Solarized_Dark.terminal"
+#  sleep 1 # Wait a bit to make sure the theme is loade
+#/usr/libexec/PlistBuddy -x -c "Print Window\ Settings:Solarized_Dark" ~/Library/Preferences/com.apple.Terminal.plist > test.plist
+#/usr/libexec/PlistBuddy -x -c "Add Window\ Settings:Solarized_Dark3 dict" ~/Library/Preferences/com.apple.Terminal.plist
+#/usr/libexec/PlistBuddy -x -c "Merge test.plist Window\ Settings:Solarized_Dark3" ~/Library/Preferences/com.apple.Terminal.plist
 
-if [[ "$new_dotfiles_install" ]]; then
- e_header "First-Time OSX Init"
- # Terminal
- # ========
- #copy fonts
- cp ~/.dotfiles/conf/osx/powerline-fonts/* /Library/Fonts/
- # # Use a modified version of the Pro theme by default in Terminal.app
- open "link/.oh-my-zsh-custom/terminal/Solarized_Dark_Ver2.terminal"
- sleep 1 # Wait a bit to make sure the theme is loaded
- open "link/.oh-my-zsh-custom/terminal/Solarized_Dark.terminal"
- sleep 1 # Wait a bit to make sure the theme is loade
-
- # Setup OXS Config Stugg
- source ~/.dotfiles/conf/osx/conf_osx.sh
-fi
+#  # Setup OXS Config Stugg
+#  source ~/.dotfiles/conf/osx/conf_osx.sh
+# fi
 
