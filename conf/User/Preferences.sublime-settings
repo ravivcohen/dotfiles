@@ -1,0 +1,20 @@
+{
+	"color_scheme": "Packages/User/base16-ocean.dark (SL).tmTheme",
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"rulers":
+	[
+		80
+	],
+	"soda_classic_tabs": true,
+	"theme": "Spacegray.sublime-theme",
+	"tab_size": 4,
+	"tab_completion": false,
+	"translate_tabs_to_spaces": true,
+    "word_wrap": true,
+    "highlight_line": true,
+    "highlight_modified_tabs": true
+//http://scotch.io/bar-talk/best-of-sublime-text-3-features-plugins-and-settings
+}
