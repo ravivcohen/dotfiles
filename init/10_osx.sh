@@ -56,7 +56,7 @@ if [[ "$(type -P brew)" ]]; then
   brew install homebrew/dupes/grep
     
   # Install Homebrew recipes.
-  recipes=(git ssh-copy-id tree apg nmap git-extras htop-osx djbdns youtube-dl coreutils findutils ack lynx pigz rename pkg-config p7zip)
+  recipes=(git ssh-copy-id tree apg nmap git-extras htop-osx youtube-dl coreutils findutils ack lynx pigz rename pkg-config p7zip)
 
   list="$(to_install "${recipes[*]}" "$(brew list)")"
   if [[ "$list" ]]; then
@@ -106,9 +106,9 @@ if [[ "$(type -P brew)" ]]; then
   export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
   #Ok Lets install sublime text
-  brew cask install SublimeText3
+  brew cask install sublime-text3
   # Download latest version of Sublime 3 package manager
-  curl -fsSL https://sublime.wbond.net/Package%20Control.sublime-package -o \ $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
+  curl -fsSL https://sublime.wbond.net/Package%20Control.sublime-package -o $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
   
   # Link our settings into SublimeText
   sudo rm -rf $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
