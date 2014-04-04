@@ -56,7 +56,7 @@ if [[ "$(type -P brew)" ]]; then
   brew install homebrew/dupes/grep
     
   # Install Homebrew recipes.
-  recipes=(git ssh-copy-id tree apg nmap git-extras htop-osx djbdns youtube-dl coreutils findutils ack lynx pigz rename pkg-config p7zip)
+  recipes=(git ssh-copy-id tree apg nmap git-extras htop-osx youtube-dl coreutils findutils ack lynx pigz rename pkg-config p7zip)
 
   list="$(to_install "${recipes[*]}" "$(brew list)")"
   if [[ "$list" ]]; then
