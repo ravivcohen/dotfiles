@@ -19,7 +19,7 @@ else
     echo `git ls-files --exclude-standard --others`
     git diff-index --quiet HEAD
     echo $?
-    if git diff-index --quiet HEAD -- -a [[ ! -z "$(git ls-files --exclude-standard --others)" ]]; then
+    if ! git diff-index --quiet HEAD -- -a [ -z "$(git ls-files --exclude-standard --others)" ]; then
     #if [[ $? -eq 0 ]] && [[ -z "$(git ls-files --exclude-standard --others)" ]]; then
     	# Check if the dotfiles dir is out-of-date
     	echo clean
