@@ -34,8 +34,6 @@ if [[ "$(type -P brew)" ]]; then
   
   e_header "Installing ZSH"
   brew install zsh
-  echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
-  chsh -s /usr/local/bin/zsh
   
   # Install wget with IRI support
   e_header "Installing wget with IRI"
@@ -107,13 +105,7 @@ if [[ "$(type -P brew)" ]]; then
 
   #Ok Lets install sublime text
   brew cask install sublime-text3
-  # Download latest version of Sublime 3 package manager
-  curl -fsSL https://sublime.wbond.net/Package%20Control.sublime-package -o $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
   
-  # Link our settings into SublimeText
-  sudo rm -rf $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
-  ln -s $DOTFILES_HOME/.dotfiles/conf/User $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
-
   #ToDo install because cask is way to buggy
   # Install native apps [google-chrome, iterm2, macvim, sublime-text, the-unarchiver, tor-browser, transmission, transmit, keepassx, xquartz, truecrypt, path-finder
   # gpgtools, cord, adium, skype, shuttle, tunnelblick-beta, wireshark, vagrant, tower, paragon-ntfs, little-snitch, java, vmware-fusion, ]
@@ -149,6 +141,21 @@ fi
 #/usr/libexec/PlistBuddy -x -c "Print Window\ Settings:Solarized_Dark" ~/Library/Preferences/com.apple.Terminal.plist > test.plist
 #/usr/libexec/PlistBuddy -x -c "Add Window\ Settings:Solarized_Dark3 dict" ~/Library/Preferences/com.apple.Terminal.plist
 #/usr/libexec/PlistBuddy -x -c "Merge test.plist Window\ Settings:Solarized_Dark3" ~/Library/Preferences/com.apple.Terminal.plist
+# Download latest version of Sublime 3 package manager
+  # sudo curl -fsSL https://sublime.wbond.net/Package%20Control.sublime-package -o $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
+  
+  # # Link our settings into SublimeText
+  # sudo rm -rf $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+  # sudo ln -s $DOTFILES_HOME/.dotfiles/conf/User $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+
+# DO WE NEED THIS /etc/shelss test if new ZSH is used after install or not
+# echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
+# chsh -s /usr/local/bin/zsh
+# ??
+#unalias run-help
+#autoload run-help
+#HELPDIR=/usr/local/share/zsh/helpfiles
+
 
 #  # Setup OXS Config Stugg
 #  source ~/.dotfiles/conf/osx/conf_osx.sh
