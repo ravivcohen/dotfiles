@@ -2,7 +2,13 @@
 
 export lib_file=$HOME/.dotfiles/libs/helper_functions.sh 
 
+LOCAL=$(git rev-parse @)
+REMOTE=$(git rev-parse @{u})
+BASE=$(git merge-base @ @{u})
 
+echo $LOCAL
+echo $REMOTE
+echo $BASE
 #All Helper functions can now be found inside libs/helper_functions.
 . $lib_file
 
