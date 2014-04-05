@@ -17,7 +17,8 @@ else
 	# Update the Index
     git update-index -q --refresh
     git diff-index --quiet HEAD
-    if git diff-index --quiet HEAD --; then
+    echo $?
+    if git diff-index --quiet HEAD -- && [[! -z "$(git ls-files --exclude-standard --others)" ]]; then
     #if [[ $? -eq 0 ]] && [[ -z "$(git ls-files --exclude-standard --others)" ]]; then
     	# Check if the dotfiles dir is out-of-date
     	echo clean
