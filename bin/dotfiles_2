@@ -5,10 +5,16 @@ export lib_file=$HOME/.dotfiles/libs/helper_functions.sh
 LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse @{u})
 BASE=$(git merge-base @ @{u})
+if [ $LOCAL = $REMOTE ]; then
+	echo "Up-to-date"
+elif [ $LOCAL = $BASE ]; then
+	echo "Need to pull"
+elif [ $REMOTE = $BASE ]; then
+	echo "Need to push"
+else
+	echo "Diverged"
+fi
 
-echo $LOCAL
-echo $REMOTE
-echo $BASE
 #All Helper functions can now be found inside libs/helper_functions.
 . $lib_file
 
@@ -26,6 +32,20 @@ else
     if [[ $? -eq 0 ]] && [[ -z "$(git ls-files --exclude-standard --others)" ]]; then
     	# Check if the dotfiles dir is out-of-date
     	echo clean
+    	# Clean Repo. Lets check origin-master.
+    	LOCAL=$(git rev-parse @)
+		REMOTE=$(git rev-parse @{u})
+		BASE=$(git merge-base @ @{u})
+		if [ $LOCAL = $REMOTE ]; then
+    		echo "Up-to-date"
+		elif [ $LOCAL = $BASE ]; then
+    		echo "Need to pull"
+		elif [ $REMOTE = $BASE ]; then
+    		echo "Need to push"
+		else
+    		echo "Diverged"
+		fi
+
    	else
    		echo dirty
    fi
