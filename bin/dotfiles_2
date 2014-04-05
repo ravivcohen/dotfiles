@@ -2,19 +2,6 @@
 
 export lib_file=$HOME/.dotfiles/libs/helper_functions.sh 
 
-LOCAL=$(git rev-parse @)
-REMOTE=$(git rev-parse @{u})
-BASE=$(git merge-base @ @{u})
-if [ $LOCAL = $REMOTE ]; then
-	echo "Up-to-date"
-elif [ $LOCAL = $BASE ]; then
-	echo "Need to pull"
-elif [ $REMOTE = $BASE ]; then
-	echo "Need to push"
-else
-	echo "Diverged"
-fi
-
 #All Helper functions can now be found inside libs/helper_functions.
 . $lib_file
 
@@ -26,6 +13,7 @@ if [[ ! -d ~/.dotfiles ]]; then
   git clone --recursive git://github.com/ravivcohen/dotfiles.git ~/.dotfiles
   cd ~/.dotfiles
 else
+	cd ~/.dotfiles
 	# Update the Index
     git update-index -q --refresh
     git diff-index --quiet HEAD
@@ -37,17 +25,22 @@ else
 		REMOTE=$(git rev-parse @{u})
 		BASE=$(git merge-base @ @{u})
 		if [ $LOCAL = $REMOTE ]; then
-    		echo "Up-to-date"
+    		e_header "Dotfiles are up-to-date"
 		elif [ $LOCAL = $BASE ]; then
-    		echo "Need to pull"
-		elif [ $REMOTE = $BASE ]; then
-    		echo "Need to push"
+    		e_header "Updating dotfiles"
+			git pull
+			# #Dont have any submodules installed for now
+			#git submodule update --init --recursive --quiet
 		else
-    		echo "Diverged"
+    		e_error "Dotfiles out-of-sync"
+    		git status
+    		exit 1
 		fi
 
    	else
-   		echo dirty
+   		e_error "Dotfiles out-of-sync"
+    	git status
+    	exit 1
    fi
    #if [[ test -z "$u" ]]; then
   #	echo $u
