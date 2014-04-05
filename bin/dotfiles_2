@@ -38,7 +38,7 @@ else
 		fi
 
    	else
-   		e_error "Dotfiles out-of-sync"
+   		e_error "Dotfiles are dirty"
     	git status
     	exit 1
    fi
