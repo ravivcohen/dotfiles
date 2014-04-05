@@ -1,0 +1,30 @@
+#!/bin/bash
+
+## Check if .dotfiles exist
+if [[ ! -d ~/.dotfiles ]]; then
+  new_dotfiles_install=1
+  # ~/.dotfiles doesn't exist? Clone it!
+  e_header "Downloading dotfiles"
+  git clone --recursive git://github.com/ravivcohen/dotfiles.git ~/.dotfiles
+  cd ~/.dotfiles
+else
+	# Update the Index
+    git update-index -q --refresh
+    if [[ u="$(git ls-files --exclude-standard --others)" && -z "$u" && $(git diff-index --quiet HEAD) ]]; then
+    	# Check if the dotfiles dir is out-of-date
+    	echo clean
+   	else
+   		echo dirty
+   fi
+   #if [[ test -z "$u" ]]; then
+  #	echo $u
+  #fi
+  # Make sure we have the latest files.
+  # e_header "Updating dotfiles"
+  # cd ~/.dotfiles
+  # git pull
+  # #Dont have any submodules installed for now
+  #git submodule update --init --recursive --quiet
+fi
+
+#[[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]]
