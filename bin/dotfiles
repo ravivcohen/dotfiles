@@ -20,9 +20,16 @@ exit; fi
 #Setup the DOTFILES_HOME variable to be the current users home.
 #This is needed when running something as STD user.
 export DOTFILES_HOME=$HOME
-export lib_file=/tmp/lib_file$$.$RANDOM
 
-curl -fsSL https://raw.githubusercontent.com/ravivcohen/dotfiles/master/libs/helper_functions.sh -o $lib_file
+#
+if [[ ! -d ~/.dotfiles ]]; then
+  export lib_file=/tmp/lib_file$$.$RANDOM
+  curl -fsSL https://raw.githubusercontent.com/ravivcohen/dotfiles/master/libs/helper_functions.sh -o $lib_file
+else
+  export lib_file=$HOME/.dotfiles/libs/helper_functions.sh 
+
+
+  
 #All Helper functions can now be found inside libs/helper_functions.
 . $lib_file
 

@@ -1,5 +1,11 @@
 #!/bin/bash
 
+export lib_file=$HOME/.dotfiles/libs/helper_functions.sh 
+
+
+#All Helper functions can now be found inside libs/helper_functions.
+. $lib_file
+
 ## Check if .dotfiles exist
 if [[ ! -d ~/.dotfiles ]]; then
   new_dotfiles_install=1
