@@ -14,19 +14,19 @@ if [[ ! -d ~/.dotfiles ]]; then
   cd ~/.dotfiles
 else
 	cd ~/.dotfiles
-	# Update the Index
+	# Check if dotfiles dirty
     git update-index -q --refresh
     git diff-index --quiet HEAD
     if [[ $? -eq 0 ]] && [[ -z "$(git ls-files --exclude-standard --others)" ]]; then
+    	
     	# Check if the dotfiles dir is out-of-date
-    	echo clean
-    	# Clean Repo. Lets check origin-master.
     	LOCAL=$(git rev-parse @)
 		REMOTE=$(git rev-parse @{u})
-		BASE=$(git merge-base @ @{u})
+		
 		if [ $LOCAL = $REMOTE ]; then
     		e_header "Dotfiles are up-to-date"
-		elif [ $LOCAL = $BASE ]; then
+    		exit 0
+		elif [ $LOCAL = $(git merge-base @ @{u}) ]; then
     		e_header "Updating dotfiles"
 			git pull
 			# #Dont have any submodules installed for now
@@ -42,15 +42,4 @@ else
     	git status
     	exit 1
    fi
-   #if [[ test -z "$u" ]]; then
-  #	echo $u
-  #fi
-  # Make sure we have the latest files.
-  # e_header "Updating dotfiles"
-  # cd ~/.dotfiles
-  # git pull
-  # #Dont have any submodules installed for now
-  #git submodule update --init --recursive --quiet
 fi
-
-#[[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]]
