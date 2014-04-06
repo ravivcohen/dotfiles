@@ -10,7 +10,6 @@
 #   sudo xcode-select -switch /usr/bin
 # fi
 
-echo $lib_file
 #All Helper functions can now be found inside libs/helper_functions.
 . $lib_file
 
@@ -19,8 +18,6 @@ if [[ ! "$(type -P brew)" ]]; then
   e_header "Installing Homebrew"
   true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 fi
-
-echo 2
 
 if [[ "$(type -P brew)" ]]; then
   e_header "Updating Homebrew"

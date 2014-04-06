@@ -166,7 +166,6 @@ backup=
 # 1. First We Init the system
 do_stuff "init"
 
-exit
 # 2. Second We Setup OH-MY-ZSH  
 if [[ "$new_dotfiles_install" ]]; then
   e_header "Setup oh-my-zsh"
