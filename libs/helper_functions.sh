@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Logging stuff.
 function e_header()   { echo -e "\n\033[1m$@\033[0m"; }
 function e_success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
@@ -10,7 +12,7 @@ function e_arrow()    { echo -e " \033[1;33m➜\033[0m  $@"; }
 function dosu() {
   sudo -p "Enter password, %u:" $1 $2 $3 $4 $5 $6 $7 $8 $9
 }
-export -f dosu
+#export -f dosu
 
 
 function check_std_user_sudo_access() {
@@ -69,8 +71,8 @@ function init_do() {
   if [ "$is_standard_user" = false ]; then
     source "$2"
   else
-    echo 1
-    su $username -m -c "$(typeset -f dosu); source $2"
+    #$(typeset -f dosu);
+    su $username -m -c "source $2"
  fi 
 }
 

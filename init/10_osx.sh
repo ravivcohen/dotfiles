@@ -17,6 +17,8 @@ if [[ ! "$(type -P brew)" ]]; then
   true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 fi
 
+echo 2
+
 if [[ "$(type -P brew)" ]]; then
   e_header "Updating Homebrew"
   

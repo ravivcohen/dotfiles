@@ -70,7 +70,6 @@ function init_do() {
   if [ "$is_standard_user" = false ]; then
     source "$2"
   else
-    echo 1
     su $username -m -c "$(typeset -f dosu); source $2"
  fi 
 }
