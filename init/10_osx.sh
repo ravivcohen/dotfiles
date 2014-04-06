@@ -138,9 +138,9 @@ fi
 #  sleep 1 # Wait a bit to make sure the theme is loaded
 #  open "link/.oh-my-zsh-custom/terminal/Solarized_Dark.terminal"
 #  sleep 1 # Wait a bit to make sure the theme is loade
-#/usr/libexec/PlistBuddy -x -c "Print Window\ Settings:Solarized_Dark" ~/Library/Preferences/com.apple.Terminal.plist > test.plist
-#/usr/libexec/PlistBuddy -x -c "Add Window\ Settings:Solarized_Dark3 dict" ~/Library/Preferences/com.apple.Terminal.plist
-#/usr/libexec/PlistBuddy -x -c "Merge test.plist Window\ Settings:Solarized_Dark3" ~/Library/Preferences/com.apple.Terminal.plist
+/usr/libexec/PlistBuddy -x -c "Print Window\ Settings:Solarized_Dark_Ver2" ~/Library/Preferences/com.apple.Terminal.plist > test.plist
+/usr/libexec/PlistBuddy -x -c "Add Window\ Settings:Solarized_Dark3 dict" ~/Library/Preferences/com.apple.Terminal.plist
+/usr/libexec/PlistBuddy -x -c "Merge SolarizedDark.terminal Window\ Settings:Solarized_Dark3" ~/Library/Preferences/com.apple.Terminal.plist
 # Download latest version of Sublime 3 package manager
   # sudo curl -fsSL https://sublime.wbond.net/Package%20Control.sublime-package -o $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
   

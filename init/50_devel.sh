@@ -1,3 +1,19 @@
+# Here Everyhting is orgnaized into logical groups
+# Sublime
+# OSX
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+	# Get the latest package manager
+	curl -fsSL https://sublime.wbond.net/Package%20Control.sublime-package -o $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
+	# Remove the current user folder 
+	rm -rf $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+	# Link our User directory
+	ln -s $DOTFILES_HOME/.dotfiles/conf/User $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+	
+# Ubuntu.
+elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
+	#TODO
+	echo 'Fix Sublime Init'
+fi
 # # rbenv init.
 # PATH=$(path_remove ~/.dotfiles/libs/rbenv/bin):~/.dotfiles/libs/rbenv/bin
 # PATH=$(path_remove ~/.dotfiles/libs/ruby-build/bin):~/.dotfiles/libs/ruby-build/bin
