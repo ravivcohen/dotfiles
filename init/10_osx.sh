@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # OSX-only stuff. Abort if not OSX.
 [[ "$OSTYPE" =~ ^darwin ]] || return 1
 
@@ -8,6 +10,7 @@
 #   sudo xcode-select -switch /usr/bin
 # fi
 
+echo $lib_file
 #All Helper functions can now be found inside libs/helper_functions.
 . $lib_file
 

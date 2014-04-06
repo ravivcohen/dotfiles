@@ -10,9 +10,9 @@ function e_arrow()    { echo -e " \033[1;33m➜\033[0m  $@"; }
 # Because I run a jailed user not in the Sudo list
 # I Oveeride sudo to show from which user sudo is being invoked.
 function dosu() {
-  sudo -p "Enter password, %u:" $1 $2 $3 $4 $5 $6 $7 $8 $9
+  sudo -p "Enter password, %u:" $@
 }
-#export -f dosu
+export -f dosu
 
 
 function check_std_user_sudo_access() {
@@ -71,8 +71,7 @@ function init_do() {
   if [ "$is_standard_user" = false ]; then
     source "$2"
   else
-    #$(typeset -f dosu);
-    su $username -m -c "source $2"
+    su $username  -m -c "$(typeset -f dosu); source $2"
  fi 
 }
 
