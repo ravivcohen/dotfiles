@@ -24,3 +24,5 @@ fi
 e_header "Setup oh-my-zsh"
 ##SETUP OH MY ZSH ONLY ON THE FIRST TIME
 curl -L http://install.ohmyz.sh | sh
+#We have to set ZSH shell to Homebrew version
+chsh -s /usr/local/bin/zsh

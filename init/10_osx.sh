@@ -33,6 +33,8 @@ if [[ ! "$(type -P brew)" ]]; then
   
   e_header "Installing ZSH"
   brew install zsh
+  # Add Homebrew Shell to Allowed Shell List
+  echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
   
   # Install wget with IRI support
   e_header "Installing wget with IRI"
@@ -77,6 +79,9 @@ if [[ ! "$(type -P brew)" ]]; then
   e_header "Install  python universal"
   brew install python --universal --framework
   
+  # Temp fix for pip. https://github.com/Homebrew/homebrew/pull/28196
+  ln -s $(brew --prefix)/Cellar/python/2.7.6/bin/pip $(brew --prefix)/bin/pip
+  
   #install and upgrade PIP
   e_header "Install and Upgrade PIP"
   pip install --upgrade setuptools
@@ -111,10 +116,33 @@ if [[ ! "$(type -P brew)" ]]; then
 
   #Ok Lets install sublime text
   brew cask install sublime-text3
+  brew cask install java6
+  brew cask install xquartz
+  brew cask install tower
+  brew cask install transmit
+  brew cask install path-finder
+  brew cask install adium
+  brew cask install vagrant
+  brew cask install keka
+  brew cask install shuttle
+  brew cask install cord
   
-  #ToDo install because cask is way to buggy
-  # Install native apps [google-chrome, iterm2, macvim, sublime-text, the-unarchiver, tor-browser, transmission, transmit, keepassx, xquartz, truecrypt, path-finder
-  # gpgtools, cord, adium, skype, shuttle, tunnelblick-beta, wireshark, vagrant, tower, paragon-ntfs, little-snitch, java, vmware-fusion, ]
+  #tunnelblick-beta
+  open "https://code.google.com/p/tunnelblick/wiki/DownloadsEntry#Tunnelblick_Beta_Release"
+  #gpgtools
+  open "https://gpgtools.org/"
+  #vmware-fusion
+  open "https://my.vmware.com/web/vmware/login"
+  #keepassx
+  open "https://www.keepassx.org/dev/projects/keepassx/files"
+  #True-Crypt
+  open "http://www.truecrypt.org/downloads"
+  #Paragon
+  open "http://www.paragon-software.com/home/ntfs-mac/"
+  #Little-Snitch
+  open "http://www.obdev.at/products/littlesnitch/download.html"  
+  #google-chrome
+  open "https://www.google.com/chrome"
 
   # Remove outdated versions from the cellar
   brew cleanup
