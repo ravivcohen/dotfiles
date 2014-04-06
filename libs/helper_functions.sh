@@ -68,7 +68,10 @@ function skip() {
 
 # Initialize.
 function init_do() {
-  if [ "$is_standard_user" = false ]; then
+  filename=$(basename $2)
+  ##Copied this. Could be done better.
+  vers=$(awk -F_ '{print $1}' <<<"$filename")
+  if [[ "$is_standard_user" = false || $vers -ge 50 ]]; then
     source "$2"
   else
     su $username  -m -c "$(typeset -f dosu); source $2"

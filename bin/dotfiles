@@ -67,7 +67,6 @@ done
 
 # Keep-alive: update existing `dosu` time stamp until `.osx` has finished
 if [ "$is_standard_user" = false ]; then
-  echo 1
   while true; do dosu -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 fi
 
@@ -80,18 +79,10 @@ fi
 if [[ ! "$(type -P git)" ]]; then
   # OSX
   if [[ "$OSTYPE" =~ ^darwin ]]; then
-    # It's easiest to get Git via Homebrew, so get that first.
-    if [[ ! "$(type -P brew)" ]]; then
-      e_header "Installing Homebrew"
-      true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)"
-    fi
-    # If Homebrew was installed, install Git.
-    if [[ "$(type -P brew)" ]]; then
-      e_header "Updating Homebrew"
-      brew update
-      e_header "Installing Git"
-      brew install git
-    fi
+    # Since apple dropped support fot 10.6 and 10.7 is next.
+    # I assusme you already have git installed its default on 10.8 +
+    e_error "No GIT ? supported osx 10.8 +"
+    exit 1
   # Ubuntu.
   elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
     # Git is fairly easy.
@@ -108,13 +99,13 @@ fi
 
 ## Check if .dotfiles exist
 if [[ ! -d ~/.dotfiles ]]; then
-  new_dotfiles_install=1
+  export new_dotfiles_install=1
   # ~/.dotfiles doesn't exist? Clone it!
   e_header "Downloading dotfiles"
   git clone --recursive git://github.com/ravivcohen/dotfiles.git ~/.dotfiles
   cd ~/.dotfiles
 else
-    new_dotfiles_install=1
+    export new_dotfiles_install=1
     cd ~/.dotfiles
     # Check if dotfiles dirty
     git update-index -q --refresh
@@ -165,13 +156,7 @@ backup=
 
 # 1. First We Init the system
 do_stuff "init"
-
-# 2. Second We Setup OH-MY-ZSH  
-if [[ "$new_dotfiles_install" ]]; then
-  e_header "Setup oh-my-zsh"
-  ##SETUP OH MY ZSH ONLY ON THE FIRST TIME
-  wget --no-check-certificate https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
-fi
+exit 1
 
 # 3. Copy and Link Over Files 
 do_stuff "copy"

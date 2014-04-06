@@ -17,10 +17,7 @@
 if [[ ! "$(type -P brew)" ]]; then
   e_header "Installing Homebrew"
   true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
-fi
-
-if [[ "$(type -P brew)" ]]; then
-  e_header "Updating Homebrew"
+  e_header "Installing Homebrew pks on first run"
   
   brew doctor
   
@@ -66,6 +63,13 @@ if [[ "$(type -P brew)" ]]; then
   
   echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
   
+  # htop
+  if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wheel" || ! "$(($(stat -L -f "%DMp" "$(which htop)") & 4))" ]]; then
+    e_header "Updating htop permissions"
+    dosu chown root:wheel "$(which htop)"
+    dosu chmod u+s "$(which htop)"
+  fi
+
   e_header "Install Less PIPE"
   brew install lesspipe --syntax-highlighting
 
@@ -114,34 +118,23 @@ if [[ "$(type -P brew)" ]]; then
 
   # Remove outdated versions from the cellar
   brew cleanup
+
+  ##link all the apps 
+  brew linkapps
+
   
+else  
+  e_header "Updating Homebrew"
+
+  brew doctor
+  
+  # Make sure we’re using the latest Homebrew
+  brew update
+
+  # Upgrade any already-installed formulae
+  brew upgrade
 fi
 
-
-##link all the apps 
-brew linkapps
-
-# htop
-if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wheel" || ! "$(($(stat -L -f "%DMp" "$(which htop)") & 4))" ]]; then
- e_header "Updating htop permissions"
- dosu chown root:wheel "$(which htop)"
- dosu chmod u+s "$(which htop)"
-fi
-
-
-if [[ "$new_dotfiles_install" ]]; then
- e_header "Setting Up OSX Visual Settings"
- # Terminal
- # ========
- #copy fonts
- # TODO make this into a submodule at some point
- cp $DOTFILES_HOME/.dotfiles/conf/osx/powerline-fonts/* $DOTFILES_HOME/Library/Fonts/
- # # Use a modified version of the Pro theme by default in Terminal.app
- open "$DOTFILES_HOME/.dotfiles/conf/osx/solarized-osx-terminal-colors/xterm-256color/Solarized\ Dark.terminal"
- sleep 1 # Wait a bit to make sure the theme is loaded
- open "$DOTFILES_HOME/.dotfiles/conf/osx/solarized-osx-terminal-colors/xterm-256color/Solarized\ Light.terminal"
- sleep 1 # Wait a bit to make sure the theme is loade
-fi
 
 # DO WE NEED THIS /etc/shelss test if new ZSH is used after install or not
 # echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
@@ -153,5 +146,5 @@ fi
 
 
 # OSX Config. Can safely be run everytime.
-source $DOTFILES_HOME/.dotfiles/conf/osx/conf_osx.sh
+source $DOTFILES_HOME/.dotfiles/conf/osx/conf_osx_global.sh
 
