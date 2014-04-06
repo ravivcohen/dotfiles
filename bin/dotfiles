@@ -130,8 +130,7 @@ else
       elif [ $LOCAL = $(git merge-base @ @{u}) ]; then
           e_header "Updating dotfiles"
           git pull
-          # #Dont have any submodules installed for now
-          #git submodule update --init --recursive --quiet
+          git submodule update --init --recursive --quiet
       else
           e_error "Dotfiles out-of-sync"
           git status

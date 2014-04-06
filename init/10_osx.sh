@@ -127,26 +127,19 @@ if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wh
 fi
 
 
-# if [[ "$new_dotfiles_install" ]]; then
-#  e_header "First-Time OSX Init"
-#  # Terminal
-#  # ========
-#  #copy fonts
-#  cp ~/.dotfiles/conf/osx/powerline-fonts/* /Library/Fonts/
-#  # # Use a modified version of the Pro theme by default in Terminal.app
-#  open "link/.oh-my-zsh-custom/terminal/Solarized_Dark_Ver2.terminal"
-#  sleep 1 # Wait a bit to make sure the theme is loaded
-#  open "link/.oh-my-zsh-custom/terminal/Solarized_Dark.terminal"
-#  sleep 1 # Wait a bit to make sure the theme is loade
-/usr/libexec/PlistBuddy -x -c "Print Window\ Settings:Solarized_Dark_Ver2" ~/Library/Preferences/com.apple.Terminal.plist > test.plist
-/usr/libexec/PlistBuddy -x -c "Add Window\ Settings:Solarized_Dark3 dict" ~/Library/Preferences/com.apple.Terminal.plist
-/usr/libexec/PlistBuddy -x -c "Merge SolarizedDark.terminal Window\ Settings:Solarized_Dark3" ~/Library/Preferences/com.apple.Terminal.plist
-# Download latest version of Sublime 3 package manager
-  # sudo curl -fsSL https://sublime.wbond.net/Package%20Control.sublime-package -o $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
-  
-  # # Link our settings into SublimeText
-  # sudo rm -rf $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
-  # sudo ln -s $DOTFILES_HOME/.dotfiles/conf/User $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+if [[ "$new_dotfiles_install" ]]; then
+ e_header "Setting Up OSX Visual Settings"
+ # Terminal
+ # ========
+ #copy fonts
+ # TODO make this into a submodule at some point
+ cp $DOTFILES_HOME/.dotfiles/conf/osx/powerline-fonts/* $DOTFILES_HOME/Library/Fonts/
+ # # Use a modified version of the Pro theme by default in Terminal.app
+ open "$DOTFILES_HOME/.dotfiles/conf/osx/solarized-osx-terminal-colors/xterm-256color/Solarized\ Dark.terminal"
+ sleep 1 # Wait a bit to make sure the theme is loaded
+ open "$DOTFILES_HOME/.dotfiles/conf/osx/solarized-osx-terminal-colors/xterm-256color/Solarized\ Light.terminal"
+ sleep 1 # Wait a bit to make sure the theme is loade
+fi
 
 # DO WE NEED THIS /etc/shelss test if new ZSH is used after install or not
 # echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
@@ -157,7 +150,6 @@ fi
 #HELPDIR=/usr/local/share/zsh/helpfiles
 
 
-#  # Setup OXS Config Stugg
-#  source ~/.dotfiles/conf/osx/conf_osx.sh
-# fi
+# OSX Config. Can safely be run everytime.
+source ~/.dotfiles/conf/osx/conf_osx.sh
 
