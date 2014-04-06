@@ -126,7 +126,7 @@ else
     
       if [ $LOCAL = $REMOTE ]; then
           e_header "Dotfiles are up-to-date"
-          exit 0
+          #exit 0
       elif [ $LOCAL = $(git merge-base @ @{u}) ]; then
           e_header "Updating dotfiles"
           git pull
