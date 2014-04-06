@@ -4,13 +4,24 @@ function e_success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
 function e_error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
 function e_arrow()    { echo -e " \033[1;33m➜\033[0m  $@"; }
 
+
+# Because I run a jailed user not in the Sudo list
+# I Oveeride sudo to show from which user sudo is being invoked.
+function dosu() {
+  sudo -p "Enter password, %u:" $1 $2 $3 $4 $5 $6 $7 $8 $9
+}
+export -f dosu
+
+
 function check_std_user_sudo_access() {
   TEMP_FILE=/tmp/test_root_access$$.$RANDOM
   #This will kill the tmp file incase any of thses signals are received.
   trap "rm $TEMP_FILE; exit" SIGHUP SIGINT SIGTERM
+  
   touch $TEMP_FILE
   chmod 666 $TEMP_FILE
-  test1=`su $username -c "echo Testing SUDO Acess; sudo whoami &> $TEMP_FILE" 1>&2`
+  su $username -c "$(typeset -f dosu); echo Testing SUDO Acess; dosu whoami &> $TEMP_FILE" 1>&2
+  
   #Here we read the whole File because sudo on first run displays a warning menu
   test_root_access=$(< $TEMP_FILE)
   rm -rf $TEMP_FILE
@@ -58,7 +69,8 @@ function init_do() {
   if [ "$is_standard_user" = false ]; then
     source "$2"
   else
-    su $username -m -c "source $2"
+    echo 1
+    su $username -m -c "$(typeset -f dosu); source $2"
  fi 
 }
 

@@ -122,8 +122,8 @@ brew linkapps
 # htop
 if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wheel" || ! "$(($(stat -L -f "%DMp" "$(which htop)") & 4))" ]]; then
  e_header "Updating htop permissions"
- sudo chown root:wheel "$(which htop)"
- sudo chmod u+s "$(which htop)"
+ dosu chown root:wheel "$(which htop)"
+ dosu chmod u+s "$(which htop)"
 fi
 
 

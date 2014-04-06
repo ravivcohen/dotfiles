@@ -27,9 +27,8 @@ if [[ ! -d ~/.dotfiles ]]; then
   curl -fsSL https://raw.githubusercontent.com/ravivcohen/dotfiles/master/libs/helper_functions.sh -o $lib_file
 else
   export lib_file=$HOME/.dotfiles/libs/helper_functions.sh 
+fi
 
-
-  
 #All Helper functions can now be found inside libs/helper_functions.
 . $lib_file
 
@@ -37,7 +36,7 @@ else
 # 1. Install init as root.
 # 2. Switch to regular user for copying/linking/ etc..
 while true; do
-    echo "The config part of this script will require SUDO user"
+    echo "The config part of this script will require dosu user"
     read -p "Do you need to login as an administrator (y/n) ?: " yn
     case $yn in
         [Yy]* ) 
@@ -46,7 +45,7 @@ while true; do
               echo "Please enter password for $username"
               check_std_user_sudo_access
               #since we have the enitre file and it might contain the orginal
-              #sudo warining menu we look for root anywhere in the file.
+              #dosu warining menu we look for root anywhere in the file.
               if [[ $test_root_access != *root* ]]; then
                 echo "Sorry, you need root to run parts of this script exiting."
                 exit 1
@@ -55,8 +54,8 @@ while true; do
               ;;
         [Nn]* ) 
               is_standard_user=false
-              echo "Testing SUDO Acess:"
-              if [[ $(sudo whoami) != "root" ]]; then
+              echo "Testing dosu Acess:"
+              if [[ $(dosu whoami) != "root" ]]; then
                 echo "Sorry, you need root to run parts of this script exiting."
                 exit 1
               fi
@@ -66,9 +65,9 @@ while true; do
     esac
 done
 
-# Keep-alive: update existing `sudo` time stamp until `.osx` has finished
+# Keep-alive: update existing `dosu` time stamp until `.osx` has finished
 if [ "$is_standard_user" = false ]; then
-  while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+  while true; do dosu -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 fi
 
 # Ensure that we can actually, like, compile anything.
@@ -97,7 +96,7 @@ if [[ ! "$(type -P git)" ]]; then
   elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
     # Git is fairly easy.
     e_header "Installing Git"
-    sudo apt-get -qq install git-core
+    dosu apt-get -qq install git-core
   fi
 fi
 
@@ -107,7 +106,7 @@ if [[ ! "$(type -P git)" ]]; then
   exit 1
 fi
 
-# Initialize.
+## Check if .dotfiles exist
 if [[ ! -d ~/.dotfiles ]]; then
   new_dotfiles_install=1
   # ~/.dotfiles doesn't exist? Clone it!
@@ -115,12 +114,35 @@ if [[ ! -d ~/.dotfiles ]]; then
   git clone --recursive git://github.com/ravivcohen/dotfiles.git ~/.dotfiles
   cd ~/.dotfiles
 else
-  # Make sure we have the latest files.
-  e_header "Updating dotfiles"
-  cd ~/.dotfiles
-  git pull
-  #Dont have any submodules installed for now
-  #git submodule update --init --recursive --quiet
+    cd ~/.dotfiles
+    # Check if dotfiles dirty
+    git update-index -q --refresh
+    git diff-index --quiet HEAD
+    if [[ $? -eq 0 ]] && [[ -z "$(git ls-files --exclude-standard --others)" ]]; then
+      
+      # Check if the dotfiles dir is out-of-date
+      LOCAL=$(git rev-parse @)
+      REMOTE=$(git rev-parse @{u})
+    
+      if [ $LOCAL = $REMOTE ]; then
+          e_header "Dotfiles are up-to-date"
+          exit 0
+      elif [ $LOCAL = $(git merge-base @ @{u}) ]; then
+          e_header "Updating dotfiles"
+          git pull
+          # #Dont have any submodules installed for now
+          #git submodule update --init --recursive --quiet
+      else
+          e_error "Dotfiles out-of-sync"
+          git status
+          exit 1
+      fi
+
+    else
+      e_error "Dotfiles are dirty"
+      git status
+      exit 1
+   fi
 fi
 
 # Add binaries into the path
@@ -174,4 +196,3 @@ e_header "All done!"
 
 #Delete the libs file.
 rm $lib_file
-

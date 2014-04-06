@@ -21,7 +21,7 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
 # Reveal IP address, hostname, OS version, etc. when clicking the clock
 # in the login window
-sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+dosu defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
 # Check for software updates daily, not just once per week
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
@@ -66,7 +66,7 @@ defaults write NSGlobalDomain AppleFontSmoothing -int 2
 #defaults write com.apple.screencapture type -string "png"
 
 # Enable HiDPI display modes (requires restart)
-sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
+dosu defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
 ###############################################################################
 # Finder                                                                      #
@@ -112,9 +112,9 @@ defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # It's my library. Let me see it.
-sudo chflags nohidden ~/Library/
-sudo chflags nohidden /tmp
-sudo chflags nohidden /usr
+dosu chflags nohidden ~/Library/
+dosu chflags nohidden /tmp
+dosu chflags nohidden /usr
 
 
 
@@ -204,7 +204,7 @@ defaults write com.apple.dock pinning -string start
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # Disable local Time Machine backups
-#hash tmutil &> /dev/null && sudo tmutil disablelocal
+#hash tmutil &> /dev/null && dosu tmutil disablelocal
 
 # Transmission
 # ============
@@ -227,7 +227,7 @@ defaults write org.m0k.transmission WarningLegal -bool false
 
 ##EXTRAA
 # Link to the airport command
-sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/sbin/airport
+dosu ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/sbin/airport
 
 ##Security
 # Turn on firewall, such as it is
@@ -240,19 +240,19 @@ sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Curre
 # every time you leave the machine to prevent that. If you want to do that, use
 # this:
 #
-sudo pmset -a destroyfvkeyonstandby 1 hibernatemode 25
+dosu pmset -a destroyfvkeyonstandby 1 hibernatemode 25
 #
 # You can also use autopoweroff and reduce the autopoweroffdelay if you want 
 # to sleep -> hibernate after a period of time.
 # pmset -a hibernatemode 0
 # pmset -a autopoweroff 0
-sudo rm -rf /private/var/vm/sleepimage
+dosu rm -rf /private/var/vm/sleepimage
 #sudo touch /private/var/vm/sleepimage
 # sudo chflags uchg /private/var/vm/sleepimage
 
 # Remove the Java browser Plugin.
-sudo rm -rf /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
-sudo touch /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
-sudo chmod 000 /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
-sudo chflags uchg /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
+dosu rm -rf /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
+dosu touch /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
+dosu chmod 000 /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
+dosu chflags uchg /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
 
