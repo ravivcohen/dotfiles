@@ -151,5 +151,5 @@ fi
 
 
 # OSX Config. Can safely be run everytime.
-source ~/.dotfiles/conf/osx/conf_osx.sh
+source $DOTFILES_HOME/.dotfiles/conf/osx/conf_osx.sh
 

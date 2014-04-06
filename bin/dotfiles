@@ -165,8 +165,6 @@ backup=
 # 1. First We Init the system
 do_stuff "init"
 
-exit
-
 # 2. Second We Setup OH-MY-ZSH  
 if [[ "$new_dotfiles_install" ]]; then
   e_header "Setup oh-my-zsh"
@@ -181,13 +179,6 @@ do_stuff "link"
 # Alert if backups were made.
 if [[ "$backup" ]]; then
   echo -e "\nBackups were moved to ~/${backup_dir#$HOME/}"
-fi
-
-
-# Lest I forget to do a few additional things...
-if [[ "$new_dotfiles_install" && -e "conf/firsttime_reminder.sh" ]]; then
-  e_header "First-Time Reminders"
-  source "conf/firsttime_reminder.sh"
 fi
 
 # All done!
