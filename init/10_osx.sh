@@ -40,6 +40,17 @@ if [[ ! "$(type -P brew)" ]]; then
   e_header "Installing wget with IRI"
   brew install wget --enable-iri
   
+#     zpython.rb  zpython: use checksummed patches  20 days ago
+# zsh-completions.rb  zsh-completions 0.10.0  8 months ago
+# zsh-history-substring-search.rb zsh-history-substring-search 1.0.0  5 months ago
+# zsh-lovers.rb zsh-lovers: style nits  a year ago
+# zsh-syntax-highlighting.rb  zsh-syntax-highlighting 0.2.0 8 months ago
+# zsh.rb  Batch convert http download urls from SourceForge to https  a month ago
+# zshdb.rb  Batch convert http download urls from SourceForge to https  a month ago
+# zssh.rb Batch convert http download urls from SourceForge to https  a month ago
+# zsync.rb  Batch convert MD5 formula to SHA1.  2 years ago
+# zxcc.rb zxcc 0.5.7  3 months ago
+# zzuf.rb
   
   # # Install WireShark
   # e_header "Install latest version of WireShark with QT"
