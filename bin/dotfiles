@@ -111,7 +111,8 @@ else
     git update-index -q --refresh
     git diff-index --quiet HEAD
     if [[ $? -eq 0 ]] && [[ -z "$(git ls-files --exclude-standard --others)" ]]; then
-      
+      # Update remote info
+      git remote update >&-
       # Check if the dotfiles dir is out-of-date
       LOCAL=$(git rev-parse @)
       REMOTE=$(git rev-parse @{u})
