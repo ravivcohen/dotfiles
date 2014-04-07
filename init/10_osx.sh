@@ -127,6 +127,9 @@ if [[ ! "$(type -P brew)" ]]; then
 
   #Ok Lets install sublime text
   brew cask install sublime-text3
+  # Open Sublime Text so stuff gets set. DO WE NEED THIS OR CAN I MAKE THEM MYSLEF !?!
+  open -gj /Applications/Sublime\ Text.app
+
   brew cask install java6
   brew cask install xquartz
   brew cask install tower
