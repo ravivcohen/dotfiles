@@ -153,10 +153,8 @@ backup_dir="$HOME/.dotfiles/backups/$(date "+%Y_%m_%d-%H_%M_%S")/"
 backup=
 
 # do_stuff Executes code for each file in these subdirectories.
-
 # 1. First We Init the system
 do_stuff "init"
-exit 1
 
 # 3. Copy and Link Over Files 
 do_stuff "copy"
@@ -169,6 +167,3 @@ fi
 
 # All done!
 e_header "All done!"
-
-#Delete the libs file.
-rm $lib_file
