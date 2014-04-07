@@ -12,7 +12,7 @@ dosu chflags nohidden /usr
 
 ##EXTRAA
 # Link to the airport command
-dosu ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/sbin/airport
+dosu ln -sf /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/sbin/airport
 
 ##Security
 # Turn on firewall, such as it is
@@ -35,8 +35,10 @@ dosu rm -rf /private/var/vm/sleepimage
 #sudo touch /private/var/vm/sleepimage
 # sudo chflags uchg /private/var/vm/sleepimage
 
-# Remove the Java browser Plugin.
-dosu rm -rf "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin"
-dosu touch "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin"
-dosu chmod 000 "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin"
-dosu chflags uchg "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin"
+# Remove the Java browser Plugin. NO LONGER NEEDED ?!?
+# Apple by default disables this in http://support.apple.com/kb/dl1572
+# java_plugin="/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin"
+# dosu rm -rf $java_plugin
+# dosu touch $java_plugin
+# dosu chmod 000 $java_plugin
+# dosu chflags uchg $java_plugin
