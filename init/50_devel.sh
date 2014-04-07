@@ -7,7 +7,7 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	# Remove the current user folder 
 	rm -rf $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
 	# Link our User directory
-	ln -s $DOTFILES_HOME/.dotfiles/conf/User $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+	ln -s $DOTFILES_HOME/.dotfiles/conf/sublime/User $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
 	
 # Ubuntu.
 elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
