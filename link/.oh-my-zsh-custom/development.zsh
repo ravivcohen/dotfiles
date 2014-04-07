@@ -37,5 +37,3 @@ elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
   sudo apt-get -qq install git-core
 fi
 
-
-
