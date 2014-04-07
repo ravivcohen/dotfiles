@@ -36,7 +36,7 @@ dosu rm -rf /private/var/vm/sleepimage
 # sudo chflags uchg /private/var/vm/sleepimage
 
 # Remove the Java browser Plugin.
-dosu rm -rf /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
-dosu touch /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
-dosu chmod 000 /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
-dosu chflags uchg /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
+dosu rm -rf "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin"
+dosu touch "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin"
+dosu chmod 000 "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin"
+dosu chflags uchg "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin"
