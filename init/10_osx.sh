@@ -91,7 +91,7 @@ if [[ ! "$(type -P brew)" ]]; then
   brew install python --universal --framework
   
   # Temp fix for pip. https://github.com/Homebrew/homebrew/pull/28196
-  ln -s $(brew --prefix)/Cellar/python/2.7.6/bin/pip $(brew --prefix)/bin/pip
+  #ln -s $(brew --prefix)/Cellar/python/2.7.6/bin/pip $(brew --prefix)/bin/pip
   
   #install and upgrade PIP
   e_header "Install and Upgrade PIP"
