@@ -9,7 +9,6 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 # time that oh-my-zsh is loaded.
 ZSH_THEME="agnoster_m"
 
-
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
