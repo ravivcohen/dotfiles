@@ -2,6 +2,9 @@
 # Sublime
 # OSX
 if [[ "$OSTYPE" =~ ^darwin ]]; then
+	# Make sirectory if it does not exist
+	mkdir -p $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
+	mkdir -p $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/
 	# Get the latest package manager
 	curl -fsSL https://sublime.wbond.net/Package%20Control.sublime-package -o $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
 	# Remove the current user folder 
