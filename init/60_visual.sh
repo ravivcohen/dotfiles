@@ -12,8 +12,11 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	open "$DOTFILES_HOME/.dotfiles/conf/osx/solarized-osx-terminal-colors/xterm-256color/Solarized Dark.terminal"
 	sleep 1 # Wait a bit to make sure the theme is loaded
 	open "$DOTFILES_HOME/.dotfiles/conf/osx/solarized-osx-terminal-colors/xterm-256color/Solarized Light.terminal"
-	sleep 1 # Wait a bit to make sure the theme is loaded
+	sleep 1 # Wait a bit to make sure the theme is loaded	
 
+	# We need to set the default font + Default Theme
+	
+	
 # Ubuntu.
 elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
 	#TODO
