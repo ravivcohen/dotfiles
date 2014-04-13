@@ -9,10 +9,11 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	# TODO make this into a submodule at some point
 	cp $DOTFILES_HOME/.dotfiles/conf/osx/powerline-fonts/* $DOTFILES_HOME/Library/Fonts/
 	# # Use a modified version of the Pro theme by default in Terminal.app
-	open "$DOTFILES_HOME/.dotfiles/conf/osx/solarized-osx-terminal-colors/xterm-256color/Solarized Dark.terminal"
-	sleep 1 # Wait a bit to make sure the theme is loaded
-	open "$DOTFILES_HOME/.dotfiles/conf/osx/solarized-osx-terminal-colors/xterm-256color/Solarized Light.terminal"
-	sleep 1 # Wait a bit to make sure the theme is loaded	
+	# TODO FIX!!!
+	??open "$DOTFILES_HOME/.dotfiles/conf/osx/solarized-osx-terminal-colors/xterm-256color/Solarized Dark.terminal"
+	??sleep 1 # Wait a bit to make sure the theme is loaded
+	??open "$DOTFILES_HOME/.dotfiles/conf/osx/solarized-osx-terminal-colors/xterm-256color/Solarized Light.terminal"
+	??sleep 1 # Wait a bit to make sure the theme is loaded	
 
 	# We need to set the default font + Default Theme
 	
