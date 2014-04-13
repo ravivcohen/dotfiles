@@ -1,6 +1,6 @@
-[submodule "conf/osx/tomorrow-theme"]
-	path = conf/osx/tomorrow-theme
-	url = https://github.com/chriskempson/tomorrow-theme.git
 [submodule "conf/osx/terminal-colors-solarized"]
 	path = conf/osx/terminal-colors-solarized
 	url = https://github.com/tomislav/osx-terminal.app-colors-solarized.git
+[submodule "conf/tomorrow-theme"]
+	path = conf/tomorrow-theme
+	url = https://github.com/chriskempson/tomorrow-theme.git
