@@ -35,8 +35,8 @@ else
 fi
 
 ##Setup DirColors DB to load on start
-# alias dircolors='gdircolors'
-# eval `dircolors ~/.oh-my-zsh-custom/dircolors-solarized/dircolors.ansi-dark` 
+alias dircolors='gdircolors'
+eval `dircolors ~/.oh-my-zsh-custom/dircolors-solarized/dircolors.ansi-dark` 
 
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache"
