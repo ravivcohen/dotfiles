@@ -11,11 +11,6 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	for f in $fonts_dir/*.rb
 	do
 		brew cask install --fontdir=/Library/Fonts --force $f
-		#brew cask install --fontdir=/Library/Fonts --force $fonts_dir/font-dejavu-sans-mono-for-powerline.rb
-		#brew cask install --fontdir=/Library/Fonts --force $fonts_dir/font-sauce-code-powerline.rb
-		#brew cask install --fontdir=/Library/Fonts --force $fonts_dir/font-inconsolata-powerline.rb
-		#brew cask install --fontdir=/Library/Fonts --force $fonts_dir/font-inconsolata-dz-powerline.rb
-		#brew cask install --fontdir=/Library/Fonts --force $fonts_dir/font-meslo-powerline.rb
 	done
 
 	# Download all the needed themes.
