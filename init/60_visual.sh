@@ -6,32 +6,48 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
  	# Terminal
 	# ========
 	# Get fonts.
-	osx_conf_dir = $DOTFILES_HOME/.dotfiles/conf/osx
-	brew cask install --fontdir=/Library/Fonts --force $osx_conf_dir/powerline-fonts/font-dejavu-sans-mono-for-powerline.rb
-	brew cask install --fontdir=/Library/Fonts --force $osx_conf_dir/powerline-fonts/font-sauce-code-powerline.rb
-	brew cask install --fontdir=/Library/Fonts --force $osx_conf_dir/powerline-fonts/font-inconsolata-powerline.rb
-	brew cask install --fontdir=/Library/Fonts --force $osx_conf_dir/powerline-fonts/font-inconsolata-dz-powerline.rb
-	brew cask install --fontdir=/Library/Fonts --force $osx_conf_dir/powerline-fonts/font-meslo-powerline.rb
-	
-	# # Use a modified version of the Pro theme by default in Terminal.app
-	# TODO FIX!!!
-	open "$osx_conf_dir/terminal-colors-solarized/Solarized Dark.terminal"
-	sleep 1 # Wait a bit to make sure the theme is loaded
-	open "$osx_conf_dir/terminal-colors-solarized/Solarized Light.terminal"
-	sleep 1
-	open "$DOTFILES_HOME/.dotfiles/conf/tomorrow-theme/OS X Terminal/Tomorrow.terminal"
-	sleep 1	
-	open "$DOTFILES_HOME/.dotfiles/conf/tomorrow-theme/OS X Terminal/Tomorrow Night.terminal"
-	sleep 1	
-	open "$DOTFILES_HOME/.dotfiles/conf/tomorrow-theme/OS X Terminal/Tomorrow Night Blue.terminal"
-	sleep 1	
-	open "$DOTFILES_HOME/.dotfiles/conf/tomorrow-theme/OS X Terminal/Tomorrow Night Bright.terminal"
-	sleep 1	
-	open "$DOTFILES_HOME/.dotfiles/conf/tomorrow-theme/OS X Terminal/Tomorrow Night Eighties.terminal"
-	sleep 1
+	osx_conf_dir=$DOTFILES_HOME/.dotfiles/conf/osx
+	fonts_dir=$osx_conf_dir/fonts
+	for f in $fonts_dir/*
+	do
+		brew cask install --fontdir=/Library/Fonts --force f
+		#brew cask install --fontdir=/Library/Fonts --force $fonts_dir/font-dejavu-sans-mono-for-powerline.rb
+		#brew cask install --fontdir=/Library/Fonts --force $fonts_dir/font-sauce-code-powerline.rb
+		#brew cask install --fontdir=/Library/Fonts --force $fonts_dir/font-inconsolata-powerline.rb
+		#brew cask install --fontdir=/Library/Fonts --force $fonts_dir/font-inconsolata-dz-powerline.rb
+		#brew cask install --fontdir=/Library/Fonts --force $fonts_dir/font-meslo-powerline.rb
+	done
+
+	# Download all the needed themes.
+    # Theme URL array
+    themes_array=("https://github.com/tomislav/osx-terminal.app-colors-solarized/raw/master/Solarized%20Dark.terminal"
+            "https://github.com/chriskempson/tomorrow-theme/raw/master/OS%20X%20Terminal/Tomorrow%20Night.terminal"
+            "https://github.com/chriskempson/tomorrow-theme/raw/master/OS%20X%20Terminal/Tomorrow%20Night%20Eighties.terminal"
+            "https://github.com/chriskempson/tomorrow-theme/raw/master/iTerm2/Tomorrow%20Night.itermcolors"
+            "https://github.com/chriskempson/tomorrow-theme/raw/master/iTerm2/Tomorrow%20Night%20Eighties.itermcolors"
+            "https://github.com/altercation/solarized/raw/master/iterm2-colors-solarized/Solarized%20Dark.itermcolors "
+            )
+    for i in "${themes_array[@]}"
+    do
+            :
+            # Strip https:/ and leave /
+            url_name="$(echo $i | sed 's~http[s]*:/~~g')"
+            # Pick last group in the path
+            file_name=${url_name##/*/}
+            # Get the File
+            curl -fsSL $i -o $file_name
+            # Open file so it get init and sleep 1 to give it time
+            open $file_name
+            sleep 1
+            # Delete the no longer needed file.
+            rm $file_name
+
+    done
 
 	# We need to set the default font + Default Theme
-	
+	defaults write com.apple.terminal "Default Window Settings" -string "SolarizedDark"
+	defaults write com.apple.terminal "Startup Window Settings" -string "SolarizedDark"
+
 	
 # Ubuntu.
 elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
