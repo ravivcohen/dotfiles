@@ -43,6 +43,9 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	defaults write com.apple.terminal "Default Window Settings" -string "SolarizedDark"
 	defaults write com.apple.terminal "Startup Window Settings" -string "SolarizedDark"
 
+	# Now for iTerm to load its settting from an external location.
+	defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool TRUE
+	defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iTerm/com.googlecode.iterm2.plist";
 	
 # Ubuntu.
 elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
