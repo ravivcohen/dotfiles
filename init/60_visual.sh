@@ -8,7 +8,7 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	# Get fonts.
 	osx_conf_dir=$DOTFILES_HOME/.dotfiles/conf/osx
 	fonts_dir=$osx_conf_dir/fonts
-	for f in $fonts_dir/*
+	for f in $fonts_dir/*.rb
 	do
 		brew cask install --fontdir=/Library/Fonts --force $f
 		#brew cask install --fontdir=/Library/Fonts --force $fonts_dir/font-dejavu-sans-mono-for-powerline.rb
