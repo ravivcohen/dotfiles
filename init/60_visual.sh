@@ -10,7 +10,7 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	fonts_dir=$osx_conf_dir/fonts
 	for f in $fonts_dir/*
 	do
-		brew cask install --fontdir=/Library/Fonts --force f
+		brew cask install --fontdir=/Library/Fonts --force $f
 		#brew cask install --fontdir=/Library/Fonts --force $fonts_dir/font-dejavu-sans-mono-for-powerline.rb
 		#brew cask install --fontdir=/Library/Fonts --force $fonts_dir/font-sauce-code-powerline.rb
 		#brew cask install --fontdir=/Library/Fonts --force $fonts_dir/font-inconsolata-powerline.rb
