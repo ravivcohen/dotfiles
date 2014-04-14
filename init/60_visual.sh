@@ -5,15 +5,30 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	e_header "Setting Up OSX Visual Settings"
  	# Terminal
 	# ========
-	#copy fonts
-	# TODO make this into a submodule at some point
-	cp $DOTFILES_HOME/.dotfiles/conf/osx/powerline-fonts/* $DOTFILES_HOME/Library/Fonts/
+	# Get fonts.
+	osx_conf_dir = $DOTFILES_HOME/.dotfiles/conf/osx
+	brew cask install --fontdir=/Library/Fonts --force $osx_conf_dir/powerline-fonts/font-dejavu-sans-mono-for-powerline.rb
+	brew cask install --fontdir=/Library/Fonts --force $osx_conf_dir/powerline-fonts/font-sauce-code-powerline.rb
+	brew cask install --fontdir=/Library/Fonts --force $osx_conf_dir/powerline-fonts/font-inconsolata-powerline.rb
+	brew cask install --fontdir=/Library/Fonts --force $osx_conf_dir/powerline-fonts/font-inconsolata-dz-powerline.rb
+	brew cask install --fontdir=/Library/Fonts --force $osx_conf_dir/powerline-fonts/font-meslo-powerline.rb
+	
 	# # Use a modified version of the Pro theme by default in Terminal.app
 	# TODO FIX!!!
-	??open "$DOTFILES_HOME/.dotfiles/conf/osx/solarized-osx-terminal-colors/xterm-256color/Solarized Dark.terminal"
-	??sleep 1 # Wait a bit to make sure the theme is loaded
-	??open "$DOTFILES_HOME/.dotfiles/conf/osx/solarized-osx-terminal-colors/xterm-256color/Solarized Light.terminal"
-	??sleep 1 # Wait a bit to make sure the theme is loaded	
+	open "$osx_conf_dir/terminal-colors-solarized/Solarized Dark.terminal"
+	sleep 1 # Wait a bit to make sure the theme is loaded
+	open "$osx_conf_dir/terminal-colors-solarized/Solarized Light.terminal"
+	sleep 1
+	open "$DOTFILES_HOME/.dotfiles/conf/tomorrow-theme/OS X Terminal/Tomorrow.terminal"
+	sleep 1	
+	open "$DOTFILES_HOME/.dotfiles/conf/tomorrow-theme/OS X Terminal/Tomorrow Night.terminal"
+	sleep 1	
+	open "$DOTFILES_HOME/.dotfiles/conf/tomorrow-theme/OS X Terminal/Tomorrow Night Blue.terminal"
+	sleep 1	
+	open "$DOTFILES_HOME/.dotfiles/conf/tomorrow-theme/OS X Terminal/Tomorrow Night Bright.terminal"
+	sleep 1	
+	open "$DOTFILES_HOME/.dotfiles/conf/tomorrow-theme/OS X Terminal/Tomorrow Night Eighties.terminal"
+	sleep 1
 
 	# We need to set the default font + Default Theme
 	
