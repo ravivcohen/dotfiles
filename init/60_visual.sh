@@ -5,14 +5,7 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	e_header "Setting Up OSX Visual Settings"
  	# Terminal
 	# ========
-	# Get fonts.
-	osx_conf_dir=$DOTFILES_HOME/.dotfiles/conf/osx
-	fonts_dir=$osx_conf_dir/fonts
-	for f in $fonts_dir/*.rb
-	do
-		brew cask install --fontdir=/Library/Fonts --force $f
-	done
-
+	
 	# Download all the needed themes.
     # Theme URL array
     themes_array=("https://github.com/tomislav/osx-terminal.app-colors-solarized/raw/master/Solarized%20Dark.terminal"
@@ -39,13 +32,9 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 
     done
 
-	# We need to set the default font + Default Theme
-	defaults write com.apple.terminal "Default Window Settings" -string "SolarizedDark"
-	defaults write com.apple.terminal "Startup Window Settings" -string "SolarizedDark"
-
 	# Now for iTerm to load its settting from an external location.
 	defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool TRUE
-	defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iTerm/com.googlecode.iterm2.plist";
+	defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iTerm/";
 	
 # Ubuntu.
 elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then

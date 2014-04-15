@@ -14,7 +14,7 @@
 . $lib_file
 
 # Homebrew should already be installed at this point.
-if [[ ! "$(type -P brew)" ]]; then
+if [[ "$(type -P brew)" ]]; then
   e_header "Installing Homebrew"
   true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
   e_header "Installing Homebrew pks on first run"
@@ -127,9 +127,10 @@ if [[ ! "$(type -P brew)" ]]; then
 
   #Ok Lets install sublime text
   brew cask install sublime-text3
-  # Open Sublime Text so stuff gets set. DO WE NEED THIS OR CAN I MAKE THEM MYSLEF !?!
-  #open -gj /Applications/Sublime\ Text.app
+  
   brew cask install iterm2
+  open -a iTerm
+
   brew cask install java6
   brew cask install xquartz
   brew cask install tower
@@ -141,22 +142,35 @@ if [[ ! "$(type -P brew)" ]]; then
   brew cask install shuttle
   brew cask install cord
   
+  open -a Safari
+  sleep 1
   #tunnelblick-beta
-  open "https://code.google.com/p/tunnelblick/wiki/DownloadsEntry#Tunnelblick_Beta_Release"
+  open https://code.google.com/p/tunnelblick/wiki/DownloadsEntry#Tunnelblick_Beta_Release
   #gpgtools
-  open "https://gpgtools.org/"
+  open https://gpgtools.org/
   #vmware-fusion
-  open "https://my.vmware.com/web/vmware/login"
+  open https://my.vmware.com/web/vmware/login
   #keepassx
-  open "https://www.keepassx.org/dev/projects/keepassx/files"
+  open https://www.keepassx.org/dev/projects/keepassx/files
   #True-Crypt
-  open "http://www.truecrypt.org/downloads"
+  open http://www.truecrypt.org/downloads
   #Paragon
-  open "http://www.paragon-software.com/home/ntfs-mac/"
+  open http://www.paragon-software.com/home/ntfs-mac/
   #Little-Snitch
-  open "http://www.obdev.at/products/littlesnitch/download.html"  
+  open http://www.obdev.at/products/littlesnitch/download.html
   #google-chrome
-  open "https://www.google.com/chrome"
+  open https://www.google.com/chrome
+
+  killall iTerm
+
+  # Get fonts.
+  osx_conf_dir=$DOTFILES_HOME/.dotfiles/conf/osx
+  fonts_dir=$osx_conf_dir/fonts
+  for f in $fonts_dir/*.rb
+  do
+    brew cask install --fontdir=/Library/Fonts --force $f
+  done
+
 
   # Remove outdated versions from the cellar
   brew cleanup
