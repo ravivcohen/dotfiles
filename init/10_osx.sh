@@ -128,7 +128,7 @@ if [[ ! "$(type -P brew)" ]]; then
   #Ok Lets install sublime text
   brew cask install sublime-text3
   
-  brew cask install $DOTFILES_HOME/conf/osx/iterm2.rb
+  brew cask install $DOTFILES_HOME/.dotfiles/conf/osx/iterm2.rb
   brew cask install java6
   brew cask install xquartz
   brew cask install tower
