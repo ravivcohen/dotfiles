@@ -14,7 +14,7 @@
 . $lib_file
 
 # Homebrew should already be installed at this point.
-if [[ ! "$(type -P brew)" ]]; then
+if [[  "$(type -P brew)" ]]; then
   e_header "Installing Homebrew"
   true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
   e_header "Installing Homebrew pks on first run"
@@ -128,9 +128,7 @@ if [[ ! "$(type -P brew)" ]]; then
   #Ok Lets install sublime text
   brew cask install sublime-text3
   
-  brew cask install iterm2
-  open -a iTerm
-
+  brew cask install $DOTFILES_HOME/conf/osx/iterm2.rb
   brew cask install java6
   brew cask install xquartz
   brew cask install tower
@@ -140,7 +138,6 @@ if [[ ! "$(type -P brew)" ]]; then
   brew cask install vagrant
   brew cask install keka
   brew cask install shuttle
-  brew cask install cord
   
   open -a Safari
   sleep 1
