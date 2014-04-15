@@ -6,6 +6,15 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
  	# Terminal
 	# ========
 	
+    # Open iTerm to set all files in place.
+    open -a iTerm
+    sleep 1
+    killall iTerm
+
+    # Now for iTerm to load its settting from an external location.
+    defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool TRUE
+    defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iTerm/";
+    
 	# Download all the needed themes.
     # Theme URL array
     themes_array=("https://github.com/tomislav/osx-terminal.app-colors-solarized/raw/master/Solarized%20Dark.terminal"
@@ -32,10 +41,6 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 
     done
 
-	# Now for iTerm to load its settting from an external location.
-	defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool TRUE
-	defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iTerm/";
-	
 # Ubuntu.
 elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
 	#TODO
