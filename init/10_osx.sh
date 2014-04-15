@@ -37,7 +37,7 @@ if [[ ! "$(type -P brew)" ]]; then
   echo "/usr/local/bin/zsh" | dosu tee -a /etc/shells
   # Fix permissions
   dosu chown -R root:admin /usr/local/Cellar/zsh/
-  dosu chown -R root:admin /usr/local/share/zsh/
+  #dosu chown -R root:admin /usr/local/share/zsh/
 
   # Install wget with IRI support
   e_header "Installing wget with IRI"
