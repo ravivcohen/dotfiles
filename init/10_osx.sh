@@ -37,23 +37,11 @@ if [[ ! "$(type -P brew)" ]]; then
   echo "/usr/local/bin/zsh" | dosu tee -a /etc/shells
   # Fix permissions
   dosu chown -R root:admin /usr/local/Cellar/zsh/
-  #dosu chown -R root:admin /usr/local/share/zsh/
-
+  
   # Install wget with IRI support
   e_header "Installing wget with IRI"
   brew install wget --enable-iri
   
-#     zpython.rb  zpython: use checksummed patches  20 days ago
-# zsh-completions.rb  zsh-completions 0.10.0  8 months ago
-# zsh-history-substring-search.rb zsh-history-substring-search 1.0.0  5 months ago
-# zsh-lovers.rb zsh-lovers: style nits  a year ago
-# zsh-syntax-highlighting.rb  zsh-syntax-highlighting 0.2.0 8 months ago
-# zsh.rb  Batch convert http download urls from SourceForge to https  a month ago
-# zshdb.rb  Batch convert http download urls from SourceForge to https  a month ago
-# zssh.rb Batch convert http download urls from SourceForge to https  a month ago
-# zsync.rb  Batch convert MD5 formula to SHA1.  2 years ago
-# zxcc.rb zxcc 0.5.7  3 months ago
-# zzuf.rb
   
   # # Install WireShark
   # e_header "Install latest version of WireShark with QT"
@@ -92,9 +80,6 @@ if [[ ! "$(type -P brew)" ]]; then
   #update to latest version of python universal == 32/64bit and framework == allows interaction with osx libs
   e_header "Install  python universal"
   brew install python --universal --framework
-  
-  # Temp fix for pip. https://github.com/Homebrew/homebrew/pull/28196
-  #ln -s $(brew --prefix)/Cellar/python/2.7.6/bin/pip $(brew --prefix)/bin/pip
   
   #install and upgrade PIP
   e_header "Install and Upgrade PIP"
