@@ -14,7 +14,7 @@
 . $lib_file
 
 # Homebrew should already be installed at this point.
-if [[ "$(type -P brew)" ]]; then
+if [[ ! "$(type -P brew)" ]]; then
   e_header "Installing Homebrew"
   true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
   e_header "Installing Homebrew pks on first run"
