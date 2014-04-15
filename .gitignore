@@ -4,7 +4,7 @@ link/.ssh/authorized_keys
 link/.ssh/id_*
 link/.ssh/known_hosts
 *LOCAL*
-conf/sublime/User/Package\ Control.last-run
+*.last-run
 
 # OS generated files #
 ######################
