@@ -34,8 +34,11 @@ if [[ ! "$(type -P brew)" ]]; then
   e_header "Installing ZSH"
   brew install zsh
   # Add Homebrew Shell to Allowed Shell List
-  echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
-  
+  echo "/usr/local/bin/zsh" | dosu tee -a /etc/shells
+  # Fix permissions
+  dosu chown -R root:admin /usr/local/Cellar/zsh/
+  dosu chown -R root:admin /usr/local/share/zsh/
+
   # Install wget with IRI support
   e_header "Installing wget with IRI"
   brew install wget --enable-iri
