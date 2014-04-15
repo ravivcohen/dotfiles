@@ -158,8 +158,7 @@ if [[ ! "$(type -P brew)" ]]; then
   #google-chrome
   open https://www.google.com/chrome
 
-  killall iTerm
-
+  
   # Get fonts.
   osx_conf_dir=$DOTFILES_HOME/.dotfiles/conf/osx
   fonts_dir=$osx_conf_dir/fonts
