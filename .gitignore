@@ -4,4 +4,4 @@ link/.ssh/authorized_keys
 link/.ssh/id_*
 link/.ssh/known_hosts
 *LOCAL*
-*.last-run
+conf/sublime/User/Package Control.last-run
