@@ -66,6 +66,18 @@ function skip() {
   fi
 }
 
+# Offer the user a chance to skip something.
+function no-skip() {
+  REPLY=noskip
+  read -t 5 -n 1 -s -p "To NOT skip, press X within 5 seconds. "
+  if [[ "$REPLY" =~ ^[Xx]$ ]]; then
+    echo "Continuing..."
+    return 1
+  else
+    echo "Skipping.."
+  fi
+}
+
 # Initialize.
 function init_do() {
   filename=$(basename $2)
