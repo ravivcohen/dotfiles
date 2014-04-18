@@ -86,7 +86,7 @@ else
       if [ $LOCAL = $REMOTE ]; then
           e_header "Dotfiles are up-to-date"
           e_header "Skip Script Will Exit"
-          if ! no-skip; then
+          if no-skip; then
             exit 0
           fi
       elif [ $LOCAL = $(git merge-base @ @{u}) ]; then
