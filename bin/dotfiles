@@ -1,17 +1,14 @@
 #!/bin/bash
 
-echo 'Dotfiles - "Cowboy" Ben Alman - http://benalman.com/'
+echo 'Dotfiles - Raviv Cohen'
 
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then cat <<HELP
 
 Usage: $(basename "$0")
 
 See the README for documentation.
-https://github.com/cowboy/dotfiles
+https://github.com/ravivcohen/dotfiles
 
-Copyright (c) 2012 "Cowboy" Ben Alman
-Licensed under the MIT license.
-http://benalman.com/about/license/
 HELP
 exit; fi
 
@@ -95,13 +92,13 @@ else
       else
           e_error "Dotfiles out-of-sync"
           git status
-          #exit 1
+          exit 1
       fi
 
     else
       e_error "Dotfiles are dirty"
       git status
-      #exit 1
+      exit 1
    fi
 fi
 
