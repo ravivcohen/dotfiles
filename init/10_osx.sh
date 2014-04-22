@@ -162,6 +162,9 @@ if [[ ! "$(type -P brew)" ]]; then
   ##link all the apps 
   brew linkapps
 
+  # Link the PasswordAssitant Bin"
+  ln -sF $DOTFILES_HOME/.dotfiles/bin/PasswordAssistant.app /Applications/PasswordAssistant.app
+
   
 else  
   e_header "Updating Homebrew"
@@ -183,9 +186,6 @@ fi
 #unalias run-help
 #autoload run-help
 #HELPDIR=/usr/local/share/zsh/helpfiles
-
-# Link the PasswordAssitant Bin"
-ln -sF DOTFILES_HOME/.dotfiles/bin/PasswordAssistant.app /Applications/PasswordAssistant.app
 
 # OSX Config. Can safely be run everytime.
 source $DOTFILES_HOME/.dotfiles/conf/osx/conf_osx_global.sh
