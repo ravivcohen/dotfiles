@@ -1,3 +1,13 @@
+# Abort if not first run
+[[ "$new_dotfiles_install" ]] || return 1
+
+# Setup the needed DIRS
+mkdir -p $DOTFILES_HOME/Development
+mkdir -p $DOTFILES_HOME/Engagements
+mkdir -p $DOTFILES_HOME/Tools
+mkdir -p $DOTFILES_HOME/Resources
+mkdir -p $DOTFILES_HOME/Documents
+
 # Here Everyhting is orgnaized into logical groups
 # Sublime
 # OSX
