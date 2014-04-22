@@ -41,6 +41,7 @@ eval `dircolors ~/.oh-my-zsh-custom/dircolors-solarized/dircolors.ansi-dark`
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache"
 
+alias passgen="open ~/.dotfiles/bin/PasswordAssistant.app"
 #sleepnow - causes an immediate system sleep
 #pmset sleepnow
 #displaysleepnow - causes display to go to sleep immediately
