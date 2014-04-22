@@ -184,6 +184,8 @@ fi
 #autoload run-help
 #HELPDIR=/usr/local/share/zsh/helpfiles
 
+# Link the PasswordAssitant Bin"
+ln -sF DOTFILES_HOME/.dotfiles/bin/PasswordAssistant.app /Applications/PasswordAssistant.app
 
 # OSX Config. Can safely be run everytime.
 source $DOTFILES_HOME/.dotfiles/conf/osx/conf_osx_global.sh
