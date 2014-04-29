@@ -53,9 +53,10 @@ if [[ $(uname) == "Darwin" ]] ; then
 
 	export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin::/usr/local/MacGPG2/bin
 	export PATH=/usr/texbin:$PATH
-	#unalias run-help
-  	#autoload run-help
-  	#HELPDIR=/usr/local/share/zsh/helpfiles
+	# Brew ZSH requires this
+	unalias run-help
+  	autoload run-help
+  	HELPDIR=/usr/local/share/zsh/helpfiles
 	
 
 # Ubuntu.
