@@ -50,8 +50,13 @@ class ViewState(HTMLParser):
 main_url = "https://pro.portswigger.net/users/"
 login_url = "https://pro.portswigger.net/users/default.aspx"
 
-burp_config = {}
 home_dir = os.path.expanduser('~') + "/"
+
+if os.path.isfile(home_dir + ".burp") == False :
+    print "Missing .burp file"
+    exit(1)
+
+burp_config = {}
 execfile(home_dir + ".burp", burp_config) 
 burp_dir =  home_dir + burp_config['directory']
 
