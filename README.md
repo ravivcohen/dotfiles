@@ -7,6 +7,7 @@ My OS X / Linux dotfiles.
 This was orginally a fork of Cowboy's Dotfiles(https://github.com/cowboy/dotfiles). I then began to modify some of it's core functionality to better suit my needs.
 
 Changes/Modifications:
+
 1. Cowboy's dotfiles made use of Bash as a default shell and would source Bash files. I use oh-my-zsh with my own custom setup.
 2. I run most of my systems as a Standalone `non-sudo` user. This means that to install parts of the init script that require root I must `su $username -c` to user that can `sudo`. I modified the script to support this, more information below.
 3. Added support for checking if the dotfiles directory is dirty, as well as the ability to skip re-running dotfiles if dotfiles is up-to-date.
