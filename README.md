@@ -1,23 +1,31 @@
 # Dotfiles
 
-My OS X / Ubuntu dotfiles.
+My OS X / Linux dotfiles.
 
 ## Why is this a git repo?
 
-This was orginally a fork of Cowboy's Dotfiles(https://github.com/cowboy/dotfiles). I then began to modify some of it's core functionality to better suit my needs. More info to follow below.
+This was orginally a fork of Cowboy's Dotfiles(https://github.com/cowboy/dotfiles). I then began to modify some of it's core functionality to better suit my needs.
+
+Changes/Modifications:
+1. Cowboy's dotfiles made use of Bash as a default shell and would source Bash files. I use oh-my-zsh with my own custom setup.
+2. I run most of my systems as a Standalone `non-sudo` user. This means that to install parts of the init script that require root I must `su $username -c` to user that can `sudo`. I modified the script to support this, more information below.
+3. Added support for checking if the dotfiles directory is dirty, as well as the ability to skip re-running dotfiles if dotfiles is up-to-date.
+4. Added support for theme settings for sublime, iTerm and Terminal.app
+5. Seperated functions into there own lib file, that also gets downloaded as needed.
+
 
 That command is [dotfiles][dotfiles], and this is my "dotfiles" Git repo.
 
 [dotfiles]: bin/dotfiles
-[bin]: https://github.com/cowboy/dotfiles/tree/master/bin
+[bin]: https://github.com/ravivcohen/dotfiles/tree/master/bin
 
 ## What, exactly, does the "dotfiles" command do?
 
 It's really not very complicated. When [dotfiles][dotfiles] is run, it does a few things:
 
-1. Git is installed if necessary, via APT or Homebrew (which is installed if necessary).
-2. This repo is cloned into the `~/.dotfiles` directory (or updated if it already exists).
-2. Files in `init` are executed (in alphanumeric order, hence the "50_" names).
+1. Git is installed if necessary (on Ubuntu, via APT. OSX is assumed to have GIT installed).
+2. This repo is cloned into the `~/.dotfiles` directory (or updated if it already exists or quits if dirty).
+2. Files in `init` are executed (in alphanumeric order, hence the "50_" names and files < 50 run as sudo).
 3. Files in `copy` are copied into `~/`.
 4. Files in `link` are linked into `~/`.
 
@@ -25,9 +33,7 @@ Note:
 
 * The `backups` folder only gets created when necessary. Any files in `~/` that would have been overwritten by `copy` or `link` get backed up there.
 * Files in `bin` are executable shell scripts (Eg. [~/.dotfiles/bin][bin] is added into the path).
-* Files in `source` get sourced whenever a new shell is opened (in alphanumeric order, hence the "50_" names).
 * Files in `conf` just sit there. If a config file doesn't _need_ to go in `~/`, put it in there.
-* Files in `caches` are cached files, only used by some scripts. This folder will only be created if necessary.
 
 ## Installation
 ### OS X Notes
@@ -44,13 +50,13 @@ Note:
 ### Actual Installation
 
 ```sh
-bash -c "$(curl -fsSL https://bit.ly/cowboy-dotfiles)" && source ~/.bashrc
+bash -c "$(curl -fsSL https://bit.ly/cowboy-dotfiles)"
 ```
 
 If, for some reason, [bit.ly](https://bit.ly/) is down, you can use the canonical URL.
 
 ```sh
-bash -c "$(curl -fsSL https://raw.github.com/ravivcohen/dotfiles/master/bin/dotfiles)" && source ~/.bashrc
+bash -c "$(curl -fsSL https://raw.github.com/ravivcohen/dotfiles/master/bin/dotfiles)"
 ```
 
 ## The "init" step
