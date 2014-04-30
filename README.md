@@ -26,7 +26,9 @@ It's really not very complicated. When [dotfiles][dotfiles] is run, it does a fe
 
 1. Git is installed if necessary (on Ubuntu, via APT. OSX is assumed to have GIT installed).
 2. This repo is cloned into the `~/.dotfiles` directory (or updated if it already exists or quits if dirty).
-2. Files in `init` are executed (in alphanumeric order, hence the "50_" names and files < 50 run as sudo).
+2. Files in `init` are executed:
+    * In alphanumeric order, hence the "50_" names 
+    * With permission constraints, files < "50_" are run as sudo.
 3. Files in `copy` are copied into `~/`.
 4. Files in `link` are linked into `~/`.
 
