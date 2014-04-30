@@ -12,7 +12,7 @@ Changes/Modifications:
 2. I run most of my systems as a Standalone `non-sudo` user. This means that to install parts of the init script that require root I must `su $username -c` to user that can `sudo`. I modified the script to support this, more information below.
 3. Added support for checking if the dotfiles directory is dirty, as well as the ability to skip re-running dotfiles if dotfiles is up-to-date.
 4. Added support for theme settings for sublime, iTerm and Terminal.app
-5. Seperated functions into there own lib file, that also gets downloaded as needed.
+5. Seperated functions into their own lib file, that also gets downloaded as needed.
 
 
 That command is [dotfiles][dotfiles], and this is my "dotfiles" Git repo.
