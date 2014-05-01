@@ -14,11 +14,13 @@
 . $lib_file
 
 # Homebrew should already be installed at this point.
-if [[ ! "$(type -P brew)" ]]; then
-  e_header "Installing Homebrew"
-  true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
-  e_header "Installing Homebrew pks on first run"
-  
+if [[ "$new_dotfiles_install" ]]; then
+  if [[ ! "$(type -P brew)" ]]; then
+    e_header "Installing Homebrew"
+    true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+    e_header "Installing Homebrew pks on first run"
+  fi
+
   brew doctor
   
   # Make sure we’re using the latest Homebrew

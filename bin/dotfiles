@@ -68,7 +68,6 @@ if [[ ! -d ~/.dotfiles ]]; then
   git clone git://github.com/ravivcohen/dotfiles.git ~/.dotfiles
   cd ~/.dotfiles
 else
-    export new_dotfiles_install=1
     cd ~/.dotfiles
     # Check if dotfiles dirty
     git update-index -q --refresh
