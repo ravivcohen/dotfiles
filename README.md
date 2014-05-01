@@ -42,27 +42,33 @@ Note:
 ### General Notes
 
 * In order to run init scripts files that have an alphanumeric value < "50_" require `sudo` privillgies.
-   ** You can skip the entire "init" step when prompted.
+   * __You can skip the entire "init" step when prompted.__
    * The reason it is all or nothing for the "init" step is because the sudo steps install necesary software needed by the rest of the script. 
    * I am working on making this more flexible. SEE ROADMAP
+   * If you skip the "init" step, only copy/link will be executed.  
 
-* If you skip the "init" step, only copy/link will be executed.  
+##### Run As Another User 
+   
+I tend to run as a non `sudo` privillged user on my systems. I therfore need to first `su` to a user that can `sudo` and run the commands as that user. The files are split up in the "init" script to run all files with < "50_" as a `sudo` user, this way only the stuff that really needs `sudo` runs.
+
+* Upon execution you will be asked if you would like to `su` to another user which can `sudo`. 
+   * When you choose "yes" all `sudo` commands will gets wrapped in `su $username -c 'sudo _command_`.
+
 
 ### OS X Notes
 
-* You need to be an administrator (for `sudo`).
 * You need to have installed [XCode](https://developer.apple.com/downloads/index.action?=xcode) or, at the very minimum, the [XCode Command Line Tools](https://developer.apple.com/downloads/index.action?=command%20line%20tools), which are available as a _much smaller_ download thank XCode.
 
 ### Ubuntu Notes
 
-* You need to be an administrator (for `sudo`).
-* You might want to set up your ubuntu server [like I do it](/cowboy/dotfiles/wiki/ubuntu-setup), but then again, you might not.
-* Either way, you should at least update/upgrade APT with `sudo apt-get -qq update && sudo apt-get -qq dist-upgrade` first.
+__out-of-date__ More to come ... 
+
+__MORE OSs TO COME ...__
 
 ### Actual Installation
 
 ```sh
-bash -c "$(curl -fsSL https://bit.ly/cowboy-dotfiles)"
+bash -c "$(curl -fsSL https://bit.ly/rc-dotfiles)"
 ```
 
 If, for some reason, [bit.ly](https://bit.ly/) is down, you can use the canonical URL.
