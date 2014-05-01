@@ -39,6 +39,15 @@ Note:
 * Files in `conf` just sit there. If a config file doesn't _need_ to go in `~/`, put it in there.
 
 ## Installation
+### General Notes
+
+* In order to run init scripts files that have an alphanumeric value < "50_" require `sudo` privillgies.
+   ** You can skip the entire "init" step when prompted.
+   * The reason it is all or nothing for the "init" step is because the sudo steps install necesary software needed by the rest of the script. 
+   * I am working on making this more flexible. SEE ROADMAP
+
+* If you skip the "init" step, only copy/link will be executed.  
+
 ### OS X Notes
 
 * You need to be an administrator (for `sudo`).
