@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export skip_update=0
+
 echo 'Dotfiles - Raviv Cohen'
 
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then cat <<HELP
@@ -13,9 +15,13 @@ See the README for documentation.
 https://github.com/ravivcohen/dotfiles
 
 HELP
-exit;
+exit
+
 elif [[ "$1" == "-f" || "$1" == "--force-reinstall" ]]; then
   export new_dotfiles_install=1
+
+elif [[ "$1" == "-s" || "$1" == "--skip-update" ]]; then
+  skip_update=1
 fi
 
 #Setup the DOTFILES_HOME variable to be the current users home.
@@ -74,37 +80,40 @@ if [[ ! -d ~/.dotfiles ]]; then
   git clone git://github.com/ravivcohen/dotfiles.git ~/.dotfiles
   cd ~/.dotfiles
 else
-    cd ~/.dotfiles
-    # Check if dotfiles dirty
-    git update-index -q --refresh
-    git diff-index --quiet HEAD
-    if [[ $? -eq 0 ]] && [[ -z "$(git ls-files --exclude-standard --others)" ]]; then
-      # Update remote info
-      git remote update >&-
-      # Check if the dotfiles dir is out-of-date
-      LOCAL=$(git rev-parse @)
-      REMOTE=$(git rev-parse @{u})
-    
-      if [ $LOCAL = $REMOTE ]; then
-          e_header "Dotfiles are up-to-date"
-          e_header "Skip Script Will Exit"
-          if no-skip; then
-            exit 0
-          fi
-      elif [ $LOCAL = $(git merge-base @ @{u}) ]; then
-          e_header "Updating dotfiles"
-          git pull
+    if [[ "$skip_update" == "0" ]]; then
+      cd ~/.dotfiles
+      # Check if dotfiles dirty
+      git update-index -q --refresh
+      git diff-index --quiet HEAD
+      if [[ $? -eq 0 ]] && [[ -z "$(git ls-files --exclude-standard --others)" ]]; then
+        # Update remote info
+        git remote update >&-
+        # Check if the dotfiles dir is out-of-date
+        LOCAL=$(git rev-parse @)
+        REMOTE=$(git rev-parse @{u})
+      
+        if [ $LOCAL = $REMOTE ]; then
+            e_header "Dotfiles are up-to-date"
+            e_header "Skip Script Will Exit"
+            if no-skip; then
+              exit 0
+            fi
+        elif [ $LOCAL = $(git merge-base @ @{u}) ]; then
+            e_header "Updating dotfiles"
+            git pull
+        else
+            e_error "Dotfiles out-of-sync"
+            git status
+            exit 1
+        fi
+
       else
-          e_error "Dotfiles out-of-sync"
-          git status
-          exit 1
+        e_error "Dotfiles are dirty"
+        git status
+        exit 1
       fi
 
-    else
-      e_error "Dotfiles are dirty"
-      git status
-      exit 1
-   fi
+    fi
 fi
 
 # Add binaries into the path
