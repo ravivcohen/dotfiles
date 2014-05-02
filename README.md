@@ -59,10 +59,6 @@ I tend to run as a non `sudo` privillged user on my systems. I therfore need to 
 
 * You need to have installed [XCode](https://developer.apple.com/downloads/index.action?=xcode) or, at the very minimum, the [XCode Command Line Tools](https://developer.apple.com/downloads/index.action?=command%20line%20tools), which are available as a _much smaller_ download thank XCode.
 
-### Ubuntu Notes
-
-__out-of-date__ More to come ... 
-
 __MORE OSs TO COME ...__
 
 ### Actual Installation
