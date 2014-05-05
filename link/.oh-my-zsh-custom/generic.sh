@@ -14,6 +14,19 @@ umask 022
 alias ll='ls -ltrh'
 alias lla='ls -altrh'
 
+# # Shortcuts
+# alias ll='ls -lh'
+# alias la='ls -lhA'
+# alias l='ls'
+# alias c='clear'
+# alias x='exit'
+# alias q='exit'
+ 
+# # Don't run shutdown if rtorrent is running - as long as there's a screen with "tor" in its name, shutdown won't run (unless you call /sbin/shutdown, or unalias it)
+# alias shutdown='/home/james/scripts/safe.shutdown.sh'
+ 
+# # When using sudo, use alias expansion (otherwise sudo ignores your aliases)
+# alias sudo='sudo '
 
 # # Directory listing
 # if [[ "$(type -P tree)" ]]; then
