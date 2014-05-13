@@ -10,7 +10,7 @@ function e_arrow()    { echo -e " \033[1;33m➜\033[0m  $@"; }
 # Because I run a jailed user not in the Sudo list
 # I Oveeride sudo to show from which user sudo is being invoked.
 function sudo() {
-  command sudo -p "Enter password, %u:" $@
+  command sudo -p "Enter sudo password for, %u:" $@
 }
 export -f sudo
 
@@ -86,6 +86,7 @@ function init_do() {
   if [[ "$is_standard_user" = false || $vers -ge 50 ]]; then
     source "$2"
   else
+    echo "Enter password for, $username"
     su $username  -m -c "$(typeset -f sudo); source $2"
  fi 
 }

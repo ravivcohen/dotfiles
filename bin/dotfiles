@@ -1,28 +1,32 @@
 #!/bin/bash
 
-export skip_update=0
 
 echo 'Dotfiles - Raviv Cohen'
 
-if [[ "$1" == "-h" || "$1" == "--help" ]]; then cat <<HELP
 
-Usage: $(basename "$0") [-f | -h]
+for var in "$@"
+do
+    if [[ "$var" == "-h" || "$var" == "--help" ]]; then cat <<HELP
+      Usage: $(basename "$0") [-f | -h]
 
--h / --help run help
--f / --force-reinstall force to re-run and re-install all dotfiles
+      -h / --help run help
+      -f / --force-reinstall force to re-run and re-install all dotfiles
+      -s / --skip-update force skip updating or checking status of dotfiles
 
-See the README for documentation.
-https://github.com/ravivcohen/dotfiles
-
+      See the README for documentation.
+      https://github.com/ravivcohen/dotfiles
 HELP
 exit
 
-elif [[ "$1" == "-f" || "$1" == "--force-reinstall" ]]; then
-  export new_dotfiles_install=1
+  elif [[ "$var" == "-f" || "$var" == "--force-reinstall" ]]; then
+    export new_dotfiles_install=1
 
-elif [[ "$1" == "-s" || "$1" == "--skip-update" ]]; then
-  skip_update=1
-fi
+  elif [[ "$var" == "-s" || "$var" == "--skip-update" ]]; then
+    export skip_update=1
+  fi
+
+done
+
 
 #Setup the DOTFILES_HOME variable to be the current users home.
 #This is needed when running something as STD user.
