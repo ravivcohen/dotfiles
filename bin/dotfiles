@@ -39,10 +39,9 @@ fi
 #All Helper functions can now be found inside libs/helper_functions.
 . $lib_file
 
-
-# Keep-alive: update existing `dosu` time stamp until `.osx` has finished
+# Keep-alive: update existing `sudo` time stamp until `.osx` has finished
 if [ "$is_standard_user" = false ]; then
-  while true; do dosu -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+  while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 fi
 
 # Ensure that we can actually, like, compile anything.
@@ -62,7 +61,7 @@ if [[ ! "$(type -P git)" ]]; then
   elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
     # Git is fairly easy.
     e_header "Installing Git"
-    dosu apt-get -qq install git-core
+    sudo apt-get -qq install git-core
   fi
 fi
 
@@ -146,7 +145,7 @@ if ! skip; then
         echo "Please enter password for $username"
         check_std_user_sudo_access
         #since we have the enitre file and it might contain the orginal
-        #dosu warining menu we look for root anywhere in the file.
+        #sudo warining menu we look for root anywhere in the file.
         if [[ $test_root_access != *root* ]]; then
           echo "Sorry, you need root to run parts of this script exiting."
           exit 1
@@ -157,7 +156,7 @@ if ! skip; then
       [Nn]* ) 
         is_standard_user=false
         echo "Testing Sudo Acess:"
-        if [[ $(dosu whoami) != "root" ]]; then
+        if [[ $(sudo whoami) != "root" ]]; then
           echo "Sorry, you need root to run parts of this script exiting."
           exit 1
         fi

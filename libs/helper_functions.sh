@@ -9,11 +9,12 @@ function e_arrow()    { echo -e " \033[1;33m➜\033[0m  $@"; }
 
 # Because I run a jailed user not in the Sudo list
 # I Oveeride sudo to show from which user sudo is being invoked.
-function dosu() {
-  sudo -p "Enter password, %u:" $@
+function sudo() {
+  command sudo -p "Enter password, %u:" $@
 }
-export -f dosu
+export -f sudo
 
+alias momo='ls -l'
 
 function check_std_user_sudo_access() {
   TEMP_FILE=/tmp/test_root_access$$.$RANDOM
@@ -22,8 +23,7 @@ function check_std_user_sudo_access() {
   
   touch $TEMP_FILE
   chmod 666 $TEMP_FILE
-  su $username -c "$(typeset -f dosu); echo Testing SUDO Acess; dosu whoami &> $TEMP_FILE" 1>&2
-  
+  su $username -c "$(typeset -f sudo); echo Testing SUDO Acess; sudo whoami &> $TEMP_FILE" 1>&2
   #Here we read the whole File because sudo on first run displays a warning menu
   test_root_access=$(< $TEMP_FILE)
   rm -rf $TEMP_FILE
@@ -86,7 +86,7 @@ function init_do() {
   if [[ "$is_standard_user" = false || $vers -ge 50 ]]; then
     source "$2"
   else
-    su $username  -m -c "$(typeset -f dosu); source $2"
+    su $username  -m -c "$(typeset -f sudo); source $2"
  fi 
 }
 

@@ -12,7 +12,6 @@
 
 #All Helper functions can now be found inside libs/helper_functions.
 . $lib_file
-
 # Homebrew should already be installed at this point.
 if [[ "$new_dotfiles_install" ]]; then
   if [[ ! "$(type -P brew)" ]]; then
@@ -36,9 +35,9 @@ if [[ "$new_dotfiles_install" ]]; then
   e_header "Installing ZSH"
   brew install zsh
   # Add Homebrew Shell to Allowed Shell List
-  echo "/usr/local/bin/zsh" | dosu tee -a /etc/shells
+  echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
   # Fix permissions
-  dosu chown -R root:admin /usr/local/Cellar/zsh/
+  sudo chown -R root:admin /usr/local/Cellar/zsh/
   
   # Install wget with IRI support
   e_header "Installing wget with IRI"
@@ -72,8 +71,8 @@ if [[ "$new_dotfiles_install" ]]; then
   # htop
   if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wheel" || ! "$(($(stat -L -f "%DMp" "$(which htop)") & 4))" ]]; then
     e_header "Updating htop permissions"
-    dosu chown root:wheel "$(which htop)"
-    dosu chmod u+s "$(which htop)"
+    sudo chown root:wheel "$(which htop)"
+    sudo chmod u+s "$(which htop)"
   fi
 
   e_header "Install Less PIPE"

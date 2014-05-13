@@ -68,7 +68,7 @@ defaults write NSGlobalDomain AppleFontSmoothing -int 2
 #defaults write com.apple.screencapture type -string "png"
 
 # Enable HiDPI display modes (requires restart)
-#dosu defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
+#sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
 ###############################################################################
 # Finder                                                                      #
@@ -114,9 +114,9 @@ defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # # It's my library. Let me see it.
-# dosu chflags nohidden ~/Library/
-# dosu chflags nohidden /tmp
-# dosu chflags nohidden /usr
+# sudo chflags nohidden ~/Library/
+# sudo chflags nohidden /tmp
+# sudo chflags nohidden /usr
 
 
 
@@ -206,7 +206,7 @@ defaults write com.apple.dock pinning -string start
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # Disable local Time Machine backups
-#hash tmutil &> /dev/null && dosu tmutil disablelocal
+#hash tmutil &> /dev/null && sudo tmutil disablelocal
 
 # Transmission
 # ============
