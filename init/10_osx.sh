@@ -40,8 +40,8 @@ if [[ "$new_dotfiles_install" ]]; then
   sudo chown -R root:admin /usr/local/Cellar/zsh/
   
   # Install wget with IRI support
-  e_header "Installing wget with IRI"
-  brew install wget --enable-iri
+  #e_header "Installing wget with IRI"
+  #brew install wget --enable-iri
   
   
   # # Install WireShark
@@ -56,14 +56,22 @@ if [[ "$new_dotfiles_install" ]]; then
   # Install more recent versions of some OS X tools
   brew tap homebrew/dupes
   brew install homebrew/dupes/grep
-    
+      
   # Install Homebrew recipes.
-  recipes=(git ssh-copy-id tree apg nmap git-extras htop-osx youtube-dl coreutils findutils ack lynx pigz rename pkg-config p7zip)
+  recipes=(git ssh-copy-id "wget --enable-iri" apg nmap git-extras htop-osx youtube-dl coreutils findutils ack lynx pigz rename pkg-config p7zip)
 
-  list="$(to_install "${recipes[*]}" "$(brew list)")"
+  #convert_list_to_array "$(brew list)"
+  brew_list=( $(convert_list_to_array "$(brew list)") )
+  #to_install "recipes[@]" "brew_list[@]"
+  list=( $(to_install "recipes[@]" "brew_list[@]") )
   if [[ "$list" ]]; then
-    e_header "Installing Homebrew recipes: $list"
-    brew install $list
+    # Because brew hard fails incase one application fails.
+    # We call each install one by one.
+    for recipe in "${list[@]}"
+    do
+      e_header "Installing Homebrew recipe: $recipe"
+      brew install $recipe
+    done 
   fi
   
   echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."

@@ -29,28 +29,79 @@ function check_std_user_sudo_access() {
   rm -rf $TEMP_FILE
 }
 
-# Given a list of desired items and installed items, return a list
-# of uninstalled items. Arrays in bash are insane (not in a good way).
-function to_install() {
-  local debug desired installed i desired_s installed_s remain
-  if [[ "$1" == 1 ]]; then debug=1; shift; fi
+function convert_list_to_array() {
   # Convert args to arrays, handling both space- and newline-separated lists.
-  read -ra desired < <(echo "$1" | tr '\n' ' ')
-  read -ra installed < <(echo "$2" | tr '\n' ' ')
-  # Sort desired and installed arrays.
-  unset i; while read -r; do desired_s[i++]=$REPLY; done < <(
-    printf "%s\n" "${desired[@]}" | sort
-  )
+  local desired
+  read -ra  desired < <(echo "$1" | tr '\n' ' ')
+  echo "${desired[@]}"
+}
+
+# Given a list of desired items and installed items, return a list
+# of uninstalled items.
+# Expects to get array as input by calling function like this:
+# to_install arr1[@] arr2[@] .. 
+# to convert a space or newline seperated list to array call
+# brew_list="$(convert_list_to_array "$(brew list)")"
+function to_install() {
+  local debug desired installed i desired_s installed_s remain common
+  local remain=()
+  if [[ "$1" == 1 ]]; then debug=1; shift; fi
+  
+  declare -a desired=("${!1}")
+  declare -a installed=("${!2}")
+  
+  # Sort the installed arrays.
   unset i; while read -r; do installed_s[i++]=$REPLY; done < <(
     printf "%s\n" "${installed[@]}" | sort
   )
-  # Get the difference. comm is awesome.
-  unset i; while read -r; do remain[i++]=$REPLY; done < <(
-    comm -13 <(printf "%s\n" "${installed_s[@]}") <(printf "%s\n" "${desired_s[@]}")
-  )
-  [[ "$debug" ]] && for v in desired desired_s installed installed_s remain; do
+  
+  # Iterate through the array desired array searching in the sorted array
+  # Search time is log N * N times it happens.
+  let desired_size=${#installed[@]}
+  for element in "${desired[@]}"; do
+    # Split up element just incase its a complex
+    # I.E. git --universal
+    element_s=( $element )
+    
+    # Due a log N search.
+    let start=0
+    let end=$desired_size-1
+    element_found=false
+    while [ $start -le $end ]
+    do
+
+        let tmp=$start+$end
+        mid=$(printf "%.0f" $(echo "scale=2;$tmp/2" | bc))
+        
+        if [ ${installed[$mid]} = ${element_s[0]} ]; then
+            element_found=true
+            break
+        
+        elif [ ${installed[$mid]} \< ${element_s[0]} ]; then
+            let start=$mid+1
+        
+        elif [ ${installed[$mid]} \> ${element_s[0]} ]; then
+            let end=$mid-1
+        
+        else
+            # THIS SHOULD NEVER HAPPEN
+            echo "Element Not Found."
+            echo -e "\n"
+            element_found=false
+            break
+        fi
+    done
+    
+    if [[ $element_found == false ]]; then
+      # We insert back the original element to preserve flags i.e. --universal
+      remain+=($element)
+    fi
+  done
+
+  [[ "$debug" ]] && for v in desired desired_s installed installed_s remain common; do
     echo "$v ($(eval echo "\${#$v[*]}")) $(eval echo "\${$v[*]}")"
   done
+  
   echo "${remain[@]}"
 }
 
