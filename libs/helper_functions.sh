@@ -6,7 +6,7 @@ function e_success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
 function e_error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
 function e_arrow()    { echo -e " \033[1;33m➜\033[0m  $@"; }
 
-
+ret=""
 # Because I run a jailed user not in the Sudo list
 # I Oveeride sudo to show from which user sudo is being invoked.
 function sudo() {
@@ -102,7 +102,8 @@ function to_install() {
     echo "$v ($(eval echo "\${#$v[*]}")) $(eval echo "\${$v[*]}")"
   done
   
-  echo "${remain[@]}"
+  ret=( "${remain[@]}" )
+  #echo "${remain[@]}"
 }
 
 # Offer the user a chance to skip something.

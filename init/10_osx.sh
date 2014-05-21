@@ -20,24 +20,24 @@ if [[ "$new_dotfiles_install" ]]; then
     e_header "Installing Homebrew pks on first run"
   fi
 
-  brew doctor
+  #brew doctor
   
   # Make sure we’re using the latest Homebrew
-  brew update
+  #brew update
 
   # Upgrade any already-installed formulae
-  brew upgrade
+  #brew upgrade
   
-  #this is needed for the python install below to work
-  e_header "Install  readline gdbm sqlite universal"
-  brew install readline sqlite gdbm --universal
+  # #this is needed for the python install below to work
+  # e_header "Install  readline gdbm sqlite universal"
+  # brew install readline sqlite gdbm --universal
   
-  e_header "Installing ZSH"
-  brew install zsh
-  # Add Homebrew Shell to Allowed Shell List
-  echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
-  # Fix permissions
-  sudo chown -R root:admin /usr/local/Cellar/zsh/
+  # e_header "Installing ZSH"
+  # brew install zsh
+  # # Add Homebrew Shell to Allowed Shell List
+  # echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
+  # # Fix permissions
+  # sudo chown -R root:admin /usr/local/Cellar/zsh/
   
   # Install wget with IRI support
   #e_header "Installing wget with IRI"
@@ -55,25 +55,31 @@ if [[ "$new_dotfiles_install" ]]; then
   
   # Install more recent versions of some OS X tools
   brew tap homebrew/dupes
-  brew install homebrew/dupes/grep
+  #brew install homebrew/dupes/grep
       
   # Install Homebrew recipes.
-  recipes=(git ssh-copy-id "wget --enable-iri" apg nmap git-extras htop-osx youtube-dl coreutils findutils ack lynx pigz rename pkg-config p7zip)
+  recipes=("readline --universal" "sqlite --universal" "gdbm --universal" zsh
+    "wget --enable-iri" grep git ssh-copy-id  apg nmap git-extras
+    htop-osx youtube-dl coreutils findutils ack lynx pigz rename pkg-config p7zip)
 
-  #convert_list_to_array "$(brew list)"
   brew_list=( $(convert_list_to_array "$(brew list)") )
-  #to_install "recipes[@]" "brew_list[@]"
-  list=( $(to_install "recipes[@]" "brew_list[@]") )
-  if [[ "$list" ]]; then
+  to_install "recipes[@]" "brew_list[@]"
+  #list=( $(to_install "recipes[@]" "brew_list[@]") )
+  
+  echo "${recipes[*]}" 
+  echo "${brew_list[*]}" 
+  echo "${ret[*]}"   
+  if [[ "$ret" ]]; then
     # Because brew hard fails incase one application fails.
     # We call each install one by one.
-    for recipe in "${list[@]}"
+    for recipe in "${ret[@]}"
     do
       e_header "Installing Homebrew recipe: $recipe"
       brew install $recipe
     done 
   fi
-  
+  exit
+
   echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
   
   # htop
