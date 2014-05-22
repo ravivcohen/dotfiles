@@ -97,7 +97,7 @@ function to_install() {
     
     if [[ $element_found == false ]]; then
       # We insert back the original element to preserve flags i.e. --universal
-      remain+=($element)
+      remain+=( "$element" )
     fi
   done
 
