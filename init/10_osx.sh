@@ -51,7 +51,6 @@ if [[ "$new_dotfiles_install" ]]; then
   # curl https://bugs.wireshark.org/bugzilla/attachment.cgi?id=3373 -o ChmodBPF.tar.gz
   # tar zxvf ChmodBPF.tar.gz
   # open ChmodBPF/Install\ ChmodBPF.app
-
   
   # Install more recent versions of some OS X tools
   brew tap homebrew/dupes
@@ -60,7 +59,9 @@ if [[ "$new_dotfiles_install" ]]; then
   # Install Homebrew recipes.
   recipes=("readline --universal" "sqlite --universal" "gdbm --universal" zsh
     "wget --enable-iri" grep git ssh-copy-id  apg nmap git-extras
-    htop-osx youtube-dl coreutils findutils ack lynx pigz rename pkg-config p7zip)
+    htop-osx youtube-dl coreutils findutils ack lynx pigz rename pkg-config p7zip "lesspipe --syntax-highlighting"
+    "python --universal --framework" "vim --with-python --with-ruby --with-perl --enable-cscope --enable-pythoninterp --override-system-vi"
+    "macvim --enable-cscope --enable-pythoninterp --custom-icons")
 
   brew_list=( $(convert_list_to_array "$(brew list)") )
   to_install "recipes[@]" "brew_list[@]"
