@@ -37,9 +37,13 @@ function convert_list_to_array() {
 }
 
 # Given a list of desired items and installed items, return a list
-# of uninstalled items.
+# of uninstalled items in the ret global variable.
+# A. Items will preserve the you dictate in your array.
+#    That way you can control what gets installed when.
+# B. You can supply items with args by placing "software --args"
+#    Inside your array. 
 # Expects to get array as input by calling function like this:
-# to_install arr1[@] arr2[@] .. 
+# to_install arr1[@] arr2[@] .. and the
 # to convert a space or newline seperated list to array call
 # brew_list="$(convert_list_to_array "$(brew list)")"
 function to_install() {
@@ -56,7 +60,7 @@ function to_install() {
   )
   
   # Iterate through the array desired array searching in the sorted array
-  # Search time is log N * N times it happens.
+  # Search time is log N * M times it happens.
   let desired_size=${#installed[@]}
   for element in "${desired[@]}"; do
     # Split up element just incase its a complex
@@ -85,8 +89,7 @@ function to_install() {
         
         else
             # THIS SHOULD NEVER HAPPEN
-            echo "Element Not Found."
-            echo -e "\n"
+            e_error "Element Not Found."
             element_found=false
             break
         fi

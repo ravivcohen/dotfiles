@@ -20,13 +20,13 @@ if [[ "$new_dotfiles_install" ]]; then
     e_header "Installing Homebrew pks on first run"
   fi
 
-  #brew doctor
+  brew doctor
   
   # Make sure we’re using the latest Homebrew
-  #brew update
+  brew update
 
-  # Upgrade any already-installed formulae
-  #brew upgrade
+  #Upgrade any already-installed formulae
+  brew upgrade
   
   # #this is needed for the python install below to work
   # e_header "Install  readline gdbm sqlite universal"
@@ -64,11 +64,8 @@ if [[ "$new_dotfiles_install" ]]; then
 
   brew_list=( $(convert_list_to_array "$(brew list)") )
   to_install "recipes[@]" "brew_list[@]"
-  #list=( $(to_install "recipes[@]" "brew_list[@]") )
   
-  echo "${recipes[*]}" 
-  echo "${brew_list[*]}" 
-  echo "${ret[*]}"   
+  # to_install returns Value back to ret
   if [[ "$ret" ]]; then
     # Because brew hard fails incase one application fails.
     # We call each install one by one.
@@ -78,6 +75,8 @@ if [[ "$new_dotfiles_install" ]]; then
       brew install $recipe
     done 
   fi
+  #reset ret
+  ret=""
   exit
 
   echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
