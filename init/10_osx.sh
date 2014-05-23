@@ -53,7 +53,24 @@ if [[ "$new_dotfiles_install" ]]; then
   # open ChmodBPF/Install\ ChmodBPF.app
   
   # Install more recent versions of some OS X tools
-  brew tap homebrew/dupes
+  taps=("homebrew/dupes" "caskroom/cask")
+  tap_list=( $(convert_list_to_array "$(brew tap)") )
+  to_install "taps[@]" "tap_list[@]"
+  #brew tap homebrew/dupes
+  # to_install returns Value back to ret
+  if [[ "$ret" ]]; then
+    # Because brew hard fails incase one application fails.
+    # We call each install one by one.
+    for a_tap in "${ret[@]}"
+    do
+      e_header "Tapping Homebrew: $recipe"
+      brew tap $a_tap
+    done 
+  fi
+  #reset ret
+  ret=""
+  
+
   #brew install homebrew/dupes/grep
       
   # Install Homebrew recipes.
@@ -61,7 +78,7 @@ if [[ "$new_dotfiles_install" ]]; then
     "wget --enable-iri" grep git ssh-copy-id  apg nmap git-extras
     htop-osx youtube-dl coreutils findutils ack lynx pigz rename pkg-config p7zip "lesspipe --syntax-highlighting"
     "python --universal --framework" "vim --with-python --with-ruby --with-perl --enable-cscope --enable-pythoninterp --override-system-vi"
-    "macvim --enable-cscope --enable-pythoninterp --custom-icons")
+    "macvim --enable-cscope --enable-pythoninterp --custom-icons" "brew-cask")
 
   brew_list=( $(convert_list_to_array "$(brew list)") )
   to_install "recipes[@]" "brew_list[@]"
