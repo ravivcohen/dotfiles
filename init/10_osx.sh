@@ -74,7 +74,7 @@ if [[ "$new_dotfiles_install" ]]; then
   #brew install homebrew/dupes/grep
       
   # Install Homebrew recipes.
-  recipes=("readline --universal" "sqlite --universal" "gdbm --universal" zsh
+  recipes=("readline --universal" "sqlite --universal" "gdbm --universal" "openssl --universal" zsh
     "wget --enable-iri" grep git ssh-copy-id  apg nmap git-extras
     htop-osx youtube-dl coreutils findutils ack lynx pigz rename pkg-config p7zip "lesspipe --syntax-highlighting"
     "python --universal --framework" "vim --with-python --with-ruby --with-perl --enable-cscope --enable-pythoninterp --override-system-vi"
