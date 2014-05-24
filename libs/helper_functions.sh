@@ -47,7 +47,7 @@ function convert_list_to_array() {
 # to convert a space or newline seperated list to array call
 # brew_list="$(convert_list_to_array "$(brew list)")"
 function to_install() {
-  local debug desired installed i desired_s installed_s remain common
+  local debug desired installed i installed_s remain
   local remain=()
   if [[ "$1" == 1 ]]; then debug=1; shift; fi
   
@@ -61,7 +61,7 @@ function to_install() {
   
   # Iterate through the array desired array searching in the sorted array
   # Search time is log N * M times it happens.
-  let desired_size=${#installed[@]}
+  let desired_size=${#installed_s[@]}
   for element in "${desired[@]}"; do
     # Split up element just incase its a complex
     # I.E. git --universal
@@ -77,14 +77,14 @@ function to_install() {
         let tmp=$start+$end
         mid=$(printf "%.0f" $(echo "scale=2;$tmp/2" | bc))
         
-        if [ ${installed[$mid]} = ${element_s[0]} ]; then
+        if [ ${installed_s[$mid]} = ${element_s[0]} ]; then
             element_found=true
             break
         
-        elif [ ${installed[$mid]} \< ${element_s[0]} ]; then
+        elif [ ${installed_s[$mid]} \< ${element_s[0]} ]; then
             let start=$mid+1
         
-        elif [ ${installed[$mid]} \> ${element_s[0]} ]; then
+        elif [ ${installed_s[$mid]} \> ${element_s[0]} ]; then
             let end=$mid-1
         
         else
@@ -101,7 +101,7 @@ function to_install() {
     fi
   done
 
-  [[ "$debug" ]] && for v in desired desired_s installed installed_s remain common; do
+  [[ "$debug" ]] && for v in desired installed installed_s remain; do
     echo "$v ($(eval echo "\${#$v[*]}")) $(eval echo "\${$v[*]}")"
   done
   
