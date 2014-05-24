@@ -36,6 +36,31 @@ function convert_list_to_array() {
   echo "${desired[@]}"
 }
 
+# Given a list of undesired items and installed items, return a list
+# of installed items. Arrays in bash are insane (not in a good way).
+function to_remove() {
+  local debug desired installed i desired_s installed_s remain
+  if [[ "$1" == 1 ]]; then debug=1; shift; fi
+  # Convert args to arrays, handling both space- and newline-separated lists.
+  read -ra desired < <(echo "$1" | tr '\n' ' ')
+  read -ra installed < <(echo "$2" | tr '\n' ' ')
+  # Sort desired and installed arrays.
+  unset i; while read -r; do desired_s[i++]=$REPLY; done < <(
+    printf "%s\n" "${desired[@]}" | sort
+  )
+  unset i; while read -r; do installed_s[i++]=$REPLY; done < <(
+    printf "%s\n" "${installed[@]}" | sort
+  )
+  # Get the difference. comm is awesome.
+  unset i; while read -r; do remain[i++]=$REPLY; done < <(
+    comm -12 <(printf "%s\n" "${installed_s[@]}") <(printf "%s\n" "${desired_s[@]}")
+  )
+  [[ "$debug" ]] && for v in desired desired_s installed installed_s remain; do
+    echo "$v ($(eval echo "\${#$v[*]}")) $(eval echo "\${$v[*]}")"
+  done
+  echo "${remain[@]}"
+}
+
 # Given a list of desired items and installed items, return a list
 # of uninstalled items in the ret global variable.
 # A. Items will preserve the you dictate in your array.
