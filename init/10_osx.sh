@@ -115,7 +115,7 @@ if [[ "$new_dotfiles_install" ]]; then
   ret=""
   
   # Add Homebrew Shell to Allowed Shell List
-  echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
+  echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells > /dev/null
   # Fix ZSH permissions
   sudo chown -R root:admin /usr/local/Cellar/zsh/
   
