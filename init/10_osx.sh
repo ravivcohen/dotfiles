@@ -18,8 +18,15 @@ if [[ "$new_dotfiles_install" ]]; then
     e_header "Installing Homebrew"
     true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
     e_header "Installing Homebrew pks on first run"
+    
+    if [[ $is_standard_user ]]; then
+      # if your std user echo into admin user path brew
+      # this way brew dr wont yell when u run it.
+      echo export PATH='/usr/local/bin:$PATH' >> ~/.bash_profile
+    fi 
+    
   fi
-
+  
   brew doctor
   
   # Make sure we’re using the latest Homebrew
@@ -154,7 +161,7 @@ if [[ "$new_dotfiles_install" ]]; then
   # Remove outdated versions from the cellar
   brew cleanup
 
-  e_header "Link brewed apps"
+  e_header "Linking brewed apps"
   ##link all the apps 
   brew linkapps
 
