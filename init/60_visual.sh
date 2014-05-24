@@ -2,7 +2,8 @@
 [[ "$new_dotfiles_install" ]] || return 1
 
 if [[ "$OSTYPE" =~ ^darwin ]]; then
-	e_header "Setting Up OSX Visual Settings"
+	
+    e_header "Setting Up OSX Visual Settings"
  	# Terminal
 	# ========
 	
