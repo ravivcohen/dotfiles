@@ -154,6 +154,7 @@ if [[ "$new_dotfiles_install" ]]; then
   # Remove outdated versions from the cellar
   brew cleanup
 
+  e_header "Link brewed apps"
   ##link all the apps 
   brew linkapps
 
@@ -162,7 +163,7 @@ if [[ "$new_dotfiles_install" ]]; then
     # Remove the PasswordAssitant.app just incase (it might not exist)
     rm -rf "/Applications/PasswordAssistant.app"
     # Link the PasswordAssitant Bin"
-    ln -sF $DOTFILES_HOME/.dotfiles/bin/PasswordAssistant.app /Applications/PasswordAssistant.app
+    ln -s $DOTFILES_HOME/.dotfiles/bin/PasswordAssistant.app /Applications/PasswordAssistant.app
   fi
   
   
