@@ -1,9 +1,6 @@
-# Reveal IP address, hostname, OS version, etc. when clicking the clock
-# in the login window
-sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+# All Helper functions can now be found inside libs/helper_functions.
+. $lib_file
 
-# Enable HiDPI display modes (requires restart)
-sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
 # It's my library. Let me see it.
 sudo chflags nohidden ~/Library/
@@ -13,6 +10,9 @@ sudo chflags nohidden /usr
 ##EXTRAA
 # Link to the airport command
 sudo ln -sf /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/sbin/airport
+
+# Enable HiDPI display modes (requires restart)
+sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
 ##Security
 # Enable Firewall.
@@ -38,61 +38,82 @@ sudo defaults write /Library/Preferences/.GlobalPreferences com.apple.userspref.
 # Find <key>system.preferences<key>.
 # Then find <key>shared<key>.
 # Then replace <true/> with <false/>.
-security authorizationdb read system.preferences > /tmp/system.preferences.plist
+security -q authorizationdb read system.preferences > /tmp/system.preferences.plist
 defaults write /tmp/system.preferences.plist shared -bool false
-sudo security authorizationdb write system.preferences < /tmp/system.preferences.plist
+sudo security -q authorizationdb write system.preferences < /tmp/system.preferences.plist
 sudo rm -rf /tmp/system.preferences.plist
 
 # Disable automatic login.
 sudo defaults write /Library/Preferences/.GlobalPreferences com.apple.autologout.AutoLogOutDelay -int 0
-
 # Disable IR remote control.
 sudo defaults write /Library/Preferences/com.apple.driver.AppleIRController DeviceEnabled -bool no
 # Turn Bluetooth off.
 sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 0
+# Disable Remote Management.
+sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -deactivate -stop -quiet
+# Disable Internet Sharing.
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.nat NAT -dict Enabled -int 0
+# Disable Bluetooth Sharing.
+sudo defaults -currentHost write com.apple.bluetooth PrefKeyServicesEnabled 0
 
-# Disable location services
-sudo launchctl unload -wF /System/Library/LaunchDaemons/com.apple.locationd.plist 
+# Remove BAD services. In the future look at unloading these as well
+# # com.apple.smb.preferences.plist $d
+# # aosnotifyd -- Find My Mac daemon
+# com.apple.AOSNotificationOSX.plist com.apple.locationd.plist com.apple.cmio.AVCAssistant.plist
+# com.apple.cmio.VDCAssistant.plist com.apple.iCloudStats.plist com.apple.wwand.plist
+# com.apple.AirPlayXPCHelper.plist
+# # blued
+# com.apple.blued.plist com.apple.bluetoothaudiod.plist com.apple.IOBluetoothUSBDFU.plist 
+# com.apple.rpcbind.plist org.postfix.master.plist com.apple.spindump.plist
+# com.apple.spindump_symbolicator.plist
+# # metadata
+# com.apple.metadata.mds.index.plist com.apple.metadata.mds.spindump.plist com.apple.metadata.mds.scan.plist
+# com.apple.metadata.mds.plist com.apple.lockd.plist com.apple.nis.ypbind.plist com.apple.mbicloudsetupd.plist
+# com.apple.gssd.plist com.apple.findmymac.plist com.apple.findmymacmessenger.plist 
+# com.apple.cmio.IIDCVideoAssistant.plist com.apple.afpfs_checkafp.plist com.apple.afpfs_afpLoad.plist
+# # Apple Push Notification service daemon
+# com.apple.apsd.plist
+# # awacsd -- Apple Wide Area Connectivity Service daemon
+# com.apple.awacsd.plist
+# # share service
+# com.apple.RFBEventHelper.plist com.apple.cmio.AppleCameraAssistant.plist
+# com.apple.revisiond.plist
+# Turn off AirPort Services using the following commands. Run the last
+# command as the current user.
+#sudo launchctl unload -wF /System/Library/LaunchDaemons/com.apple.airportPrefsUpdater.plist
+#sudo launchctl unload -wF /System/Library/LaunchDaemons/com.apple.AirPort.wps.plist
+# Another way to reomve is
+# home=$HOME
+# d=$home/backup-unload-daemon
+# sudo mv /System/Library/LaunchDaemons/com.apple.mdmclient.daemon.plist $d
+
+
+bad=("com.apple.locationd.plist" 
+	"org.apache.httpd.plist" 
+	"com.openssh.sshd"
+	"com.apple.eppc.plist" 
+	"com.apple.InternetSharing.plist" 
+	"com.apple.RFBEventHelper.plist" 
+	"com.apple.screensharing.plist"
+	"com.apple.screensharing.MessagesAgent" 
+	"com.apple.screensharing.agent"
+	"com.apple.RemoteDesktop.PrivilegeProxy.plist" 
+	"com.apple.RemoteDesktop.agent" 
+	"com.apple.blued.plist")
+loaded="$(sudo launchctl list | awk 'NR>1 && $3 !~ /0x[0-9a-fA-F]+\.(anonymous|mach_init)/ {print $3}')"
+
+bad_list=( $(to_remove "${bad[*]}" "$loaded") )
+
+for rmv in "${bad_list[@]}"; do
+	e_header "Unloading: $rmv"
+	sudo launchctl unload -wF "/System/Library/LaunchDaemons/"$rmv".plist"
+done
 
 ## Set computer name (as done via System Preferences → Sharing)
 #sudo scutil --set ComputerName "0x6D746873"
 #sudo scutil --set HostName "0x6D746873"
 #sudo scutil --set LocalHostName "0x6D746873"
 #sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6D746873"
-
-
-# Disable internal microphone or line-in.
-# This command does not change the input volume for input devices. It
-# only sets the default input device volume to zero.
-sudo osascript -e "set volume input volume 0"
-
-# These are disabled by default but just to make sure we add them
-# Disable Web Sharing.
-sudo launchctl unload -wF /System/Library/LaunchDaemons/org.apache.httpd.plist
-sudo launchctl unload -wF /System/Library/LaunchDaemons/ssh.plist
-# Disable Remote Management.
-sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -deactivate -stop
-# Disable Remote Apple Events.
-sudo launchctl unload -wF /System/Library/LaunchDaemons/com.apple.eppc.plist
-# Disable Internet Sharing.
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.nat NAT -dict Enabled -int 0
-sudo launchctl unload -wF /System/Library/LaunchDaemons/com.apple.InternetSharing.plist
-# Disable Bluetooth Sharing.
-sudo defaults -currentHost write com.apple.bluetooth PrefKeyServicesEnabled 0
-
-# Turn off AirPort Services using the following commands. Run the last
-# command as the current user.
-#sudo launchctl unload -wF /System/Library/LaunchDaemons/com.apple.airportPrefsUpdater.plist
-#sudo launchctl unload -wF /System/Library/LaunchDaemons/com.apple.AirPort.wps.plist
-#launchctl unload -wF /System/Library/LaunchAgents/com.apple.airportd.plist
-# Turn off Screen Sharing services.
-sudo launchctl unload -wF /System/Library/LaunchDaemons/com.apple.RFBEventHelper.plist
-sudo launchctl unload -wF /System/Library/LaunchDaemons/com.apple.screenSharing.plist
-
-# Turn off Remote Management service using the following commands:
-sudo launchctl unload -wF /System/Library/LaunchDaemons/com.apple.RemoteDesktop.PrivilegeProxy.plist
-# Turn off Bluetooth service using the following command:
-sudo launchctl unload -wF /System/Library/LaunchDaemons/com.apple.blued.plist
 
 # Destroy File Vault Key when going to standby
  # mode. By default File vault keys are retained even when system goes
