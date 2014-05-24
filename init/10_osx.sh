@@ -28,36 +28,11 @@ if [[ "$new_dotfiles_install" ]]; then
   #Upgrade any already-installed formulae
   brew upgrade
   
-  # #this is needed for the python install below to work
-  # e_header "Install  readline gdbm sqlite universal"
-  # brew install readline sqlite gdbm --universal
-  
-  # e_header "Installing ZSH"
-  # brew install zsh
-  # # Add Homebrew Shell to Allowed Shell List
-  # echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
-  # # Fix permissions
-  # sudo chown -R root:admin /usr/local/Cellar/zsh/
-  
-  # Install wget with IRI support
-  #e_header "Installing wget with IRI"
-  #brew install wget --enable-iri
-  
-  
-  # # Install WireShark
-  # e_header "Install latest version of WireShark with QT"
-  # brew install wireshark --devel --with-qt
-  # # Temp fix for wireshark interfaces
-  # curl https://bugs.wireshark.org/bugzilla/attachment.cgi?id=3373 -o ChmodBPF.tar.gz
-  # tar zxvf ChmodBPF.tar.gz
-  # open ChmodBPF/Install\ ChmodBPF.app
-  
-  # Install more recent versions of some OS X tools
+  # Tap needed repo's
   taps=("homebrew/dupes" "caskroom/cask" "caskroom/versions")
   tap_list=( $(convert_list_to_array "$(brew tap)") )
   to_install "taps[@]" "tap_list[@]"
-  #brew tap homebrew/dupes
-  # to_install returns Value back to ret
+  
   if [[ "$ret" ]]; then
     # Because brew hard fails incase one application fails.
     # We call each install one by one.
@@ -70,15 +45,17 @@ if [[ "$new_dotfiles_install" ]]; then
   #reset ret
   ret=""
   
-
-  #brew install homebrew/dupes/grep
-      
   # Install Homebrew recipes.
-  recipes=("readline --universal" "sqlite --universal" "gdbm --universal" "openssl --universal" zsh
-    "wget --enable-iri" grep git ssh-copy-id  apg nmap git-extras
-    htop-osx youtube-dl coreutils findutils ack lynx pigz rename pkg-config p7zip "lesspipe --syntax-highlighting"
-    "python --universal --framework" "vim --with-python --with-ruby --with-perl --enable-cscope --enable-pythoninterp --override-system-vi"
-    "macvim --enable-cscope --enable-pythoninterp --custom-icons" "brew-cask")
+  recipes=(
+  "readline --universal" "sqlite --universal" "gdbm --universal" 
+  "openssl --universal"
+  zsh "wget --enable-iri" grep git ssh-copy-id  apg nmap git-extras
+  htop-osx youtube-dl coreutils findutils ack lynx pigz rename 
+  pkg-config p7zip "lesspipe --syntax-highlighting"
+  "python --universal --framework" 
+  "vim --with-python --with-ruby --with-perl --enable-cscope --enable-pythoninterp --override-system-vi"
+  "macvim --enable-cscope --enable-pythoninterp --custom-icons" 
+  "brew-cask")
 
   brew_list=( $(convert_list_to_array "$(brew list)") )
   to_install "recipes[@]" "brew_list[@]"
@@ -96,6 +73,7 @@ if [[ "$new_dotfiles_install" ]]; then
   #reset ret
   ret=""
   
+  # Install Casks
   casks=(sublime-text3 iterm2-beta java6 xquartz tower transmit path-finder adium vagrant keka shuttle)
   cask_list=( $(convert_list_to_array "$(brew cask list)") )
   to_install "casks[@]" "cask_list[@]"
@@ -107,17 +85,47 @@ if [[ "$new_dotfiles_install" ]]; then
     for cask in "${ret[@]}"
     do
       e_header "Installing Homebrew recipe: $cask"
-      echo $cask
-      #brew install $recipe
       brew cask install --appdir="/Applications" $cask
     done 
   fi
   #reset ret
   ret=""
   
-  exit
-
-  echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
+  # install fonts.
+  osx_conf_dir=$DOTFILES_HOME/.dotfiles/conf/osx
+  fonts_dir=$osx_conf_dir/fonts
+  fonts=(font-dejavu-sans-mono-for-powerline font-inconsolata-dz-powerline font-inconsolata-powerline
+  font-meslo-powerline font-sauce-code-powerline)
+  cask_list=( $(convert_list_to_array "$(brew cask list)") )
+  to_install "fonts[@]" "cask_list[@]"
+  
+  # to_install returns Value back to ret
+  if [[ "$ret" ]]; then
+    # Because brew hard fails incase one application fails.
+    # We call each install one by one.
+    for font in "${ret[@]}"
+    do
+      e_header "Installing Homebrew recipe: $font"
+      #echo $fonts_dir"/"$font".rb"
+      #brew install $recipe
+      brew cask install --fontdir=/Library/Fonts $fonts_dir"/"$font".rb"
+    done 
+  fi
+  #reset ret
+  ret=""
+  
+  # Add Homebrew Shell to Allowed Shell List
+  echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
+  # Fix ZSH permissions
+  sudo chown -R root:admin /usr/local/Cellar/zsh/
+  
+  # # Install WireShark
+  # e_header "Install latest version of WireShark with QT"
+  # brew install wireshark --devel --with-qt
+  # # Temp fix for wireshark interfaces
+  # curl https://bugs.wireshark.org/bugzilla/attachment.cgi?id=3373 -o ChmodBPF.tar.gz
+  # tar zxvf ChmodBPF.tar.gz
+  # open ChmodBPF/Install\ ChmodBPF.app
   
   # htop
   if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wheel" || ! "$(($(stat -L -f "%DMp" "$(which htop)") & 4))" ]]; then
@@ -126,12 +134,6 @@ if [[ "$new_dotfiles_install" ]]; then
     sudo chmod u+s "$(which htop)"
   fi
 
-  e_header "Install Less PIPE"
-  brew install lesspipe --syntax-highlighting
-
-  #update to latest version of python universal == 32/64bit and framework == allows interaction with osx libs
-  e_header "Install  python universal"
-  brew install python --universal --framework
   
   #install and upgrade PIP
   e_header "Install and Upgrade PIP"
@@ -144,60 +146,25 @@ if [[ "$new_dotfiles_install" ]]; then
   pip install virtualenv 
   pip install virtualenvwrapper
 
-  # Install more recent versions of some OS X tools
-  e_header "Install and override latest version of VIM + MacVim"
-
-  brew install vim --with-python --with-ruby --with-perl --enable-cscope --enable-pythoninterp --override-system-vi
-  brew install macvim --enable-cscope --enable-pythoninterp --custom-icons
-  # CERT Check Fails. Dont like that removing for now.
-  #brew install ctags --HEAD
-
   # if [[ ! "$(type -P gcc-4.2)" ]]; then
   #   e_header "Installing Homebrew dupe recipe: apple-gcc42"
   #   brew install https://raw.github.com/Homebrew/homebrew-dupes/master/apple-gcc42.rb
-  # fi
+  # fi  
   
-  ## OK Lets use cask to install some basic stuff since it is *VERY* !! Buggy
-  brew tap phinze/cask
-  brew install brew-cask
-  # Tap to allow us to install Sublime Text 3
-  brew tap caskroom/versions
-  # Change so all casks are installed in the main apps folder.
-  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
-  #Ok Lets install sublime text
-  brew cask install sublime-text3
-  
-  brew cask install $DOTFILES_HOME/.dotfiles/conf/osx/iterm2.rb
-  brew cask install java6
-  brew cask install xquartz
-  brew cask install tower
-  brew cask install transmit
-  brew cask install path-finder
-  brew cask install adium
-  brew cask install vagrant
-  brew cask install keka
-  brew cask install shuttle
-  
-  
-  # Get fonts.
-  osx_conf_dir=$DOTFILES_HOME/.dotfiles/conf/osx
-  fonts_dir=$osx_conf_dir/fonts
-  for f in $fonts_dir/*.rb
-  do
-    brew cask install --fontdir=/Library/Fonts --force $f
-  done
-
-
   # Remove outdated versions from the cellar
   brew cleanup
 
   ##link all the apps 
   brew linkapps
 
-  # Link the PasswordAssitant Bin"
-  ln -sF $DOTFILES_HOME/.dotfiles/bin/PasswordAssistant.app /Applications/PasswordAssistant.app
-
+  if [[ ! -L "/Applications/PasswordAssistant.app" ]]; then
+    e_header "Linking PasswordAssistant"
+    # Remove the PasswordAssitant.app just incase (it might not exist)
+    rm -rf "/Applications/PasswordAssistant.app"
+    # Link the PasswordAssitant Bin"
+    ln -sF $DOTFILES_HOME/.dotfiles/bin/PasswordAssistant.app /Applications/PasswordAssistant.app
+  fi
+  
   
 else  
   e_header "Updating Homebrew"
