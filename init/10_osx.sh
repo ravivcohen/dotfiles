@@ -53,7 +53,7 @@ if [[ "$new_dotfiles_install" ]]; then
   # open ChmodBPF/Install\ ChmodBPF.app
   
   # Install more recent versions of some OS X tools
-  taps=("homebrew/dupes" "caskroom/cask")
+  taps=("homebrew/dupes" "caskroom/cask" "caskroom/versions")
   tap_list=( $(convert_list_to_array "$(brew tap)") )
   to_install "taps[@]" "tap_list[@]"
   #brew tap homebrew/dupes
@@ -95,6 +95,26 @@ if [[ "$new_dotfiles_install" ]]; then
   fi
   #reset ret
   ret=""
+  
+  casks=(sublime-text3 iterm2-beta java6 xquartz tower transmit path-finder adium vagrant keka shuttle)
+  cask_list=( $(convert_list_to_array "$(brew cask list)") )
+  to_install "casks[@]" "cask_list[@]"
+  
+  # to_install returns Value back to ret
+  if [[ "$ret" ]]; then
+    # Because brew hard fails incase one application fails.
+    # We call each install one by one.
+    for cask in "${ret[@]}"
+    do
+      e_header "Installing Homebrew recipe: $cask"
+      echo $cask
+      #brew install $recipe
+      brew cask install --appdir="/Applications" $cask
+    done 
+  fi
+  #reset ret
+  ret=""
+  
   exit
 
   echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
