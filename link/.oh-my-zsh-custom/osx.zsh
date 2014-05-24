@@ -19,6 +19,12 @@ function path_remove() {
 PATH=/usr/local/bin:$(path_remove /usr/local/bin)
 export PATH
 
+# Add this for Coreutils to be default and overide local
+# GNU. 
+#PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+#MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+# GREP ??
+
 # Trim new lines and copy to clipboard
 alias c="tr -d '\n' | pbcopy"
 
