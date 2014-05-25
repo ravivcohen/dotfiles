@@ -11,12 +11,14 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	mkdir -p $DOTFILES_HOME/Engagements
 	mkdir -p $DOTFILES_HOME/Tools
 	mkdir -p $DOTFILES_HOME/Resources
+	mkdir -p $DOTFILES_HOME/Resources/Deliverables
+	mkdir -p $DOTFILES_HOME/Resources/Training
 	mkdir -p $DOTFILES_HOME/Research
 	mkdir -p $DOTFILES_HOME/Virtual_Machines
 	mkdir -p $DOTFILES_HOME/Documents
 	mkdir -p $DOTFILES_HOME/conf/ssh
 	mkdir -p $DOTFILES_HOME/conf/gnupg
-	
+
 	if [[ ! -L  "$DOTFILES_HOME/.ssh" ]]; then
 		ln -s  $DOTFILES_HOME/conf/ssh  $DOTFILES_HOME/.ssh
 	fi
