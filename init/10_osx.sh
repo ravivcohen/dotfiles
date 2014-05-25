@@ -188,6 +188,7 @@ fi
 #autoload run-help
 #HELPDIR=/usr/local/share/zsh/helpfiles
 
+e_header "Running OSX Global Config"
 # OSX Config. Can safely be run everytime.
 source $DOTFILES_HOME/.dotfiles/conf/osx/conf_osx_global.sh
 
