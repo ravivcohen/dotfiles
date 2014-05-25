@@ -20,8 +20,11 @@ if [[ "$new_dotfiles_install" ]]; then
     e_header "Installing Homebrew pks on first run"
   fi
 
-  #check if homebrew in PATH, if not add it
-  echo "$PATH" | grep -q "/usr/local/bin" && export PATH='/usr/local/bin:$PATH'
+  # Just incase we set the path again over here.
+  # APPLE, Y U PUT /usr/bin B4 /usr/local/bin?!
+  PATH=/usr/local/bin:$(path_remove /usr/local/bin)
+  export PATH
+
 
   e_header "Brew DR"
   brew doctor
