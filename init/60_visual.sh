@@ -46,12 +46,12 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
             fi
             e_header "Installing theme: $filename"
             # Get the File
-            curl -fsSL $i -o $file_name
+            curl -fsSL $i -o $filename
             # Open file so it get init and sleep 1 to give it time
-            open $file_name
+            open $filename
             sleep 1
             # Delete the no longer needed file.
-            rm $file_name
+            rm $filename
 
     done
 
