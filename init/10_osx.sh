@@ -171,12 +171,15 @@ e_header "Linking brewed apps"
 ##link all the apps 
 brew linkapps
 
-if [[ ! -L "/Applications/PasswordAssistant.app" ]]; then
-  e_header "Linking PasswordAssistant"
+if [[ ! -e "/Applications/PasswordAssistant.app" ]]; then
+  e_header "Setting up PasswordAssistant"
+  curl -fsSL https://s3.amazonaws.com/rc_software/PasswordAssistant.zip -o /tmp/PasswordAssistant.zip
   # Remove the PasswordAssitant.app just incase (it might not exist)
   rm -rf "/Applications/PasswordAssistant.app"
   # Link the PasswordAssitant Bin"
-  ln -s $DOTFILES_HOME/.dotfiles/bin/PasswordAssistant.app /Applications/PasswordAssistant.app
+  unzip -o -qq /tmp/PasswordAssistant.zip -d /Applications/
+  # Begone!
+  rm -rf /tmp/PasswordAssistant.zip
 fi
 
 

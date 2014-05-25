@@ -19,7 +19,8 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	mkdir -p $DOTFILES_HOME/conf/ssh
 	mkdir -p $DOTFILES_HOME/conf/gnupg
 
-	if [[ ! -L  "$DOTFILES_HOME/.ssh" ]]; then
+	if [ "$(readlink $DOTFILES_HOME/.ssh)" != "$DOTFILES_HOME/conf/ssh" ]; then
+		rm -rf $DOTFILES_HOME/.ssh
 		ln -s  $DOTFILES_HOME/conf/ssh  $DOTFILES_HOME/.ssh
 	fi
 
