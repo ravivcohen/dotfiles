@@ -51,6 +51,7 @@ function to_remove() {
   unset i; while read -r; do installed_s[i++]=$REPLY; done < <(
     printf "%s\n" "${installed[@]}" | sort
   )
+  
   # Get the difference. comm is awesome.
   unset i; while read -r; do remain[i++]=$REPLY; done < <(
     comm -12 <(printf "%s\n" "${installed_s[@]}") <(printf "%s\n" "${desired_s[@]}")
