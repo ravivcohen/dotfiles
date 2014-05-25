@@ -92,7 +92,7 @@ function to_install() {
     # Split up element just incase its a complex
     # I.E. git --universal
     element_s=( $element )
-    
+    echo "Element" "$element"
     # Due a log N search.
     let start=0
     let end=$desired_size-1
@@ -102,7 +102,7 @@ function to_install() {
 
         let tmp=$start+$end
         mid=$(printf "%.0f" $(echo "scale=2;$tmp/2" | bc))
-        
+        echo "start:"$start "mid:"$mid "end:"$end "installed_s[mid]"${installed_s[$mid]} "element_s[0]"${element_s[0]}
         if [ ${installed_s[$mid]} = ${element_s[0]} ]; then
             element_found=true
             break
