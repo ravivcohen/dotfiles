@@ -87,19 +87,12 @@ sudo defaults -currentHost write com.apple.bluetooth PrefKeyServicesEnabled 0
 # d=$home/backup-unload-daemon
 # sudo mv /System/Library/LaunchDaemons/com.apple.mdmclient.daemon.plist $d
 
-
-bad=("com.apple.locationd.plist" 
-	"org.apache.httpd.plist" 
-	"com.openssh.sshd"
-	"com.apple.eppc.plist" 
-	"com.apple.InternetSharing.plist" 
-	"com.apple.RFBEventHelper.plist" 
-	"com.apple.screensharing.plist"
-	"com.apple.screensharing.MessagesAgent" 
-	"com.apple.screensharing.agent"
-	"com.apple.RemoteDesktop.PrivilegeProxy.plist" 
-	"com.apple.RemoteDesktop.agent" 
-	"com.apple.blued.plist")
+#"com.apple.locationd" 
+bad=("org.apache.httpd" "com.openssh.sshd" 
+	"com.apple.eppc" "com.apple.InternetSharing" "com.apple.RFBEventHelper" 
+	"com.apple.screensharing" "com.apple.screensharing.MessagesAgent" 
+	"com.apple.screensharing.agent" "com.apple.RemoteDesktop.PrivilegeProxy" 
+	"com.apple.RemoteDesktop.agent" "com.apple.blued")
 loaded="$(sudo launchctl list | awk 'NR>1 && $3 !~ /0x[0-9a-fA-F]+\.(anonymous|mach_init)/ {print $3}')"
 
 bad_list=( $(to_remove "${bad[*]}" "$loaded") )
