@@ -7,10 +7,15 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
  	# Terminal
 	# ========
 	
-    # Open iTerm to set all files in place.
-    open -a iTerm
-    sleep 1
-    killall iTerm
+    # IF Iterm has never been run this wont exsit. 
+    # We then run iterm so we can config it.
+    if [[ ! -e ~/Library/Preferences/com.googlecode.iterm2.plist ]]; then
+
+        # Open iTerm to set all files in place.
+        open -a iTerm
+        sleep 1
+        killall iTerm
+    fi
 
     # Now for iTerm to load its settting from an external location.
     defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool TRUE
@@ -31,7 +36,15 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
             # Strip https:/ and leave /
             url_name="$(echo $i | sed 's~http[s]*:/~~g')"
             # Pick last group in the path
-            file_name=${url_name##/*/}
+            filename=${url_name##/*/}
+            if [[ "${filename##*.}" == "itermcolors" &&
+                "$(defaults read com.googlecode.iterm2 | grep -i -c "${filename%.*}")" != "0" ]]; then
+                continue
+            elif [[ "${filename##*.}" == "terminal" &&
+                "$(defaults read com.apple.terminal | grep -i -c "${filename%.*}")" != "0" ]]; then
+                continue
+            fi
+            e_header "Installing theme: $filename"
             # Get the File
             curl -fsSL $i -o $file_name
             # Open file so it get init and sleep 1 to give it time
@@ -48,9 +61,11 @@ elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
 	echo 'Fix Visual Init'
 fi
 
-# 2. Second We Setup OH-MY-ZSH  
-e_header "Setup oh-my-zsh"
-##SETUP OH MY ZSH ONLY ON THE FIRST TIME
-curl -L http://install.ohmyz.sh | sh
-#We have to set ZSH shell to Homebrew version
-chsh -s /usr/local/bin/zsh
+if [[ ! -e $HOME/.oh-my-zsh ]]; then
+    # 2. Second We Setup OH-MY-ZSH  
+    e_header "Setup oh-my-zsh"
+    ##SETUP OH MY ZSH ONLY ON THE FIRST TIME
+    curl -L http://install.ohmyz.sh | sh
+    #We have to set ZSH shell to Homebrew version
+    chsh -s /usr/local/bin/zsh
+fi
