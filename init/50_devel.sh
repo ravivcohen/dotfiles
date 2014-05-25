@@ -1,6 +1,3 @@
-# Abort if not first run
-[[ "$new_dotfiles_install" ]] || return 1
-
 # Setup the needed DIRS
 mkdir -p $DOTFILES_HOME/Development
 mkdir -p $DOTFILES_HOME/Engagements
