@@ -146,17 +146,17 @@ if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wh
   sudo chmod u+s "$(which htop)"
 fi
 
+# Open Bug HomeBrew 05-25-14
+# #install and upgrade PIP
+# e_header "Install and Upgrade PIP"
+# pip install --upgrade setuptools
+# pip install --upgrade pip
+# pip install --upgrade distribute
 
-#install and upgrade PIP
-e_header "Install and Upgrade PIP"
-pip install --upgrade setuptools
-pip install --upgrade pip
-pip install --upgrade distribute
-
-e_header "Install VirualENV + VirtualEnvWrapper"
-##Actually Install VirtualEnv 
-pip install virtualenv 
-pip install virtualenvwrapper
+# e_header "Install VirualENV + VirtualEnvWrapper"
+# ##Actually Install VirtualEnv 
+# pip install virtualenv 
+# pip install virtualenvwrapper
 
 # if [[ ! "$(type -P gcc-4.2)" ]]; then
 #   e_header "Installing Homebrew dupe recipe: apple-gcc42"
