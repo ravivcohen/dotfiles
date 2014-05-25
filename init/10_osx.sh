@@ -20,6 +20,9 @@ if [[ "$new_dotfiles_install" ]]; then
     e_header "Installing Homebrew pks on first run"
   fi
 
+  #check if homebrew in PATH, if not add it
+  echo "$PATH" | grep -q "/usr/local/bin" && export PATH='/usr/local/bin:$PATH'
+
   e_header "Brew DR"
   brew doctor
   
@@ -117,9 +120,14 @@ if [[ "$new_dotfiles_install" ]]; then
   #reset ret
   ret=""
   
-  # Add Homebrew Shell to Allowed Shell List
-  echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells > /dev/null
+  if ! grep -q "/usr/local/bin/zsh" "/etc/shells"; then
+    e_header "Adding homebrew ZSH to /etc/shells"
+    # Add Homebrew Shell to Allowed Shell List
+    echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells > /dev/null
+  fi
+
   # Fix ZSH permissions
+  # Safe to run everytime incase of ZSH Update.
   sudo chown -R root:admin /usr/local/Cellar/zsh/
   
   # # Install WireShark
@@ -154,6 +162,7 @@ if [[ "$new_dotfiles_install" ]]; then
   #   brew install https://raw.github.com/Homebrew/homebrew-dupes/master/apple-gcc42.rb
   # fi  
   
+  e_header "Brew cleanup"
   # Remove outdated versions from the cellar
   brew cleanup
 
