@@ -12,15 +12,25 @@ mkdir -p $DOTFILES_HOME/Documents
 # Sublime
 # OSX
 if [[ "$OSTYPE" =~ ^darwin ]]; then
+
 	# Make sirectory if it does not exist
 	mkdir -p $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
 	mkdir -p $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/
-	# Get the latest package manager
-	curl -fsSL https://sublime.wbond.net/Package%20Control.sublime-package -o $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
-	# Remove the current user folder 
-	rm -rf $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
-	# Link our User directory
-	ln -s $DOTFILES_HOME/.dotfiles/conf/sublime/User $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+	
+	if [[ ! -e "$DOTFILES_HOME/Library/Application Support/Sublime Text 3/Installed Packages/Package Control.sublime-package" ]]; then
+		e_header "Downloading sublime-package-manager"
+		# Get the latest package manager
+		curl -fsSL https://sublime.wbond.net/Package%20Control.sublime-package -o $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
+	fi
+
+	if [[ ! -L "$DOTFILES_HOME/Library/Application Support/Sublime Text 3/Packages/User" ]]; then
+    	e_header "Linking Sublime user directory"
+    	# Remove the current user folder 
+		rm -rf $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+		# Link our User directory
+		ln -s $DOTFILES_HOME/.dotfiles/conf/sublime/User $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+  	fi
+  
 	
 # Ubuntu.
 elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
