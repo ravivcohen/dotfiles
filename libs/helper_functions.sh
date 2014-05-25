@@ -87,7 +87,8 @@ function to_install() {
   
   # Iterate through the array desired array searching in the sorted array
   # Search time is log N * M times it happens.
-  let desired_size=${#installed_s[@]}
+  let installed_size=${#installed_s[@]}
+  echo "installed size:"installed_size
   for element in "${desired[@]}"; do
     # Split up element just incase its a complex
     # I.E. git --universal
@@ -95,7 +96,7 @@ function to_install() {
     echo "Element" "$element"
     # Due a log N search.
     let start=0
-    let end=$desired_size-1
+    let end=$installed_size-1
     element_found=false
     while [ $start -le $end ]
     do
