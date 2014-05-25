@@ -233,7 +233,7 @@ bad_list=( $(to_remove "${bad[*]}" "$loaded") )
 
 for rmv in "${bad_list[@]}"; do
 	e_header "Unloading: $rmv"
-	sudo launchctl unload -wF "/System/Library/LaunchAgents/"$rmv".plist"
+	launchctl unload -wF "/System/Library/LaunchAgents/"$rmv".plist"
 done
 
 # Disable VoiceOver service.
