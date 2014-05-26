@@ -23,9 +23,9 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     themes_array=("https://github.com/tomislav/osx-terminal.app-colors-solarized/raw/master/Solarized%20Dark.terminal"
             "https://github.com/chriskempson/tomorrow-theme/raw/master/OS%20X%20Terminal/Tomorrow%20Night.terminal"
             "https://github.com/chriskempson/tomorrow-theme/raw/master/OS%20X%20Terminal/Tomorrow%20Night%20Eighties.terminal"
-            "https://github.com/chriskempson/tomorrow-theme/raw/master/iTerm2/Tomorrow%20Night.itermcolors"
-            "https://github.com/chriskempson/tomorrow-theme/raw/master/iTerm2/Tomorrow%20Night%20Eighties.itermcolors"
-            "https://github.com/altercation/solarized/raw/master/iterm2-colors-solarized/Solarized%20Dark.itermcolors "
+            #"https://github.com/chriskempson/tomorrow-theme/raw/master/iTerm2/Tomorrow%20Night.itermcolors"
+            #"https://github.com/chriskempson/tomorrow-theme/raw/master/iTerm2/Tomorrow%20Night%20Eighties.itermcolors"
+            #"https://github.com/altercation/solarized/raw/master/iterm2-colors-solarized/Solarized%20Dark.itermcolors"
             )
     for i in "${themes_array[@]}"
     do

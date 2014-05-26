@@ -27,7 +27,6 @@ exit
 
 done
 
-
 #Setup the DOTFILES_HOME variable to be the current users home.
 #This is needed when running something as STD user.
 export DOTFILES_HOME=$HOME
