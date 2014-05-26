@@ -77,22 +77,62 @@ bash -c "$(curl -fsSL https://raw.github.com/ravivcohen/dotfiles/master/bin/dotf
 A whole bunch of things will be installed, but _only_ if they aren't already.
 
 ### OS X
+* Hombrew taps
+   * homebrew/dupes 
+   * caskroom/cask 
+   * caskroom/versions 
+
 * Homebrew recipes
-  * git
-  * tree
-  * sl
-  * lesspipe
-  * id3tool
-  * nmap
-  * git-extras
-  * htop-osx
-  * man2html
-  * hub
-  * cowsay
-  * ssh-copy-id
-  * apple-gcc42 (via [homebrew-dupes](https://github.com/Homebrew/homebrew-dupes/blob/master/apple-gcc42.rb))
+   *  readline --universal
+   *  sqlite --universal
+   *  gdbm --universal
+   *  openssl --universal
+   *  zsh 
+   *  wget --enable-iri
+   *  grep 
+   *  git 
+   *  ssh-copy-id  
+   *  apg 
+   *  nmap 
+   *  git-extras
+   *  htop-osx 
+   *  youtube-dl 
+   *  coreutils 
+   *  findutils 
+   *  ack 
+   *  lynx 
+   *  pigz 
+   *  rename 
+   *  pkg-config 
+   *  p7zip 
+   *  lesspipe --syntax-highlighting
+   *  python --universal --framework 
+   *  vim --with-python --with-ruby --with-perl --enable-cscope --enable-pythoninterp --override-system-vi
+   *  macvim --enable-cscope --enable-pythoninterp --custom-icons
+   *  brew-cask 
+
+* Homebrew Casks
+   * sublime-text3 
+   * iterm2-beta 
+   * java6 
+   * xquartz 
+   * tower 
+   * transmit 
+   * path-finder 
+   * adium 
+   * vagrant 
+   * keka 
+   * shuttle 
+* Fonts - [lokaltog](https://github.com/Lokaltog/powerline-fonts) powerline fonts
+   * font-dejavu-sans-mono-for-powerline 
+   * font-inconsolata-dz-powerline 
+   * font-inconsolata-powerline
+   * font-meslo-powerline 
+   * font-sauce-code-powerline
+
 
 ### Ubuntu
+(Outdated)
 * APT packages
   * build-essential
   * libssl-dev
@@ -105,22 +145,6 @@ A whole bunch of things will be installed, but _only_ if they aren't already.
   * telnet
   * htop
 
-### Both
-* Nave
-  * node (latest stable)
-    * npm
-    * grunt-cli
-    * linken
-    * bower
-    * node-inspector
-    * yo
-* rbenv
-  * ruby 2.0.0-p247
-* gems
-  * bundler
-  * awesome_print
-  * pry
-  * lolcat
 
 ## The ~/ "copy" step
 Any file in the `copy` subdirectory will be copied into `~/`. Any file that _needs_ to be modified with personal information (like [.gitconfig](copy/.gitconfig) which contains an email address and private key) should be _copied_ into `~/`. Because the file you'll be editing is no longer in `~/.dotfiles`, it's less likely to be accidentally committed into your public dotfiles repo.
