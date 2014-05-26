@@ -91,7 +91,7 @@ if [[ ! -d ~/.dotfiles ]]; then
   git clone git://github.com/ravivcohen/dotfiles.git ~/.dotfiles
   cd ~/.dotfiles
 else
-    if [[ "$skip_update" == "0" ]]; then
+    if [[ -z "$skip_update"  ]]; then
       cd ~/.dotfiles
       # Check if dotfiles dirty
       git update-index -q --refresh
