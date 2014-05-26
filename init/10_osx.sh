@@ -169,7 +169,7 @@ brew cleanup
 
 e_header "Linking brewed apps"
 ##link all the apps 
-brew linkapps
+brew linkapps > /dev/null
 
 if [[ ! -e "/Applications/PasswordAssistant.app" ]]; then
   e_header "Setting up PasswordAssistant"

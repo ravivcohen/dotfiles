@@ -14,8 +14,6 @@ function sudo() {
 }
 export -f sudo
 
-alias momo='ls -l'
-
 function check_std_user_sudo_access() {
   TEMP_FILE=/tmp/test_root_access$$.$RANDOM
   #This will kill the tmp file incase any of thses signals are received.
@@ -162,11 +160,20 @@ function init_do() {
   filename=$(basename $2)
   ##Copied this. Could be done better.
   vers=$(awk -F_ '{print $1}' <<<"$filename")
+  # Files greater then equal to 50 do not need sudo
   if [[ "$is_standard_user" = false || $vers -ge 50 ]]; then
     source "$2"
   else
-    echo "Enter password for, $username"
-    su $username  -m -c "$(typeset -f sudo); source $2"
+    # For Init files we only run os specific files.
+    if [[ $vers == 10 ]]; then
+      if [[ $filename == *$OS* ]]; then
+        echo "Enter password for, $username"
+        su $username  -m -c "$(typeset -f sudo); source $2"  
+      fi
+    else
+      echo "Enter password for, $username"
+      su $username  -m -c "$(typeset -f sudo); source $2"
+    fi
  fi 
 }
 

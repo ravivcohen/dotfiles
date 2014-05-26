@@ -53,6 +53,14 @@ if [[ ! "$(type -P gcc)" && "$OSTYPE" =~ ^darwin ]]; then
   e_error "The XCode Command Line Tools must be installed first."
 fi
 
+# OSX
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+  export OS="osx"
+# Ubuntu.
+elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
+  export OS="ubuntu"
+fi
+
 # If Git is not installed...
 if [[ ! "$(type -P git)" ]]; then
   # OSX
@@ -150,6 +158,7 @@ case $yn in
       exit 1
     fi
     # Now Actually do stuff
+    e_header "Running Init"
     do_stuff "init"
     ;;
 
@@ -161,6 +170,7 @@ case $yn in
       exit 1
     fi
     # Now Actually do stuff
+    e_header "Running Init"
     do_stuff "init"
     ;;
 
