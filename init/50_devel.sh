@@ -25,6 +25,7 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	fi
 
 	if [[ ! -L  "$DOTFILES_HOME/.gnupg" ]]; then
+		rm -rf "$DOTFILES_HOME/.gnupg" 
 		ln -s  $DOTFILES_HOME/conf/gnupg  $DOTFILES_HOME/.gnupg
 	fi
 	
