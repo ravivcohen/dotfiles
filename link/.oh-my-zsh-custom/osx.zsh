@@ -2,7 +2,7 @@
 [[ "$OSTYPE" =~ ^darwin ]] || return 1
 
 # Utilities, helpers. Moved into here just to make it cleaner
-# From http://stackoverflow.com/questions/370047/#370255
+# From http://stackoverflow.com//370047/#370255
 function path_remove() {
   IFS=:
   # convert it to an array
@@ -17,6 +17,7 @@ function path_remove() {
 
 # APPLE, Y U PUT /usr/bin B4 /usr/local/bin?!
 PATH=/usr/local/bin:$(path_remove /usr/local/bin)
+PATH=/usr/local/sbin:$(path_remove /usr/local/sbin)
 export PATH
 
 # Add this for Coreutils to be default and overide local
