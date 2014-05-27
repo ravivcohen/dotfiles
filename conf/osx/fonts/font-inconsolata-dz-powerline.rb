@@ -5,6 +5,6 @@ class FontInconsolataDzPowerline < Cask
       :trust_cert => true
   homepage 'https://github.com/Lokaltog/powerline-fonts/tree/master/InconsolataDz'
   version '1.010'
-  sha256 'faf945e8131d92b16bfdd9227b908e4f818d4d77549740a0f2a98067f12548af'
+  sha256 '78f8cf4f8a7da763d7b8734dfd6c6bab713be8a24d3a9c2c04f95737ac230b90'
   font 'Inconsolata-dz for Powerline.otf'
 end

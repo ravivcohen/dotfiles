@@ -5,7 +5,7 @@ class FontSauceCodePowerline < Cask
       :trust_cert => true
   homepage 'https://github.com/Lokaltog/powerline-fonts/tree/master/SourceCodePro'
   version '1.020'
-  sha256 '084a40279c77d73d4c5a71791c7743d0e310e51821def95e0439ace7419c9e91'
+  sha256 'a72619a712b6776c09bc278509ac5eb593855472b7a657ae26a02ce520497229'
   font 'Sauce Code Powerline Black.otf'
   font 'Sauce Code Powerline Bold.otf'
   font 'Sauce Code Powerline ExtraLight.otf'
