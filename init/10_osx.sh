@@ -147,17 +147,22 @@ if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wh
   sudo chmod u+s "$(which htop)"
 fi
 
+# Install Slate
+if [[ ! -e "/Applications/Slate.app" ]]; then
+  e_header "Installing Slate"
+  cd /Applications && curl http://www.ninjamonkeysoftware.com/slate/versions/slate-latest.tar.gz | tar -xz
+fi
 # Open Bug HomeBrew 05-25-14
 # #install and upgrade PIP
-# e_header "Install and Upgrade PIP"
-# pip install --upgrade setuptools
-# pip install --upgrade pip
-# pip install --upgrade distribute
+e_header "Install and/Or Upgrade PIP"
+pip -q install --upgrade setuptools
+pip -q install --upgrade pip
+pip -q install --upgrade distribute
 
 # e_header "Install VirualENV + VirtualEnvWrapper"
 # ##Actually Install VirtualEnv 
-# pip install virtualenv 
-# pip install virtualenvwrapper
+pip -q install --upgrade virtualenv 
+pip -q install --upgrade virtualenvwrapper
 
 # if [[ ! "$(type -P gcc-4.2)" ]]; then
 #   e_header "Installing Homebrew dupe recipe: apple-gcc42"
