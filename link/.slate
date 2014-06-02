@@ -24,7 +24,7 @@ config windowHintsTopLeftY (windowSizeY/2)-(windowHintsHeight/2)
 # Misc Aliases
 alias showHintsLeftHand hint AOEUIYQJKX
 alias showNormalHint hint AOEUIDHTNSYXFBPKGMCW
-alias browser 'Chrome'
+alias browser 'Google Chrome'
 alias editor 'Sublime Text'
 
 #
@@ -67,13 +67,11 @@ bind e:cmd  ${showNormalHint}
 # The HYPER key
 # ======================================
  
-alias hyper ctrl;shift;alt;cmd
+alias hyper ctrl;alt;cmd
   
 # App bindings
-bind e:${hyper} focus ${browser}
+bind b:${hyper} focus ${browser}
 bind u:${hyper} focus ${editor}
-bind x:${hyper} focus 'Xcode'
-bind g:${hyper} focus 'GitHub'
 bind m:${hyper} focus 'Mail'
 bind i:${hyper} focus 'iTerm'
 bind o:${hyper} focus 'Path Finder'
