@@ -141,7 +141,7 @@ sudo pmset -a disksleep 45
 # Disable computer sleep.
 sudo pmset -a sleep 90
 # Display sleep
-sudo pmset -a displaysleep 45
+sudo pmset -a displaysleep 60
 # Disable Wake for Ethernet network administrator access.
 sudo pmset -a womp 0
 # Disable Restart automatically after power failure.
