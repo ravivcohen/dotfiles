@@ -75,3 +75,14 @@ bind u:${hyper} focus ${editor}
 bind m:${hyper} focus 'Mail'
 bind i:${hyper} focus 'iTerm'
 bind o:${hyper} focus 'Path Finder'
+
+# Throws
+# Throws
+bind n:${hyper} throw next
+bind right:${hyper} throw right resize
+bind left:${hyper}  throw left  resize
+ 
+bind f:${hyper} throw 1 resize
+bind g:${hyper} throw 0 resize
+
+##

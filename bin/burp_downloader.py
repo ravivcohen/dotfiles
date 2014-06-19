@@ -2,9 +2,9 @@
 # Script to download the latest verison of BURP Proxy.
 # Script relies on a .burp file to be located in user $HOME directory.
 # The file should have three lines:
-#   email
-#   burp customer #
-#   burp directory
+#   email = "XXXXXX@XXXXX.XXX"
+#   custnumber = "XXXXXXXXX"
+#   directory = "DIR/DIR/" must have slash at the end
 
 # Works on all Python 2.7
 from HTMLParser import HTMLParser
