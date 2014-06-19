@@ -59,6 +59,21 @@ if os.path.isfile(home_dir + ".burp") == False :
 burp_config = {}
 execfile(home_dir + ".burp", burp_config) 
 burp_dir =  home_dir + burp_config['directory']
+# Let make some Dirs just incase they do not exist
+if not os.path.exists(burp_dir):
+    os.makedirs(burp_dir, 0755 )
+if not os.path.exists(burp_dir + "logs"):
+    os.makedirs(burp_dir + "logs", 0755 )
+if not os.path.exists(burp_dir + "logging"):
+    os.makedirs(burp_dir + "logging", 0755 )
+if not os.path.exists(burp_dir + "backup"):
+    os.makedirs(burp_dir + "backup", 0755 )
+if not os.path.exists(burp_dir + "temp"):
+    os.makedirs(burp_dir + "temp", 0755 )
+
+
+
+
 
 ## SETUP
 # Store the cookies and create an opener that will hold them
