@@ -54,10 +54,6 @@ function md() {
 
 
 alias top=htop
-# Fast directory switching
-_Z_NO_PROMPT_COMMAND=1
-_Z_DATA=~/.dotfiles/caches/.z
-. ~/.dotfiles/libs/z/z.sh
 
 # if [[ ! "$SSH_TTY" && "$OSTYPE" =~ ^darwin ]]; then
 #   export EDITOR='subl -w'
