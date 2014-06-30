@@ -46,7 +46,16 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 		# Link our User directory
 		ln -s $DOTFILES_HOME/.dotfiles/conf/sublime/User $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
   	fi
-  
+
+  	#TOOLS INSTALL
+  	#NIKTO
+  	if [[ ! -L "$DOTFILES_HOME/Tools/Nikto" ]]
+  		e_header "Installing Nikto"
+  		curl "https://www.cirt.net/nikto/nikto-current.tar.gz" | tar -xz
+  		mv nikto-*/* .
+  		rm -rf nikto*
+  	fi
+  		
 	
 # Ubuntu.
 elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
