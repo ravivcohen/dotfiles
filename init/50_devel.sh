@@ -49,13 +49,15 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 
   	#TOOLS INSTALL
   	#NIKTO
-  	if [[ ! -L "$DOTFILES_HOME/Tools/nikto" ]]; then
+  	if [[ ! -e "$DOTFILES_HOME/Tools/nikto" ]]; then
   		e_header "Installing Nikto"
   		mkdir "$DOTFILES_HOME/Tools/nikto"
-  		curl "https://www.cirt.net/nikto/nikto-current.tar.gz" -o $DOTFILES_HOME/Tools/nikto/nikto-current.tar.gz
+  		cd "$DOTFILES_HOME/Tools/nikto"
+  		curl "https://www.cirt.net/nikto/nikto-current.tar.gz" -o nikto-current.tar.gz
   		tar -xzf nikto*
   		mv nikto-*/* .
   		rm -rf nikto-*
+  		cd "$DOTFILES_HOME/.dotfiles"
   	fi
   		
 	
