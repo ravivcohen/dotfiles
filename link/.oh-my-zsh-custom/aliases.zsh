@@ -1,8 +1,3 @@
-##This should work if not alias this.!
-dev=~/Development
-projects=~/Development/isec/projects
-tools=~/Development/isec/tools
-
 #Burp
 burpdirectory="$HOME/Tools/burp/"
 logfilename="$(date +%F_%H-%M-%S)"

@@ -2,7 +2,7 @@
 alias dev="cd $HOME/Development"
 alias gigs="cd $HOME/Engagements"
 alias tools="cd $HOME/Tools"
-alias srcs="cd $HOME/Resources"
+alias rcs="cd $HOME/Resources"
 alias docs="cd $home/Documents"
 
 # Files will be created with these permissions:
