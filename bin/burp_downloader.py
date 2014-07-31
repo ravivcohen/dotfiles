@@ -20,8 +20,8 @@ class URLS(HTMLParser):
     def handle_starttag(self, tag, attrs):
         if tag == 'a':
             for name, value in attrs:
-                # This is parsed top to bottom. We stop at the first link.
-                # First link is assumer to be latest ? more logic needed.
+                # This is parsed top to bottom. We stop at the first link. First
+                # link is assumer to be latest ? more logic needed.
                 if name == 'href' and 'DownloadBuild.ashx' in value:
                     self.download_href = value if self.download_href == None else self.download_href
                 if name == 'href' and 'DownloadLicenseKey.ashx' in value:
