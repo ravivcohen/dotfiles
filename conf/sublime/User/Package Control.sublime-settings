@@ -1,6 +1,7 @@
 {
 	"installed_packages":
 	[
+		"AutoWrap",
 		"BracketHighlighter",
 		"Git",
 		"LaTeXTools",
@@ -10,6 +11,7 @@
 		"SublimeLinter",
 		"Theme - Soda",
 		"Theme - Spacegray",
-		"Tomorrow Color Schemes"
+		"Tomorrow Color Schemes",
+		"Wrap Plus"
 	]
 }
