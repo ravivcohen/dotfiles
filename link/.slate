@@ -79,8 +79,11 @@ bind o:${hyper} focus 'Path Finder'
 # Throws
 # Throws
 bind n:${hyper} throw next
-bind right:${hyper} throw right resize
-bind left:${hyper}  throw left  resize
+bind right:${hyper} throw right
+bind left:${hyper}  throw left
+bind up:${hyper} throw up
+bind down:${hyper}  throw down
+
  
 bind f:${hyper} throw 1 resize
 bind g:${hyper} throw 0 resize
