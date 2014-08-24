@@ -58,6 +58,8 @@ if [[ $(uname) == "Darwin" ]] ; then
   	autoload run-help
   	HELPDIR=/usr/local/share/zsh/helpfiles
 	
+    # rbenv init
+    eval "$(rbenv init -)" 
 
 # Ubuntu.
 elif [[ $(uname) == "Linux"  ]] ; then
