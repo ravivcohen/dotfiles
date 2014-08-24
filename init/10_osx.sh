@@ -60,10 +60,10 @@ apple-gcc42 "readline --universal" "sqlite --universal" "gdbm --universal"
 zsh "wget --enable-iri" grep git ssh-copy-id  apg nmap git-extras
 htop-osx youtube-dl coreutils findutils ack lynx pigz rename 
 pkg-config p7zip "lesspipe --syntax-highlighting"
-"python --universal --framework" 
+"python --universal" 
 "vim --with-python --with-ruby --with-perl --enable-cscope --enable-pythoninterp --override-system-vi"
 "macvim --enable-cscope --enable-pythoninterp --custom-icons" 
-"brew-cask" rbenv ruby-build)
+"brew-cask" rbenv ruby-build rbenv-gemset)
 
 brew_list=( $(convert_list_to_array "$(brew list)") )
 to_install "recipes[@]" "brew_list[@]"
