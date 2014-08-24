@@ -10,8 +10,8 @@ alias firefox='nohup /Applications/Firefox.app/Contents/MacOS/firefox-bin -p > /
 ###Nikto
 alias nikto="perl $HOME/Tools/nikto/nikto.pl"
 
-alias dotfiles="cd $HOME/.dotfiles/"
-alias edotfiles="subl $HOME/.dotfiles/"
+alias dot="cd $HOME/.dotfiles/"
+alias edot="subl $HOME/.dotfiles/"
 
 #load private aliases 
 if [[ -e "$HOME/conf/my_aliases_privi.zsh" ]]; then
