@@ -63,7 +63,7 @@ pkg-config p7zip "lesspipe --syntax-highlighting"
 "python --universal" 
 "vim --with-python --with-ruby --with-perl --enable-cscope --enable-pythoninterp --override-system-vi"
 "macvim --enable-cscope --enable-pythoninterp --custom-icons" 
-"brew-cask" rbenv ruby-build rbenv-gemset)
+"brew-cask" rbenv ruby-build rbenv-gemset rbenv-binstubs)
 
 brew_list=( $(convert_list_to_array "$(brew list)") )
 to_install "recipes[@]" "brew_list[@]"
