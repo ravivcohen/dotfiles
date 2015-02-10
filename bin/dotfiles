@@ -49,7 +49,13 @@ fi
 
 # Ensure that we can actually, like, compile anything.
 if [[ ! "$(type -P gcc)" && "$OSTYPE" =~ ^darwin ]]; then
-  e_error "The XCode Command Line Tools must be installed first."
+  e_header "Installing XCode Command Line Tools and available Updates"
+  # create the placeholder file that's checked by CLI updates' .dist code
+  # in Apple's SUS catalog
+  touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+  # install all the updates
+  softwareupdate -iav
+  #rm -rf /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 fi
 
 # OSX

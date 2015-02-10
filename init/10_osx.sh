@@ -13,21 +13,6 @@
 #All Helper functions can now be found inside libs/helper_functions.
 . $lib_file
 if [[ ! "$(type -P brew)" ]]; then
-  xcode-select -p
-  rs=$?
-  # Ensure that we can actually, like, compile anything.
-  # If XCode CLI Tools aren't installed
-  if [[ $rs != 0 ]]; then
-    e_error "The XCode Command Line Tools must be installed first."
-    e_header "Installing XCode Command Line Tools and available Updates"
-    # create the placeholder file that's checked by CLI updates' .dist code
-    # in Apple's SUS catalog
-    touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-    # install all the updates
-    softwareupdate -iav
-    #rm -rf /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-  fi
-
   e_header "Installing Homebrew"
   true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
   e_header "Installing Homebrew pks on first run"
