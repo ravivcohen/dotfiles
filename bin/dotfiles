@@ -47,18 +47,28 @@ if [ "$is_standard_user" = false ]; then
   while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 fi
 
+#Ensure command line tools are installed 
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+  xcode-select -p
+  rs=$?
+  # Ensure that we can actually, like, compile anything.
+  # If XCode CLI Tools aren't installed
+  if [[ $rs != 0 ]]; then
+    e_header "Installing XCode Command Line Tools and available Updates"
+    # create the placeholder file that's checked by CLI updates' .dist code
+    # in Apple's SUS catalog
+    touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+    # install all the updates
+    softwareupdate -iav
+    #rm -rf /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+  fi
+fi
+  
 # Ensure that we can actually, like, compile anything.
 if [[ ! "$(type -P gcc)" && "$OSTYPE" =~ ^darwin ]]; then
-  e_header "Installing XCode Command Line Tools and available Updates"
-  # create the placeholder file that's checked by CLI updates' .dist code
-  # in Apple's SUS catalog
-  touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-  # install all the updates
-  softwareupdate -iav
-  #rm -rf /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+  e_error "The XCode Command Line Tools must be installed first."
 fi
 
-exit
 # OSX
 if [[ "$OSTYPE" =~ ^darwin ]]; then
   export OS="osx"
