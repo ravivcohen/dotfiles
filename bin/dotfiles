@@ -47,6 +47,7 @@ if [ "$is_standard_user" = false ]; then
   while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 fi
 
+## TODO: Move this into a get_os functions that is smart return var right away if already set
 # OSX
 if [[ "$OSTYPE" =~ ^darwin ]]; then
   export OS="osx"
