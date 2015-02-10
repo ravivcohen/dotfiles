@@ -64,20 +64,21 @@ if [[ "$OS" = "osx" ]]; then
   # Ensure that we can actually, like, compile anything.
   # If XCode CLI Tools aren't installed
   if [[ $rs != 0 ]]; then
-    e_header "Installing XCode Command Line Tools"
+    e_header "Installing XCode Command Line Tools and All Updates"
     # create the placeholder file that's checked by CLI updates' .dist code
     # in Apple's SUS catalog
     touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
     # install all the updates
     # Find the last listed update in the Software Update feed with "Command Line Tools" in the name
-    cmd_line_tools=$(softwareupdate -l | awk '/\*\ Command Line Tools/ { $1=$1;print }' | tail -1 | sed 's/^[[ \t]]*//;s/[[ \t]]*$//;s/*//' | cut -c 2-)
+    #cmd_line_tools=$(softwareupdate -l | awk '/\*\ Command Line Tools/ { $1=$1;print }' | tail -1 | sed 's/^[[ \t]]*//;s/[[ \t]]*$//;s/*//' | cut -c 2-)
     #Install the command line tools
-    softwareupdate -i "$cmd_line_tools" -v
+    softwareupdate -iav
     # Remove the temp file
     if [[ -f "/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress" ]]; then
       rm -rf "/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress"
     fi
-  
+    e_header "Must Reboot Damn you Apple"
+    reboot
   fi
 fi
   
