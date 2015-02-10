@@ -1,0 +1,22 @@
+--- mutt.rb.orig	2015-01-09 09:45:39.000000000 -0500
++++ mutt.rb.mod	2015-01-09 12:31:12.000000000 -0500
+@@ -42,6 +42,7 @@
+   option "with-ignore-thread-patch", "Apply ignore-thread patch"
+   option "with-pgp-verbose-mime-patch", "Apply PGP verbose mime patch"
+   option "with-confirm-attachment-patch", "Apply confirm attachment patch"
++  option "with-sidebar-patch", "Install the latest MUTT sidebar"
+ 
+   depends_on "autoconf" => :build
+   depends_on "automake" => :build
+@@ -52,6 +53,11 @@
+   depends_on "gpgme" => :optional
+ 
+   patch do
++    url "http://lunar-linux.org/~tchan/mutt/patch-1.5.23.sidebar.20140412.txt"
++    sha1 "8b86f148d8e1a0b37b0b77268349f4c94e797561"
++  end if build.with? "sidebar-patch"
++
++  patch do
+     url "ftp://ftp.openbsd.org/pub/OpenBSD/distfiles/mutt/trashfolder-1.5.22.diff0.gz"
+     sha1 "c597566c26e270b99c6f57e046512a663d2f415e"
+   end if build.with? "trash-patch"
