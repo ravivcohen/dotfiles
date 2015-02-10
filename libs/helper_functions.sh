@@ -99,6 +99,7 @@ function to_install() {
 
         let tmp=$start+$end
         mid=$(printf "%.0f" $(echo "scale=2;$tmp/2" | bc))
+        #echo "${installed_s[$mid]} ${element_s[0]}"
         if [ ${installed_s[$mid]} = ${element_s[0]} ]; then
             element_found=true
             break

@@ -13,6 +13,21 @@
 #All Helper functions can now be found inside libs/helper_functions.
 . $lib_file
 if [[ ! "$(type -P brew)" ]]; then
+  xcode-select -p
+  rs=$?
+  # Ensure that we can actually, like, compile anything.
+  # If XCode CLI Tools aren't installed
+  if [[ $rs != 0 ]]; then
+    e_error "The XCode Command Line Tools must be installed first."
+    e_header "Installing XCode Command Line Tools and available Updates"
+    # create the placeholder file that's checked by CLI updates' .dist code
+    # in Apple's SUS catalog
+    touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+    # install all the updates
+    softwareupdate -iav
+    #rm -rf /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+  fi
+
   e_header "Installing Homebrew"
   true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
   e_header "Installing Homebrew pks on first run"
@@ -23,6 +38,11 @@ fi
 PATH=/usr/local/bin:$(path_remove /usr/local/bin)
 PATH=/usr/local/sbin:$(path_remove /usr/local/sbin)
 export PATH
+
+echo `whoami`
+# Fix ZSH permissions
+# Safe to run everytime incase of ZSH Update.
+sudo chown -R `whoami`:admin /usr/local/Cellar/zsh/
 
 
 e_header "Brew DR"
@@ -53,17 +73,66 @@ fi
 #reset ret
 ret=""
 
+#We need to Patch MUTT for sidebar support
+patch -p0 -N --reject-file=/dev/null --dry-run --silent /usr/local/Library/Formula/mutt.rb < $DOTFILES_HOME/.dotfiles/conf/osx/mutt.rb.patch &>/dev/null
+#If the patch has not been applied then the $? which is the exit status 
+#for last command would have a success status code = 0
+if [ $? -eq 0 ];
+then
+    e_header "Patching Mutt before Brewing"
+    #apply the patch
+    patch -p0 -N --silent /usr/local/Library/Formula/mutt.rb < $DOTFILES_HOME/.dotfiles/conf/osx/mutt.rb.patch
+fi
+
 # Install Homebrew recipes.
 recipes=(
-apple-gcc42 "readline --universal" "sqlite --universal" "gdbm --universal" 
-"openssl --universal"
-zsh "wget --enable-iri" grep git ssh-copy-id  apg nmap git-extras
-htop-osx youtube-dl coreutils findutils ack lynx pigz rename 
-pkg-config p7zip "lesspipe --syntax-highlighting"
+
+apple-gcc42 
+"readline --universal" 
+"sqlite --universal" 
+"gdbm --universal" 
+"openssl --universal" 
+s-lang
+zsh 
+"wget --enable-iri" 
+grep git 
+ssh-copy-id  
+apg 
+nmap
+dvtm 
+git-extras
+htop-osx 
+youtube-dl 
+coreutils 
+findutils 
+ack 
+lynx 
+pigz 
+rename 
+pkg-config 
+p7zip 
+"lesspipe --syntax-highlighting"
 "python --universal" 
-"vim --with-python --with-ruby --with-perl --enable-cscope --enable-pythoninterp --override-system-vi"
 "macvim --enable-cscope --enable-pythoninterp --custom-icons" 
-"brew-cask" rbenv ruby-build rbenv-gemset rbenv-binstubs)
+"brew-cask" 
+rbenv 
+ruby-build 
+rbenv-gemset 
+rbenv-binstubs 
+"aspell --with-lang-en" 
+"weechat -with-aspell --with-perl --with-ruby --with-python" 
+
+
+#--with-ignore-thread-patch Cannot apple with sidebar mutually exclu
+"mutt --with-trash-patch --with-s-lang  
+--with-pgp-verbose-mime-patch --with-confirm-attachment-patch 
+--with-sidebar-patch"
+offline-imap
+lbdb
+
+"vim --with-python --with-ruby --with-perl --enable-cscope 
+--enable-pythoninterp --override-system-vi"
+)
 
 brew_list=( $(convert_list_to_array "$(brew list)") )
 to_install "recipes[@]" "brew_list[@]"
@@ -128,10 +197,6 @@ if ! grep -q "/usr/local/bin/zsh" "/etc/shells"; then
   echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells > /dev/null
 fi
 
-# Fix ZSH permissions
-# Safe to run everytime incase of ZSH Update.
-sudo chown -R root:admin /usr/local/Cellar/zsh/
-
 # # Install WireShark
 # e_header "Install latest version of WireShark with QT"
 # brew install wireshark --devel --with-qt
@@ -188,6 +253,9 @@ if [[ ! -e "/Applications/PasswordAssistant.app" ]]; then
   rm -rf /tmp/PasswordAssistant.zip
 fi
 
+# Fix ZSH permissions
+# Safe to run everytime incase of ZSH Update.
+sudo chown -R root:admin /usr/local/Cellar/zsh/
 
 # DO WE NEED THIS /etc/shelss test if new ZSH is used after install or not
 # echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells

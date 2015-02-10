@@ -1,10 +1,14 @@
 {
+	"in_process_packages":
+	[
+	],
 	"installed_packages":
 	[
 		"AutoWrap",
 		"BracketHighlighter",
 		"Git",
 		"LaTeXTools",
+		"Package Control",
 		"SideBarEnhancements",
 		"Solarized Color Scheme",
 		"SublimeCodeIntel",

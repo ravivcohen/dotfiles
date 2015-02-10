@@ -47,7 +47,7 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 		ln -s $DOTFILES_HOME/.dotfiles/conf/sublime/User $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
   	fi
 
-  	#TOOLS INSTALL
+  	##TOOLS INSTALL
   	#NIKTO
   	if [[ ! -e "$DOTFILES_HOME/Tools/nikto" ]]; then
   		e_header "Installing Nikto"
@@ -59,6 +59,17 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
   		rm -rf nikto-*
   		cd "$DOTFILES_HOME/.dotfiles"
   	fi
+
+    ##Configure Mutt
+    mkdir -p $DOTFILES_HOME/.mutt/temp
+    mkdir -p $DOTFILES_HOME/.mutt/alias
+    mkdir -p $DOTFILES_HOME/.mutt/cache/headers 
+    mkdir -p $DOTFILES_HOME/.mutt/cache/bodies  
+    mkdir -p $DOTFILES_HOME/.mutt/certificates  
+    mkdir -p $DOTFILES_HOME/.mutt/mailcap       
+    mkdir -p $DOTFILES_HOME/.mutt/temp          
+    mkdir -p $DOTFILES_HOME/.mutt/sig           
+
   		
 	
 # Ubuntu.
