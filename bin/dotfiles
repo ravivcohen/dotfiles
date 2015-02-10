@@ -47,8 +47,17 @@ if [ "$is_standard_user" = false ]; then
   while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 fi
 
-#Ensure command line tools are installed 
+# OSX
 if [[ "$OSTYPE" =~ ^darwin ]]; then
+  export OS="osx"
+# Ubuntu.
+elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
+  export OS="ubuntu"
+fi
+
+
+#Ensure command line tools are installed 
+if [[ "$OS" = "osx" ]]; then
   xcode-select -p
   rs=$?
   # Ensure that we can actually, like, compile anything.
@@ -60,33 +69,25 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
     # install all the updates
     softwareupdate -iav
-    #rm -rf /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+    rm -rf /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
   fi
 fi
   
 # Ensure that we can actually, like, compile anything.
-if [[ ! "$(type -P gcc)" && "$OSTYPE" =~ ^darwin ]]; then
+if [[ ! "$(type -P gcc)" && "$OS" = "osx" ]]; then
   e_error "The XCode Command Line Tools must be installed first."
-fi
-
-# OSX
-if [[ "$OSTYPE" =~ ^darwin ]]; then
-  export OS="osx"
-# Ubuntu.
-elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
-  export OS="ubuntu"
 fi
 
 # If Git is not installed...
 if [[ ! "$(type -P git)" ]]; then
   # OSX
-  if [[ "$OSTYPE" =~ ^darwin ]]; then
+  if [[ "$OS" = "osx" ]]; then
     # Since apple dropped support fot 10.6 and 10.7 is next.
     # I assusme you already have git installed its default on 10.8 +
     e_error "No GIT ? supported osx 10.8 +"
     exit 1
   # Ubuntu.
-  elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
+  elif [[ "$OS" = "ubuntu" ]]; then
     # Git is fairly easy.
     e_header "Installing Git"
     sudo apt-get -qq install git-core
