@@ -11,8 +11,6 @@
 	open https://my.vmware.com/web/vmware/login
 	#keepassx
 	open https://www.keepassx.org/dev/projects/keepassx/files
-	#True-Crypt
-	open http://www.truecrypt.org/downloads
 	#Paragon
 	open http://www.paragon-software.com/home/ntfs-mac/
 	#Little-Snitch
