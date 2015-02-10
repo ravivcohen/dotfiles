@@ -58,6 +58,7 @@ if [[ ! "$(type -P gcc)" && "$OSTYPE" =~ ^darwin ]]; then
   #rm -rf /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 fi
 
+exit
 # OSX
 if [[ "$OSTYPE" =~ ^darwin ]]; then
   export OS="osx"
