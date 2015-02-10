@@ -79,7 +79,7 @@ apple-gcc42
 "openssl --universal" 
 s-lang
 zsh 
-"wget --enable-iri" 
+"wget --with-iri" 
 grep git 
 ssh-copy-id  
 apg 
@@ -98,14 +98,14 @@ pkg-config
 p7zip 
 "lesspipe --syntax-highlighting"
 "python --universal" 
-"macvim --enable-cscope --enable-pythoninterp --custom-icons" 
+#"macvim --enable-cscope --enable-pythoninterp --custom-icons" #Requires Xcode 
 "brew-cask" 
 rbenv 
 ruby-build 
 rbenv-gemset 
 rbenv-binstubs 
 "aspell --with-lang-en" 
-"weechat -with-aspell --with-perl --with-ruby --with-python" 
+#"weechat -with-aspell --with-perl --with-ruby --with-python" #drops to bash
 
 
 #--with-ignore-thread-patch Cannot apple with sidebar mutually exclu
@@ -113,7 +113,7 @@ rbenv-binstubs
 --with-pgp-verbose-mime-patch --with-confirm-attachment-patch 
 --with-sidebar-patch"
 offline-imap
-lbdb
+#lbdb #Fails to install  
 
 "vim --with-python --with-ruby --with-perl --enable-cscope 
 --enable-pythoninterp --override-system-vi"
@@ -136,7 +136,7 @@ fi
 ret=""
 
 # Install Casks
-casks=(sublime-text3 iterm2-beta java6 xquartz tower transmit path-finder adium vagrant keka shuttle)
+casks=(sublime-text3 iterm2-nightly java6 xquartz tower transmit path-finder adium vagrant keka shuttle)
 cask_list=( $(convert_list_to_array "$(brew cask list)") )
 to_install "casks[@]" "cask_list[@]"
 
@@ -155,9 +155,9 @@ ret=""
 
 # install fonts.
 osx_conf_dir=$DOTFILES_HOME/.dotfiles/conf/osx
-fonts_dir=$osx_conf_dir/fonts
+#fonts_dir=$osx_conf_dir/fonts
 fonts=(font-dejavu-sans-mono-for-powerline font-inconsolata-dz-powerline font-inconsolata-powerline
-font-meslo-powerline font-sauce-code-powerline)
+font-meslo-lg-for-powerline font-meslo-lg font-sauce-code-powerline)
 cask_list=( $(convert_list_to_array "$(brew cask list)") )
 to_install "fonts[@]" "cask_list[@]"
 
@@ -170,7 +170,7 @@ if [[ "$ret" ]]; then
     e_header "Installing Homebrew recipe: $font"
     #echo $fonts_dir"/"$font".rb"
     #brew install $recipe
-    brew cask install --fontdir=/Library/Fonts $fonts_dir"/"$font".rb"
+    brew cask install --fontdir=/Library/Fonts "$font"
   done 
 fi
 #reset ret
@@ -205,8 +205,8 @@ fi
 # Open Bug HomeBrew 05-25-14
 # #install and upgrade PIP
 e_header "Install and/Or Upgrade PIP"
-pip -q install --upgrade setuptools
 pip -q install --upgrade pip
+pip -q install --upgrade setuptools
 pip -q install --upgrade distribute
 
 # e_header "Install VirualENV + VirtualEnvWrapper"
