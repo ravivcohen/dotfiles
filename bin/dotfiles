@@ -64,7 +64,7 @@ if [[ "$OS" = "osx" ]]; then
   # Ensure that we can actually, like, compile anything.
   # If XCode CLI Tools aren't installed
   if [[ $rs != 0 ]]; then
-    e_header "Installing XCode Command Line Tools and available Updates"
+    e_header "Installing XCode Command Line Tools"
     # create the placeholder file that's checked by CLI updates' .dist code
     # in Apple's SUS catalog
     touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
