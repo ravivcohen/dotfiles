@@ -90,6 +90,8 @@ if [[ "$OS" = "osx" ]]; then
     sudo reboot
   fi
 fi
+echo "Goodbye"
+exit 1
 if [[ -e "$HOME/.profile" ]]; then
   e_header "Removing .profile"
   rm -rf "$HOME/.profile"
