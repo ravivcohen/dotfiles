@@ -42,7 +42,7 @@ e_header "Brew upgrade"
 brew upgrade
 
 # Tap needed repo's
-taps=("homebrew/dupes" "caskroom/cask" "caskroom/versions")
+taps=("homebrew/dupes" "caskroom/cask" "caskroom/versions" "caskroom/fonts")
 tap_list=( $(convert_list_to_array "$(brew tap)") )
 to_install "taps[@]" "tap_list[@]"
 
