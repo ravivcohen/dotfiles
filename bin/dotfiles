@@ -50,7 +50,7 @@ fi
 ## TODO: Move this into a get_os functions that is smart return var right away if already set
 # OSX
 if [[ "$OSTYPE" =~ ^darwin ]]; then
-  export OS="osx"
+  export OS="osx" 
 # Ubuntu.
 elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
   export OS="ubuntu"
@@ -86,6 +86,7 @@ if [[ "$OS" = "osx" ]]; then
     # a. On a clean install before any mods upon issuing sudo reboot the terminal reopens as part of restore previous state
     # b. One a clean install .profile does not exist so it easy to manipulate and later delete.
     echo 'bash -c "$(curl -fsSL https://raw.github.com/ravivcohen/dotfiles/master/bin/dotfiles)"' >> .profile
+    exit 1
     sudo reboot
   fi
 fi
