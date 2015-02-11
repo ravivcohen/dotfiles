@@ -74,12 +74,12 @@ if [[ "$OS" = "osx" ]]; then
     cmd_line_tools=$(softwareupdate -l | awk '/\*\ Command Line Tools/ { $1=$1;print }' | tail -1 | sed 's/^[[ \t]]*//;s/[[ \t]]*$//;s/*//' | cut -c 2-)
     #Install the command line tools
     softwareupdate -i "$cmd_line_tools" -v
-    # Install the rest of the updated
-    softwareupdate -iav
     # Remove the temp file
     if [[ -f "/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress" ]]; then
       rm -rf "/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress"
     fi
+    # Install the rest of the updated
+    softwareupdate -iav
     e_header "Must Reboot Damn you Apple"
     # This creates a .profile and will continue the install upon reboot.
     # This works because:
