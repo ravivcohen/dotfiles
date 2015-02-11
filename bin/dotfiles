@@ -86,7 +86,7 @@ if [[ "$OS" = "osx" ]]; then
     # a. On a clean install before any mods upon issuing sudo reboot the terminal reopens as part of restore previous state
     # b. One a clean install .profile does not exist so it easy to manipulate and later delete.
     echo 'bash -c "$(curl -fsSL https://raw.github.com/ravivcohen/dotfiles/master/bin/dotfiles)"' >> .profile
-    exit 1
+    sleep 5
     sudo reboot
   fi
 fi
