@@ -181,6 +181,35 @@ shopt -s nullglob
 backup_dir="$HOME/.dotfiles/backups/$(date "+%Y_%m_%d-%H_%M_%S")/"
 backup=
 
+
+Defaults:%non_admin runas_default=*user name*, runaspw
+# Ask to setup /etc/sudoers
+username="root"
+read -p '''Do you need to setup /etc/sudoers ?
+1. Yes, as runaspw
+2. Yes, as targetpw
+3. No 
+''' yn
+case $yn in
+  [1]* ) 
+    read -p "Enter the username to use:" username
+    read -p "Enter the group to use:" groupname
+    su $username -c ''' echo "Defaults:%groupname runas_default=$username, runaspw" | sudo tee /etc/sudoers
+       echo "%$groupname ALL=(ALL) ALL" | sudo tee /etc/sudoers
+      '''
+    ;;
+  [2]* )
+      read -p "Enter the group to use:" groupname
+      su -c ''' echo "Defaults:%$groupname targetpw" >> /etc/sudoers 
+      echo "%$groupname ALL=(ALL) ALL" >> /etc/sudoers
+      '''
+      ;;
+  * ) e_error "Skipping /etc/sudoers setup"
+      exit 1 
+      ;;
+esac
+
+
 # 1. First We Init the system
 read -p "Do you need to login as another user who can sudo (y/n) ?: " yn
 case $yn in
