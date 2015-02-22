@@ -61,7 +61,11 @@ On Rest:
      
     %wheel ALL=(ALL) ALL
    ```
-   
+#### On First Run
+You will be prompted the option to setup your /etc/sudoers file. Then:
+  * On OSX you will be prompted if you need to run as a standard user. Saying Yes will cause the script to run the brew install as sudo and anything that need root access as sudo -u root but will otherwise default to current user allowing you to customize user current preferences. 
+  * On systems where u do know the root password no special steps are needed just runs sudo as always except making use of roots actual password. 
+
 
 ### General Notes
 
@@ -71,17 +75,7 @@ On Rest:
    * I am working on making this more flexible. SEE ROADMAP
    * If you skip the "init" step, only copy/link will be executed.  
 
-##### Run As Another User 
-   
-I tend to run as a non `sudo` privillged user on my systems. I therfore need to first `su` to a user that can `sudo` and run the commands as that user. The files are split up in the "init" script to run all files with < "50_" as a `sudo` user, this way only the stuff that really needs `sudo` runs.
 
-* Upon execution you will be asked if you would like to `su` to another user which can `sudo`. 
-   * When you choose "yes" all `sudo` commands will gets wrapped in `su $username -c 'sudo _command_`.
-
-
-### OS X Notes
-
-* You need to have installed [XCode](https://developer.apple.com/downloads/index.action?=xcode) or, at the very minimum, the [XCode Command Line Tools](https://developer.apple.com/downloads/index.action?=command%20line%20tools), which are available as a _much smaller_ download thank XCode.
 
 __MORE OSs TO COME ...__
 
