@@ -9,7 +9,7 @@ This was orginally a fork of Cowboy's Dotfiles(https://github.com/cowboy/dotfile
 Changes/Modifications:
 
 1. Cowboy's dotfiles made use of Bash as a default shell and would source Bash files. I use oh-my-zsh with my own custom setup.
-2. I run most of my systems as a Standalone `non-sudo` user. This means that to install parts of the init script that require root I must `su $username -c` to user that can `sudo`. I modified the script to support this, more information below.
+2. I run most of my systems as a Standalone `non-sudo` user. 
 3. Added support for checking if the dotfiles directory is dirty, as well as the ability to skip re-running dotfiles if dotfiles is up-to-date.
 4. Added support for theme settings for sublime, iTerm and Terminal.app
 5. Seperated functions into their own lib file, that also gets downloaded as needed.
@@ -39,6 +39,21 @@ Note:
 * Files in `conf` just sit there. If a config file doesn't _need_ to go in `~/`, put it in there.
 
 ## Installation
+
+### Standalone user support
+On my main machine, and in general, I tend to run as a non priviliged user. As such I make use of targetpw and runaspw see [man sudoers][http://www.sudo.ws/sudoers.man.html]. 
+#### Setup
+On OSX:
+   We can enable the root user and then follow the [On rest][https://github.com/ravivcohen/dotfiles/edit/master/README.md]. I choose to not enable the root user and instead make use of runaspw, in combination with setting runas_default variable to a user who is an Administrator and as such sudo run commands under the Admin user and also allows your to run sudo -u root to run root commands the latter works because what sudo -u root with the runaspw set really mean sudo sudo.
+   * Create a group, for ex non_admin
+   * Add standard user you want to have sudo access to that group
+   * Add the following to /etc/sudoers
+     ```
+     Defaults:%non_admin runas_default=ravivcohen, runaspw
+     %non_admin ALL=(ALL) ALL
+     ```
+   
+
 ### General Notes
 
 * In order to run init scripts files that have an alphanumeric value < "50_" require `sudo` privillgies.
