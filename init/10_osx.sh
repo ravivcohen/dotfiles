@@ -156,8 +156,8 @@ ret=""
 # install fonts.
 osx_conf_dir=$DOTFILES_HOME/.dotfiles/conf/osx
 #fonts_dir=$osx_conf_dir/fonts
-fonts=(font-dejavu-sans-mono-for-powerline font-inconsolata-dz-powerline font-inconsolata-powerline
-font-meslo-lg-for-powerline font-meslo-lg font-sauce-code-powerline)
+fonts=(font-dejavu-sans-mono-for-powerline font-inconsolata-dz-for-powerline font-inconsolata-for-powerline
+font-inconsolata-g-for-powerline font-meslo-lg-for-powerline font-meslo-lg font-sauce-code-powerline )
 cask_list=( $(convert_list_to_array "$(brew cask list)") )
 to_install "fonts[@]" "cask_list[@]"
 
