@@ -41,17 +41,26 @@ Note:
 ## Installation
 
 ### Standalone user support
-On my main machine, and in general, I tend to run as a non priviliged user. As such I make use of targetpw and runaspw see [man sudoers][http://www.sudo.ws/sudoers.man.html]. 
+On my main machine, and in general, I tend to run as a non privileged user. As such I make use of targetpw and runaspw see [man sudoers](http://www.sudo.ws/sudoers.man.html). Therefore even if the current account is compromised the attacker still needs to know either the root user or adminsitator users password to run as privileged user. Indeed this is a defense in depth mechanism only but is highly effective in many situations.  
 #### Setup
 On OSX:
-   We can enable the root user and then follow the [On rest][https://github.com/ravivcohen/dotfiles/edit/master/README.md]. I choose to not enable the root user and instead make use of runaspw, in combination with setting runas_default variable to a user who is an Administrator and as such sudo run commands under the Admin user and also allows your to run sudo -u root to run root commands the latter works because what sudo -u root with the runaspw set really mean sudo sudo.
+   We can enable the root user and then follow the [On rest](https://github.com/ravivcohen/dotfiles/edit/master/README.md). I choose to not enable the root user and instead make use of runaspw, in combination with setting runas_default variable to a user who is an Administrator and as such sudo run commands under the Admin user and also allows your to run sudo -u root to run root commands the latter works because what sudo -u root with the runaspw set really mean sudo sudo.
    * Create a group, for ex non_admin
-   * Add standard user you want to have sudo access to that group
+   * Add standard users you want to have sudo access to this group
    * Add the following to /etc/sudoers
+   
      ```
-     Defaults:%non_admin runas_default=ravivcohen, runaspw
+     Defaults:%non_admin runas_default=*user name*, runaspw
+     
      %non_admin ALL=(ALL) ALL
      ```
+On Rest:
+   We already have a root account that is either enabled or disabled but we know the password too so we just set all users in lets say wheel for example to use the targetpw as follows:
+   ```
+    Defaults:%wheel targetpw
+     
+    %wheel ALL=(ALL) ALL
+   ```
    
 
 ### General Notes
