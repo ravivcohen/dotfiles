@@ -12,6 +12,13 @@ sudo chflags nohidden ~/Library/
 sudo chflags nohidden /tmp
 sudo chflags nohidden /usr
 
+#Disable Spotlight indexing from indexing /volume
+sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
+
+#Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window"
+sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+
+
 ##EXTRAA
 # Link to the airport command
 sudo ln -sf /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/sbin/airport
@@ -61,6 +68,9 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.nat NAT -
 # Disable Bluetooth Sharing.
 sudo defaults -currentHost write com.apple.bluetooth PrefKeyServicesEnabled 0
 
+#TODO
+#Need to look at bad services in the future right now disabling some service
+#removed functinlity needs more testing.
 # Remove BAD services. In the future look at unloading these as well
 # # com.apple.smb.preferences.plist $d
 # # aosnotifyd -- Find My Mac daemon
@@ -91,13 +101,13 @@ sudo defaults -currentHost write com.apple.bluetooth PrefKeyServicesEnabled 0
 # home=$HOME
 # d=$home/backup-unload-daemon
 # sudo mv /System/Library/LaunchDaemons/com.apple.mdmclient.daemon.plist $d
+#"com.apple.eppc" "com.apple.InternetSharing" "com.apple.RFBEventHelper" 
+#    "com.apple.screensharing" "com.apple.screensharing.MessagesAgent" 
+#    "com.apple.screensharing.agent" "com.apple.RemoteDesktop.PrivilegeProxy" 
+#    "com.apple.RemoteDesktop.agent" "com.apple.blued"
 
 #"com.apple.locationd" 
-bad=("org.apache.httpd" "com.openssh.sshd" 
-	"com.apple.eppc" "com.apple.InternetSharing" "com.apple.RFBEventHelper" 
-	"com.apple.screensharing" "com.apple.screensharing.MessagesAgent" 
-	"com.apple.screensharing.agent" "com.apple.RemoteDesktop.PrivilegeProxy" 
-	"com.apple.RemoteDesktop.agent" "com.apple.blued")
+bad=("org.apache.httpd" "com.openssh.sshd")
 loaded="$(sudo launchctl list | awk 'NR>1 && $3 !~ /0x[0-9a-fA-F]+\.(anonymous|mach_init)/ {print $3}')"
 
 bad_list=( $(to_remove "${bad[*]}" "$loaded") )
@@ -141,7 +151,7 @@ sudo pmset -a destroyfvkeyonstandby 1
 #      and better battery life, you should use this setting.
 sudo pmset -a hibernatemode 25
 # Enable hard disk sleep.
-sudo pmset -a disksleep 45
+sudo pmset -a disksleep 0
 
 # Disable computer sleep.
 sudo pmset -a sleep 90
