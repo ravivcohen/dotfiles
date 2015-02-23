@@ -109,7 +109,7 @@ if [[ "$OS" = "osx" ]]; then
     # b. One a clean install .profile does not exist so it easy to manipulate and later delete.
     echo 'bash -c "$(curl -fsSL https://raw.github.com/ravivcohen/dotfiles/master/bin/dotfiles)"' >> .profile
     sleep 5
-    sudo reboot
+    sudo -u root reboot
   fi
 fi
 
