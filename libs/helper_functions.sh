@@ -148,9 +148,9 @@ function init_do() {
   else
       # For Init files we only run os specific files.
       if [[ $vers == 10 && $filename == *$OS* ]]; then
-        sudo -E -i "source $2" 
+        sudo -E "source $2" 
     else
-        sudo -E -i "source $2"
+        sudo -E "source $2"
     fi
  fi 
 }
