@@ -24,7 +24,6 @@ PATH=/usr/local/bin:$(path_remove /usr/local/bin)
 PATH=/usr/local/sbin:$(path_remove /usr/local/sbin)
 export PATH
 
-echo `whoami`
 # Fix ZSH permissions
 # Safe to run everytime incase of ZSH Update.
 sudo chown -R `whoami`:admin /usr/local/Cellar/zsh/
