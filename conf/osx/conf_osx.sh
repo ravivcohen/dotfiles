@@ -336,18 +336,16 @@ done
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
  
 #"Disable smart quotes in Messages.app? (it's annoying for messages that contain code) (y/n)"
-efaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
   
 
 
-echo "Wipe all (default) app icons from the Dock? (y/n)"
-echo "(This is only really useful when setting up a new Mac, or if you don't use the Dock to launch apps.)"
-read -r response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+#"Wipe all (default) app icons from the Dock? (y/n)"
+#"(This is only really useful when setting up a new Mac, or if you don't use the Dock to launch apps.)"
+#read -r response
+if [[ "$new_dotfiles_install" ]]; then
   defaults write com.apple.dock persistent-apps -array
 fi
-
-
 
 # Disable VoiceOver service.
 #launchctl unload -w /System/Library/LaunchAgents/com.apple.VoiceOver.plist
