@@ -51,10 +51,11 @@ elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
   export OS="ubuntu"
 fi
 
-if ! groups | grep &>/dev/null '\badmin\b'; then
+if [$OS == "osx"] && [! groups | grep &>/dev/null '\badmin\b'] ; then
     is_standard_user=true
 fi
 
+echo "user $is_standard_user"
 if [[ $(sudo -u root whoami) != "root" ]]; then
     e_error "Sorry, you need root to run parts of this script exiting."
     # Ask to setup /etc/sudoers
@@ -216,41 +217,8 @@ backup_dir="$HOME/.dotfiles/backups/$(date "+%Y_%m_%d-%H_%M_%S")/"
 backup=
 
 
-# 1. First We Init the system
-read -p "Do you need to login as another user who can sudo (y/n) ?: " yn
-case $yn in
-  [Yy]* ) 
-    is_standard_user=true
-    read -p "Enter the Username to use: " username
-    echo "Please enter password for $username"
-    check_std_user_sudo_access
-    #since we have the enitre file and it might contain the orginal
-    #sudo warining menu we look for root anywhere in the file.
-    if [[ $test_root_access != *root* ]]; then
-      e_error "Sorry, you need root to run parts of this script exiting."
-      exit 1
-    fi
-    # Now Actually do stuff
-    e_header "Running Init"
-    do_stuff "init"
-    ;;
-
-  [Nn]* ) 
-    is_standard_user=false
-    echo "Testing Sudo Acess:"
-    if [[ $(sudo whoami) != "root" ]]; then
-      e_error "Sorry, you need root to run parts of this script exiting."
-      exit 1
-    fi
-    # Now Actually do stuff
-    e_header "Running Init"
-    do_stuff "init"
-    ;;
-
-  * ) e_error "Sorry, you need root to run parts of this script exiting."
-      exit 1 
-      ;;
-esac
+e_header "Running Init"
+do_stuff "init"
 
 
 # 2. Copy and Link Over Files 
