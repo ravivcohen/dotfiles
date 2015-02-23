@@ -51,7 +51,7 @@ elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
   export OS="ubuntu"
 fi
 
-if [[ "$OS" -eq "osx"  &&  !groups | grep &>/dev/null '\badmin\b' ]]; then
+if [[ "$OS" -eq "osx"  &&  ! $(groups | grep &>/dev/null '\badmin\b') ]]; then
     is_standard_user=true
 fi
 
