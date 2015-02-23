@@ -43,7 +43,6 @@ fi
 . $lib_file
 
 # Ask to setup /etc/sudoers
-username="root"
 read -p '''Do you need to setup /etc/sudoers ?
 1. Yes, as runaspw
 2. Yes, as targetpw
@@ -53,17 +52,14 @@ case $yn in
   [1]* ) 
     read -p "Enter the username to use:" username
     read -p "Enter the group to use:" groupname
-    su $username -c ''' sudo -p "Enter sudo password for, %u:" -i
-    echo "Defaults:%$groupname runas_default=$username, runaspw" >> /etc/sudoers
-    echo "%$groupname ALL=(ALL) ALL" >> /etc/sudoers
-    '''
+    su $username -m -c "echo 'Defaults:%$groupname runas_default=$username, runaspw' | sudo tee -a /etc/sudoers;
+    echo '%$groupname ALL=(ALL) ALL' | sudo tee -a /etc/sudoers"
     ;;
   [2]* )
-      read -p "Enter the group to use:" groupname
-      su -c ''' echo "Defaults:%$groupname targetpw" >> /etc/sudoers 
-      echo "%$groupname ALL=(ALL) ALL" >> /etc/sudoers
-      '''
-      ;;
+    read -p "Enter the group to use:" groupname
+    su -m -c "echo 'Defaults:%$groupname targetpw' >> /etc/sudoers; 
+    echo '%$groupname ALL=(ALL) ALL' >> /etc/sudoers"
+    ;;
   * ) e_error "Skipping /etc/sudoers setup"
       exit 1 
       ;;
@@ -71,9 +67,7 @@ esac
 
 
 # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
-if [ "$is_standard_user" = false ]; then
-  while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-fi
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 ## TODO: Move this into a get_os functions that is smart return var right away if already set
 # OSX
