@@ -55,7 +55,6 @@ if [[ "$OS" -eq "osx"  &&  ! $(groups | grep &>/dev/null '\badmin\b') ]]; then
     is_standard_user=true
 fi
 
-echo "user $is_standard_user"
 if [[ $(sudo -u root whoami) != "root" ]]; then
     e_error "Sorry, you need root to run parts of this script exiting."
     # Ask to setup /etc/sudoers
