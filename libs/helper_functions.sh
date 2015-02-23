@@ -148,11 +148,9 @@ function init_do() {
   else
       # For Init files we only run os specific files.
       if [[ $vers == 10 && $filename == *$OS* ]]; then
-        chmod +x $2
-        sudo -E bash -c "source $2" 
+        su $username -m -c "source $2"
     else
-        chmod +x $2
-        sudo -E bash -c "source $2"
+        su $username -m -c "source $2"
     fi
  fi 
 }
