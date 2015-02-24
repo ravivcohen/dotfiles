@@ -148,9 +148,9 @@ function init_do() {
   else
       # For Init files we only run os specific files.
       if [[ $vers == 10 && $filename == *$OS* ]]; then
-        su $username -m -c "source $2"
+        sudo -H bash -c "source $2"
     else
-        su $username -m -c "source $2"
+        sudo -H bash -c "source $2"
     fi
  fi 
 }

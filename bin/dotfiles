@@ -215,10 +215,6 @@ shopt -s nullglob
 backup_dir="$HOME/.dotfiles/backups/$(date "+%Y_%m_%d-%H_%M_%S")/"
 backup=
 
-if [[ "$OS" -eq "osx"  && "$is_standard_user" ]]; then
-    read -p "Please enter Administrator's username:" username
-fi
-
 e_header "Running Init"
 do_stuff "init"
 
