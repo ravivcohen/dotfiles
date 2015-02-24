@@ -7,7 +7,7 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster_m"
+ZSH_THEME="bullet-train"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"

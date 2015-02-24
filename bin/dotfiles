@@ -140,8 +140,8 @@ fi
 if [[ ! "$(type -P git)" ]]; then
   # OSX
   if [[ "$OS" = "osx" ]]; then
-    # Since apple dropped support fot 10.6 and 10.7 is next.
-    # I assusme you already have git installed its default on 10.8 +
+    # Since apple dropped support for 10.6 and 10.7 is next.
+    # I assume you already have git installed its default on 10.8 +
     e_error "No GIT ? supported osx 10.8 +"
     exit 1
   # Ubuntu.
