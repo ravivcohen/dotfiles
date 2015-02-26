@@ -93,7 +93,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 #Ensure command line tools are installed 
 if [[ "$OS" = "osx" ]]; then
-  xcode-select -p
+  xcode-select -p > /dev/null
   rs=$?
   # Ensure that we can actually, like, compile anything.
   # If XCode CLI Tools aren't installed
