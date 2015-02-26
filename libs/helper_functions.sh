@@ -148,9 +148,9 @@ function init_do() {
   else
       # For Init files we only run os specific files.
       if [[ $vers == 10 && $filename == *$OS* ]]; then
-        sudo -H -E bash -c "source $2"
+        sudo -H -E TMPDIR=$TMPDIR bash -c "source $2"
     else
-        sudo -H -E bash -c "source $2"
+        sudo -H -E TMPDIR=$TMPDIR bash -c "source $2"
     fi
  fi 
 }
