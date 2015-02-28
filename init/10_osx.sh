@@ -97,22 +97,16 @@ pkg-config
 p7zip 
 "lesspipe --syntax-highlighting"
 "python --universal" 
-#"macvim --enable-cscope --enable-pythoninterp --custom-icons" #Requires Xcode 
+"macvim --enable-cscope --enable-pythoninterp --custom-icons"
 "brew-cask" 
-rbenv 
-ruby-build 
-rbenv-gemset 
-rbenv-binstubs 
-"aspell --with-lang-en" 
-#"weechat -with-aspell --with-perl --with-ruby --with-python" #drops to bash
-
 
 #--with-ignore-thread-patch Cannot apple with sidebar mutually exclu
 "mutt --with-trash-patch --with-s-lang  
 --with-pgp-verbose-mime-patch --with-confirm-attachment-patch 
 --with-sidebar-patch"
 offline-imap
-#lbdb #Fails to install  
+lbdb 
+"wireshark --with-headers --with-libpcap --with-libsmi --with-lua --with-qt --devel"
 
 "vim --with-python --with-ruby --with-perl --enable-cscope 
 --enable-pythoninterp --override-system-vi"
@@ -185,9 +179,9 @@ fi
 # e_header "Install latest version of WireShark with QT"
 # brew install wireshark --devel --with-qt
 # # Temp fix for wireshark interfaces
-# curl https://bugs.wireshark.org/bugzilla/attachment.cgi?id=3373 -o ChmodBPF.tar.gz
-# tar zxvf ChmodBPF.tar.gz
-# open ChmodBPF/Install\ ChmodBPF.app
+curl https://bugs.wireshark.org/bugzilla/attachment.cgi?id=3373 -o ChmodBPF.tar.gz
+tar zxvf ChmodBPF.tar.gz
+open ChmodBPF/Install\ ChmodBPF.app
 
 # htop
 if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wheel" || ! "$(($(stat -L -f "%DMp" "$(which htop)") & 4))" ]]; then
