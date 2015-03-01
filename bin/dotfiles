@@ -52,12 +52,15 @@ elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
 fi
 
 is_standard_user=false
+echo "1 is std udr: $is_standard_user"
 
 if [[ "$OS" -eq "osx"  && $(groups | grep -q -e '\badmin\b') -eq 0 ]]; then
+    echo "2 is std udr: $is_standard_user"
+
     is_standard_user=true
 fi
 
-echo "is std udr: $is_standard_user"
+echo "3 is std udr: $is_standard_user"
 
 if [[ $(sudo -u root whoami) != "root" ]]; then
     e_error "Sorry, you need root to run parts of this script exiting."
