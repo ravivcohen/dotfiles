@@ -139,6 +139,7 @@ function no-skip() {
 
 # Initialize.
 function init_do() {
+  echo "4 is std udr: $is_standard_user"
   filename=$(basename $2)
   ##Copied this. Could be done better.
   vers=$(awk -F_ '{print $1}' <<<"$filename")
