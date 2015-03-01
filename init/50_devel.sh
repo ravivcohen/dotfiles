@@ -19,6 +19,17 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	mkdir -p $DOTFILES_HOME/conf/ssh
 	mkdir -p $DOTFILES_HOME/conf/gnupg
 
+    ##Configure Mutt
+    mkdir -p $DOTFILES_HOME/.mutt/temp
+    mkdir -p $DOTFILES_HOME/.mutt/alias
+    mkdir -p $DOTFILES_HOME/.mutt/cache/headers 
+    mkdir -p $DOTFILES_HOME/.mutt/cache/bodies  
+    mkdir -p $DOTFILES_HOME/.mutt/certificates  
+    mkdir -p $DOTFILES_HOME/.mutt/mailcap       
+    mkdir -p $DOTFILES_HOME/.mutt/temp          
+    mkdir -p $DOTFILES_HOME/.mutt/sig           
+
+
 	if [ "$(readlink $DOTFILES_HOME/.ssh)" != "$DOTFILES_HOME/conf/ssh" ]; then
 		rm -rf $DOTFILES_HOME/.ssh
 		ln -s  $DOTFILES_HOME/conf/ssh  $DOTFILES_HOME/.ssh
@@ -46,30 +57,6 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 		# Link our User directory
 		ln -s $DOTFILES_HOME/.dotfiles/conf/sublime/User $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
   	fi
-
-  	##TOOLS INSTALL
-  	#NIKTO
-  	if [[ ! -e "$DOTFILES_HOME/Tools/nikto" ]]; then
-  		e_header "Installing Nikto"
-  		mkdir "$DOTFILES_HOME/Tools/nikto"
-  		cd "$DOTFILES_HOME/Tools/nikto"
-  		curl "https://www.cirt.net/nikto/nikto-current.tar.gz" -o nikto-current.tar.gz
-  		tar -xzf nikto*
-  		mv nikto-*/* .
-  		rm -rf nikto-*
-  		cd "$DOTFILES_HOME/.dotfiles"
-  	fi
-
-    ##Configure Mutt
-    mkdir -p $DOTFILES_HOME/.mutt/temp
-    mkdir -p $DOTFILES_HOME/.mutt/alias
-    mkdir -p $DOTFILES_HOME/.mutt/cache/headers 
-    mkdir -p $DOTFILES_HOME/.mutt/cache/bodies  
-    mkdir -p $DOTFILES_HOME/.mutt/certificates  
-    mkdir -p $DOTFILES_HOME/.mutt/mailcap       
-    mkdir -p $DOTFILES_HOME/.mutt/temp          
-    mkdir -p $DOTFILES_HOME/.mutt/sig           
-
   		
 	
 # Ubuntu.
