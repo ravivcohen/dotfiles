@@ -91,9 +91,14 @@ fi
 # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+xcode-select -p >/dev/null 2>&1
+if [ $? == 0 ]; then
+  xcode_installed=true
+fi
+
 #Ensure command line tools are installed 
 if [[ "$OS" = "osx" ]]; then
-  xcode-select -p >/dev/null 2>&1
+  pkgutil --pkg-info=com.apple.pkg.CLTools_Executables >/dev/null 2>&1
   # Ensure that we can actually, like, compile anything.
   # If XCode CLI Tools aren't installed
   # We assume if not CLI tools clean install and update the whole system
@@ -130,25 +135,11 @@ if [[ -e "$HOME/.profile" ]]; then
   rm -rf "$HOME/.profile"
 fi
 
-# Ensure that we can actually, like, compile anything.
-if [[ ! "$(type -P gcc)" && "$OS" = "osx" ]]; then
-  e_error "The XCode Command Line Tools must be installed first."
-fi
-
-# If Git is not installed...
-if [[ ! "$(type -P git)" ]]; then
-  # OSX
-  if [[ "$OS" = "osx" ]]; then
-    # Since apple dropped support for 10.6 and 10.7 is next.
-    # I assume you already have git installed its default on 10.8 +
-    e_error "No GIT ? supported osx 10.8 +"
-    exit 1
-  # Ubuntu.
-  elif [[ "$OS" = "ubuntu" ]]; then
-    # Git is fairly easy.
-    e_header "Installing Git"
-    sudo apt-get -qq install git-core
-  fi
+# If Git is not installed, install it (Ubuntu only, since Git comes standard
+# with recent XCode or CLT)
+if [[ ! "$(type -P git)" ]] && is_ubuntu; then
+  e_header "Installing Git"
+  sudo apt-get -qq install git-core
 fi
 
 # If Git isn't installed by now, something exploded. We gots to quit!
