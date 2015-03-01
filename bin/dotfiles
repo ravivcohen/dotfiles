@@ -55,7 +55,7 @@ if [[ "$OS" -eq "osx"  &&  ! $(groups | grep -q -e '\badmin\b') ]]; then
     is_standard_user=true
 fi
 
-echo $is_standard_user
+echo "is std udr: $is_standard_user"
 
 if [[ $(sudo -u root whoami) != "root" ]]; then
     e_error "Sorry, you need root to run parts of this script exiting."
