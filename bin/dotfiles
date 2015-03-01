@@ -127,6 +127,8 @@ if [[ "$OS" = "osx" ]]; then
     echo 'bash -c "$(curl -fsSL https://raw.github.com/ravivcohen/dotfiles/master/bin/dotfiles)"' >> .profile
     sleep 5
     sudo -u root reboot
+  else
+    e_header "CLT installed"
   fi
 fi
 
