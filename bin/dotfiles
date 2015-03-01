@@ -93,12 +93,11 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 #Ensure command line tools are installed 
 if [[ "$OS" = "osx" ]]; then
-  xcode-select -p > /dev/null 2>&1
-  rs=$?
+  xcode-select -p >/dev/null 2>&1
   # Ensure that we can actually, like, compile anything.
   # If XCode CLI Tools aren't installed
   # We assume if not CLI tools clean install and update the whole system
-  if [[ $rs != 0 ]]; then
+  if [[ $? != 0 ]]; then
     e_header "Installing XCode Command Line Tools and All Updates"
     # create the placeholder file that's checked by CLI updates' .dist code
     # in Apple's SUS catalog
