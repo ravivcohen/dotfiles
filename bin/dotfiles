@@ -54,7 +54,7 @@ fi
 is_standard_user=false
 echo "1 is std udr: $is_standard_user"
 
-if [[ "$OS" -eq "osx"  && $(groups | grep -q -e '\badmin\b') -neq 0 ]]; then
+if [[ "$OS" -eq "osx"  && $(groups | grep -q -e '\badmin\b') -ne 0 ]]; then
     echo "2 is std udr: $is_standard_user"
     is_standard_user=true
 fi
