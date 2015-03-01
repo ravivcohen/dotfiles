@@ -129,7 +129,7 @@ fi
 ret=""
 
 # Install Casks
-casks=(sublime-text3 iterm2-nightly java6 xquartz tower transmit path-finder adium vagrant keka shuttle)
+casks=(sublime-text3 iterm2-nightly java6 tower transmit path-finder adium vagrant keka)
 cask_list=( $(convert_list_to_array "$(brew cask list)") )
 to_install "casks[@]" "cask_list[@]"
 
