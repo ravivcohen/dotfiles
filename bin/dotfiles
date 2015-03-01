@@ -53,10 +53,9 @@ fi
 
 is_standard_user=false
 if [[ "$OS" -eq "osx"  && $(groups | grep -q -e '\badmin\b') -ne 0 ]]; then
+    echo "Script is running as a standard user."
     is_standard_user=true
 fi
-
-echo "3 is std udr: $is_standard_user"
 
 if [[ $(sudo -u root whoami) != "root" ]]; then
     e_error "Sorry, you need root to run parts of this script exiting."
