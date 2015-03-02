@@ -94,7 +94,7 @@ fi
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 if [[ $(xcode-select -p 2>&1) == "/Applications/Xcode.app/Contents/Developer"  ]]; then
-  xcode_installed=true
+  export xcode_installed=true
 fi
 
 #Ensure command line tools are installed 
