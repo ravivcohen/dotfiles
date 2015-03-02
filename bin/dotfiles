@@ -28,7 +28,7 @@ exit
 done
 
 ################################################################################
-# functions                                                                    #
+# functions - start                                                            #
 ################################################################################
 # Logging stuff.
 function e_header()   { echo -e "\n\033[1m$@\033[0m"; }
@@ -259,7 +259,7 @@ function path_remove() {
   echo "${t[*]}"
 }
 ################################################################################
-# functions                                                                    #
+# functions - end                                                              #
 ################################################################################
 
 
@@ -276,11 +276,13 @@ elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
   export OS="ubuntu"
 fi
 
+
 is_standard_user=false
 if [[ "$OS" -eq "osx"  && $(groups | grep -q -e '\badmin\b') -ne 0 ]]; then
-    echo "Script is running as a standard user."
-    is_standard_user=true
+  echo "Script is running as a standard user."
+  is_standard_user=true
 fi
+echo "std user: $is_standard_user"
 
 if [[ $(sudo -u root whoami) != "root" ]]; then
     e_error "Sorry, you need root to run parts of this script exiting."
