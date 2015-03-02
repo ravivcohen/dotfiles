@@ -10,6 +10,10 @@
 #   sudo xcode-select -switch /usr/bin
 # fi
 
+#All Helper functions can now be found inside libs/helper_functions.
+. $lib_file
+
+
 if [[ ! "$(type -P brew)" ]]; then
   e_header "Installing Homebrew"
   true | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
