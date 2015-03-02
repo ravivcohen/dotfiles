@@ -188,7 +188,7 @@ fi
 # brew install wireshark --devel --with-qt
 # # Temp fix for wireshark interfaces
 curl "https://bugs.wireshark.org/bugzilla/attachment.cgi?id=3373" -o /tmp/ChmodBPF.tar.gz
-tar zxvf /tmp/ChmodBPF.tar.gz
+tar zxvf /tmp/ChmodBPF.tar.gz -C /tmp
 open /tmp/ChmodBPF/Install\ ChmodBPF.app
 
 # htop
