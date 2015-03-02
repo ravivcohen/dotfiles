@@ -1,3 +1,4 @@
+
 # Set computer name (as done via System Preferences → Sharing)
 sudo scutil --set ComputerName "0x326c333374"
 sudo scutil --set HostName "0x326c333374"

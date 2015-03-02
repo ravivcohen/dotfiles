@@ -101,7 +101,7 @@ p7zip
 --enable-pythoninterp --override-system-vi"
 )
 
-echo "Xcode $xcode_installed"
+
 if [[ $xcode_installed ]]; then
   #We need to Patch MUTT for sidebar support
   patch -p0 -N --reject-file=/dev/null --dry-run --silent /usr/local/Library/Formula/mutt.rb < $DOTFILES_HOME/.dotfiles/conf/osx/mutt.rb.patch &>/dev/null
@@ -138,7 +138,7 @@ fi
 ret=""
 
 # Install Casks
-casks=(sublime-text3 iterm2-nightly java6 tower transmit path-finder adium vagrant keka)
+casks=(sublime-text3 iterm2-nightly firefox java6 tower transmit path-finder adium vagrant keka)
 cask_list=( $(convert_list_to_array "$(brew cask list)") )
 to_install "casks[@]" "cask_list[@]"
 
