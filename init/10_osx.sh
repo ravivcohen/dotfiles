@@ -187,9 +187,9 @@ fi
 # e_header "Install latest version of WireShark with QT"
 # brew install wireshark --devel --with-qt
 # # Temp fix for wireshark interfaces
-curl "https://bugs.wireshark.org/bugzilla/attachment.cgi?id=3373" -o $TMPDIR/ChmodBPF.tar.gz
-tar zxvf $TMPDIR/ChmodBPF.tar.gz
-open $TMPDIR/ChmodBPF/Install\ ChmodBPF.app
+curl "https://bugs.wireshark.org/bugzilla/attachment.cgi?id=3373" -o /tmp/ChmodBPF.tar.gz
+tar zxvf /tmp/ChmodBPF.tar.gz
+open /tmp/ChmodBPF/Install\ ChmodBPF.app
 
 # htop
 if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wheel" || ! "$(($(stat -L -f "%DMp" "$(which htop)") & 4))" ]]; then
