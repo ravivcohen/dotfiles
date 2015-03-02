@@ -101,6 +101,7 @@ p7zip
 --enable-pythoninterp --override-system-vi"
 )
 
+echo "Xcode $xcode_installed"
 if [[ $xcode_installed ]]; then
   #We need to Patch MUTT for sidebar support
   patch -p0 -N --reject-file=/dev/null --dry-run --silent /usr/local/Library/Formula/mutt.rb < $DOTFILES_HOME/.dotfiles/conf/osx/mutt.rb.patch &>/dev/null
