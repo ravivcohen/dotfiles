@@ -16,6 +16,9 @@ if [[ ! "$(type -P brew)" ]]; then
   e_header "Installing Homebrew pks on first run"
 fi
 
+# Exit if, for some reason, Homebrew is not installed.
+[[ ! "$(type -P brew)" ]] && e_error "Homebrew failed to install." && return 1
+
 # Just incase we set the path again over here.
 # APPLE, Y U PUT /usr/bin B4 /usr/local/bin?!
 PATH=/usr/local/bin:$(path_remove /usr/local/bin)
@@ -55,16 +58,6 @@ fi
 #reset ret
 ret=""
 
-#We need to Patch MUTT for sidebar support
-patch -p0 -N --reject-file=/dev/null --dry-run --silent /usr/local/Library/Formula/mutt.rb < $DOTFILES_HOME/.dotfiles/conf/osx/mutt.rb.patch &>/dev/null
-#If the patch has not been applied then the $? which is the exit status 
-#for last command would have a success status code = 0
-if [ $? -eq 0 ];
-then
-    e_header "Patching Mutt before Brewing"
-    #apply the patch
-    patch -p0 -N --silent /usr/local/Library/Formula/mutt.rb < $DOTFILES_HOME/.dotfiles/conf/osx/mutt.rb.patch
-fi
 
 # Install Homebrew recipes.
 recipes=(
@@ -95,20 +88,33 @@ pkg-config
 p7zip 
 "lesspipe --syntax-highlighting"
 "python --universal" 
-"macvim --enable-cscope --enable-pythoninterp --custom-icons"
 "brew-cask" 
 
 #--with-ignore-thread-patch Cannot apple with sidebar mutually exclu
-"mutt --with-trash-patch --with-s-lang  
---with-pgp-verbose-mime-patch --with-confirm-attachment-patch 
---with-sidebar-patch"
-offline-imap
-lbdb 
 "wireshark --with-headers --with-libpcap --with-libsmi --with-lua --with-qt --devel"
 
 "vim --with-python --with-ruby --with-perl --enable-cscope 
 --enable-pythoninterp --override-system-vi"
 )
+
+if [[ $xcode_installed ]]; then
+  #We need to Patch MUTT for sidebar support
+  patch -p0 -N --reject-file=/dev/null --dry-run --silent /usr/local/Library/Formula/mutt.rb < $DOTFILES_HOME/.dotfiles/conf/osx/mutt.rb.patch &>/dev/null
+  #If the patch has not been applied then the $? which is the exit status 
+  #for last command would have a success status code = 0
+  if [ $? -eq 0 ];  then
+    e_header "Patching Mutt before Brewing"
+    #apply the patch
+    patch -p0 -N --silent /usr/local/Library/Formula/mutt.rb < $DOTFILES_HOME/.dotfiles/conf/osx/mutt.rb.patch
+  fi
+  recipes+=("mutt --with-trash-patch --with-s-lang  
+  --with-pgp-verbose-mime-patch --with-confirm-attachment-patch 
+  --with-sidebar-patch"
+  offline-imap
+  lbdb )
+  recipes+=("macvim --enable-cscope --enable-pythoninterp --custom-icons")
+fi
+
 
 brew_list=( $(convert_list_to_array "$(brew list)") )
 to_install "recipes[@]" "brew_list[@]"
