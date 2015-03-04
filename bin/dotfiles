@@ -55,7 +55,6 @@ elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Arch ]]; then
 fi
 
 is_standard_user=false
-echo "OS is: $OS"
 if [[ "$OS" == "osx"  && $(groups | grep -q -e '\badmin\b')$? -ne 0 ]]; then
     echo "Script is running as a standard user."
     is_standard_user=true
@@ -142,10 +141,10 @@ fi
 
 # If Git is not installed, install it (Ubuntu only, since Git comes standard
 # with recent XCode or CLT)
-if [[ ! "$(type -P git)" && $OS == "ubuntu"]]; then
+if [[ ! "$(type -P git)" && "$OS" == "ubuntu"]]; then
   e_header "Installing Git"
   sudo apt-get -qq install git-core
-elif [[ ! "$(type -P git)" && $OS == "arch" ]]; then
+elif [[ ! "$(type -P git)" && "$OS" == "arch" ]]; then
   e_header "Installing Git"
   sudo pacman -Sy git
 fi
