@@ -146,7 +146,7 @@ if [[ ! "$(type -P git)" && "$OS" == "ubuntu" ]]; then
   sudo apt-get -qq install git-core
 elif [[ ! "$(type -P git)" && "$OS" == "arch" ]]; then
   e_header "Installing Git"
-  sudo pacman -Sy git
+  sudo pacman --noc -S git
 fi
 
 # If Git isn't installed by now, something exploded. We gots to quit!
