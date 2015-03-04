@@ -30,7 +30,7 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iTerm/";
     
     #We have to set ZSH shell to Homebrew version
-    chsh -s /usr/local/bin/zsh
+    #chsh -s /usr/local/bin/zsh
 
 # Ubuntu.
 elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
@@ -41,6 +41,6 @@ elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
 elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Arch ]]; then
     #TODO
     if [[ $(whoami) == "vagrant" ]]; then
-        sudo chsh -s zsh vagrant
+        sudo chsh -s /usr/bin/zsh vagrant
     fi
 fi

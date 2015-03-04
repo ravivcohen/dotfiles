@@ -31,7 +31,7 @@ export PATH
 
 # Fix ZSH permissions
 # Safe to run everytime incase of ZSH Update.
-sudo chown -R `whoami`:admin /usr/local/Cellar/zsh/
+#sudo chown -R `whoami`:admin /usr/local/Cellar/zsh/
 
 
 e_header "Brew DR"
@@ -244,7 +244,7 @@ fi
 
 # Fix ZSH permissions
 # Safe to run everytime incase of ZSH Update.
-sudo chown -R root:admin /usr/local/Cellar/zsh/
+#sudo chown -R root:admin /usr/local/Cellar/zsh/
 
 # DO WE NEED THIS /etc/shelss test if new ZSH is used after install or not
 # echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
