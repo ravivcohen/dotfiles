@@ -42,4 +42,5 @@ elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Arch ]]; then
     #TODO
     if [[ $(whoami) == "vagrant" ]]; then
         sudo chsh -s zsh vagrant
+    fi
 fi
