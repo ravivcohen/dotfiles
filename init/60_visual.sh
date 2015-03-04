@@ -1,6 +1,14 @@
 #All Helper functions can now be found inside libs/helper_functions.
 . $lib_file
 
+
+if [[ ! -e $HOME/.oh-my-zsh ]]; then
+    # 2. Second We Setup OH-MY-ZSH  
+    e_header "Setup oh-my-zsh"
+    ##SETUP OH MY ZSH ONLY ON THE FIRST TIME
+    curl -L http://install.ohmyz.sh | sh
+fi
+
 if [[ "$OSTYPE" =~ ^darwin ]]; then
 	
     e_header "Setting Up OSX Visual Settings"
@@ -21,18 +29,17 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool TRUE
     defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iTerm/";
     
+    #We have to set ZSH shell to Homebrew version
+    chsh -s /usr/local/bin/zsh
 
 # Ubuntu.
 elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
 	#TODO
 	echo 'Fix Visual Init'
-fi
 
-if [[ ! -e $HOME/.oh-my-zsh ]]; then
-    # 2. Second We Setup OH-MY-ZSH  
-    e_header "Setup oh-my-zsh"
-    ##SETUP OH MY ZSH ONLY ON THE FIRST TIME
-    curl -L http://install.ohmyz.sh | sh
-    #We have to set ZSH shell to Homebrew version
-    chsh -s /usr/local/bin/zsh
+# Arch
+elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Arch ]]; then
+    #TODO
+    if [[ $(whoami) == "vagrant" ]]; then
+        sudo chsh -s zsh vagrant
 fi
