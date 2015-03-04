@@ -44,7 +44,7 @@ vagrant-xpra () {
     xpra attach --encoding=rgb --no-microphone --no-speaker --ssh="vagrant ssh $1 -- " ${@:2} 
   fi 
 }
-alias xpra='~/Applications/Xpra.app/Contents/Helpers/Xpra'
+alias xpra='/Applications/Xpra.app/Contents/Helpers/Xpra'
 
 
 # Trim new lines and copy to clipboard
