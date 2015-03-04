@@ -31,7 +31,8 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     mkdir -p $DOTFILES_HOME/.mutt/certificates  
     mkdir -p $DOTFILES_HOME/.mutt/mailcap       
     mkdir -p $DOTFILES_HOME/.mutt/temp          
-    mkdir -p $DOTFILES_HOME/.mutt/sig           
+    mkdir -p $DOTFILES_HOME/.mutt/sig       
+    mkdir -p $DOTFILES_HOME/.mail    
 
 
 	if [ "$(readlink $DOTFILES_HOME/.ssh)" != "$DOTFILES_HOME/conf/ssh" ]; then

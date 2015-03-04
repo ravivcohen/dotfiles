@@ -17,6 +17,8 @@
 	open http://www.obdev.at/products/littlesnitch/download.html
 	#google-chrome
 	open https://www.google.com/chrome
+    #VB box
+    open https://www.virtualbox.org/wiki/Downloads
     
   # Ubuntu.
   elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then

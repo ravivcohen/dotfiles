@@ -116,6 +116,7 @@ if [[ $xcode_installed ]]; then
   --with-pgp-verbose-mime-patch --with-confirm-attachment-patch 
   --with-sidebar-patch"
   offline-imap
+  notmuch
   lbdb )
   recipes+=("macvim --enable-cscope --enable-pythoninterp --custom-icons")
 fi
