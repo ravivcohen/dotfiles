@@ -32,6 +32,11 @@ if [[ $(groups | grep -q -e '\badmin\b')$? -ne 0 ]]; then
     alias rodo="sudo -u root"
 fi
 
+###firefox
+alias firefox='nohup /Applications/Firefox.app/Contents/MacOS/firefox-bin -p > /dev/null 2>&1 &'
+
+
+alias xpra='/Applications/Xpra.app/Contents/Helpers/Xpra'
 #XPRA Vagrant Stuff
 #so i can do something like
 #vagrant-xpra ssh:
@@ -44,8 +49,6 @@ vagrant-xpra () {
     xpra attach --encoding=rgb --no-microphone --no-speaker --ssh="vagrant ssh $1 -- " ${@:2} 
   fi 
 }
-alias xpra='/Applications/Xpra.app/Contents/Helpers/Xpra'
-
 
 # Trim new lines and copy to clipboard
 alias c="tr -d '\n' | pbcopy"
