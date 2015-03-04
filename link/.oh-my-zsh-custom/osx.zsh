@@ -26,6 +26,27 @@ export PATH
 #MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 # GREP ??
 
+#Some Sudo related stuff if your a STD user.
+if [[ $(groups | grep -q -e '\badmin\b')$? -ne 0 ]]; then
+    alias sudo="sudo -H -E TMPDIR=/tmp"
+    alias rodo="sudo -u root"
+fi
+
+#XPRA Vagrant Stuff
+#so i can do something like
+#vagrant-xpra ssh:
+#vagrant-xpra webapp ssh:
+#whatever vm name im using
+vagrant-xpra () { 
+  if [ $# -le 1 ]; then 
+    xpra attach --encoding=rgb --no-microphone --no-speaker --ssh="vagrant ssh -- " ${@:1}
+  else 
+    xpra attach --encoding=rgb --no-microphone --no-speaker --ssh="vagrant ssh $1 -- " ${@:2} 
+  fi 
+}
+alias xpra='~/Applications/Xpra.app/Contents/Helpers/Xpra'
+
+
 # Trim new lines and copy to clipboard
 alias c="tr -d '\n' | pbcopy"
 
