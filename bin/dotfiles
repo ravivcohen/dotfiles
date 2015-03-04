@@ -49,6 +49,9 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 # Ubuntu.
 elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
   export OS="ubuntu"
+# Arch
+elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Arch ]]; then
+  export OS="arch"
 fi
 
 is_standard_user=false
@@ -93,7 +96,7 @@ fi
 # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-if [[ $(xcode-select -p 2>&1) == "/Applications/Xcode.app/Contents/Developer"  ]]; then
+if [[ "$OS" = "osx" && $(xcode-select -p 2>&1) == "/Applications/Xcode.app/Contents/Developer"  ]]; then
   export xcode_installed=true
 fi
 
@@ -138,9 +141,12 @@ fi
 
 # If Git is not installed, install it (Ubuntu only, since Git comes standard
 # with recent XCode or CLT)
-if [[ ! "$(type -P git)" ]] && is_ubuntu; then
+if [[ ! "$(type -P git)" && $OS == "ubuntu"]]; then
   e_header "Installing Git"
   sudo apt-get -qq install git-core
+elif [[ ! "$(type -P git)" && $OS == "arch" ]]; then
+  e_header "Installing Git"
+  sudo pacman -Sy git
 fi
 
 # If Git isn't installed by now, something exploded. We gots to quit!

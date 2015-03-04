@@ -32,7 +32,13 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     mkdir -p $DOTFILES_HOME/.mutt/mailcap       
     mkdir -p $DOTFILES_HOME/.mutt/temp          
     mkdir -p $DOTFILES_HOME/.mutt/sig       
-    mkdir -p $DOTFILES_HOME/.mail    
+    mkdir -p $DOTFILES_HOME/.mail
+
+    #Add offline-imap to launch
+    mkdir -p ~/Library/LaunchAgents
+    cp /usr/local/opt/offline-imap/*.plist ~/Library/LaunchAgents
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.offline-imap.plist
+    
 
 
 	if [ "$(readlink $DOTFILES_HOME/.ssh)" != "$DOTFILES_HOME/conf/ssh" ]; then

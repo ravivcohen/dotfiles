@@ -93,6 +93,7 @@ p7zip
 "lesspipe --syntax-highlighting"
 "python --universal" 
 "brew-cask" 
+"profanity --with-terminal-notifier"
 
 #--with-ignore-thread-patch Cannot apple with sidebar mutually exclu
 "wireshark --with-headers --with-libpcap --with-libsmi --with-lua --with-qt --devel"
