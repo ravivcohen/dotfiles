@@ -12,13 +12,15 @@
 	#keepassx
 	open https://www.keepassx.org/dev/projects/keepassx/files
 	#Paragon
-	open http://www.paragon-software.com/home/ntfs-mac/
+	open https://www.paragon-software.com/home/ntfs-mac/
 	#Little-Snitch
-	open http://www.obdev.at/products/littlesnitch/download.html
+	open https://www.obdev.at/products/littlesnitch/download.html
 	#google-chrome
 	open https://www.google.com/chrome
     #VB box
     open https://www.virtualbox.org/wiki/Downloads
+    #xPRA
+    https://www.xpra.org/
     
   # Ubuntu.
   elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
