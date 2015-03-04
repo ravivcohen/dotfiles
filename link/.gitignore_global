@@ -60,3 +60,6 @@ Desktop.ini
 
 #important folders
 \!imp
+
+#Vagrant boxes
+.vagrant
