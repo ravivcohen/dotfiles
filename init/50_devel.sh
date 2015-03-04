@@ -1,13 +1,11 @@
 
+#All Helper functions can now be found inside libs/helper_functions.
+. $lib_file
 
 # Here Everyhting is orgnaized into logical groups
 # Sublime
 # OSX
 if [[ "$OSTYPE" =~ ^darwin ]]; then
-
-    #All Helper functions can now be found inside libs/helper_functions.
-    . $lib_file
-
 
 	# Setup OSX for Personal Use
 	# Setup the needed DIRS

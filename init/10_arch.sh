@@ -5,7 +5,7 @@
 
     # Update APT.
     e_header "Updating pacman"
-    pacman --noc -Syyu
+    sudo pacman --noc -Syyu
 
     # Install APT packages.
     packages=(
