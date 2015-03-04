@@ -18,9 +18,7 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	mkdir -p $DOTFILES_HOME/Research
 	mkdir -p $DOTFILES_HOME/Virtual_Machines
 	mkdir -p $DOTFILES_HOME/Documents
-	mkdir -p $DOTFILES_HOME/conf/ssh
-	mkdir -p $DOTFILES_HOME/conf/gnupg
-
+	
     ##Configure Mutt
     mkdir -p $DOTFILES_HOME/.mutt/temp
     mkdir -p $DOTFILES_HOME/.mutt/alias
@@ -37,18 +35,6 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     cp /usr/local/opt/offline-imap/*.plist ~/Library/LaunchAgents
     launchctl load ~/Library/LaunchAgents/homebrew.mxcl.offline-imap.plist
     
-
-
-	if [ "$(readlink $DOTFILES_HOME/.ssh)" != "$DOTFILES_HOME/conf/ssh" ]; then
-		rm -rf $DOTFILES_HOME/.ssh
-		ln -s  $DOTFILES_HOME/conf/ssh  $DOTFILES_HOME/.ssh
-	fi
-
-	if [[ ! -L  "$DOTFILES_HOME/.gnupg" ]]; then
-		rm -rf "$DOTFILES_HOME/.gnupg" 
-		ln -s  $DOTFILES_HOME/conf/gnupg  $DOTFILES_HOME/.gnupg
-	fi
-	
 	# Make sirectory if it does not exist
 	mkdir -p $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
 	mkdir -p $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/
