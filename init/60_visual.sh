@@ -1,3 +1,6 @@
+#All Helper functions can now be found inside libs/helper_functions.
+. $lib_file
+
 if [[ "$OSTYPE" =~ ^darwin ]]; then
 	
     e_header "Setting Up OSX Visual Settings"
