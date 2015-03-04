@@ -55,7 +55,7 @@ elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Arch ]]; then
 fi
 
 is_standard_user=false
-if [[ "$OS" -eq "osx"  && $(groups | grep -q -e '\badmin\b')$? -ne 0 ]]; then
+if [[ "$OS" == "osx"  && $(groups | grep -q -e '\badmin\b')$? -ne 0 ]]; then
     echo "Script is running as a standard user."
     is_standard_user=true
 fi
