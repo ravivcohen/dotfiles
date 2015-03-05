@@ -1,6 +1,5 @@
 [[ "$(cat /etc/issue 2> /dev/null)" =~ Arch ]] || return 1
 
-echo "ARCHH"
 if [[ "$(whoami)" == "vagrant" ]]; then
     export DISPLAY=:7
 fi
