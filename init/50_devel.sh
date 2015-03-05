@@ -31,12 +31,13 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     mkdir -p $DOTFILES_HOME/.mail
 
     if ! $(launchctl list | grep -Eq "homebrew.mxcl.offline-imap"); then
+        e_header "Loading offline-imap launchctl"
         #Add offline-imap to launch
         mkdir -p ~/Library/LaunchAgents
         cp /usr/local/opt/offline-imap/*.plist ~/Library/LaunchAgents
         launchctl load ~/Library/LaunchAgents/homebrew.mxcl.offline-imap.plist
     fi
-    
+
 	# Make sirectory if it does not exist
 	mkdir -p $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
 	mkdir -p $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/
