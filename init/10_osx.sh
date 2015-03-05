@@ -74,9 +74,9 @@ apple-gcc42
 s-lang
 zsh 
 "wget --with-iri" 
-grep git 
+grep 
+git 
 ssh-copy-id  
-apg 
 nmap
 dvtm 
 git-extras
@@ -86,7 +86,6 @@ coreutils
 findutils 
 ack 
 lynx 
-pigz 
 rename 
 pkg-config 
 p7zip 
@@ -119,7 +118,6 @@ if [[ $xcode_installed ]]; then
   offline-imap
   notmuch
   lbdb )
-  recipes+=("macvim --enable-cscope --enable-pythoninterp --custom-icons")
 fi
 
 
