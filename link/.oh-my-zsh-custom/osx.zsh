@@ -50,6 +50,8 @@ vagrant-xpra () {
   fi 
 }
 
+#xpra attach --encoding=h264 --quality=75 --no-microphone --no-speaker --opengl=yes  --dpi=72 --ssh="vagrant ssh webapp -- " ssh:2
+
 # Trim new lines and copy to clipboard
 alias c="tr -d '\n' | pbcopy"
 
