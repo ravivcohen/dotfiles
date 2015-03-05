@@ -117,6 +117,7 @@ if [[ $xcode_installed ]]; then
   --with-sidebar-patch"
   offline-imap
   notmuch
+  urlview
   lbdb )
 fi
 

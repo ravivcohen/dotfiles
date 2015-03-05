@@ -46,7 +46,7 @@ ZSH_THEME="bullet-train"
 
 # OSX
 if [[ $(uname) == "Darwin" ]] ; then
-	plugins=(git osx github brew battery)
+	plugins=(git osx github brew battery vagrant)
 
 	# Customize to your needs...
 	#export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/MacGPG2/bin

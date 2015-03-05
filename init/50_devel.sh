@@ -15,20 +15,21 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
 	mkdir -p $DOTFILES_HOME/Resources
 	mkdir -p $DOTFILES_HOME/Resources/Deliverables
 	mkdir -p $DOTFILES_HOME/Resources/Training
-	mkdir -p $DOTFILES_HOME/Research
 	mkdir -p $DOTFILES_HOME/Virtual_Machines
 	mkdir -p $DOTFILES_HOME/Documents
 	
     ##Configure Mutt
-    mkdir -p $DOTFILES_HOME/.mutt/temp
-    mkdir -p $DOTFILES_HOME/.mutt/alias
-    mkdir -p $DOTFILES_HOME/.mutt/cache/headers 
-    mkdir -p $DOTFILES_HOME/.mutt/cache/bodies  
-    mkdir -p $DOTFILES_HOME/.mutt/certificates  
-    mkdir -p $DOTFILES_HOME/.mutt/mailcap       
-    mkdir -p $DOTFILES_HOME/.mutt/temp          
-    mkdir -p $DOTFILES_HOME/.mutt/sig       
     mkdir -p $DOTFILES_HOME/.mail
+    mkdir -p $DOTFILES_HOME/.mail/mutt/temp
+    mkdir -p $DOTFILES_HOME/.mail/mutt/cache/headers 
+    mkdir -p $DOTFILES_HOME/.mail/mutt/cache/bodies  
+    mkdir -p $DOTFILES_HOME/.mail/mutt/temp          
+    
+    mkdir -p $DOTFILES_HOME/.mutt/certificates  
+    mkdir -p $DOTFILES_HOME/.mutt/alias
+    mkdir -p $DOTFILES_HOME/.mutt/mailcap       
+    mkdir -p $DOTFILES_HOME/.mutt/sig       
+    
 
     if ! $(launchctl list | grep -Eq "homebrew.mxcl.offline-imap"); then
         e_header "Loading offline-imap launchctl"
