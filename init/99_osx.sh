@@ -8,3 +8,7 @@ if [ -d "$DOTFILES_HOME/conf/dotfiles" ]; then
     e_header "Linking CONF files"
     ln -sf $DOTFILES_HOME/conf/dotfiles/* $DOTFILES_HOME/
 fi
+
+# After we fixed the perms we need to re init ZSH
+rm ~/.zcompdump*
+compinit

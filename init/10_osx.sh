@@ -218,11 +218,6 @@ pip -q install --upgrade distribute
 pip -q install --upgrade virtualenv 
 pip -q install --upgrade virtualenvwrapper
 
-# if [[ ! "$(type -P gcc-4.2)" ]]; then
-#   e_header "Installing Homebrew dupe recipe: apple-gcc42"
-#   brew install https://raw.github.com/Homebrew/homebrew-dupes/master/apple-gcc42.rb
-# fi  
-
 e_header "Brew cleanup"
 # Remove outdated versions from the cellar
 brew cleanup
@@ -244,15 +239,7 @@ fi
 
 # Fix ZSH permissions
 # Safe to run everytime incase of ZSH Update.
-#sudo chown -R root:admin /usr/local/Cellar/zsh/
-
-# DO WE NEED THIS /etc/shelss test if new ZSH is used after install or not
-# echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
-# chsh -s /usr/local/bin/zsh
-# ??
-#unalias run-help
-#autoload run-help
-#HELPDIR=/usr/local/share/zsh/helpfiles
+sudo chown -R root:admin /usr/local/Cellar/zsh/
 
 e_header "Running OSX Global Config"
 # OSX Config. Can safely be run everytime.

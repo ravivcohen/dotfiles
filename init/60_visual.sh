@@ -29,9 +29,6 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool TRUE
     defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iTerm/";
     
-    #We have to set ZSH shell to Homebrew version
-    #chsh -s /usr/local/bin/zsh
-
 # Ubuntu.
 elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
 	#TODO
