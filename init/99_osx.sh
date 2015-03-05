@@ -11,4 +11,4 @@ fi
 
 # After we fixed the perms we need to re init ZSH
 rm ~/.zcompdump*
-compinit
+zsh -c "autoload -U compinit; compinit -i"
