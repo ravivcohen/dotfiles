@@ -308,7 +308,9 @@ function setdiff() {
   for a in "${setdiffA[@]}"; do
     skip=
     for b in "${setdiffB[@]}"; do
-      [[ "$a" == "$b" ]] && skip=1 && break
+      # Strip out anything after space which should leave you with just
+      # the package name in case u do "python --universal" installs etc ..
+      [[ "${a/%\ */}" == "${b/%\ */}" ]] && skip=1 && break
     done
     [[ "$skip" ]] || setdiffC=("${setdiffC[@]}" "$a")
   done

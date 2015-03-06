@@ -40,9 +40,32 @@ assert "1" echo "${#setdiffC[@]}"
 assert "b" echo "${setdiffC[*]}"
 
 unset setdiffA setdiffB setdiffC; setdiffA=("a b" c); setdiffB=(a b c); setdiff
-assert "1" echo "${#setdiffC[@]}"
-assert "a b" echo "${setdiffC[*]}"
+assert "0" echo "${#setdiffC[@]}"
+assert "" echo "${setdiffC[*]}"
 
-unset setdiffA setdiffB setdiffC; setdiffA=(a b "a b" c "c d"); setdiffB=(a c); setdiff
+unset setdiffA setdiffB setdiffC; setdiffA=(a b "a b" c "c d" b "d c"); setdiffB=(a c); setdiff
 assert "3" echo "${#setdiffC[@]}"
-assert "b a b c d" echo "${setdiffC[*]}"
+assert "b b d c" echo "${setdiffC[*]}"
+
+unset setdiffA setdiffB setdiffC;
+setdiffA=("apple-gcc42" "readline --universal" "s-lang" "wget --with-iri" "grep" \
+"git" "wireshark --with --w-m='3' --x=3"); setdiffB=(apple sauce); setdiff
+assert "7" echo "${#setdiffC[@]}"
+assert "apple-gcc42 readline --universal s-lang wget --with-iri grep \
+git wireshark --with --w-m='3' --x=3" echo "${setdiffC[*]}"
+
+unset setdiffA setdiffB setdiffC;
+setdiffA=("apple-gcc42" "readline --universal" "s-lang" "wget --with-iri" "grep" \
+"git" "wireshark --with --w-m='3' --x=3"); 
+setdiffB=(s-lang apple-gcc42  wget wireshark grep random); 
+setdiff
+assert "2" echo "${#setdiffC[@]}"
+assert "readline --universal git" echo "${setdiffC[*]}"
+
+unset setdiffA setdiffB setdiffC;
+setdiffA=("apple-gcc42" "readline --universal" "s-lang" "wget --with-iri" "grep" \
+"git" "wireshark --with --w-m='3' --x=3"); 
+setdiffB=(readline s-lang apple-gcc42  wget git wireshark grep random); 
+setdiff
+assert "0" echo "${#setdiffC[@]}"
+assert "" echo "${setdiffC[*]}"
