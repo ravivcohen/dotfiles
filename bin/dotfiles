@@ -97,14 +97,13 @@ if [[ ! "$(type -P git)" ]]; then
   exit 1
 fi
 
-
 # Initialize.
 if [[ ! -d $DOTFILES ]]; then
   # $DOTFILES directory doesn't exist? Clone it!
   new_dotfiles_install=1
   prompt_delay=15
   e_header "Downloading dotfiles"
-  git clone --recursive git://github.com/${github_user:-ravivcohen}/dotfiles.git $DOTFILES
+  git clone git://github.com/ravivcohen/dotfiles.git ~/.dotfiles
   cd $DOTFILES
 elif [[ "$1" != "restart" ]]; then
   # Make sure we have the latest files.
