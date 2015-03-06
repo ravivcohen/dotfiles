@@ -64,9 +64,7 @@ ret=""
 
 
 # Install Homebrew recipes.
-recipes=(
-
-apple-gcc42 
+recipes=(apple-gcc42 
 "readline --universal" 
 "sqlite --universal" 
 "gdbm --universal" 
@@ -125,10 +123,11 @@ fi
 # to_install "recipes[@]" "brew_list[@]"
 echo "${recipes[*]}"
 echo "$(brew list)"
-recipes=($(setdiff "${recipes[*]}" "$(brew list)"))
+recipes=($(setdiff "${recipes[@]}" "$(brew list)"))
   if (( ${#recipes[@]} > 0 )); then
     e_header "Installing Homebrew recipes: ${recipes[*]}"
     for recipe in "${recipes[@]}"; do
+      echo $recipe
       brew install $recipe
     done
   fi
