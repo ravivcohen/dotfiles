@@ -31,8 +31,6 @@ done
 #This is needed when running something as STD user.
 export DOTFILES_HOME=$HOME
 
-#!/bin/bash
-
 
 ################################################################################
 #                 FUNCTIONS START                                                #
@@ -300,8 +298,8 @@ export -f path_remove
 #   export lib_file=$HOME/.dotfiles/libs/helper_functions.sh
 # fi
 
-#All Helper functions can now be found inside libs/helper_functions.
-. $lib_file
+# #All Helper functions can now be found inside libs/helper_functions.
+# . $lib_file
 
 ## TODO: Move this into a get_os functions that is smart return var right away if already set
 # OSX
