@@ -1,5 +1,5 @@
 #All Helper functions can now be found inside libs/helper_functions.
-#. $lib_file
+. $lib_file
 
 
 if [[ ! -e $HOME/.oh-my-zsh ]]; then

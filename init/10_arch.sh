@@ -1,7 +1,7 @@
 [[ "$(cat /etc/issue 2> /dev/null)" =~ Arch ]] || return 1
 
     #All Helper functions can now be found inside libs/helper_functions.
-    #. $lib_file
+    . $lib_file
 
     # Update APT.
     e_header "Updating pacman"
