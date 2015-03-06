@@ -78,3 +78,37 @@ alias passgen="open ~/.dotfiles/bin/PasswordAssistant.app"
 #sleepnow - causes an immediate system sleep
 #pmset sleepnow
 #displaysleepnow - causes display to go to sleep immediately
+
+#Virtual env
+##Python and virtual ENVS Stuff!!
+# PATH=/usr/local/share/python/:$PATH
+# export WORKON_HOME=~/.virtualenvs
+# source /usr/local/share/python/virtualenvwrapper.sh
+# export PIP_VIRTUALENV_BASE=$WORKON_HOME
+# export PIP_RESPECT_VIRTUALENV=true
+
+# Python
+# No longer needed!
+#PATH=/usr/local/share/python/:$PATH
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+export PIP_VIRTUALENV_BASE=$WORKON_HOME
+export PIP_RESPECT_VIRTUALENV=true
+if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
+    source /usr/local/bin/virtualenvwrapper.sh
+else
+    echo "WARNING: Can't find virtualenvwrapper.sh"
+fi
+
+#Burp
+burpdirectory="$HOME/Tools/burp/"
+logfilename="$(date +%F_%H-%M-%S)"
+
+alias burp='nohup java -jar -Xmx1024m ${burpdirectory}burp.jar >>${burpdirectory}/logs/${logfilename}_stdout.log 2>>${burpdirectory}/logs/${logfilename}_stderr.log &'
+
+###Nikto
+alias nikto="perl $HOME/Tools/nikto/nikto.pl"
+
+alias dot="cd $HOME/.dotfiles/"
+alias edot="subl $HOME/.dotfiles/"
