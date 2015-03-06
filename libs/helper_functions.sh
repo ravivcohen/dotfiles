@@ -8,6 +8,72 @@ function e_arrow()    { echo -e " \033[1;33m➜\033[0m  $@"; }
 
 ret=""
 
+function check_sudo() {
+  if [[ $(sudo -u root whoami) != "root" ]]; then
+    e_error "Sorry, you need root to run parts of this script exiting."
+    # Ask to setup /etc/sudoers
+    read -p '''1. Yes, as runaspw
+    2. Yes, as targetpw
+    3. No
+    Do you need to setup /etc/sudoers ?  
+    ''' yn
+    case $yn in
+    [1]* ) 
+      read -p "Enter the username to use:" username
+      read -p "Enter the group to use:" groupname
+      su $username -m -c "echo 'Defaults:%$groupname runas_default=$username, runaspw' | sudo tee -a /etc/sudoers;
+      echo '%$groupname ALL=(ALL) ALL' | sudo tee -a /etc/sudoers"
+      ;;
+    [2]* )
+      read -p "Enter the group to use:" groupname
+      su -m -c "echo 'Defaults:%$groupname targetpw' >> /etc/sudoers; 
+      echo '%$groupname ALL=(ALL) ALL' >> /etc/sudoers"
+      ;;
+    * ) e_error "Skipping /etc/sudoers setup"
+        exit 1 
+        ;;
+    esac
+    if [[ $(sudo -u root whoami) != "root" ]]; then
+      e_error "Sorry, you need root to run parts of this script exiting."
+      exit 1
+    fi
+    
+  fi
+
+}
+
+function check_cmd_tools() {
+  pkgutil --pkg-info=com.apple.pkg.CLTools_Executables >/dev/null 2>&1
+  # Ensure that we can actually, like, compile anything.
+  # If XCode CLI Tools aren't installed
+  # We assume if not CLI tools clean install and update the whole system
+  if [[ $? != 0 ]]; then
+    e_header "Installing XCode Command Line Tools and All Updates"
+    # create the placeholder file that's checked by CLI updates' .dist code
+    # in Apple's SUS catalog
+    touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+    # install all the updates
+    # Find the last listed update in the Software Update feed with "Command Line Tools" in the name
+    cmd_line_tools=$(softwareupdate -l | awk '/\*\ Command Line Tools/ { $1=$1;print }' | tail -1 | sed 's/^[[ \t]]*//;s/[[ \t]]*$//;s/*//' | cut -c 2-)
+    #Install the command line tools
+    softwareupdate -i "$cmd_line_tools" -v
+    # Remove the temp file
+    if [[ -f "/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress" ]]; then
+      rm -rf "/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress"
+    fi
+    # Install the rest of the updated
+    softwareupdate -iav
+    e_header "Must Reboot Damn you Apple"
+    # This creates a .profile and will continue the install upon reboot.
+    # This works because:
+    # a. On a clean install before any mods upon issuing sudo reboot the terminal reopens as part of restore previous state
+    # b. One a clean install .profile does not exist so it easy to manipulate and later delete.
+    echo 'bash -c "$(curl -fsSL https://raw.github.com/ravivcohen/dotfiles/master/bin/dotfiles)"' >> .profile
+    sleep 5
+    sudo -u root reboot
+  fi
+}
+
 function convert_list_to_array() {
   # Convert args to arrays, handling both space- and newline-separated lists.
   local desired
