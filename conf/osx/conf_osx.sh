@@ -314,15 +314,15 @@ defaults write org.m0k.transmission WarningDonate -bool false
 # Hide the legal disclaimer
 defaults write org.m0k.transmission WarningLegal -bool false
 
-# bad=("com.apple.VoiceOver" "com.apple.ScreenReaderUIServer" "com.apple.scrod.plist")
-# loaded="$(launchctl list | awk 'NR>1 && $3 !~ /0x[0-9a-fA-F]+\.(anonymous|mach_init)/ {print $3}')"
+bad=("com.apple.VoiceOver" "com.apple.ScreenReaderUIServer" "com.apple.scrod.plist")
+loaded="$(launchctl list | awk 'NR>1 && $3 !~ /0x[0-9a-fA-F]+\.(anonymous|mach_init)/ {print $3}')"
 
-# bad_list=( $(to_remove "${bad[*]}" "$loaded") )
+bad_list=( $(to_remove "${bad[*]}" "$loaded") )
 
-# for rmv in "${bad_list[@]}"; do
-# 	e_header "Unloading: $rmv"
-# 	launchctl unload -wF "/System/Library/LaunchAgents/"$rmv".plist"
-# done
+for rmv in "${bad_list[@]}"; do
+	e_header "Unloading: $rmv"
+	launchctl unload -wF "/System/Library/LaunchAgents/"$rmv".plist"
+done
 
 ###############################################################################
 # Messages                                                                    #
@@ -344,7 +344,7 @@ if [[ "$new_dotfiles_install" ]]; then
 fi
 
 # Disable VoiceOver service.
-launchctl unload -w /System/Library/LaunchAgents/com.apple.VoiceOver.plist
-launchctl unload -w /System/Library/LaunchAgents/com.apple.ScreenReaderUIServer.plist
-launchctl unload -w /System/Library/LaunchAgents/com.apple.scrod.plist
+#launchctl unload -w /System/Library/LaunchAgents/com.apple.VoiceOver.plist
+#launchctl unload -w /System/Library/LaunchAgents/com.apple.ScreenReaderUIServer.plist
+#launchctl unload -w /System/Library/LaunchAgents/com.apple.scrod.plist
 
