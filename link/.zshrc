@@ -47,16 +47,6 @@ ZSH_THEME="bullet-train"
 # OSX
 if [[ $(uname) == "Darwin" ]] ; then
 	plugins=(git osx github brew battery vagrant)
-
-	# Customize to your needs...
-	#export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/MacGPG2/bin
-
-	export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin::/usr/local/MacGPG2/bin
-	export PATH=/usr/texbin:$PATH
-	# Brew ZSH requires this
-	unalias run-help
-  	autoload run-help
-  	HELPDIR=/usr/local/share/zsh/helpfiles
 	
 # Ubuntu.
 elif [[ $(uname) == "Linux"  ]] ; then
@@ -64,17 +54,6 @@ elif [[ $(uname) == "Linux"  ]] ; then
 fi
 
 source $ZSH/oh-my-zsh.sh
-
-#export PATH=$HOME/bin:/usr/local/bin:$PATH
-#export MANPATH="/usr/local/man:$MANPATH"
-# Add binaries into the path
-PATH=~/.dotfiles/bin:$PATH
-export PATH
-
-# Run dotfiles script, then source.
-function dotfiles() {
-  ~/.dotfiles/bin/dotfiles "$@"
-}
 
 
 # # Preferred editor for local and remote sessions

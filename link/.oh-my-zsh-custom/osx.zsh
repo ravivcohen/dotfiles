@@ -20,12 +20,6 @@ PATH=/usr/local/bin:$(path_remove /usr/local/bin)
 PATH=/usr/local/sbin:$(path_remove /usr/local/sbin)
 export PATH
 
-# Add this for Coreutils to be default and overide local
-# GNU. 
-#PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-#MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-# GREP ??
-
 #Some Sudo related stuff if your a STD user.
 if [[ $(groups | grep -q -e '\badmin\b')$? -ne 0 ]]; then
     alias sudo="sudo -H -E TMPDIR=/tmp"
@@ -75,17 +69,6 @@ eval `dircolors ~/.oh-my-zsh-custom/dircolors-solarized/dircolors.ansi-dark`
 alias flush="dscacheutil -flushcache"
 
 alias passgen="open ~/.dotfiles/bin/PasswordAssistant.app"
-#sleepnow - causes an immediate system sleep
-#pmset sleepnow
-#displaysleepnow - causes display to go to sleep immediately
-
-#Virtual env
-##Python and virtual ENVS Stuff!!
-# PATH=/usr/local/share/python/:$PATH
-# export WORKON_HOME=~/.virtualenvs
-# source /usr/local/share/python/virtualenvwrapper.sh
-# export PIP_VIRTUALENV_BASE=$WORKON_HOME
-# export PIP_RESPECT_VIRTUALENV=true
 
 # Python
 # No longer needed!
@@ -107,8 +90,12 @@ logfilename="$(date +%F_%H-%M-%S)"
 
 alias burp='nohup java -jar -Xmx1024m ${burpdirectory}burp.jar >>${burpdirectory}/logs/${logfilename}_stdout.log 2>>${burpdirectory}/logs/${logfilename}_stderr.log &'
 
-###Nikto
-alias nikto="perl $HOME/Tools/nikto/nikto.pl"
-
-alias dot="cd $HOME/.dotfiles/"
 alias edot="subl $HOME/.dotfiles/"
+
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin::/usr/local/MacGPG2/bin
+export PATH=/usr/texbin:$PATH
+# Brew ZSH requires this
+unalias run-help
+autoload run-help
+HELPDIR=/usr/local/share/zsh/helpfiles
+
