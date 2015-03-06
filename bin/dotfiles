@@ -97,7 +97,7 @@ if [[ ! "$(type -P git)" ]]; then
   exit 1
 fi
 
-DOTFILES="~/.dotfiles"
+DOTFILES="$HOME/.dotfiles"
 # Initialize.
 if [[ ! -d $DOTFILES ]]; then
   # $DOTFILES directory doesn't exist? Clone it!
