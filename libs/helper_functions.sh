@@ -1,10 +1,19 @@
 #!/bin/bash
 
+
+################################################################################
+#                 FUNCTIONS START                                                #
+################################################################################
 # Logging stuff.
 function e_header()   { echo -e "\n\033[1m$@\033[0m"; }
 function e_success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
 function e_error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
 function e_arrow()    { echo -e " \033[1;33m➜\033[0m  $@"; }
+
+export -f e_header
+export -f e_success
+export -f e_error
+export -f e_arrow
 
 ret=""
 
@@ -14,6 +23,7 @@ function convert_list_to_array() {
   read -ra  desired < <(echo "$1" | tr '\n' ' ')
   echo "${desired[@]}"
 }
+export -f convert_list_to_array
 
 # Given a list of undesired items and installed items, return a list
 # of installed items. Arrays in bash are insane (not in a good way).
@@ -40,6 +50,7 @@ function to_remove() {
   done
   echo "${remain[@]}"
 }
+export -f to_remove
 
 # Given a list of desired items and installed items, return a list
 # of uninstalled items in the ret global variable.
@@ -112,6 +123,7 @@ function to_install() {
   ret=( "${remain[@]}" )
   #echo "${remain[@]}"
 }
+export -f to_install
 
 # Offer the user a chance to skip something.
 function skip() {
@@ -124,6 +136,7 @@ function skip() {
     return 1
   fi
 }
+export -f skip
 
 # Offer the user a chance to skip something.
 function no-skip() {
@@ -136,6 +149,7 @@ function no-skip() {
     echo "Skipping.."
   fi
 }
+export -f no-skip
 
 # Initialize.
 function init_do() {
@@ -154,9 +168,12 @@ function init_do() {
     fi
  fi 
 }
+export -f init_do
 
 # Copy files.
 function copy_header() { e_header "Copying files into home directory"; }
+export -f copy_header
+
 function copy_test() {
   if [[ -e "$2" && ! "$(cmp "$1" "$2" 2> /dev/null)" ]]; then
     echo "same file"
@@ -164,20 +181,28 @@ function copy_test() {
     echo "destination file newer"
   fi
 }
+export -f copy_test
+
 function copy_do() {
   e_success "Copying ~/$1."
   cp "$2" ~/
 }
+export -f copy_do
 
 # Link files.
 function link_header() { e_header "Linking files into home directory"; }
+export -f link_header
+
 function link_test() {
   [[ "$1" -ef "$2" ]] && echo "same file"
 }
+export -f link_test
+
 function link_do() {
   e_success "Linking ~/$1. ${2#$HOME/}"
   ln -sf ${2#$HOME/} ~/
 }
+export -f link_do
 
 # Copy, link, init, etc.
 function do_stuff() {
@@ -214,6 +239,7 @@ function do_stuff() {
     "$1_do" "$base" "$file"
   done
 }
+export -f do_stuff
 
 # Utilities, helpers. Moved into here just to make it cleaner
 # From http://stackoverflow.com/questions/370047/#370255
@@ -228,3 +254,8 @@ function path_remove() {
   # output the new array
   echo "${t[*]}"
 }
+export -f path_remove
+
+################################################################################
+#                 FUNCTIONS END                                                #
+################################################################################

@@ -11,7 +11,7 @@
 # fi
 
 #All Helper functions can now be found inside libs/helper_functions.
-. $lib_file
+#. $lib_file
 
 
 if [[ ! "$(type -P brew)" ]]; then
