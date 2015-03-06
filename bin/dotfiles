@@ -38,6 +38,8 @@ elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Arch ]]; then
   export OS="arch"
 fi
 
+# If this file was being sourced, exit now.
+[[ "$1" == "source" ]] && return
 
 check_sudo
 

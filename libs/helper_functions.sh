@@ -318,3 +318,12 @@ function setdiff() {
   [[ "$1" ]] && echo "${setdiffC[@]}"
 }
 
+# For testing.
+function assert() {
+  local success modes equals actual expected
+  modes=(e_error e_success); equals=("!=" "=="); expected="$1"; shift
+  actual="$("$@")"
+  [[ "$actual" == "$expected" ]] && success=1 || success=0
+  ${modes[success]} "\"$actual\" ${equals[success]} \"$expected\""
+}
+
