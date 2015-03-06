@@ -121,6 +121,9 @@ if [[ $xcode_installed ]]; then
   lbdb )
 fi
 
+echo "recipes[@]"
+echo "recipes[*]"
+echo "$(brew list)")
 
 brew_list=( $(convert_list_to_array "$(brew list)") )
 to_install "recipes[@]" "brew_list[@]"

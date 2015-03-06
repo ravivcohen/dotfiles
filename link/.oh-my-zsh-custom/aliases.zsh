@@ -3,7 +3,7 @@ if [[ -e "$HOME/.my_aliasxs.zsh" ]]; then
     source "$HOME/.my_aliasxs.zsh"
 fi
 
-export DOTFILES="$HOME/.dotfiles"
+export lDOTFILES="$HOME/.dotfiles"
 # Add binaries into the path
 PATH=~/.dotfiles/bin:$PATH
 export PATH
