@@ -342,9 +342,3 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 if [[ "$new_dotfiles_install" ]]; then
   defaults write com.apple.dock persistent-apps -array
 fi
-
-# Disable VoiceOver service.
-#launchctl unload -w /System/Library/LaunchAgents/com.apple.VoiceOver.plist
-#launchctl unload -w /System/Library/LaunchAgents/com.apple.ScreenReaderUIServer.plist
-#launchctl unload -w /System/Library/LaunchAgents/com.apple.scrod.plist
-
