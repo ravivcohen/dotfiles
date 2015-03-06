@@ -123,7 +123,8 @@ fi
 
 # brew_list=( $(convert_list_to_array "$(brew list)") )
 # to_install "recipes[@]" "brew_list[@]"
-
+echo "${recipes[*]}"
+echo "$(brew list)"
 recipes=($(setdiff "${recipes[*]}" "$(brew list)"))
   if (( ${#recipes[@]} > 0 )); then
     e_header "Installing Homebrew recipes: ${recipes[*]}"
@@ -131,7 +132,7 @@ recipes=($(setdiff "${recipes[*]}" "$(brew list)"))
       brew install $recipe
     done
   fi
-  
+
 # # to_install returns Value back to ret
 # if [[ "$ret" ]]; then
 #   # Because brew hard fails incase one application fails.
