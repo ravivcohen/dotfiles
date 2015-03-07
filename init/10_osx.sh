@@ -123,7 +123,7 @@ fi
 # to_install "recipes[@]" "brew_list[@]"
 setdiffA=recipes
 setdiffB=( $(brew list) )
-recipes=( $(setdiff) )
+recipes=( $(setdiff 1) )
   if (( ${#recipes[@]} > 0 )); then
     e_header "Installing Homebrew recipes: ${recipes[*]}"
     for recipe in "${recipes[@]}"; do
