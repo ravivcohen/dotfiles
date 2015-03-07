@@ -301,10 +301,17 @@ function setdiff() {
   local debug skip a b
   if [[ "$1" == 1 ]]; then debug=1; shift; fi
   if [[ "$1" ]]; then
-    local setdiffA setdiffB setdiffC
-    setdiffA=($1); setdiffB=($2)
+    #local setdiffA setdiffB setdiffC
+    declare -a setdiffA=("${!1}")
+    declare -a setdiffB=("${!2}")
+    #setdiffA=($1); 
+    #setdiffB=($2)
   fi
   setdiffC=()
+  [[ "$debug" ]] && for a in setdiffA setdiffB setdiffC; do
+    echo "$a ($(eval echo "\${#$a[@]}")) $(eval echo "\${$a[@]}")" 1>&2
+  done
+  
   for a in "${setdiffA[@]}"; do
     skip=
     for b in "${setdiffB[@]}"; do
@@ -315,7 +322,7 @@ function setdiff() {
     [[ "$skip" ]] || setdiffC=("${setdiffC[@]}" "$a")
   done
   [[ "$debug" ]] && for a in setdiffA setdiffB setdiffC; do
-    echo "$a ($(eval echo "\${#$a[*]}")) $(eval echo "\${$a[*]}")" 1>&2
+    echo "$a ($(eval echo "\${#$a[@]}")) $(eval echo "\${$a[@]}")" 1>&2
   done
   [[ "$1" ]] && echo "${setdiffC[@]}"
 }
