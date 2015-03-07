@@ -121,8 +121,9 @@ fi
 
 # brew_list=( $(convert_list_to_array "$(brew list)") )
 # to_install "recipes[@]" "brew_list[@]"
-read -ra  brew_list < <(echo "$(brew list)" | tr '\n' ' ')
-recipes=($(setdiff "recipes[@]" "brew_list[@]"))
+setdiffA=recipes
+setdiffB=( $(brew list) )
+recipes=( $(setdiff) )
   if (( ${#recipes[@]} > 0 )); then
     e_header "Installing Homebrew recipes: ${recipes[*]}"
     for recipe in "${recipes[@]}"; do

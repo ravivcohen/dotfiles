@@ -72,9 +72,10 @@ assert "" echo "${setdiffC[*]}"
 
 
 # Test for osx brew
-unset setdiffA setdiffB setdiffC;
-setdiffA=("apple-gcc42" "readline --universal" "sqlite --universal" "gdbm --universal" "openssl --universal" "s-lang" "zsh" "wget --with-iri" "grep" "git" "ssh-copy-id" "nmap" "dvtm" "git-extras" "htop-osx" "youtube-dl" "coreutils" "findutils" "ack" "lynx" "rename" "pkg-config" "p7zip" "lesspipe --syntax-highlighting" "python --universal" "brew-cask" "profanity --with-terminal-notifier" "wireshark --with-headers --with-libpcap --with-libsmi --with-lua --with-qt --devel" "vim --with-python --with-ruby --with-perl --enable-cscope 
---enable-pythoninterp --override-system-vi")
-read -ra  arr < <(echo "$(brew list)" | tr '\n' ' ')
-setdiff 1 "setdiffA[@]" "arr[@]" 
-#echo "${recipes[*]}"
+# unset setdiffA setdiffB setdiffC;
+# setdiffA=("apple-gcc42" "readline --universal" "sqlite --universal" "gdbm --universal" "openssl --universal" "s-lang" "zsh" "wget --with-iri" "grep" "git" "ssh-copy-id" "nmap" "dvtm" "git-extras" "htop-osx" "youtube-dl" "coreutils" "findutils" "ack" "lynx" "rename" "pkg-config" "p7zip" "lesspipe --syntax-highlighting" "python --universal" "brew-cask" "profanity --with-terminal-notifier" "wireshark --with-headers --with-libpcap --with-libsmi --with-lua --with-qt --devel" "vim --with-python --with-ruby --with-perl --enable-cscope 
+# --enable-pythoninterp --override-system-vi" "core")
+# setdiffB=( $(brew list) )
+# setdiff 1
+# echo "${#setdiffC[@]}"
+# echo "${setdiffC[*]}"
