@@ -121,7 +121,7 @@ fi
 
 # brew_list=( $(convert_list_to_array "$(brew list)") )
 # to_install "recipes[@]" "brew_list[@]"
-setdiffA=recipes
+setdiffA=$recipes
 setdiffB=( $(brew list) )
 recipes=( $(setdiff 1) )
   if (( ${#recipes[@]} > 0 )); then
