@@ -12,8 +12,13 @@
 # Exit if, for some reason, cask is not installed.
 [[ ! "$(brew ls --versions brew-cask)" ]] && e_error "Brew-cask failed to install." && return 1
 
+casks=(sublime-text3 iterm2-nightly firefox java6 keka)
+
+if [[ "$not_personal" ]]; then
+    casks+=(tower transmit path-finder adium vagrant)
+fi
+
 # Install Homebrew casks.
-casks=(sublime-text3 iterm2-nightly firefox java6 tower transmit path-finder adium vagrant keka)
 casks=($(setdiff "${casks[*]}" "$(brew cask list 2>/dev/null)"))
 if (( ${#casks[@]} > 0 )); then
   for cask in "${casks[@]}"; do
