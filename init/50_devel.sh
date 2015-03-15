@@ -31,7 +31,7 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     mkdir -p $DOTFILES_HOME/.mutt/sig       
     
     loaded="$(launchctl list | awk 'NR>1 && $3 !~ /0x[0-9a-fA-F]+\.(anonymous|mach_init)/ {print $3}')"
-    if [[ "$(setdiff "homebrew.mxcl.offline-imap" "$loaded")" -ne "" ]] && [[ "$(setcomp "offline-imap" "$(brew list)")" -ne "" ]]; then
+    if [[ $(setdiff "homebrew.mxcl.offline-imap" "$loaded") -eq "" ]] && [[ $(setcomp "offline-imap" "$(brew list)") -ne "" ]]; then
         e_header "Loading offline-imap launchctl"
         #Add offline-imap to launch
         mkdir -p ~/Library/LaunchAgents
