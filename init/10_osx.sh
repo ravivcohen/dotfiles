@@ -57,23 +57,6 @@ if (( ${#taps[@]} > 0 )); then
   done
 fi
 
-
-# tap_list=( $(convert_list_to_array "$(brew tap)") )
-# to_install "taps[@]" "tap_list[@]"
-
-# if [[ "$ret" ]]; then
-#   # Because brew hard fails incase one application fails.
-#   # We call each install one by one.
-#   for a_tap in "${ret[@]}"
-#   do
-#     e_header "Tapping Homebrew: $recipe"
-#     brew tap $a_tap
-#   done 
-# fi
-# #reset ret
-# ret=""
-
-
 # Install Homebrew recipes.
 recipes=(apple-gcc42 
 "readline --universal" 
@@ -153,22 +136,6 @@ if (( ${#casks[@]} > 0 )); then
   brew cask cleanup
 fi
 
-# cask_list=( $(convert_list_to_array "$(brew cask list)") )
-# to_install "casks[@]" "cask_list[@]"
-
-# # to_install returns Value back to ret
-# if [[ "$ret" ]]; then
-#   # Because brew hard fails incase one application fails.
-#   # We call each install one by one.
-#   for cask in "${ret[@]}"
-#   do
-#     e_header "Installing Homebrew recipe: $cask"
-#     brew cask install --appdir="/Applications" $cask
-#   done 
-# fi
-# #reset ret
-# ret=""
-
 # install fonts.
 fonts=(font-dejavu-sans-mono-for-powerline font-inconsolata-dz-for-powerline font-inconsolata-for-powerline
 font-inconsolata-g-for-powerline font-meslo-lg-for-powerline font-meslo-lg font-sauce-code-powerline )
@@ -180,24 +147,6 @@ if (( ${#fonts[@]} > 0 )); then
   done
   brew cask cleanup
 fi
-
-
-# cask_list=( $(convert_list_to_array "$(brew cask list)") )
-# to_install "fonts[@]" "cask_list[@]"
-# # to_install returns Value back to ret
-# if [[ "$ret" ]]; then
-#   # Because brew hard fails incase one application fails.
-#   # We call each install one by one.
-#   for font in "${ret[@]}"
-#   do
-#     e_header "Installing Homebrew recipe: $font"
-#     #echo $fonts_dir"/"$font".rb"
-#     #brew install $recipe
-#     brew cask install --fontdir=/Library/Fonts "$font"
-#   done 
-# fi
-# #reset ret
-# ret=""
 
 if ! grep -q "/usr/local/bin/zsh" "/etc/shells"; then
   e_header "Adding homebrew ZSH to /etc/shells"
