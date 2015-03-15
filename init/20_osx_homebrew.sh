@@ -126,17 +126,20 @@ if [[ ! -e "/Applications/Slate.app" ]]; then
   cd /Applications && curl http://www.ninjamonkeysoftware.com/slate/versions/slate-latest.tar.gz | tar -xz
 fi
 
-# Open Bug HomeBrew 05-25-14
-# #install and upgrade PIP
-e_header "Install and/Or Upgrade PIP"
-pip -q install --upgrade pip
-pip -q install --upgrade setuptools
-pip -q install --upgrade distribute
+if [[ "$(type -P brew)" ]]; then
+  # Open Bug HomeBrew 05-25-14
+  # #install and upgrade PIP
+  e_header "Install and/Or Upgrade PIP"
+  pip -q install --upgrade pip
+  pip -q install --upgrade setuptools
+  pip -q install --upgrade distribute
 
-# e_header "Install VirualENV + VirtualEnvWrapper"
-# ##Actually Install VirtualEnv 
-pip -q install --upgrade virtualenv 
-pip -q install --upgrade virtualenvwrapper
+  # e_header "Install VirualENV + VirtualEnvWrapper"
+  # ##Actually Install VirtualEnv 
+  pip -q install --upgrade virtualenv 
+  pip -q install --upgrade virtualenvwrapper
+
+fi
 
 e_header "Brew cleanup"
 # Remove outdated versions from the cellar
