@@ -126,7 +126,7 @@ if [[ ! -e "/Applications/Slate.app" ]]; then
   cd /Applications && curl http://www.ninjamonkeysoftware.com/slate/versions/slate-latest.tar.gz | tar -xz
 fi
 
-if [[ "$(type -P brew)" ]]; then
+if [[ "$(type -P pip)" ]]; then
   # Open Bug HomeBrew 05-25-14
   # #install and upgrade PIP
   e_header "Install and/Or Upgrade PIP"
