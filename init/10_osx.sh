@@ -122,7 +122,7 @@ if [[ $xcode_installed ]]; then
 fi
 
 unset setdiffA setdiffB setdiffC;
-setdiffA=("${recipes[@]}"); setdiffB=( $(brew list) ); setdiff 1
+setdiffA=("${recipes[@]}"); setdiffB=( $(brew list) ); setdiff
 # Because brew hard fails incase one application fails.
 # We call each install one by one.
 for recipe in "${setdiffC[@]}"
@@ -132,61 +132,63 @@ do
 done 
 
 
-# brew_list=( $(convert_list_to_array "$(brew list)") )
-# to_install "recipes[@]" "brew_list[@]"
+
+# Install Homebrew casks.
+casks=(sublime-text3 iterm2-nightly firefox java6 tower transmit path-finder adium vagrant keka)
+casks=($(setdiff "${casks[*]}" "$(brew cask list 2>/dev/null)"))
+if (( ${#casks[@]} > 0 )); then
+  for cask in "${casks[@]}"; do
+    e_header "Installing Homebrew recipe: $cask"
+    brew cask install --appdir="/Applications" $cask
+  done
+  brew cask cleanup
+fi
+
+# cask_list=( $(convert_list_to_array "$(brew cask list)") )
+# to_install "casks[@]" "cask_list[@]"
+
 # # to_install returns Value back to ret
 # if [[ "$ret" ]]; then
 #   # Because brew hard fails incase one application fails.
 #   # We call each install one by one.
-#   for recipe in "${ret[@]}"
+#   for cask in "${ret[@]}"
 #   do
-#     e_header "Installing Homebrew recipe: $recipe"
-#     brew install $recipe
+#     e_header "Installing Homebrew recipe: $cask"
+#     brew cask install --appdir="/Applications" $cask
 #   done 
 # fi
 # #reset ret
 # ret=""
 
-# Install Casks
-casks=(sublime-text3 iterm2-nightly firefox java6 tower transmit path-finder adium vagrant keka)
-cask_list=( $(convert_list_to_array "$(brew cask list)") )
-to_install "casks[@]" "cask_list[@]"
-
-# to_install returns Value back to ret
-if [[ "$ret" ]]; then
-  # Because brew hard fails incase one application fails.
-  # We call each install one by one.
-  for cask in "${ret[@]}"
-  do
-    e_header "Installing Homebrew recipe: $cask"
-    brew cask install --appdir="/Applications" $cask
-  done 
-fi
-#reset ret
-ret=""
-
 # install fonts.
-osx_conf_dir=$DOTFILES_HOME/.dotfiles/conf/osx
-#fonts_dir=$osx_conf_dir/fonts
 fonts=(font-dejavu-sans-mono-for-powerline font-inconsolata-dz-for-powerline font-inconsolata-for-powerline
 font-inconsolata-g-for-powerline font-meslo-lg-for-powerline font-meslo-lg font-sauce-code-powerline )
-cask_list=( $(convert_list_to_array "$(brew cask list)") )
-to_install "fonts[@]" "cask_list[@]"
-
-# to_install returns Value back to ret
-if [[ "$ret" ]]; then
-  # Because brew hard fails incase one application fails.
-  # We call each install one by one.
-  for font in "${ret[@]}"
-  do
+fonts=($(setdiff "${fonts[*]}" "$(brew cask list 2>/dev/null)"))
+if (( ${#fonts[@]} > 0 )); then
+  for font in "${fonts[@]}"; do
     e_header "Installing Homebrew recipe: $font"
-    #echo $fonts_dir"/"$font".rb"
-    #brew install $recipe
     brew cask install --fontdir=/Library/Fonts "$font"
-  done 
+  done
+  brew cask cleanup
 fi
-#reset ret
-ret=""
+
+
+# cask_list=( $(convert_list_to_array "$(brew cask list)") )
+# to_install "fonts[@]" "cask_list[@]"
+# # to_install returns Value back to ret
+# if [[ "$ret" ]]; then
+#   # Because brew hard fails incase one application fails.
+#   # We call each install one by one.
+#   for font in "${ret[@]}"
+#   do
+#     e_header "Installing Homebrew recipe: $font"
+#     #echo $fonts_dir"/"$font".rb"
+#     #brew install $recipe
+#     brew cask install --fontdir=/Library/Fonts "$font"
+#   done 
+# fi
+# #reset ret
+# ret=""
 
 if ! grep -q "/usr/local/bin/zsh" "/etc/shells"; then
   e_header "Adding homebrew ZSH to /etc/shells"
