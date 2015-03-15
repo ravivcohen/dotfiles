@@ -51,8 +51,8 @@ brew upgrade
 taps=("homebrew/dupes" "caskroom/cask" "caskroom/versions" "caskroom/fonts")
 taps=($(setdiff "${taps[*]}" "$(brew tap)"))
 if (( ${#taps[@]} > 0 )); then
-  for tap in "${taps[@]}"; do
-    e_header "Tapping Homebrew: $recipe"
+  for a_tap in "${taps[@]}"; do
+    e_header "Tapping Homebrew: $a_tap"
     brew tap $a_tap
   done
 fi

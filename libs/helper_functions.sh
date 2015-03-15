@@ -74,84 +74,6 @@ function check_cmd_tools() {
   fi
 }
 
-# function convert_list_to_array() {
-#   # Convert args to arrays, handling both space- and newline-separated lists.
-#   local desired
-#   read -ra  desired < <(echo "$1" | tr '\n' ' ')
-#   echo "${desired[@]}"
-# }
-
-# # Given a list of desired items and installed items, return a list
-# # of uninstalled items in the ret global variable.
-# # A. Items will preserve the you dictate in your array.
-# #    That way you can control what gets installed when.
-# # B. You can supply items with args by placing "software --args"
-# #    Inside your array. 
-# # Expects to get array as input by calling function like this:
-# # to_install arr1[@] arr2[@] .. and the
-# # to convert a space or newline seperated list to array call
-# # brew_list="$(convert_list_to_array "$(brew list)")"
-# function to_install() {
-#   local debug desired installed i installed_s remain
-#   local remain=()
-#   if [[ "$1" == 1 ]]; then debug=1; shift; fi
-  
-#   declare -a desired=("${!1}")
-#   declare -a installed=("${!2}")
-  
-#   # Sort the installed arrays.
-#   unset i; while read -r; do installed_s[i++]=$REPLY; done < <(
-#     printf "%s\n" "${installed[@]}" | sort
-#   )
-  
-#   # Iterate through the array desired array searching in the sorted array
-#   # Search time is log N * M times it happens.
-#   let installed_size=${#installed[@]}
-#   for element in "${desired[@]}"; do
-#     # Split up element just incase its a complex
-#     # I.E. git --universal
-#     element_s=( $element )
-#     # Due a log N search.
-#     let start=0
-#     let end=$installed_size-1
-#     element_found=false
-#     while [ $start -le $end ]
-#     do
-
-#         let tmp=$start+$end
-#         mid=$(printf "%.0f" $(echo "scale=2;$tmp/2" | bc))
-#         #echo "${installed_s[$mid]} ${element_s[0]}"
-#         if [ ${installed_s[$mid]} = ${element_s[0]} ]; then
-#             element_found=true
-#             break
-        
-#         elif [ ${installed_s[$mid]} \< ${element_s[0]} ]; then
-#             let start=$mid+1
-        
-#         elif [ ${installed_s[$mid]} \> ${element_s[0]} ]; then
-#             let end=$mid-1
-        
-#         else
-#             # THIS SHOULD NEVER HAPPEN
-#             e_error "Element Not Found."
-#             element_found=false
-#             break
-#         fi
-#     done
-    
-#     if [[ $element_found == false ]]; then
-#       # We insert back the original element to preserve flags i.e. --universal
-#       remain+=( "$element" )
-#     fi
-#   done
-
-#   [[ "$debug" ]] && for v in desired installed installed_s remain; do
-#     echo "$v ($(eval echo "\${#$v[*]}")) $(eval echo "\${$v[*]}")"
-#   done
-  
-#   ret=( "${remain[@]}" )
-#   #echo "${remain[@]}"
-# }
 
 # Initialize.
 function init_do() {
@@ -242,29 +164,53 @@ function path_remove() {
   echo "$path"
 }
 
+
+function setdiff() {
+  if [[ "$1" == 1 ]]; then 
+    shift; set 1 "diff" "$@"
+  else
+    set "diff" "$@"
+  fi
+  
+}
+
+function setcomp() {
+  if [[ "$1" == 1 ]]; then 
+    shift; set 1 "comp" "$@"
+  else
+    set "comp" "$@"
+  fi
+  
+}
+
 # Given strings containing space-delimited words A and B, "setdiff A B" will
 # return all words in A that do not exist in B. Arrays in bash are insane
 # (and not in a good way).
 # From http://stackoverflow.com/a/1617303/142339
-function setdiff() {
+function set() {
   local debug skip a b
   if [[ "$1" == 1 ]]; then debug=1; shift; fi
-  if [[ "$1" ]]; then
+  if [[ "$2" ]]; then
     local setdiffA setdiffB setdiffC
-    setdiffA=($1); setdiffB=($2)
+    setdiffA=($2); setdiffB=($3)
   fi
   setdiffC=()
   for a in "${setdiffA[@]}"; do
     skip=
+    if [[ "$1" == "comp" ]]; then skip=1; fi
     for b in "${setdiffB[@]}"; do
-      [[ "$(echo $a | awk '{ print $1 }')" == "$(echo $b | awk '{ print $1 }')" ]] && skip=1 && break
+      if [[ "$1" == "diff" ]]; then 
+        [[ "$(echo $a | awk '{ print $1 }')" == "$(echo $b | awk '{ print $1 }')" ]] && skip=1 && break
+      elif [[ "$1" == "comp" ]]; then 
+        [[ "$(echo $a | awk '{ print $1 }')" == "$(echo $b | awk '{ print $1 }')" ]] && skip= && break
+      fi
     done
     [[ "$skip" ]] || setdiffC=("${setdiffC[@]}" "$a")
   done
   [[ "$debug" ]] && for a in setdiffA setdiffB setdiffC; do
     echo "$a ($(eval echo "\${#$a[*]}")) $(eval echo "\${$a[*]}")" 1>&2
   done
-  [[ "$1" ]] && echo "${setdiffC[@]}"
+  [[ "$2" ]] && echo "${setdiffC[@]}"
 }
 
 # For testing.
