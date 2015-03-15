@@ -146,12 +146,13 @@ sudo defaults -currentHost write com.apple.bluetooth PrefKeyServicesEnabled 0
 bad=("org.apache.httpd" "com.openssh.sshd")
 loaded="$(sudo launchctl list | awk 'NR>1 && $3 !~ /0x[0-9a-fA-F]+\.(anonymous|mach_init)/ {print $3}')"
 
-bad_list=( $(to_remove "${bad[*]}" "$loaded") )
-
-for rmv in "${bad_list[@]}"; do
-	e_header "Unloading: $rmv"
-	sudo launchctl unload -wF "/System/Library/LaunchDaemons/"$rmv".plist"
-done
+bad_list=($(setcomp "${bad[*]}" "$loaded"))
+if (( ${#bad_list[@]} > 0 )); then
+  for rmv in "${bad_list[@]}"; do
+    e_header "Unloading: $rmv"
+    launchctl unload -wF "/System/Library/LaunchAgents/"$rmv".plist"
+  done
+fi
 
 ## Set computer name (as done via System Preferences → Sharing)
 #sudo scutil --set ComputerName "0x6D746873"
