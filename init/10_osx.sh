@@ -29,9 +29,11 @@ PATH=/usr/local/bin:$(path_remove /usr/local/bin)
 PATH=/usr/local/sbin:$(path_remove /usr/local/sbin)
 export PATH
 
-# Fix ZSH permissions
-# Safe to run everytime incase of ZSH Update.
-#sudo chown -R `whoami`:admin /usr/local/Cellar/zsh/
+if [[ -d "/usr/local/Cellar/zsh" ]]; then
+  # Fix ZSH permissions
+  # Safe to run everytime incase of ZSH Update.
+  sudo chown -R `whoami`:admin /usr/local/Cellar/zsh/
+fi
 
 
 e_header "Brew DR"
@@ -119,19 +121,19 @@ if [[ $xcode_installed ]]; then
   lbdb )
 fi
 
+unset setdiffA setdiffB setdiffC;
+setdiffA=("${recipes[@]}"); setdiffB=( $(brew list) ); setdiff 1
+# Because brew hard fails incase one application fails.
+# We call each install one by one.
+for recipe in "${setdiffC[@]}"
+do
+  e_header "Installing Homebrew recipe: $recipe"
+  brew install $recipe
+done 
+
+
 # brew_list=( $(convert_list_to_array "$(brew list)") )
 # to_install "recipes[@]" "brew_list[@]"
-setdiffA=("${recipes[@]}")
-setdiffB=( $(brew list) )
-recipes=( $(setdiff 1) )
-  if (( ${#recipes[@]} > 0 )); then
-    e_header "Installing Homebrew recipes: ${recipes[*]}"
-    for recipe in "${recipes[@]}"; do
-      echo $recipe
-      brew install $recipe
-    done
-  fi
-
 # # to_install returns Value back to ret
 # if [[ "$ret" ]]; then
 #   # Because brew hard fails incase one application fails.
@@ -142,8 +144,8 @@ recipes=( $(setdiff 1) )
 #     brew install $recipe
 #   done 
 # fi
-#reset ret
-ret=""
+# #reset ret
+# ret=""
 
 # Install Casks
 casks=(sublime-text3 iterm2-nightly firefox java6 tower transmit path-finder adium vagrant keka)
@@ -260,9 +262,11 @@ if [[ ! -e "/Applications/PasswordAssistant.app" ]]; then
   rm -rf /tmp/PasswordAssistant.zip
 fi
 
-# Fix ZSH permissions
-# Safe to run everytime incase of ZSH Update.
-sudo chown -R root:admin /usr/local/Cellar/zsh/
+if [[ -d "/usr/local/Cellar/zsh" ]]; then
+  # Fix ZSH permissions
+  # Safe to run everytime incase of ZSH Update.
+  sudo chown -R root:admin /usr/local/Cellar/zsh/
+fi
 
 e_header "Running OSX Global Config"
 # OSX Config. Can safely be run everytime.
