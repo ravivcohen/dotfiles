@@ -49,20 +49,29 @@ brew upgrade
 
 # Tap needed repo's
 taps=("homebrew/dupes" "caskroom/cask" "caskroom/versions" "caskroom/fonts")
-tap_list=( $(convert_list_to_array "$(brew tap)") )
-to_install "taps[@]" "tap_list[@]"
-
-if [[ "$ret" ]]; then
-  # Because brew hard fails incase one application fails.
-  # We call each install one by one.
-  for a_tap in "${ret[@]}"
-  do
+taps=($(setdiff "${taps[*]}" "$(brew tap)"))
+if (( ${#taps[@]} > 0 )); then
+  for tap in "${taps[@]}"; do
     e_header "Tapping Homebrew: $recipe"
     brew tap $a_tap
-  done 
+  done
 fi
-#reset ret
-ret=""
+
+
+# tap_list=( $(convert_list_to_array "$(brew tap)") )
+# to_install "taps[@]" "tap_list[@]"
+
+# if [[ "$ret" ]]; then
+#   # Because brew hard fails incase one application fails.
+#   # We call each install one by one.
+#   for a_tap in "${ret[@]}"
+#   do
+#     e_header "Tapping Homebrew: $recipe"
+#     brew tap $a_tap
+#   done 
+# fi
+# #reset ret
+# ret=""
 
 
 # Install Homebrew recipes.
