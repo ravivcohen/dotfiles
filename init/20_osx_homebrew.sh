@@ -77,7 +77,9 @@ do
 done 
 
 # This is where brew stores its binary symlinks
-binroot="$(brew --config | awk '/HOMEBREW_PREFIX/ {print $2}')"/bin
+brewroot="$(brew --config | awk '/HOMEBREW_PREFIX/ {print $2}')"
+binroot=$brewroot/bin
+cellarroot=$brewroot/Cellar
 
 
 if ! grep -q "$binroot/zsh" "/etc/shells"; then
@@ -86,10 +88,10 @@ if ! grep -q "$binroot/zsh" "/etc/shells"; then
   echo "$binroot/zsh" | sudo tee -a /etc/shells > /dev/null
 fi
 
-if [[ -d "/usr/local/Cellar/zsh/" ]]; then
+if [[ -d "$cellarroot/zsh/" ]]; then
   # Fix ZSH permissions
   # Safe to run everytime incase of ZSH Update.
-  sudo chown -R root:admin /usr/local/Cellar/zsh/
+  sudo chown -R root:admin "$cellarroot/zsh/"
 fi
 
 # The launch daemon is in the ChmodBPF directory in the source tree. The
@@ -127,7 +129,7 @@ fi
 # Install Slate
 if [[ ! -e "/Applications/Slate.app" ]]; then
   e_header "Installing Slate"
-  cd /Applications && curl http://www.ninjamonkeysoftware.com/slate/versions/slate-latest.tar.gz | tar -xz
+  cd /Applications && curl https://www.ninjamonkeysoftware.com/slate/versions/slate-latest.tar.gz | tar -xz
 fi
 
 if [[ "$(type -P pip)" ]]; then
