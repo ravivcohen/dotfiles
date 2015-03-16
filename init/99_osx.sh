@@ -8,6 +8,7 @@ source $DOTFILES_HOME/.dotfiles/conf/osx/conf_osx.sh
 rm ~/.zcompdump*
 zsh -c "autoload -U compinit; compinit -i"
 
+## SUBLIME
 # Make sirectory if it does not exist
 mkdir -p $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
 mkdir -p $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/
@@ -25,6 +26,23 @@ if [[ ! -L "$DOTFILES_HOME/Library/Application Support/Sublime Text 3/Packages/U
     # Link our User directory
     ln -s $DOTFILES_HOME/.dotfiles/conf/sublime/User $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
 fi
+
+## iTERM
+e_header "Setting Up OSX Visual Settings"
+# IF Iterm has never been run this wont exsit. 
+# We then run iterm so we can config it.
+if [[ ! -e ~/Library/Preferences/com.googlecode.iterm2.plist ]]; then
+
+    # Open iTerm to set all files in place.
+    open -a iTerm
+    sleep 1
+    killall iTerm
+fi
+
+# Now for iTerm to load its settting from an external location.
+defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool TRUE
+defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iTerm/";
+    
 
 mkdir -p $DOTFILES_HOME/Development
 mkdir -p $DOTFILES_HOME/Tools

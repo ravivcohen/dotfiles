@@ -49,16 +49,19 @@ if (( ${#taps[@]} > 0 )); then
   done
 fi
 
+if [ -z "$not_personal" ]; then
 
-if [[ ! -e "/Applications/PasswordAssistant.app" ]]; then
-  e_header "Setting up PasswordAssistant"
-  curl -fsSL https://s3.amazonaws.com/rc_software/PasswordAssistant.zip -o /tmp/PasswordAssistant.zip
-  # Remove the PasswordAssitant.app just incase (it might not exist)
-  rm -rf "/Applications/PasswordAssistant.app"
-  # Link the PasswordAssitant Bin"
-  unzip -o -qq /tmp/PasswordAssistant.zip -d /Applications/
-  # Begone!
-  rm -rf /tmp/PasswordAssistant.zip
+  if [[ ! -e "/Applications/PasswordAssistant.app" ]]; then
+    e_header "Setting up PasswordAssistant"
+    curl -fsSL https://s3.amazonaws.com/rc_software/PasswordAssistant.zip -o /tmp/PasswordAssistant.zip
+    # Remove the PasswordAssitant.app just incase (it might not exist)
+    rm -rf "/Applications/PasswordAssistant.app"
+    # Link the PasswordAssitant Bin"
+    unzip -o -qq /tmp/PasswordAssistant.zip -d /Applications/
+    # Begone!
+    rm -rf /tmp/PasswordAssistant.zip
+  fi
+
 fi
 
 e_header "Running OSX Global Config"
