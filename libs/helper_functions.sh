@@ -86,7 +86,7 @@ function init_do() {
   else
       # For Init files we only run os specific files.
       if [[ $filename == *$OS* ]]; then
-        sudo -H -E TMPDIR=/tmp bash -m -c "source $DOTFILES_HOME/bin/dotfiles source; source $2"
+        sudo -H -E TMPDIR=/tmp bash -m -c "source $DOTFILES_HOME/.dotfiles/bin/dotfiles source; source $2"
     else
         sudo -H -E TMPDIR=/tmp bash -m -c "source $2"
     fi
