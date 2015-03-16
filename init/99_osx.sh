@@ -79,11 +79,11 @@ if [ -z "$not_personal" ]; then
     loaded="$(launchctl list | awk 'NR>1 && $3 !~ /0x[0-9a-fA-F]+\.(anonymous|mach_init)/ {print $3}')"
     is_loaded=($(setdiff "homebrew.mxcl.offline-imap" "$loaded"))
     is_installed=($(setcomp "offline-imap" "$(brew list)"))
-    if [[ "${#is_loaded[@]}" -ne 0 ]] && [[ "${#is_installed[@]}" -ne 1 ]]; then
+    if [[ "${#is_loaded[@]}" -ne 0 ]] && [[ "${#is_installed[@]}" -eq 1 ]]; then
         e_header "Loading offline-imap launchctl"
         #Add offline-imap to launch
-        mkdir -p ~/Library/LaunchAgents
-        cp /usr/local/opt/offline-imap/*.plist ~/Library/LaunchAgents
-        launchctl load ~/Library/LaunchAgents/homebrew.mxcl.offline-imap.plist
+        mkdir -p $USER_HOME/Library/LaunchAgents
+        cp /usr/local/opt/offline-imap/*.plist $USER_HOME/Library/LaunchAgents
+        launchctl load $USER_HOME/Library/LaunchAgents/homebrew.mxcl.offline-imap.plist
     fi
 fi
