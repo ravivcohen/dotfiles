@@ -66,5 +66,5 @@ fi
 
 e_header "Running OSX Global Config"
 # OSX Config. Can safely be run everytime.
-source $DOTFILES_HOME/.dotfiles/conf/osx/conf_osx_global.sh
+source $DOTFILES_HOME/conf/osx/conf_osx_global.sh
 

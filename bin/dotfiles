@@ -109,7 +109,7 @@ function init_do() {
   else
       # For Init files we only run os specific files.
       if [[ $filename == *$OS* ]]; then
-        sudo -H -E TMPDIR=/tmp bash -m -c "source $DOTFILES_HOME/.dotfiles/bin/dotfiles source; source $2"
+        sudo -H -E TMPDIR=/tmp bash -m -c "source $USER_HOME/.dotfiles/bin/dotfiles source; source $2"
     else
         sudo -H -E TMPDIR=/tmp bash -m -c "source $2"
     fi
@@ -264,9 +264,11 @@ fi
 # If this file was being sourced, exit now.
 [[ "$1" == "source" ]] && return
 
-#Setup the DOTFILES_HOME variable to be the current users home.
+#Setup the USER_HOME variable to be the current users home.
 #This is needed when running something as STD user.
-export DOTFILES_HOME=$HOME
+export USER_HOME=$HOME
+export DOTFILES_HOME="$USER_HOME/.dotfiles"
+
 export is_standard_user=false
 
 check_sudo
@@ -311,7 +313,6 @@ if [[ ! "$(type -P git)" ]]; then
   exit 1
 fi
 
-DOTFILES="$HOME/.dotfiles"
 # Initialize.
 if [[ ! -d $DOTFILES ]]; then
   # $DOTFILES directory doesn't exist? Clone it!

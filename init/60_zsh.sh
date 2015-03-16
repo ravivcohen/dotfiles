@@ -2,7 +2,7 @@
 #. $lib_file
 
 
-if [[ ! -e $HOME/.oh-my-zsh ]]; then
+if [[ ! -e $USER_HOME/.oh-my-zsh ]]; then
     # 2. Second We Setup OH-MY-ZSH  
     e_header "Setup oh-my-zsh"
     ##SETUP OH MY ZSH ONLY ON THE FIRST TIME

@@ -2,29 +2,29 @@
 
 e_header "Running OSX Config"
 # OSX Config. Can safely be run everytime.
-source $DOTFILES_HOME/.dotfiles/conf/osx/conf_osx.sh
+source $DOTFILES_HOME/conf/osx/conf_osx.sh
 
 # After we fixed the perms we need to re init ZSH
-rm -rf $DOTFILES_HOME/.zcompdump*
+rm -rf $USER_HOME/.zcompdump*
 zsh -c "autoload -U compinit; compinit -i"
 
 ## SUBLIME
 # Make sirectory if it does not exist
-mkdir -p $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
-mkdir -p $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/
+mkdir -p $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
+mkdir -p $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/
 
-if [[ ! -e "$DOTFILES_HOME/Library/Application Support/Sublime Text 3/Installed Packages/Package Control.sublime-package" ]]; then
+if [[ ! -e "$USER_HOME/Library/Application Support/Sublime Text 3/Installed Packages/Package Control.sublime-package" ]]; then
     e_header "Downloading sublime-package-manager"
     # Get the latest package manager
-    curl -fsSL https://sublime.wbond.net/Package%20Control.sublime-package -o $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
+    curl -fsSL https://sublime.wbond.net/Package%20Control.sublime-package -o $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
 fi
 
-if [[ ! -L "$DOTFILES_HOME/Library/Application Support/Sublime Text 3/Packages/User" ]]; then
+if [[ ! -L "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/User" ]]; then
     e_header "Linking Sublime user directory"
     # Remove the current user folder 
-    rm -rf $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+    rm -rf $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
     # Link our User directory
-    ln -s $DOTFILES_HOME/.dotfiles/conf/sublime/User $DOTFILES_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+    ln -s $DOTFILES_HOME/conf/sublime/User $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
 fi
 
 ## iTERM
@@ -44,37 +44,37 @@ defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist LoadPrefsFromC
 defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iTerm/";
     
 
-mkdir -p $DOTFILES_HOME/Development
-mkdir -p $DOTFILES_HOME/Tools
+mkdir -p $USER_HOME/Development
+mkdir -p $USER_HOME/Tools
         
 if [ -z "$not_personal" ]; then
 
     ##   
-    if [ -d "$DOTFILES_HOME/conf/dotfiles" ]; then
+    if [ -d "$USER_HOME/conf/dotfiles" ]; then
         e_header "Linking CONF files"
-        ln -s $DOTFILES_HOME/conf/dotfiles/.* $DOTFILES_HOME/ 2>/dev/null
+        ln -s $USER_HOME/conf/dotfiles/.* $USER_HOME/ 2>/dev/null
     fi
 
     # Setup OSX for Personal Use
     # Setup the needed DIRS
-    mkdir -p $DOTFILES_HOME/Engagements
-    mkdir -p $DOTFILES_HOME/Resources
-    mkdir -p $DOTFILES_HOME/Resources/Deliverables
-    mkdir -p $DOTFILES_HOME/Resources/Training
-    mkdir -p $DOTFILES_HOME/Virtual_Machines
-    mkdir -p $DOTFILES_HOME/Documents
+    mkdir -p $USER_HOME/Engagements
+    mkdir -p $USER_HOME/Resources
+    mkdir -p $USER_HOME/Resources/Deliverables
+    mkdir -p $USER_HOME/Resources/Training
+    mkdir -p $USER_HOME/Virtual_Machines
+    mkdir -p $USER_HOME/Documents
 
     ##Configure Mutt
-    mkdir -p $DOTFILES_HOME/.mail
-    mkdir -p $DOTFILES_HOME/.mail/mutt/temp
-    mkdir -p $DOTFILES_HOME/.mail/mutt/cache/headers 
-    mkdir -p $DOTFILES_HOME/.mail/mutt/cache/bodies  
-    mkdir -p $DOTFILES_HOME/.mail/mutt/temp          
+    mkdir -p $USER_HOME/.mail
+    mkdir -p $USER_HOME/.mail/mutt/temp
+    mkdir -p $USER_HOME/.mail/mutt/cache/headers 
+    mkdir -p $USER_HOME/.mail/mutt/cache/bodies  
+    mkdir -p $USER_HOME/.mail/mutt/temp          
 
-    mkdir -p $DOTFILES_HOME/.mutt/certificates  
-    mkdir -p $DOTFILES_HOME/.mutt/alias
-    mkdir -p $DOTFILES_HOME/.mutt/mailcap       
-    mkdir -p $DOTFILES_HOME/.mutt/sig       
+    mkdir -p $USER_HOME/.mutt/certificates  
+    mkdir -p $USER_HOME/.mutt/alias
+    mkdir -p $USER_HOME/.mutt/mailcap       
+    mkdir -p $USER_HOME/.mutt/sig       
 
     loaded="$(launchctl list | awk 'NR>1 && $3 !~ /0x[0-9a-fA-F]+\.(anonymous|mach_init)/ {print $3}')"
     is_loaded=($(setdiff "homebrew.mxcl.offline-imap" "$loaded"))

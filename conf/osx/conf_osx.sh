@@ -94,7 +94,7 @@ defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 5
 
 # Save screenshots here instead of to desktop
-defaults write com.apple.screencapture location "$HOME/Screenshots/"
+defaults write com.apple.screencapture location "$USER_HOME/Screenshots/"
 
 # Disable drop shadow on screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
@@ -301,7 +301,7 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # Use `~/Documents/Torrents` to store incomplete downloads
 defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
-defaults write org.m0k.transmission IncompleteDownloadFolder -string "${HOME}/Documents/Torrents"
+defaults write org.m0k.transmission IncompleteDownloadFolder -string "$USER_HOME/Documents/Torrents"
 
 # Don’t prompt for confirmation before downloading
 defaults write org.m0k.transmission DownloadAsk -bool false
