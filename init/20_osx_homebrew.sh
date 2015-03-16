@@ -76,7 +76,7 @@ fi
 # done 
 
 # This is where brew stores its binary symlinks
-local binroot="$(brew --config | awk '/HOMEBREW_PREFIX/ {print $2}')"/bin
+binroot="$(brew --config | awk '/HOMEBREW_PREFIX/ {print $2}')"/bin
 
 
 if ! grep -q "$binroot/zsh" "/etc/shells"; then
