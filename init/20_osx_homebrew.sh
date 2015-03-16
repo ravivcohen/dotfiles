@@ -89,7 +89,7 @@ fi
 if [[ -d "$binroot/zsh" ]]; then
   # Fix ZSH permissions
   # Safe to run everytime incase of ZSH Update.
-  sudo chown -R root:admin $binroot/zsh/
+  sudo chown -R root:admin /usr/local/Cellar/zsh/
 fi
 
 # The launch daemon is in the ChmodBPF directory in the source tree. The
