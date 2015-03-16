@@ -4,10 +4,6 @@ e_header "Running OSX Config"
 # OSX Config. Can safely be run everytime.
 source $DOTFILES_HOME/.dotfiles/conf/osx/conf_osx.sh
 
-if [ -d "$DOTFILES_HOME/conf/dotfiles" ]; then
-    e_header "Linking CONF files"
-    ln -s $DOTFILES_HOME/conf/dotfiles/.* $DOTFILES_HOME/ 2>/dev/null
-fi
 # After we fixed the perms we need to re init ZSH
 rm ~/.zcompdump*
 zsh -c "autoload -U compinit; compinit -i"
@@ -34,6 +30,13 @@ mkdir -p $DOTFILES_HOME/Development
 mkdir -p $DOTFILES_HOME/Tools
         
 if [ -z "$not_personal" ]; then
+
+    ##   
+    if [ -d "$DOTFILES_HOME/conf/dotfiles" ]; then
+        e_header "Linking CONF files"
+        ln -s $DOTFILES_HOME/conf/dotfiles/.* $DOTFILES_HOME/ 2>/dev/null
+    fi
+
     # Setup OSX for Personal Use
     # Setup the needed DIRS
     mkdir -p $DOTFILES_HOME/Engagements
