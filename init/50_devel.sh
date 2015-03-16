@@ -1,19 +1,7 @@
 
 #All Helper functions can now be found inside libs/helper_functions.
-. $lib_file
+#. $lib_file
 
-# Here Everyhting is orgnaized into logical groups
-# Sublime
-# OSX
-# if [[ "$OSTYPE" =~ ^darwin ]]; then
-
-		
-	
-# # Ubuntu.
-# elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
-# 	#TODO
-# 	echo 'Fix Sublime Init'
-# fi
 # # rbenv init.
 # PATH=$(path_remove ~/.dotfiles/libs/rbenv/bin):~/.dotfiles/libs/rbenv/bin
 # PATH=$(path_remove ~/.dotfiles/libs/ruby-build/bin):~/.dotfiles/libs/ruby-build/bin
