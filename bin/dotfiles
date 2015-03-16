@@ -10,12 +10,6 @@ https://github.com/ravivcohen/dotfiles
 HELP
 exit; fi
 
-#Setup the DOTFILES_HOME variable to be the current users home.
-#This is needed when running something as STD user.
-export DOTFILES_HOME=$HOME
-export is_standard_user=false
-
-
 if [[ ! -d ~/.dotfiles ]]; then
   export lib_file=/tmp/lib_file$$.$RANDOM
   curl -fsSL https://raw.githubusercontent.com/ravivcohen/dotfiles/master/libs/helper_functions.sh -o $lib_file
@@ -40,6 +34,11 @@ fi
 
 # If this file was being sourced, exit now.
 [[ "$1" == "source" ]] && return
+
+#Setup the DOTFILES_HOME variable to be the current users home.
+#This is needed when running something as STD user.
+export DOTFILES_HOME=$HOME
+export is_standard_user=false
 
 check_sudo
 
