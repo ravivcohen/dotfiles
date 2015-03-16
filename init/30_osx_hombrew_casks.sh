@@ -14,7 +14,7 @@
 
 casks=(sublime-text3 iterm2-nightly firefox java6 keka)
 
-if [[ "$not_personal" ]]; then
+if [ -z "$not_personal" ]; then
     casks+=(tower transmit path-finder adium vagrant)
 fi
 

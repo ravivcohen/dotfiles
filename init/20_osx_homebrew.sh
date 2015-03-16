@@ -42,7 +42,7 @@ p7zip
 --enable-pythoninterp --override-system-vi"
 )
 
-if [[ "$not_personal" ]]; then
+if [ -z "$not_personal" ]; then
   recipes+=("profanity --with-terminal-notifier" dvtm youtube-dl)
 
   if [[ $xcode_installed ]]; then
