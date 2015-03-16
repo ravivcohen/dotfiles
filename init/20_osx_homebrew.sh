@@ -66,15 +66,15 @@ if [ -z "$not_personal" ]; then
   fi
 fi
 
-# unset setdiffA setdiffB setdiffC;
-# setdiffA=("${recipes[@]}"); setdiffB=( $(brew list) ); setdiff
-# # Because brew hard fails incase one application fails.
-# # We call each install one by one.
-# for recipe in "${setdiffC[@]}"
-# do
-#   e_header "Installing Homebrew recipe: $recipe"
-#   brew install $recipe
-# done 
+unset setdiffA setdiffB setdiffC;
+setdiffA=("${recipes[@]}"); setdiffB=( $(brew list) ); setdiff
+# Because brew hard fails incase one application fails.
+# We call each install one by one.
+for recipe in "${setdiffC[@]}"
+do
+  e_header "Installing Homebrew recipe: $recipe"
+  brew install $recipe
+done 
 
 # This is where brew stores its binary symlinks
 binroot="$(brew --config | awk '/HOMEBREW_PREFIX/ {print $2}')"/bin
