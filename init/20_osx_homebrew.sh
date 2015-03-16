@@ -11,7 +11,8 @@
 
 
 # Install Homebrew recipes.
-recipes=(apple-gcc42 
+recipes=(
+apple-gcc42 
 "readline --universal" 
 "sqlite --universal" 
 "gdbm --universal" 

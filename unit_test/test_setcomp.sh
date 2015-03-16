@@ -70,3 +70,12 @@ setcomp
 assert "7" echo "${#setdiffC[@]}"
 assert "apple-gcc42 readline --universal s-lang wget --with-iri grep \
 git wireshark --with --w-m='3' --x=3" echo "${setdiffC[*]}"
+
+# loaded="$(launchctl list | awk 'NR>1 && $3 !~ /0x[0-9a-fA-F]+\.(anonymous|mach_init)/ {print $3}')"
+# is_loaded=($(setdiff 1 "homebrew.mxcl.offline-imap" "$loaded"))
+# is_installed=($(setcomp 1 "offline-imap" "$(brew list)"))
+# echo "${#is_loaded[@]}"
+# echo "${#is_installed[@]}"
+# if [[  "$is_loaded" -eq 0 ]] && [[ "$is_installed" --eq 1 ]]; then
+#     e_header "Loading offline-imap launchctl"
+# fi
