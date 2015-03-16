@@ -75,16 +75,20 @@ fi
 #   brew install $recipe
 # done 
 
-if ! grep -q "/usr/local/bin/zsh" "/etc/shells"; then
+# This is where brew stores its binary symlinks
+local binroot="$(brew --config | awk '/HOMEBREW_PREFIX/ {print $2}')"/bin
+
+
+if ! grep -q "$binroot/zsh" "/etc/shells"; then
   e_header "Adding homebrew ZSH to /etc/shells"
   # Add Homebrew Shell to Allowed Shell List
-  echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells > /dev/null
+  echo "$binroot/zsh" | sudo tee -a /etc/shells > /dev/null
 fi
 
-if [[ -d "/usr/local/Cellar/zsh" ]]; then
+if [[ -d "$binroot/zsh" ]]; then
   # Fix ZSH permissions
   # Safe to run everytime incase of ZSH Update.
-  sudo chown -R root:admin /usr/local/Cellar/zsh/
+  sudo chown -R root:admin $binroot/zsh/
 fi
 
 # The launch daemon is in the ChmodBPF directory in the source tree. The
@@ -113,10 +117,10 @@ if [[ "$(stat -Lf "%Sp:%Su:%Sg" /Library/LaunchDaemons/org.wireshark.ChmodBPF.pl
 fi
 
 # htop
-if [[ "$(type -P htop)" && "$(stat -L -f "%Su:%Sg" "$(which htop)")" != "root:wheel" || ! "$(($(stat -L -f "%DMp" "$(which htop)") & 4))" ]]; then
+if [[ "$(type -P $binroot/htop)" ]] && [[ "$(stat -L -f "%Su:%Sg" "$binroot/htop")" != "root:wheel" || ! "$(($(stat -L -f "%DMp" "$binroot/htop") & 4))" ]]; then
   e_header "Updating htop permissions"
-  sudo chown root:wheel "$(which htop)"
-  sudo chmod u+s "$(which htop)"
+  sudo chown root:wheel "$binroot/htop"
+  sudo chmod u+s "$binroot/htop"
 fi
 
 # Install Slate
