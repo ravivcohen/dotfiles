@@ -292,9 +292,9 @@ fi
 
 #sleep 10
 
-if [[ -e "$HOME/.profile" ]]; then
+if [[ -e "$USER_HOME/.profile" ]]; then
   e_header "Removing .profile"
-  rm -rf "$HOME/.profile"
+  rm -rf "$USER_HOME/.profile"
 fi
 
 # If Git is not installed, install it (Ubuntu only, since Git comes standard
@@ -314,17 +314,17 @@ if [[ ! "$(type -P git)" ]]; then
 fi
 
 # Initialize.
-if [[ ! -d $DOTFILES ]]; then
+if [[ ! -d $DOTFILES_HOME ]]; then
   # $DOTFILES directory doesn't exist? Clone it!
   new_dotfiles_install=1
   prompt_delay=15
   e_header "Downloading dotfiles"
-  git clone git://github.com/ravivcohen/dotfiles.git ~/.dotfiles
-  cd $DOTFILES
+  git clone git://github.com/ravivcohen/dotfiles.git $DOTFILES_HOME
+  cd $DOTFILES_HOME
 elif [[ "$1" != "restart" ]]; then
   # Make sure we have the latest files.
   e_header "Updating dotfiles"
-  cd $DOTFILES
+  cd $DOTFILES_HOME
   prev_head="$(git rev-parse HEAD)"
   git pull
   git submodule update --init --recursive --quiet
@@ -335,7 +335,7 @@ elif [[ "$1" != "restart" ]]; then
 fi
 
 # Add binaries into the path
-PATH=~/.dotfiles/bin:$PATH
+PATH=$DOTFILES_HOME/bin:$PATH
 export PATH
 
 # Tweak file globbing.
@@ -343,7 +343,7 @@ shopt -s dotglob
 shopt -s nullglob
 
 # If backups are needed, this is where they'll go.
-backup_dir="$HOME/.dotfiles/backups/$(date "+%Y_%m_%d-%H_%M_%S")/"
+backup_dir="$DOTFILES_HOME/backups/$(date "+%Y_%m_%d-%H_%M_%S")/"
 backup=
 
 e_header "Running Init"
@@ -360,9 +360,9 @@ if [[ "$backup" ]]; then
 fi
 
 # Lest I forget to do a few additional things...
-if [[ "$new_dotfiles_install" && -e "conf/firsttime_reminder.sh" ]]; then
+if [[ "$new_dotfiles_install" && -e "$DOTFILES_HOME/conf/firsttime_reminder.sh" ]]; then
   e_header "First-Time Reminders"
-  source "conf/firsttime_reminder.sh"
+  source "$DOTFILES_HOME/conf/firsttime_reminder.sh"
 fi
 
 # All done!
