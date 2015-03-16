@@ -5,7 +5,7 @@ e_header "Running OSX Config"
 source $DOTFILES_HOME/.dotfiles/conf/osx/conf_osx.sh
 
 # After we fixed the perms we need to re init ZSH
-rm ~/.zcompdump*
+rm -rf $DOTFILES_HOME/.zcompdump*
 zsh -c "autoload -U compinit; compinit -i"
 
 ## SUBLIME
