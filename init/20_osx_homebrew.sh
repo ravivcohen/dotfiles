@@ -86,7 +86,7 @@ if ! grep -q "$binroot/zsh" "/etc/shells"; then
   echo "$binroot/zsh" | sudo tee -a /etc/shells > /dev/null
 fi
 
-if [[ -d "$binroot/zsh" ]]; then
+if [[ -d "/usr/local/Cellar/zsh/" ]]; then
   # Fix ZSH permissions
   # Safe to run everytime incase of ZSH Update.
   sudo chown -R root:admin /usr/local/Cellar/zsh/
