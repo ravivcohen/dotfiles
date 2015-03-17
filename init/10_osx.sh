@@ -21,11 +21,11 @@ PATH=/usr/local/bin:$(path_remove /usr/local/bin)
 PATH=/usr/local/sbin:$(path_remove /usr/local/sbin)
 export PATH
 
-if [[ -d "/usr/local/Cellar/zsh" ]]; then
-  # Fix ZSH permissions
-  # Safe to run everytime incase of ZSH Update.
-  sudo chown -R `whoami`:admin /usr/local/Cellar/zsh/
-fi
+# if [[ -d "/usr/local/Cellar/zsh" ]]; then
+#   # Fix ZSH permissions
+#   # Safe to run everytime incase of ZSH Update.
+#   sudo chown -R `whoami`:admin /usr/local/Cellar/zsh/
+# fi
 
 e_header "Brew DR"
 brew doctor

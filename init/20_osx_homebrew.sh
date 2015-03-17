@@ -12,7 +12,8 @@
 
 # Install Homebrew recipes.
 recipes=(
-apple-gcc42 
+apple-gcc42
+ctags 
 "readline --universal" 
 "sqlite --universal" 
 "gdbm --universal" 
@@ -88,11 +89,11 @@ if ! grep -q "$binroot/zsh" "/etc/shells"; then
   echo "$binroot/zsh" | sudo tee -a /etc/shells > /dev/null
 fi
 
-if [[ -d "$cellarroot/zsh/" ]]; then
-  # Fix ZSH permissions
-  # Safe to run everytime incase of ZSH Update.
-  sudo chown -R root:admin "$cellarroot/zsh/"
-fi
+# if [[ -d "$cellarroot/zsh/" ]]; then
+#   # Fix ZSH permissions
+#   # Safe to run everytime incase of ZSH Update.
+#   sudo chown -R root:admin "$cellarroot/zsh/"
+# fi
 
 # The launch daemon is in the ChmodBPF directory in the source tree. The
 # org.wireshark.ChmodBPF.plist file should be copied to the
