@@ -9,7 +9,7 @@ if [[ ! -e $USER_HOME/.oh-my-zsh ]]; then
     curl -L http://install.ohmyz.sh | sh
 fi
 
-if [[ "$(cat /etc/issue 2> /dev/null)" =~ Arch ]]; then
+if [[ is_arch ]]; then
     #TODO
     if [[ $(whoami) == "vagrant" ]]; then
         sudo chsh -s "$(which zsh)" vagrant

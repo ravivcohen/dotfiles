@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # OSX-only stuff. Abort if not OSX.
-[[ "$OSTYPE" =~ ^darwin ]] || return 1
+[[ is_osx ]] || return 1
 #All Helper functions can now be found inside libs/helper_functions.
 #. $lib_file
 
