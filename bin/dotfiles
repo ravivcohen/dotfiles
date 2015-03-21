@@ -96,12 +96,7 @@ function init_do() {
   if [[ "$is_standard_user" = false || $vers -ge 50 ]]; then
     source "$2"
   else
-      # For Init files we only run os specific files.
-      if [[ $filename == *$OS* ]]; then
-        sudo -H -E TMPDIR=/tmp bash -m -c "source $USER_HOME/.dotfiles/bin/dotfiles source; source $2"
-    else
-        sudo -H -E TMPDIR=/tmp bash -m -c "source $2"
-    fi
+    sudo -H -E TMPDIR=/tmp bash -m -c "source $USER_HOME/.dotfiles/bin/dotfiles source; source $2"
  fi 
 }
 
