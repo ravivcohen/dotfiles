@@ -283,7 +283,7 @@ check_sudo
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 
-if [[ is_osx]]; then
+if [[ is_osx ]]; then
   check_cmd_tools
   if [[ $(xcode-select -p 2>&1) == "/Applications/Xcode.app/Contents/Developer"  ]]; then
     export xcode_installed=true

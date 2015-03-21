@@ -1,4 +1,4 @@
-[[[ is_osx ]] || return 1
+[[ is_osx ]] || return 1
 
 e_header "Running OSX Config"
 # OSX Config. Can safely be run everytime.
