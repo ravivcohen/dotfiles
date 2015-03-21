@@ -1,6 +1,3 @@
-#All Helper functions can now be found inside libs/helper_functions.
-#. $lib_file
-
 
 if [[ ! -e $USER_HOME/.oh-my-zsh ]]; then
     # 2. Second We Setup OH-MY-ZSH  

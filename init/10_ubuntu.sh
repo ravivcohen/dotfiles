@@ -1,4 +1,3 @@
-# Ubuntu-only stuff. Abort if not Ubuntu.
 [[ is_ubuntu ]] || return 1
 
 # If the old files isn't removed, the duplicate APT alias will break sudo!
