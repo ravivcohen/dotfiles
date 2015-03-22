@@ -1,14 +1,8 @@
-#!/usr/bin/env bash
-
-[[ is_osx ]] || return 1
+is_osx || return 1
 
 e_header "Running OSX Config"
 # OSX Config. Can safely be run everytime.
 source $DOTFILES_HOME/conf/osx/conf_osx.sh
-
-# After we fixed the perms we need to re init ZSH
-rm -rf $USER_HOME/.zcompdump*
-zsh -c "autoload -U compinit; compinit -i"
 
 ## SUBLIME
 # Make sirectory if it does not exist

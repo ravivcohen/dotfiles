@@ -1,6 +1,4 @@
-#!/usr/bin/env bash
-
-[[ is_ubuntu ]] || return 1
+is_ubuntu || return 1
 
 # If the old files isn't removed, the duplicate APT alias will break sudo!
 sudoers_old="/etc/sudoers.d/sudoers-cowboy"; [[ -e "$sudoers_old" ]] && sudo rm "$sudoers_old"

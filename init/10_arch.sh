@@ -1,6 +1,4 @@
-#!/usr/bin/env bash
-
-[[ is_arch ]] || return 1
+is_arch || return 1
 
 # Update APT.
 e_header "Updating pacman"

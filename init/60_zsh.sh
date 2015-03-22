@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 
 if [[ ! -e $USER_HOME/.oh-my-zsh ]]; then
     # 2. Second We Setup OH-MY-ZSH  

@@ -1,6 +1,4 @@
-#!/usr/bin/env bash
-
-[[ is_osx ]] || return 1
+is_osx || return 1
 
 # Exit if Homebrew is not installed.
 [[ ! "$(type -P brew)" ]] && e_error "Brew recipes need Homebrew to install." && return 1
