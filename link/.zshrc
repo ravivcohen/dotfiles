@@ -47,34 +47,14 @@ ZSH_THEME="bullet-train"
 # OSX
 if [[ $(uname) == "Darwin" ]] ; then
 	plugins=(git osx github brew battery vagrant)
-# Ubuntu.
-elif [[ $(uname) == "Linux"  ]] ; then
-	plugins=(git github brew battery)
+# Linux
+else
+	plugins=(git github battery)
 fi
 
+ZSH_COMPDUMP=$HOME/.zcompdump
 source $ZSH/oh-my-zsh.sh
 
-
-# # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-## http://zsh.sourceforge.net/Doc/Release/Completion-System.html#Use-of-compinit
-## Fix insecure dirs not being read.
-# Clear out any previous zcompdumps (can be setup by using -d to track)
 rm -rf .zcompdump*
-#Auto load the compinit
-autoload -U compinit
-#complist must be loaded before compinit is run
 zmodload -i zsh/complist
-#tell compinit to ignroe and use insecure directories
-compinit -u
+compinit -u "${ZSH_COMPDUMP}"
