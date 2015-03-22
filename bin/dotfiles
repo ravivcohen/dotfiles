@@ -240,9 +240,7 @@ function is_ubuntu() {
 }
 
 function is_arch() {
-  echo "is arch: $OS"
   if [[ $OS == "arch" ]]; then return 0; fi
-  echo "is arch2: $OS"
   return 1
 }
 
