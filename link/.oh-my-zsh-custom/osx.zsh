@@ -84,6 +84,9 @@ else
     echo "WARNING: Can't find virtualenvwrapper.sh"
 fi
 
+# Recursively delete `.DS_Store` files
+alias dsstore="find . -name '*.DS_Store' -type f -ls -delete"
+
 #Burp
 burpdirectory="$HOME/Tools/burp/"
 logfilename="$(date +%F_%H-%M-%S)"
