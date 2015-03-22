@@ -6,40 +6,42 @@ is_osx || return 1
 
 # Install Homebrew recipes.
 recipes=(
-apple-gcc42
-ctags 
-"readline --universal" 
-"sqlite --universal" 
-"gdbm --universal" 
-"openssl --universal" 
-s-lang
-zsh 
-"wget --with-iri" 
-grep 
-git 
-ssh-copy-id  
-nmap
-git-extras
-htop-osx  
-coreutils 
-findutils 
-ack 
-lynx 
-rename 
-pkg-config 
-p7zip 
-"lesspipe --syntax-highlighting"
-"python --universal" 
-"brew-cask"
-#--with-ignore-thread-patch Cannot apple with sidebar mutually exclu
-"wireshark --with-headers --with-libpcap --with-libsmi --with-lua --with-qt --devel"
-
-"vim --with-python --with-ruby --with-perl --enable-cscope 
---enable-pythoninterp --override-system-vi"
+  ctags 
+  "readline --universal" 
+  "sqlite --universal" 
+  "gdbm --universal" 
+  "openssl --universal" 
+  s-lang
+  zsh 
+  "wget --with-iri" 
+  grep 
+  git 
+  ssh-copy-id  
+  git-extras
+  htop-osx  
+  coreutils 
+  findutils 
+  ack 
+  rename 
+  p7zip 
+  "lesspipe --syntax-highlighting"
+  "python --universal" 
+  "brew-cask"
+  "vim --with-python --with-ruby --with-perl --enable-cscope 
+  --enable-pythoninterp --override-system-vi"
 )
 
 if [ -z "$not_personal" ]; then
-  recipes+=("profanity --with-terminal-notifier" dvtm youtube-dl)
+  recipes+=(
+  apple-gcc42
+  nmap
+  lynx 
+  pkg-config 
+  "wireshark --with-headers --with-libpcap --with-libsmi --with-lua --with-qt --devel"
+  "profanity --with-terminal-notifier"
+  dvtm
+  youtube-dl
+  )
 
   if [[ $xcode_installed ]]; then
     #We need to Patch MUTT for sidebar support
@@ -51,6 +53,7 @@ if [ -z "$not_personal" ]; then
       #apply the patch
       patch -p0 -N --silent /usr/local/Library/Formula/mutt.rb < $DOTFILES_HOME/conf/osx/mutt.rb.patch
     fi
+
     recipes+=("mutt --with-trash-patch --with-s-lang  
     --with-pgp-verbose-mime-patch --with-confirm-attachment-patch 
     --with-sidebar-patch"
@@ -76,49 +79,26 @@ brewroot="$(brew --config | awk '/HOMEBREW_PREFIX/ {print $2}')"
 binroot=$brewroot/bin
 cellarroot=$brewroot/Cellar
 
-
-if ! grep -q "$binroot/zsh" "/etc/shells"; then
-  e_header "Adding homebrew ZSH to /etc/shells"
-  # Add Homebrew Shell to Allowed Shell List
-  echo "$binroot/zsh" | sudo tee -a /etc/shells > /dev/null
-fi
-
-# if [[ -d "$cellarroot/zsh/" ]]; then
-#   # Fix ZSH permissions
-#   # Safe to run everytime incase of ZSH Update.
-#   sudo chown -R root:admin "$cellarroot/zsh/"
-# fi
-
-# The launch daemon is in the ChmodBPF directory in the source tree. The
-# org.wireshark.ChmodBPF.plist file should be copied to the
-# /Library/LaunchDaemons directory. It should have the following permissions:
-
-# -rw-r--r-- 1 root wheel 555B Jul 21 00:34 org.wireshark.ChmodBPF.plist
-
-# If you want to give a particular user permission to access the BPF devices,
-# rather than giving all administrative users permission to access them, you
-# can have the ChmodBPF launch daemon plist change the ownership of /dev/bpf*
-# without changing the permissions. If you want to give a particular user
-# permission to read and write the BPF devices and give the administrative
-# users permission to read but not write the BPF devices, you can have the
-# script change the owner to that user, the group to "admin", and the
-# permissions to rw-r-----. Other possibilities are left as an exercise for
-# the reader.
-if [[ "$(stat -L -f "%Sp:%Su:%Sg" /Library/LaunchDaemons/org.wireshark.ChmodBPF.plist)" != "-rw-r--r--:root:wheel" ]]; then
-  # # Install WireShark
-  # e_header "Install latest version of WireShark with QT"
-  # brew install wireshark --devel --with-qt
-  # # Temp fix for wireshark interfaces
-  curl "https://bugs.wireshark.org/bugzilla/attachment.cgi?id=3373" -o /tmp/ChmodBPF.tar.gz
-  tar zxvf /tmp/ChmodBPF.tar.gz -C /tmp
-  open /tmp/ChmodBPF/Install\ ChmodBPF.app
-fi
-
 # htop
 if [[ "$(type -P $binroot/htop)" ]] && [[ "$(stat -L -f "%Su:%Sg" "$binroot/htop")" != "root:wheel" || ! "$(($(stat -L -f "%DMp" "$binroot/htop") & 4))" ]]; then
   e_header "Updating htop permissions"
   sudo chown root:wheel "$binroot/htop"
   sudo chmod u+s "$binroot/htop"
+fi
+
+# ZSH
+if [[ "$(type -P $binroot/zsh)" && "$(cat /etc/shells | grep -q "$binroot/zsh")" ]]; then
+  e_header "Adding $binroot/zsh to the list of acceptable shells"
+  echo "$binroot/zsh" | sudo tee -a /etc/shells >/dev/null
+fi
+
+
+# -rw-r--r-- 1 root wheel
+if [[ "$(stat -L -f "%Sp:%Su:%Sg" /Library/LaunchDaemons/org.wireshark.ChmodBPF.plist)" != "-rw-r--r--:root:wheel" ]]; then
+  # # Temp fix for wireshark interfaces
+  curl "https://bugs.wireshark.org/bugzilla/attachment.cgi?id=3373" -o /tmp/ChmodBPF.tar.gz
+  tar zxvf /tmp/ChmodBPF.tar.gz -C /tmp
+  open /tmp/ChmodBPF/Install\ ChmodBPF.app
 fi
 
 # Install Slate
@@ -128,15 +108,11 @@ if [[ ! -e "/Applications/Slate.app" ]]; then
 fi
 
 if [[ "$(type -P pip)" ]]; then
-  # Open Bug HomeBrew 05-25-14
-  # #install and upgrade PIP
   e_header "Install and/Or Upgrade PIP"
   pip -q install --upgrade pip
   pip -q install --upgrade setuptools
   pip -q install --upgrade distribute
 
-  # e_header "Install VirualENV + VirtualEnvWrapper"
-  # ##Actually Install VirtualEnv 
   pip -q install --upgrade virtualenv 
   pip -q install --upgrade virtualenvwrapper
 

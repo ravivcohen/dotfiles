@@ -1,6 +1,6 @@
 is_osx || return 1
 
-e_header "Running OSX Config"
+e_header "Running OSX Local Config"
 # OSX Config. Can safely be run everytime.
 source $DOTFILES_HOME/conf/osx/conf_osx.sh
 
@@ -24,7 +24,6 @@ if [[ ! -L "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/User"
 fi
 
 ## iTERM
-e_header "Setting Up OSX Visual Settings"
 # IF Iterm has never been run this wont exsit. 
 # We then run iterm so we can config it.
 if [[ ! -e ~/Library/Preferences/com.googlecode.iterm2.plist ]]; then
