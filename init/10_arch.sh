@@ -1,6 +1,5 @@
-echo "@@@@@@@@@@@@@@@@@@@@"
+echo "OS: $OS"
 [[ is_arch ]] || return 1
-echo "AAAAAAAAAAAAAAAAAA"
 
 # Update APT.
 e_header "Updating pacman"
