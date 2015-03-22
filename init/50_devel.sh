@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 #All Helper functions can now be found inside libs/helper_functions.
 #. $lib_file

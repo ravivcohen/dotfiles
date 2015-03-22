@@ -1,4 +1,5 @@
-echo "OS: $OS"
+#!/usr/bin/env bash
+
 [[ is_arch ]] || return 1
 
 # Update APT.

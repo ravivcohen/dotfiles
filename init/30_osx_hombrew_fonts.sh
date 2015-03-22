@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 [[ is_osx ]] || return 1
 
 # Exit if Homebrew is not installed.

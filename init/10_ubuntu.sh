@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 [[ is_ubuntu ]] || return 1
 
 # If the old files isn't removed, the duplicate APT alias will break sudo!

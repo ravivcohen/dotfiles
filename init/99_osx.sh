@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 [[ is_osx ]] || return 1
 
 e_header "Running OSX Config"
