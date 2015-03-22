@@ -104,7 +104,7 @@ fi
 # script change the owner to that user, the group to "admin", and the
 # permissions to rw-r-----. Other possibilities are left as an exercise for
 # the reader.
-if [[ "$(stat -Lf "%Sp:%Su:%Sg" /Library/LaunchDaemons/org.wireshark.ChmodBPF.plist)" != "-rw-r--r--:root:wheel" ]]; then
+if [[ "$(stat -L -f "%Sp:%Su:%Sg" /Library/LaunchDaemons/org.wireshark.ChmodBPF.plist)" != "-rw-r--r--:root:wheel" ]]; then
   # # Install WireShark
   # e_header "Install latest version of WireShark with QT"
   # brew install wireshark --devel --with-qt
