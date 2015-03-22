@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 # OSX
-  if [[ "$OSTYPE" =~ ^darwin ]]; then
+  if [[ is_osx ]]; then
   	open -a Safari
   	sleep 1
 	#tunnelblick-beta
@@ -23,7 +24,7 @@
     https://www.xpra.org/
     
   # Ubuntu.
-  elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
+  elif [[ is_ubuntu ]]; then
   	e_header "TO DO!! "
   fi
 
