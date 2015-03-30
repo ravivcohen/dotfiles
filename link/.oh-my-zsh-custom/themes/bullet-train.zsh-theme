@@ -65,33 +65,6 @@ if [ ! -n "${BULLETTRAIN_VIRTUALENV_PREFIX+1}" ]; then
   BULLETTRAIN_VIRTUALENV_PREFIX=🐍
 fi
 
-# NVM
-if [ ! -n "${BULLETTRAIN_NVM_SHOW+1}" ]; then
-  BULLETTRAIN_NVM_SHOW=false
-fi
-if [ ! -n "${BULLETTRAIN_NVM_BG+1}" ]; then
-  BULLETTRAIN_NVM_BG=green
-fi
-if [ ! -n "${BULLETTRAIN_NVM_FG+1}" ]; then
-  BULLETTRAIN_NVM_FG=white
-fi
-if [ ! -n "${BULLETTRAIN_NVM_PREFIX+1}" ]; then
-  BULLETTRAIN_NVM_PREFIX="⬡ "
-fi
-
-# RMV
-if [ ! -n "${BULLETTRAIN_RVM_SHOW+1}" ]; then
-  BULLETTRAIN_RVM_SHOW=true
-fi
-if [ ! -n "${BULLETTRAIN_RVM_BG+1}" ]; then
-  BULLETTRAIN_RVM_BG=magenta
-fi
-if [ ! -n "${BULLETTRAIN_RVM_FG+1}" ]; then
-  BULLETTRAIN_RVM_FG=white
-fi
-if [ ! -n "${BULLETTRAIN_RVM_PREFIX+1}" ]; then
-  BULLETTRAIN_RVM_PREFIX=♦️
-fi
 
 # DIR
 if [ ! -n "${BULLETTRAIN_DIR_SHOW+1}" ]; then
@@ -161,45 +134,10 @@ if [ ! -n "${BULLETTRAIN_GIT_ADDED+1}" ]; then
 else
   ZSH_THEME_GIT_PROMPT_ADDED=$BULLETTRAIN_GIT_ADDED
 fi
-if [ ! -n "${BULLETTRAIN_GIT_MODIFIED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_MODIFIED=" %F{blue}✹%F{black}"
-else
-  ZSH_THEME_GIT_PROMPT_MODIFIED=$BULLETTRAIN_GIT_MODIFIED
-fi
-if [ ! -n "${BULLETTRAIN_GIT_DELETED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_DELETED=" %F{red}✖%F{black}"
-else
-  ZSH_THEME_GIT_PROMPT_DELETED=$BULLETTRAIN_GIT_DELETED
-fi
 if [ ! -n "${BULLETTRAIN_GIT_UNTRACKED+1}" ]; then
   ZSH_THEME_GIT_PROMPT_UNTRACKED=" %F{yellow}✭%F{black}"
 else
   ZSH_THEME_GIT_PROMPT_UNTRACKED=$BULLETTRAIN_GIT_UNTRACKED
-fi
-if [ ! -n "${BULLETTRAIN_GIT_RENAMED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_RENAMED=" ➜"
-else
-  ZSH_THEME_GIT_PROMPT_RENAMED=$BULLETTRAIN_GIT_RENAMED
-fi
-if [ ! -n "${BULLETTRAIN_GIT_UNMERGED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_UNMERGED=" ═"
-else
-  ZSH_THEME_GIT_PROMPT_UNMERGED=$BULLETTRAIN_GIT_UNMERGED
-fi
-if [ ! -n "${BULLETTRAIN_GIT_AHEAD+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_AHEAD=" ⬆"
-else
-  ZSH_THEME_GIT_PROMPT_AHEAD=$BULLETTRAIN_GIT_AHEAD
-fi
-if [ ! -n "${BULLETTRAIN_GIT_BEHIND+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_BEHIND=" ⬇"
-else
-  ZSH_THEME_GIT_PROMPT_BEHIND=$BULLETTRAIN_GIT_BEHIND
-fi
-if [ ! -n "${BULLETTRAIN_GIT_DIVERGED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_DIVERGED=" ⬍"
-else
-  ZSH_THEME_GIT_PROMPT_DIVERGED=$BULLETTRAIN_GIT_PROMPT_DIVERGED
 fi
 
 # ------------------------------------------------------------------------------
@@ -275,40 +213,7 @@ prompt_git() {
   fi
 }
 
-prompt_hg() {
-  local rev status
-  if $(hg id >/dev/null 2>&1); then
-    if $(hg prompt >/dev/null 2>&1); then
-      if [[ $(hg prompt "{status|unknown}") = "?" ]]; then
-        # if files are not added
-        prompt_segment red white
-        st='±'
-      elif [[ -n $(hg prompt "{status|modified}") ]]; then
-        # if any modification
-        prompt_segment yellow black
-        st='±'
-      else
-        # if working copy is clean
-        prompt_segment green black
-      fi
-      echo -n $(hg prompt "☿ {rev}@{branch}") $st
-    else
-      st=""
-      rev=$(hg id -n 2>/dev/null | sed 's/[^-0-9]//g')
-      branch=$(hg id -b 2>/dev/null)
-      if $(hg st | grep -Eq "^\?"); then
-        prompt_segment red black
-        st='±'
-      elif $(hg st | grep -Eq "^(M|A)"); then
-        prompt_segment yellow black
-        st='±'
-      else
-        prompt_segment green black
-      fi
-      echo -n "☿ $rev@$branch" $st
-    fi
-  fi
-}
+
 
 # Dir: current working directory
 prompt_dir() {
@@ -323,20 +228,6 @@ prompt_dir() {
   prompt_segment $BULLETTRAIN_DIR_BG $BULLETTRAIN_DIR_FG $dir
 }
 
-# RVM: only shows RVM info if on a gemset that is not the default one
-prompt_rvm() {
-  if [[ $BULLETTRAIN_RVM_SHOW == false ]] then
-    return
-  fi
-
-  if which rvm-prompt &> /dev/null; then
-    if [[ ! -n $(rvm gemset list | grep "=> (default)") ]]
-    then
-      prompt_segment $BULLETTRAIN_RVM_BG $BULLETTRAIN_RVM_FG $BULLETTRAIN_RVM_PREFIX"  $(rvm-prompt i v g)"
-    fi
-  fi
-}
-
 # Virtualenv: current working virtualenv
 prompt_virtualenv() {
   if [[ $BULLETTRAIN_VIRTUALENV_SHOW == false ]] then
@@ -347,20 +238,6 @@ prompt_virtualenv() {
   if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
     prompt_segment $BULLETTRAIN_VIRTUALENV_BG $BULLETTRAIN_VIRTUALENV_FG $BULLETTRAIN_VIRTUALENV_PREFIX"  $(basename $virtualenv_path)"
   fi
-}
-
-# NVM: Node version manager
-prompt_nvm() {
-  if [[ $BULLETTRAIN_NVM_SHOW == false ]] then
-    return
-  fi
-
-  [[ $(which nvm) != "nvm not found" ]] || return
-  local nvm_prompt
-  nvm_prompt=$(node -v 2>/dev/null)
-  [[ "${nvm_prompt}x" == "x" ]] && return
-  nvm_prompt=${nvm_prompt:1}
-  prompt_segment $BULLETTRAIN_NVM_BG $BULLETTRAIN_NVM_FG $BULLETTRAIN_NVM_PREFIX$nvm_prompt
 }
 
 prompt_time() {
@@ -419,13 +296,10 @@ build_prompt() {
   RETVAL=$?
   prompt_time
   prompt_status
-  prompt_rvm
   prompt_virtualenv
-  prompt_nvm
   prompt_context
   prompt_dir
   prompt_git
-  # prompt_hg
   prompt_end
 }
 

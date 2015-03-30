@@ -41,6 +41,7 @@ if [ -z "$not_personal" ]; then
   "profanity --with-terminal-notifier"
   dvtm
   youtube-dl
+  awscli
   )
 
   if [[ $xcode_installed ]]; then
