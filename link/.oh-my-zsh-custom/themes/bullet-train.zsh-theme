@@ -16,129 +16,61 @@
 VIRTUAL_ENV_DISABLE_PROMPT=true
 
 # PROMPT
-if [ ! -n "${BULLETTRAIN_PROMPT_CHAR+1}" ]; then
-  BULLETTRAIN_PROMPT_CHAR="\$"
-fi
-if [ ! -n "${BULLETTRAIN_PROMPT_ROOT+1}" ]; then
-  BULLETTRAIN_PROMPT_ROOT=true
-fi
+BULLETTRAIN_PROMPT_CHAR="\$"
 
 # STATUS
-if [ ! -n "${BULLETTRAIN_STATUS_SHOW+1}" ]; then
-  BULLETTRAIN_STATUS_SHOW=true
-fi
-if [ ! -n "${BULLETTRAIN_STATUS_EXIT_SHOW+1}" ]; then
-  BULLETTRAIN_STATUS_EXIT_SHOW=false
-fi
-if [ ! -n "${BULLETTRAIN_STATUS_BG+1}" ]; then
-  BULLETTRAIN_STATUS_BG=green
-fi
-if [ ! -n "${BULLETTRAIN_STATUS_ERROR_BG+1}" ]; then
-  BULLETTRAIN_STATUS_ERROR_BG=red
-fi
-if [ ! -n "${BULLETTRAIN_STATUS_FG+1}" ]; then
-  BULLETTRAIN_STATUS_FG=white
-fi
+#BULLETTRAIN_STATUS_EXIT_SHOW=false
+BULLETTRAIN_STATUS_BG=green
+BULLETTRAIN_STATUS_ERROR_BG=red
+BULLETTRAIN_STATUS_FG=white
+
+# BATTERY
+BULLETTRAIN_BATTERY_SHOW=true
+BULLETTRAIN_BATTERY_BG=default
 
 # TIME
-if [ ! -n "${BULLETTRAIN_TIME_SHOW+1}" ]; then
-  BULLETTRAIN_TIME_SHOW=true
-fi
-if [ ! -n "${BULLETTRAIN_TIME_BG+1}" ]; then
-  BULLETTRAIN_TIME_BG=white
-fi
-if [ ! -n "${BULLETTRAIN_TIME_FG+1}" ]; then
-  BULLETTRAIN_TIME_FG=black
-fi
+BULLETTRAIN_TIME_SHOW=true
+BULLETTRAIN_TIME_BG=white
+BULLETTRAIN_TIME_FG=black
+
+# OS
+BULLETTRAIN_OS_SHOW=true
+BULLETTRAIN_OS_BG=black
+BULLETTRAIN_OS_FG=white
+
 
 # VIRTUALENV
-if [ ! -n "${BULLETTRAIN_VIRTUALENV_SHOW+1}" ]; then
-  BULLETTRAIN_VIRTUALENV_SHOW=true
-fi
-if [ ! -n "${BULLETTRAIN_VIRTUALENV_BG+1}" ]; then
-  BULLETTRAIN_VIRTUALENV_BG=yellow
-fi
-if [ ! -n "${BULLETTRAIN_VIRTUALENV_FG+1}" ]; then
-  BULLETTRAIN_VIRTUALENV_FG=white
-fi
-if [ ! -n "${BULLETTRAIN_VIRTUALENV_PREFIX+1}" ]; then
-  BULLETTRAIN_VIRTUALENV_PREFIX=🐍
-fi
+BULLETTRAIN_VIRTUALENV_SHOW=true
+BULLETTRAIN_VIRTUALENV_BG=yellow
+BULLETTRAIN_VIRTUALENV_FG=white
+BULLETTRAIN_VIRTUALENV_PREFIX=🐍
 
 
 # DIR
-if [ ! -n "${BULLETTRAIN_DIR_SHOW+1}" ]; then
-  BULLETTRAIN_DIR_SHOW=true
-fi
-if [ ! -n "${BULLETTRAIN_DIR_BG+1}" ]; then
-  BULLETTRAIN_DIR_BG=blue
-fi
-if [ ! -n "${BULLETTRAIN_DIR_FG+1}" ]; then
-  BULLETTRAIN_DIR_FG=white
-fi
-if [ ! -n "${BULLETTRAIN_DIR_CONTEXT_SHOW+1}" ]; then
-  BULLETTRAIN_DIR_CONTEXT_SHOW=false
-fi
-if [ ! -n "${BULLETTRAIN_DIR_EXTENDED+1}" ]; then
-  BULLETTRAIN_DIR_EXTENDED=true
-fi
+BULLETTRAIN_DIR_SHOW=true
+BULLETTRAIN_DIR_BG=blue
+BULLETTRAIN_DIR_FG=white
+BULLETTRAIN_DIR_CONTEXT_SHOW=false
+BULLETTRAIN_DIR_EXTENDED=true
 
 # GIT
-if [ ! -n "${BULLETTRAIN_GIT_SHOW+1}" ]; then
-  BULLETTRAIN_GIT_SHOW=true
-fi
-if [ ! -n "${BULLETTRAIN_GIT_BG+1}" ]; then
-  BULLETTRAIN_GIT_BG=white
-fi
-if [ ! -n "${BULLETTRAIN_GIT_FG+1}" ]; then
-  BULLETTRAIN_GIT_FG=black
-fi
-if [ ! -n "${BULLETTRAIN_GIT_EXTENDED+1}" ]; then
-  BULLETTRAIN_GIT_EXTENDED=true
-fi
+BULLETTRAIN_GIT_SHOW=true
+BULLETTRAIN_GIT_BG=white
+BULLETTRAIN_GIT_FG=black
+BULLETTRAIN_GIT_EXTENDED=true
 
 # CONTEXT
-if [ ! -n "${BULLETTRAIN_CONTEXT_SHOW+1}" ]; then
-  BULLETTRAIN_CONTEXT_SHOW=false
-fi
-if [ ! -n "${BULLETTRAIN_CONTEXT_BG+1}" ]; then
-  BULLETTRAIN_CONTEXT_BG=black
-fi
-if [ ! -n "${BULLETTRAIN_CONTEXT_FG+1}" ]; then
-  BULLETTRAIN_CONTEXT_FG=default
-fi
+BULLETTRAIN_CONTEXT_SHOW=true
+BULLETTRAIN_CONTEXT_BG=black
+BULLETTRAIN_CONTEXT_FG=default
 
 # GIT PROMPT
-if [ ! -n "${BULLETTRAIN_GIT_PREFIX+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_PREFIX=" \ue0a0 "
-else
-  ZSH_THEME_GIT_PROMPT_PREFIX=$BULLETTRAIN_GIT_PREFIX
-fi
-if [ ! -n "${BULLETTRAIN_GIT_SUFFIX+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_SUFFIX=""
-else
-  ZSH_THEME_GIT_PROMPT_SUFFIX=$BULLETTRAIN_GIT_SUFFIX
-fi
-if [ ! -n "${BULLETTRAIN_GIT_DIRTY+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_DIRTY=" ✘"
-else
-  ZSH_THEME_GIT_PROMPT_DIRTY=$BULLETTRAIN_GIT_DIRTY
-fi
-if [ ! -n "${BULLETTRAIN_GIT_CLEAN+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_CLEAN=" ✔"
-else
-  ZSH_THEME_GIT_PROMPT_CLEAN=$BULLETTRAIN_GIT_CLEAN
-fi
-if [ ! -n "${BULLETTRAIN_GIT_ADDED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_ADDED=" %F{green}✚%F{black}"
-else
-  ZSH_THEME_GIT_PROMPT_ADDED=$BULLETTRAIN_GIT_ADDED
-fi
-if [ ! -n "${BULLETTRAIN_GIT_UNTRACKED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_UNTRACKED=" %F{yellow}✭%F{black}"
-else
-  ZSH_THEME_GIT_PROMPT_UNTRACKED=$BULLETTRAIN_GIT_UNTRACKED
-fi
+ZSH_THEME_GIT_PROMPT_PREFIX=" \ue0a0 "
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
+ZSH_THEME_GIT_PROMPT_DIRTY=" ✘"
+ZSH_THEME_GIT_PROMPT_CLEAN=" ✔"
+ZSH_THEME_GIT_PROMPT_ADDED=" %F{green}✚%F{black}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED=" %F{yellow}✭%F{black}"
 
 # ------------------------------------------------------------------------------
 # SEGMENT DRAWING
@@ -181,10 +113,11 @@ prompt_end() {
 # to be shown
 # ------------------------------------------------------------------------------
 
+
 # Context: user@hostname (who am I and where am I)
 context() {
   local user="$(whoami)"
-  [[ "$user" != "$BULLETTRAIN_CONTEXT_DEFAULT_USER" || -n "$BULLETTRAIN_IS_SSH_CLIENT" ]] && echo -n "${user}@%m"
+  [[ "$user" != "$BULLETTRAIN_CONTEXT_DEFAULT_USER" || -n "$SSH_CLIENT" ]] && echo -n "${user}@%m"
 }
 prompt_context() {
   [[ $BULLETTRAIN_CONTEXT_SHOW == false ]] && return
@@ -203,12 +136,14 @@ prompt_git() {
   repo_path=$(git rev-parse --git-dir 2>/dev/null)
 
   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
-    prompt_segment $BULLETTRAIN_GIT_BG $BULLETTRAIN_GIT_FG
+    #prompt_segment $BULLETTRAIN_GIT_BG $BULLETTRAIN_GIT_FG
 
     if [[ $BULLETTRAIN_GIT_EXTENDED == true ]] then
-      echo -n $(git_prompt_info)$(git_prompt_status)
+      bt_git_prompt=$(git_prompt_info)$(git_prompt_status)
+      prompt_segment $BULLETTRAIN_GIT_BG $BULLETTRAIN_GIT_FG $bt_git_prompt
     else
-      echo -n $(git_prompt_info)
+      bt_git_prompt=$(git_prompt_info)
+      prompt_segment $BULLETTRAIN_GIT_BG $BULLETTRAIN_GIT_FG $bt_git_prompt
     fi
   fi
 }
@@ -236,7 +171,8 @@ prompt_virtualenv() {
 
   local virtualenv_path="$VIRTUAL_ENV"
   if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
-    prompt_segment $BULLETTRAIN_VIRTUALENV_BG $BULLETTRAIN_VIRTUALENV_FG $BULLETTRAIN_VIRTUALENV_PREFIX"  $(basename $virtualenv_path)"
+    bt_virtualenv_path=$(basename $virtualenv_path)
+    prompt_segment $BULLETTRAIN_VIRTUALENV_BG $BULLETTRAIN_VIRTUALENV_FG $BULLETTRAIN_VIRTUALENV_PREFIX"  $bt_virtualenv_path"
   fi
 }
 
@@ -244,8 +180,49 @@ prompt_time() {
   if [[ $BULLETTRAIN_TIME_SHOW == false ]] then
     return
   fi
-
   prompt_segment $BULLETTRAIN_TIME_BG $BULLETTRAIN_TIME_FG %D{%H:%M:%S}
+}
+
+prompt_os() {
+  if [[ $BULLETTRAIN_OS_SHOW == false ]] then
+    return
+  fi
+
+  # OSX
+  if [[ "$OSTYPE" =~ ^darwin ]]; then
+    BULLETTRAIN_OS_SYMBOL=''
+  # Ubuntu.
+  elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]]; then
+    BULLETTRAIN_OS_SYMBOL='ⓤ'
+  # Arch
+  elif [[ "$(cat /etc/issue 2> /dev/null)" =~ Arch ]]; then
+    BULLETTRAIN_OS_SYMBOL='ⓐ'
+  else
+    return
+  fi
+  
+  prompt_segment $BULLETTRAIN_OS_BG $BULLETTRAIN_OS_FG $BULLETTRAIN_OS_SYMBOL
+}
+
+prompt_battery() {
+  if [[ $BULLETTRAIN_BATTERY_SHOW == false ]] then
+    return
+  fi
+  
+  bt_batt_pct=$(battery_pct_remaining)
+  bt_display="$bt_batt_pct%%"
+  if [[ "$bt_batt_pct" == "External Power" ]]; then
+    BULLETTRAIN_BATTERY_FG=white
+    bt_display="⚓"
+  elif [[ "$bt_batt_pct" -gt "50" ]]; then
+    BULLETTRAIN_BATTERY_FG=green
+  elif [[ "$bt_batt_pct" -gt "20"  ]]; then
+    BULLETTRAIN_BATTERY_FG=yellow
+  else
+    BULLETTRAIN_BATTERY_FG=red
+  fi
+
+  prompt_segment $BULLETTRAIN_BATTERY_BG $BULLETTRAIN_BATTERY_FG $bt_display
 }
 
 # Status:
@@ -253,14 +230,12 @@ prompt_time() {
 # - am I root
 # - are there background jobs?
 prompt_status() {
-  if [[ $BULLETTRAIN_STATUS_SHOW == false ]] then
-    return
-  fi
-
+  
   local symbols
   symbols=()
-  [[ $RETVAL -ne 0 && $BULLETTRAIN_STATUS_EXIT_SHOW != true ]] && symbols+="✘"
-  [[ $RETVAL -ne 0 && $BULLETTRAIN_STATUS_EXIT_SHOW == true ]] && symbols+="✘ $RETVAL"
+  [[ $RETVAL -ne 0 ]] && symbols+="✘"
+  #[[ $RETVAL -ne 0 && $BULLETTRAIN_STATUS_EXIT_SHOW != true ]] && symbols+="✘"
+  #[[ $RETVAL -ne 0 && $BULLETTRAIN_STATUS_EXIT_SHOW == true ]] && symbols+="✘ $RETVAL"
   [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡%f"
   [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="⚙"
 
@@ -276,14 +251,10 @@ prompt_status() {
 prompt_char() {
   local bt_prompt_char
 
-  if [[ ${#BULLETTRAIN_PROMPT_CHAR} -eq 1 ]] then
-    bt_prompt_char="${BULLETTRAIN_PROMPT_CHAR}"
-  fi
-
-  if [[ $BULLETTRAIN_PROMPT_ROOT == true ]] then
-    bt_prompt_char="%(!.%F{red}#.%F{green}${bt_prompt_char}%f)"
-  fi
-
+  bt_prompt_char="${BULLETTRAIN_PROMPT_CHAR}"
+  
+  bt_prompt_char="%(!.%F{red}#.%F{green}${bt_prompt_char}%f)"
+  
   echo -n $bt_prompt_char
 }
 
@@ -294,6 +265,7 @@ prompt_char() {
 
 build_prompt() {
   RETVAL=$?
+  prompt_os
   prompt_time
   prompt_status
   prompt_virtualenv
@@ -303,6 +275,27 @@ build_prompt() {
   prompt_end
 }
 
-PROMPT='
-%{%f%b%k%}$(build_prompt)
-%{${fg_bold[default]}%}$(prompt_char) %{$reset_color%}'
+get_space () {
+  local STR=$1$2
+  local zero='%([BSUbfksu]|([FB]|){*})'
+  local LENGTH=${#${(S%%)STR//$~zero/}} 
+  local SPACES=""
+  (( LENGTH = ${COLUMNS} - $LENGTH - 2))
+  echo "$(printf "%${LENGTH}s" " ")"
+}
+
+
+themills_precmd () {
+  _1LEFT=$(build_prompt)
+  _1RIGHT=" $(prompt_battery)"
+  _1SPACES=`get_space $_1LEFT $_1RIGHT`
+  print 
+  print -rP "$_1LEFT$_1SPACES$_1RIGHT"
+}
+
+RPROMPT=''
+PROMPT='%{${fg_bold[default]}%}$(prompt_char) %{$reset_color%}'
+
+
+autoload -U add-zsh-hook
+add-zsh-hook precmd themills_precmd
