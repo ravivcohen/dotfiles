@@ -63,7 +63,7 @@ fi
 
 ##Setup DirColors DB to load on start
 alias dircolors='gdircolors'
-eval `dircolors ~/.oh-my-zsh-custom/dircolors-solarized/dircolors.256dark` 
+eval `dircolors ~/.oh-my-zsh-custom/themes/dircolors` 
 
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache"
