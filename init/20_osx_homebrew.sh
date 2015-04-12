@@ -80,7 +80,7 @@ brewroot="$(brew --config | awk '/HOMEBREW_PREFIX/ {print $2}')"
 binroot=$brewroot/bin
 cellarroot=$brewroot/Cellar
 
-echo "BINROOT $binroot" 
+ 
 # htop
 if [[ "$(type -P $binroot/htop)" ]] && [[ "$(stat -L -f "%Su:%Sg" "$binroot/htop")" != "root:wheel" || ! "$(($(stat -L -f "%DMp" "$binroot/htop") & 4))" ]]; then
   e_header "Updating htop permissions"
@@ -88,6 +88,7 @@ if [[ "$(type -P $binroot/htop)" ]] && [[ "$(stat -L -f "%Su:%Sg" "$binroot/htop
   sudo chmod u+s "$binroot/htop"
 fi
 
+echo "SHELL" "$(cat /etc/shells | grep -q "$binroot/zsh")"
 # ZSH
 if [[ "$(type -P $binroot/zsh)" && "$(cat /etc/shells | grep -q "$binroot/zsh")" ]]; then
   e_header "Adding $binroot/zsh to the list of acceptable shells"
