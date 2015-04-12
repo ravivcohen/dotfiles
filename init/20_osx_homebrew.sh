@@ -71,7 +71,7 @@ fi
 
 # ZSH
 if [[ "$(type -P $binroot/zsh)" ]]; then
-  if grep -q "$binroot/zsh" "/etc/shells"; then
+  if ! grep -q "$binroot/zsh" "/etc/shells"; then
     e_header "Adding $binroot/zsh to the list of acceptable shells"
     echo "$binroot/zsh" | sudo tee -a /etc/shells >/dev/null
   fi
