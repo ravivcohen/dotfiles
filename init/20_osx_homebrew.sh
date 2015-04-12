@@ -70,7 +70,7 @@ if [[ "$(type -P $binroot/htop)" ]] && [[ "$(stat -L -f "%Su:%Sg" "$binroot/htop
 fi
 
 # ZSH
-if [[ "$(type -P $binroot/zsh)" && !"$(cat /etc/shells | grep -q "$binroot/zsh")$?" ]]; then
+if [[ "$(type -P $binroot/zsh)" && !($(cat /etc/shells | grep -q "$binroot/zsh")$?) ]]; then
   e_header "Adding $binroot/zsh to the list of acceptable shells"
   echo "$binroot/zsh" | sudo tee -a /etc/shells >/dev/null
 fi
