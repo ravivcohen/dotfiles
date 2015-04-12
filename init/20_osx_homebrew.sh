@@ -80,6 +80,7 @@ brewroot="$(brew --config | awk '/HOMEBREW_PREFIX/ {print $2}')"
 binroot=$brewroot/bin
 cellarroot=$brewroot/Cellar
 
+echo "BINROOT $binroot" 
 # htop
 if [[ "$(type -P $binroot/htop)" ]] && [[ "$(stat -L -f "%Su:%Sg" "$binroot/htop")" != "root:wheel" || ! "$(($(stat -L -f "%DMp" "$binroot/htop") & 4))" ]]; then
   e_header "Updating htop permissions"
