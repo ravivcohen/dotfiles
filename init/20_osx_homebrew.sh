@@ -43,26 +43,7 @@ if [ -z "$not_personal" ]; then
   youtube-dl
   awscli
   )
-
-  if [[ $xcode_installed ]]; then
-    #We need to Patch MUTT for sidebar support
-    patch -p0 -N --reject-file=/dev/null --dry-run --silent /usr/local/Library/Formula/mutt.rb < $DOTFILES_HOME/conf/osx/mutt.rb.patch &>/dev/null
-    #If the patch has not been applied then the $? which is the exit status 
-    #for last command would have a success status code = 0
-    if [ $? -eq 0 ];  then
-      e_header "Patching Mutt before Brewing"
-      #apply the patch
-      patch -p0 -N --silent /usr/local/Library/Formula/mutt.rb < $DOTFILES_HOME/conf/osx/mutt.rb.patch
-    fi
-
-    recipes+=("mutt --with-trash-patch --with-s-lang  
-    --with-pgp-verbose-mime-patch --with-confirm-attachment-patch 
-    --with-sidebar-patch"
-    offline-imap
-    notmuch
-    urlview
-    lbdb )
-  fi
+  
 fi
 
 unset setdiffA setdiffB setdiffC;
