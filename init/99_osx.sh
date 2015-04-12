@@ -24,6 +24,7 @@ if [[ ! -L "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/User/
     FILES=$DOTFILES_HOME/conf/sublime/User/*
     for f in $FILES
     do
+        echo "$f $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/$f"
         ln -s "$f $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/$f"
     done
 fi
