@@ -4,29 +4,29 @@ e_header "Running OSX Local Config"
 # OSX Config. Can safely be run everytime.
 source $DOTFILES_HOME/conf/osx/conf_osx.sh
 
-# ## SUBLIME
-# # Make sirectory if it does not exist
-# mkdir -p $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
-# mkdir -p $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/
+## SUBLIME
+# Make sirectory if it does not exist
+mkdir -p $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
+mkdir -p $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/
+mkdir -p $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
 
-# if [[ ! -e "$USER_HOME/Library/Application Support/Sublime Text 3/Installed Packages/Package Control.sublime-package" ]]; then
-#     e_header "Downloading sublime-package-manager"
-#     # Get the latest package manager
-#     curl -fsSL https://sublime.wbond.net/Package%20Control.sublime-package -o $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
-# fi
+if [[ ! -e "$USER_HOME/Library/Application Support/Sublime Text 3/Installed Packages/Package Control.sublime-package" ]]; then
+    e_header "Downloading sublime-package-manager"
+    # Get the latest package manager
+    curl -fsSL https://sublime.wbond.net/Package%20Control.sublime-package -o $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
+fi
 
-# if [[ ! -L "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/User" ]]; then
-#     e_header "Configuring Sublime"
-#     # Remove the current user folder 
-#     rm -rf $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
-#     # Link needed files from user directory
-#     FILES=$DOTFILES_HOME/conf/sublime/User/*
-#     for f in $FILES
-#     do
-#         ln -s "$f" "$USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User"
-#     done
-#     ln -s $DOTFILES_HOME/conf/sublime/User $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
-# fi
+if [[ ! -L "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/User/Package Control.sublime-settings" ]]; then
+    e_header "Configuring Sublime"
+    # Remove the current user folder 
+    rm -rf $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/*
+    # Link needed files from user directory
+    FILES=$DOTFILES_HOME/conf/sublime/User/*
+    for f in $FILES
+    do
+        ln -s "$f" "$USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/$f"
+    done
+fi
 
 ## iTERM
 # IF Iterm has never been run this wont exsit. 

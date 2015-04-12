@@ -1,13 +1,13 @@
 {
-	"color_scheme": "Packages/User/base16-ocean.dark (SL).tmTheme",
+	"color_scheme": "Packages/Theme - Spacegray/base16-ocean.dark.tmTheme",
 	"dictionary": "Packages/Language - English/en_US.dic",
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
 		"SideBarEnhancements",
-		"SublimeLinter",
 		"BracketHighlighter",
+		"SublimeLinter",
 		"Vintage"
 	],
 	"rulers":

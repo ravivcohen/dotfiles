@@ -4,16 +4,16 @@
 	],
 	"installed_packages":
 	[
-		"AutoWrap",
+		"4GL",
+		"Abacus",
+		"Base16 Color Schemes",
 		"BracketHighlighter",
+		"CTags",
 		"Git",
 		"LaTeXTools",
 		"Package Control",
 		"SideBarEnhancements",
 		"Solarized Color Scheme",
-		"SublimeCodeIntel",
-		"SublimeLinter",
-		"Theme - Soda",
 		"Theme - Spacegray",
 		"Tomorrow Color Schemes",
 		"Wrap Plus"
