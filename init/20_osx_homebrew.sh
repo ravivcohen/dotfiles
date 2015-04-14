@@ -34,15 +34,18 @@ recipes=(
 if [ -z "$not_personal" ]; then
   recipes+=(
   apple-gcc42
-  nmap
   lynx 
-  pkg-config 
-  "wireshark --with-headers --with-libpcap --with-libsmi --with-lua --with-qt --devel"
+  pkg-config
   "profanity --with-terminal-notifier"
   dvtm
   youtube-dl
   awscli
   )
+
+  if [[ $xcode_installed ]]; then
+    recipes+=("wireshark --with-headers --with-libpcap --with-libsmi --with-lua --with-qt --devel"
+      nmap)
+  fi
   
 fi
 

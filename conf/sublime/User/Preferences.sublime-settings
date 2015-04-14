@@ -6,9 +6,9 @@
 	"ignored_packages":
 	[
 		"SideBarEnhancements",
-		"BracketHighlighter",
+		"Vintage",
 		"SublimeLinter",
-		"Vintage"
+		"BracketHighlighter"
 	],
 	"rulers":
 	[
