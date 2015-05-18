@@ -6,7 +6,7 @@ if [[ ! -e $USER_HOME/.oh-my-zsh ]]; then
     curl -L http://install.ohmyz.sh | sh
 fi
 
-if [[ is_arch ]]; then
+if is_arch; then
     #TODO
     if [[ $(whoami) == "vagrant" ]]; then
         sudo chsh -s "$(which zsh)" vagrant

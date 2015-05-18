@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # OSX
-  if [[ is_osx ]]; then
+  if is_osx; then
   	open -a Safari
   	sleep 1
 	#tunnelblick-beta
@@ -24,7 +24,7 @@
     https://www.xpra.org/
     
   # Ubuntu.
-  elif [[ is_ubuntu ]]; then
+  elif is_ubuntu; then
   	e_header "TO DO!! "
   fi
 

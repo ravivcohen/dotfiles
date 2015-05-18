@@ -229,19 +229,17 @@ function assert() {
   ${modes[success]} "\"$actual\" ${equals[success]} \"$expected\""
 }
 
+# OS detection
 function is_osx() {
-  if [[ $OS == "osx" ]]; then return 0; fi
-  return 1
+  [[ $OS == "osx" ]] || return 1
 }
 
 function is_ubuntu() {
-  if [[ $OS == "ubuntu" ]]; then return 0; fi
-  return 1
+  [[ $OS == "ubuntu" ]] || return 1
 }
 
 function is_arch() {
-  if [[ $OS == "arch" ]]; then return 0; fi
-  return 1
+  [[ $OS == "arch" ]] || return 1
 }
 
 ################################################################################
@@ -278,7 +276,7 @@ check_sudo
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 
-if [[ is_osx ]]; then
+if is_osx; then
   check_cmd_tools
   if [[ $(xcode-select -p 2>&1) == "/Applications/Xcode.app/Contents/Developer"  ]]; then
     export xcode_installed=true
