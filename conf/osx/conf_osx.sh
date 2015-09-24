@@ -16,11 +16,14 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 # Check for software updates daily, not just once per week
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
-# Show icons for hard drives, servers, and removable media on the desktop
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+# # Show icons for hard drives, servers, and removable media on the desktop
+# defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+# defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+# defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+# defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+#Hide aLL Desktop icons:
+defaults write com.apple.finder CreateDesktop -bool false
 
 #Change indexing order and disable some search results in Spotlight
 defaults write com.apple.spotlight orderedItems -array \
@@ -95,6 +98,7 @@ defaults write com.apple.screensaver askForPasswordDelay -int 5
 
 # Save screenshots here instead of to desktop
 defaults write com.apple.screencapture location "$USER_HOME/Screenshots/"
+mkdir -p "$USER_HOME/Screenshots"
 
 # Disable drop shadow on screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
@@ -104,10 +108,10 @@ defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
 
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
-#defaults write com.apple.screencapture type -string "png"
+defaults write com.apple.screencapture type -string "png"
 
 # Enable HiDPI display modes (requires restart)
-#sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
+sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
 ###############################################################################
 # Finder                                                                      #

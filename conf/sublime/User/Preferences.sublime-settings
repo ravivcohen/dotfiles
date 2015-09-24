@@ -5,9 +5,9 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"SideBarEnhancements",
-		"Vintage",
 		"SublimeLinter",
+		"Vintage",
+		"SideBarEnhancements",
 		"BracketHighlighter"
 	],
 	"rulers":
