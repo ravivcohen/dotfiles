@@ -8,7 +8,6 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 # It's my library. Let me see it.
 sudo chflags nohidden ~/Library/
 sudo chflags nohidden /tmp
-sudo chflags nohidden /usr
 
 #Disable Spotlight indexing from indexing /volume
 sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
@@ -53,11 +52,6 @@ sudo mdutil -i on / > /dev/null
 # Rebuild the index from scratch
 sudo mdutil -E / > /dev/null
 
-
-
-##EXTRAA
-# Link to the airport command
-sudo ln -sf /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/sbin/airport
 
 # Enable HiDPI display modes (requires restart)
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
