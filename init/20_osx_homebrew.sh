@@ -50,6 +50,7 @@ fi
 
 brew install git
 brew update
+export PATH="/usr/local/bin:$PATH"
 unset setdiffA setdiffB setdiffC;
 setdiffA=("${recipes[@]}"); setdiffB=( $(brew list) ); setdiff
 # Because brew hard fails incase one application fails.
