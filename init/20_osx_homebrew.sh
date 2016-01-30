@@ -14,8 +14,7 @@ recipes=(
   s-lang
   zsh 
   "wget --with-iri" 
-  grep 
-  git 
+  grep
   ssh-copy-id  
   git-extras
   htop-osx  
@@ -49,6 +48,8 @@ if [ -z "$not_personal" ]; then
   
 fi
 
+brew install git
+brew update
 unset setdiffA setdiffB setdiffC;
 setdiffA=("${recipes[@]}"); setdiffB=( $(brew list) ); setdiff
 # Because brew hard fails incase one application fails.
