@@ -25,7 +25,6 @@ recipes=(
   p7zip 
   "lesspipe --syntax-highlighting"
   "python --universal" 
-  "brew-cask"
   "vim --with-python --with-ruby --with-perl --enable-cscope 
   --enable-pythoninterp --override-system-vi"
 )
@@ -51,6 +50,8 @@ fi
 brew install git
 brew update
 export PATH="/usr/local/bin:$PATH"
+git clone --depth 1 --branch v0.60.1 https://github.com/phinze/homebrew-cask.git /Library/Caches/Homebrew/brew-cask--git
+
 unset setdiffA setdiffB setdiffC;
 setdiffA=("${recipes[@]}"); setdiffB=( $(brew list) ); setdiff
 # Because brew hard fails incase one application fails.
