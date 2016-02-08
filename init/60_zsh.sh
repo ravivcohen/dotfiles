@@ -4,7 +4,7 @@ if [[ ! -e $USER_HOME/.oh-my-zsh ]]; then
     e_header "Setup oh-my-zsh"
     export PATH="/usr/local/bin:$PATH"
     ##SETUP OH MY ZSH ONLY ON THE FIRST TIME
-    curl -L http://install.ohmyz.sh | sh
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
 
 if is_arch; then
