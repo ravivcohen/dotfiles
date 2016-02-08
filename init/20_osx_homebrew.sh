@@ -50,7 +50,6 @@ fi
 brew install git
 brew update
 export PATH="/usr/local/bin:$PATH"
-git clone --depth 1 --branch v0.60.1 https://github.com/phinze/homebrew-cask.git /Library/Caches/Homebrew/brew-cask--git
 
 unset setdiffA setdiffB setdiffC;
 setdiffA=("${recipes[@]}"); setdiffB=( $(brew list) ); setdiff
