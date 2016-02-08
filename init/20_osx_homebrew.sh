@@ -6,6 +6,7 @@ is_osx || return 1
 
 # Install Homebrew recipes.
 recipes=(
+  git
   ctags 
   "readline --universal" 
   "sqlite --universal" 
@@ -47,8 +48,6 @@ if [ -z "$not_personal" ]; then
   
 fi
 
-brew install git
-brew update
 export PATH="/usr/local/bin:$PATH"
 
 unset setdiffA setdiffB setdiffC;
