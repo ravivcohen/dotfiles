@@ -32,7 +32,7 @@ if [[ ! -e ~/Library/Preferences/com.googlecode.iterm2.plist ]]; then
     # Open iTerm to set all files in place.
     open -a iTerm
     sleep 1
-    killall iTerm
+    kill $(pgrep -f iterm)
 fi
 
 # Now for iTerm to load its settting from an external location.
