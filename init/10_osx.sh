@@ -51,15 +51,6 @@ fi
 
 if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "noxcode" ]]; then
   FALLTHROUGH=1
-  
-  if [[ ! -e "/Applications/PasswordAssistant.app" ]]; then
-    e_header "Setting up PasswordAssistant"
-    curl -fsSL https://s3.amazonaws.com/rc_software/PasswordAssistant.zip -o \
-    /tmp/PasswordAssistant.zip
-    rm -rf "/Applications/PasswordAssistant.app"
-    # Link the PasswordAssitant Bin"
-    unzip -o -qq /tmp/PasswordAssistant.zip -d /Applications/
-  fi 
 fi
 
 if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "minimal" ]]; then
