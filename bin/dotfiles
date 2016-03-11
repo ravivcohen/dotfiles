@@ -242,10 +242,28 @@ function is_arch() {
   [[ $OS == "arch" ]] || return 1
 }
 
+## OSX 
+# FALLTHROUGH=
+# if [[ "$INSTALLTYPE" == "full" ]]; then
+#   FALLTHROUGH=1
+# fi
+
+# if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "noxcode" ]]; then
+#   FALLTHROUGH=1
+# fi
+
+# if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "minimal" ]]; then
+#   FALLTHROUGH=1
+# fi
+
+# if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "base" ]]; then
+# fi
+
 ################################################################################
 ## FUNCTIONS END                                                               #
 ################################################################################
 
+export INSTALLTYPE="full"
 ## TODO: Move this into a get_os functions that is smart return var right away if already set
 # OSX
 if [[ "$OSTYPE" =~ ^darwin ]]; then

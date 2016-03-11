@@ -7,8 +7,16 @@ is_osx || return 1
 # [[ ! "$(brew ls --versions brew-cask)" ]] && e_error "Brew-cask failed to install." && return 1
 
 # install fonts.
-fonts=(font-dejavu-sans-mono-for-powerline font-inconsolata-dz-for-powerline font-inconsolata-for-powerline
-font-inconsolata-g-for-powerline font-meslo-lg-for-powerline font-meslo-lg font-sauce-code-powerline )
+fonts=(
+    font-dejavu-sans-mono-for-powerline 
+    font-inconsolata-dz-for-powerline 
+    font-inconsolata-for-powerline
+    font-inconsolata-g-for-powerline 
+    font-meslo-lg-for-powerline 
+    font-meslo-lg f
+    ont-sauce-code-powerline 
+    )
+
 fonts=($(setdiff "${fonts[*]}" "$(brew cask list 2>/dev/null)"))
 if (( ${#fonts[@]} > 0 )); then
   for font in "${fonts[@]}"; do

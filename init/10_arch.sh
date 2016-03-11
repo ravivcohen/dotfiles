@@ -5,11 +5,28 @@ e_header "Updating pacman"
 sudo pacman --noc -Syyu
 
 # Install APT packages.
-packages=(
-  zsh
-  htop
-  python2
-)
+case "$INSTALLTYPE" in
+  full)
+      echo "FULL"
+      ;&
+  
+  minimal)
+      echo "Minimal"
+      ;& 
+  
+  base)
+    packages=(
+    zsh
+    htop
+    python2
+    )
+    #e_header "Base"
+    ;;
+  
+  *)
+      e_error "No Install Type Passed"
+            ;;
+esac
 
 list=()
 for package in "${packages[@]}"; do
@@ -24,3 +41,4 @@ if (( ${#list[@]} > 0 )); then
     sudo pacman --noc -S "$package"
   done
 fi
+
