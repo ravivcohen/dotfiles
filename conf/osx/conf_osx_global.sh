@@ -22,8 +22,8 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo Hos
 #disable fast user switching 
 sudo defaults write /Library/Preferences/.GlobalPreferences MultipleSessionEnabled -bool NO
 
-#diable username list in login
-sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWFULLNAME 0
+#diable username NO list in login
+sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWFULLNAME 1
 
 #Change indexing order and disable some search results in Spotlight
 sudo defaults write com.apple.spotlight orderedItems -array \
