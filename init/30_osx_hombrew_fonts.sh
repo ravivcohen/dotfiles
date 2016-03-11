@@ -13,8 +13,8 @@ fonts=(
     font-inconsolata-for-powerline
     font-inconsolata-g-for-powerline 
     font-meslo-lg-for-powerline 
-    font-meslo-lg f
-    ont-sauce-code-powerline 
+    font-meslo-lg
+    font-sauce-code-powerline 
     )
 
 fonts=($(setdiff "${fonts[*]}" "$(brew cask list 2>/dev/null)"))
