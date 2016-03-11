@@ -64,6 +64,7 @@ if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "base" ]]; then
     zsh 
     "wget --with-iri" 
     grep
+    sf-pwgen
   )
 
 fi
