@@ -74,7 +74,7 @@ if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "base" ]]; then
     defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool TRUE
     defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iTerm/";
     ## iTERM
-    osascript -e ‘tell application “Finder” to set desktop picture to POSIX file “$DOTFILES_HOME/conf/hack_the_planet.jpg”’
+    osascript -e 'tell application "Finder" to set desktop picture to POSIX file "'$DOTFILES_HOME'/conf/hack_the_planet.jpg"'
 fi
 
 
