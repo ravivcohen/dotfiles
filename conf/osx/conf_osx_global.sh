@@ -68,11 +68,11 @@ sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutio
 # 2 = on for essential services
 sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 2
 # Enable Stealth mode.
-sudo defaults write /Library/Preferences/com.apple.alf stealthenabled 1
+sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -bool true
 # Enable Firewall Logging.
-sudo defaults write /Library/Preferences/com.apple.alf loggingenabled 1
+sudo defaults write /Library/Preferences/com.apple.alf loggingenabled -bool true
 # Allow signed APPS
-sudo defaults write /Library/Preferences/com.apple.alf allowsignedenabled -int 1
+sudo defaults write /Library/Preferences/com.apple.alf allowsignedenabled -bool false
 
 # Enable Require password to wake this computer from sleep or screen saver.
 sudo defaults -currentHost write com.apple.screensaver askForPassword -int 1
