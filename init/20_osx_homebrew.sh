@@ -12,7 +12,7 @@ if [[ "$INSTALLTYPE" == "full" ]]; then
   FALLTHROUGH=1
   recipes+=(
     "wireshark --with-headers --with-libpcap --with-libsmi --with-lua 
-    --with-qt --devel"
+    --with-qt5"
     nmap
     )
 fi
@@ -50,7 +50,7 @@ if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "minimal" ]]; then
     ack 
     rename 
     p7zip 
-    "lesspipe --syntax-highlighting"
+    "lesspipe --with-syntax-highlighting"
     "python --universal" 
     "vim --with-python --with-ruby --with-perl --enable-cscope 
     --enable-pythoninterp --override-system-vi"
