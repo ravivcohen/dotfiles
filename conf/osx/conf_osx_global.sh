@@ -1,8 +1,7 @@
 
 # Set computer name (as done via System Preferences → Sharing)
-HOSTNAME="$(cat -n /usr/share/dict/words | grep -w $(jot -r 1 1 $n) | cut -f2)"
+HOSTNAME=$(sed `perl -e "print int rand(99999)"`"q;d" /usr/share/dict/words)
 HOSTNAME+="$RANDOM"
-HOSTNAME+="$(cat -n /usr/share/dict/words | grep -w $(jot -r 1 1 $n) | cut -f2)"
 sudo scutil --set ComputerName "$HOSTNAME"
 sudo scutil --set HostName "$HOSTNAME"
 sudo scutil --set LocalHostName "$HOSTNAME"
