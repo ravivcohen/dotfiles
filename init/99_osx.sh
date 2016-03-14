@@ -39,7 +39,7 @@ if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "minimal" ]]; then
     if [[ ! -e "$USER_HOME/Library/Application Support/Sublime Text 3/Installed Packages/Package Control.sublime-package" ]]; then
         e_header "Downloading sublime-package-manager"
         # Get the latest package manager
-        curl -fsSL https://sublime.wbond.net/Package%20Control.sublime-package -o $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
+        curl -fsSL https://packagecontrol.io/Package%20Control.sublime-package -o $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
     fi
 
     if [[ ! -L "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/User/Package Control.sublime-settings" ]]; then
