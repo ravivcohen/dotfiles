@@ -58,7 +58,7 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 alias uburp='python $HOME/.dotfiles/bin/burp_download'
 
 # Sort IPs
-sip='sort -n -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4'
+alias sip='sort -n -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4'
 
 #load aliasxs 
 if [[ -e "$HOME/.my_aliasxs.zsh" ]]; then
