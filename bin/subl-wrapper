@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# Open Sublime Text 3
+
+if [ ! -e "$SUBL" ] ; then
+    echo "Sublime Text binary not found..."
+    exit 1
+fi
+
+"$SUBL" $@ &
