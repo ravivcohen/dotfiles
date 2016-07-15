@@ -24,7 +24,7 @@ if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "minimal" ]]; then
 fi
 
 if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "base" ]]; then
-    casks+=(sublime-text iterm2-nightly)
+    casks+=(sublime-text iterm2)
 fi
 
 # Install Homebrew casks.
