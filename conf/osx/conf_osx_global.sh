@@ -1,12 +1,15 @@
 
-# Set computer name (as done via System Preferences → Sharing)
-HOSTNAME=$(sed `perl -e "print int rand(99999)"`"q;d" /usr/share/dict/words)
-HOSTNAME+="$RANDOM"
-sudo scutil --set ComputerName "$HOSTNAME"
-sudo scutil --set HostName "$HOSTNAME"
-sudo scutil --set LocalHostName "$HOSTNAME"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server \
-NetBIOSName -string "$HOSTNAME"
+if [[ "$new_dotfiles_install" ]]; then
+  e_header "Setting Hostname"
+  # Set computer name (as done via System Preferences → Sharing)
+  HOSTNAME=$(sed `perl -e "print int rand(99999)"`"q;d" /usr/share/dict/words)
+  HOSTNAME+="$RANDOM"
+  sudo scutil --set ComputerName "$HOSTNAME"
+  sudo scutil --set HostName "$HOSTNAME"
+  sudo scutil --set LocalHostName "$HOSTNAME"
+  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server \
+  NetBIOSName -string "$HOSTNAME"
+fi
 
 # It's my library. Let me see it.
 sudo chflags nohidden ~/Library/
