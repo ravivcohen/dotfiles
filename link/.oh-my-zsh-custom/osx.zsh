@@ -95,7 +95,7 @@ alias burp='nohup java -jar -Xmx1024m ${burpdirectory}burp.jar >>${burpdirectory
 
 alias edot="subl $HOME/.dotfiles/"
 
-alias ggl="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir=/Users/ravivcohen/.google/chrome/rc > /dev/null 2>&1 &"
+alias ggl="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir=/Users/raviv/.google/chrome/rc > /dev/null 2>&1 &"
 alias chrome=ggl
 alias google=ggl
 

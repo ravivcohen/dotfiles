@@ -18,5 +18,7 @@
 	"tab_size": 4,
 	"theme": "Spacegray.sublime-theme",
 	"translate_tabs_to_spaces": true,
+	"remember_open_files": false,
+	"hot_exit": false,
 	"word_wrap": false
 }

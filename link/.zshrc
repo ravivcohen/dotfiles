@@ -46,7 +46,7 @@ ZSH_THEME="bullet-train"
 
 # OSX
 if [[ $(uname) == "Darwin" ]] ; then
-	plugins=(git osx github brew battery vagrant)
+	plugins=(git osx github brew battery vagrant aws screen)
 # Linux
 else
 	plugins=(git github battery)
@@ -58,3 +58,11 @@ source $ZSH/oh-my-zsh.sh
 rm -rf .zcompdump*
 zmodload -i zsh/complist
 compinit -u "${ZSH_COMPDUMP}"
+
+GPG_TTY=$(tty)
+export GPG_TTY
+if [ -f "${HOME}/.gpg-agent-info" ]; then
+    . "${HOME}/.gpg-agent-info"
+    export GPG_AGENT_INFO
+    export SSH_AUTH_SOCK
+fi

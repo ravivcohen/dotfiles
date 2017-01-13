@@ -2,6 +2,8 @@
 #
 # Open Sublime Text 3
 
+SUBL="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+
 if [ ! -e "$SUBL" ] ; then
     echo "Sublime Text binary not found..."
     exit 1
