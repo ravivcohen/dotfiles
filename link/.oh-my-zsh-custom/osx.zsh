@@ -101,6 +101,9 @@ alias google=ggl
 
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin::/usr/local/MacGPG2/bin
 export PATH=/usr/texbin:$PATH
+export PATH=$PATH:$DOTFILES/bin
+
+
 # Brew ZSH requires this
 unalias run-help
 autoload run-help

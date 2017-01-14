@@ -1,12 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Open Sublime Text 3
 
-SUBL="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+SUBL="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl"
 
 if [ ! -e "$SUBL" ] ; then
-    echo "Sublime Text binary not found..."
+    echo "Sublime Text binary not found: $SUBL"
     exit 1
 fi
 
-"$SUBL" $@ &
+"$SUBL" --new-window -wait $@
