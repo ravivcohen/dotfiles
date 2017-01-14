@@ -57,7 +57,7 @@ function check_cmd_tools() {
       rm -rf "/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress"
     fi
     # Install the rest of the updated
-    softwareupdate -iav --verbose
+    softwareupdate -ia --verbose
     e_header "Must Reboot Damn you Apple"
     # This creates a .profile and will continue the install upon reboot.
     # This works because:
