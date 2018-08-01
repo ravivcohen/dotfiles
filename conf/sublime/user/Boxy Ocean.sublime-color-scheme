@@ -1,0 +1,11 @@
+{
+    "globals":
+    {
+        "selection": "#ffffff30",
+        "selectionBorder": "#ffffff30",
+        "guide": "ffffff95",
+        "activeGuide": "ffffff95",
+        "invisibles": "#7a7c7e"
+
+    }
+}
