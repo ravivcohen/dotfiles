@@ -1,24 +1,78 @@
 {
-	"color_scheme": "Packages/Theme - Spacegray/base16-ocean.dark.tmTheme",
-	"dictionary": "Packages/Language - English/en_US.dic",
+	"always_show_minimap_viewport": false,
+	"bold_folder_labels": true,
+	"caret_extra_bottom": 1,
+	"caret_extra_top": 1,
+	"caret_extra_width": 1,
+	"caret_style": "blink",
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"fade_fold_buttons": false,
+	"file_exclude_patterns":
+	[
+		".tags",
+		".tags_sorted_by_file",
+		".gemtags"
+	],
+	"font_face": "FiraCode-Retina",
+	"font_size": 12,
+	"high_visibility_enabled_by_default": false,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
+		"Solarized Color Scheme",
 		"Vintage"
 	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"line_padding_bottom": 1,
+	"line_padding_top": 1,
+	"match_brackets": false,
+	"match_brackets_angle": false,
+	"match_brackets_braces": false,
+	"match_brackets_content": false,
+	"match_brackets_square": false,
+	"match_tags": false,
+	"overlay_scroll_bars": "enabled",
+	"remember_open_files": false,
 	"rulers":
 	[
 		80,
 		120
 	],
-	"soda_classic_tabs": true,
+	"show_encoding": true,
+	"show_line_endings": true,
 	"spell_check": true,
-	"tab_completion": false,
+	"status_bar_brighter": true,
 	"tab_size": 4,
-	"theme": "Spacegray.sublime-theme",
-	"translate_tabs_to_spaces": true,
-	"remember_open_files": false,
-	"hot_exit": false,
-	"word_wrap": false
+	"tabs_padding_small": true,
+	"tabs_small": true,
+	"theme": "Boxy Ocean.sublime-theme",
+	"theme_accent_sky": true,
+	"theme_bar": true,
+	"theme_bar_logo_atomized": true,
+	"theme_bar_shadow_hidden": true,
+	"theme_dirty_accent_tangerine": true,
+	"theme_find_panel_atomized": true,
+	"theme_icons_atomized": true,
+	"theme_scrollbar_colored": true,
+	"theme_scrollbar_line": true,
+	"theme_scrollbar_rounded": true,
+	"theme_sidebar_disclosure": true,
+	"theme_sidebar_indent_sm": true,
+	"theme_sidebar_indent_top_level_disabled": true,
+	"theme_size_sm": true,
+	"theme_statusbar_colored": true,
+	"theme_statusbar_size_xs": true,
+	"theme_tab_highlight_text_only": true,
+	"theme_tab_rounded": true,
+	"theme_tab_selected_filled": true,
+	"theme_tab_size_xs": true,
+	"theme_tab_width_auto": true,
+	"theme_tabset_line_visible": true,
+	"theme_unified": true,
+	"translate_tabs_to_spaces": true
 }

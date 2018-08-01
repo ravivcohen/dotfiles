@@ -5,15 +5,19 @@
 	],
 	"installed_packages":
 	[
-		"Base16 Color Schemes",
+		"Markdown Extended",
+		"Monokai Extended",
+		"A File Icon",
+		"Boxy Theme",
+		"Boxy Theme Addon - Font Face",
+		"Boxy Theme Addon - Widget Font Size",
 		"BracketHighlighter",
 		"CTags",
-		"Git",
-		"LaTeXTools",
 		"Package Control",
 		"SideBarEnhancements",
 		"Solarized Color Scheme",
-		"Theme - Spacegray",
+		"SublimeLinter",
+		"Theme - Solarized Flat",
 		"Wrap Plus"
 	]
 }

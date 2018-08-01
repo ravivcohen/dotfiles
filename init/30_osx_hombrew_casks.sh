@@ -6,26 +6,7 @@ is_osx || return 1
 # Exit if, for some reason, cask is not installed.
 # [[ ! "$(brew ls --versions brew-cask)" ]] && e_error "Brew-cask failed to install." && return 1
 
-casks=()
-FALLTHROUGH=
-if [[ "$INSTALLTYPE" == "full" ]]; then
-  FALLTHROUGH=1
-  casks+=(vagrant)
-fi
-
-if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "noxcode" ]]; then
-  FALLTHROUGH=1
-  casks+=(tower transmit path-finder adium)
-fi
-
-if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "minimal" ]]; then
-  FALLTHROUGH=1
-  casks+=(firefox java6 keka)
-fi
-
-if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "base" ]]; then
-    casks+=(sublime-text iterm2)
-fi
+casks=(transmit adium wireshark firefox keka sublime-text google-chrome tunnelblick xpra alfred iterm2)
 
 # Install Homebrew casks.
 casks=($(setdiff "${casks[*]}" "$(brew cask list 2>/dev/null)"))
@@ -35,4 +16,12 @@ if (( ${#casks[@]} > 0 )); then
     brew cask install --appdir="/Applications" $cask
   done
   brew cask cleanup
+fi
+
+# Chane Sublime ICON cause why not 
+if [[ -e "/Applications/Sublime Text.app/Contents/Resources/Sublime Text.icns" ]]; then
+
+    e_header "Copying over Sublime Icon"
+    cp "$DOTFILES_HOME/conf/sublime/Sublime Text.icns" "/Applications/Sublime Text.app/Contents/Resources/"
+
 fi

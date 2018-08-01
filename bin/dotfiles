@@ -24,12 +24,10 @@ export SUDO_PROMPT="Password for %p:"
 
 function check_sudo() {
   if [[ $(sudo -u root whoami) != "root" ]]; then
-    e_error "Sorry, you need root to run parts of this script exiting."
+    e_error "Sorry, you need root to run parts of this script"
     e_header "Setting up /etc/sudoers..."
     read -p "Enter the username to use: " username
-    read -p "Enter the group to use: " groupname
-    su $username -m -c "echo 'Defaults:%$groupname runas_default=$username, runaspw' | sudo tee -a /etc/sudoers;
-    echo '%$groupname ALL=(ALL) ALL' | sudo tee -a /etc/sudoers"
+    su $username -m -c "sudo sed 's/XXNAMEXX/$(whoami)/; s/XXRUNASXX/$username/' $DOTFILES_HOME/conf/sudoers | sudo dd of=/etc/sudoers > /dev/null"
     if [[ $(sudo -u root whoami) != "root" ]]; then
       e_error "Sorry, you need root to run parts of this script exiting."
       exit 1
@@ -58,7 +56,7 @@ function check_cmd_tools() {
     fi
     # Install the rest of the updated
     softwareupdate -ia --verbose
-    e_header "Must Reboot Damn you Apple"
+    e_header "Must Reboot Damn you Apple  ... going down"
     # This creates a .profile and will continue the install upon reboot.
     # This works because:
     # a. On a clean install before any mods upon issuing sudo reboot the terminal reopens as part of restore previous state
@@ -128,15 +126,15 @@ function do_stuff() {
         continue
       fi
       # Destination file already exists in ~/. Back it up!
-      if [[ -e "$dest" ]]; then
-        e_arrow "Backing up ~/$base."
-        # Set backup flag, so a nice message can be shown at the end.
-        backup=1
-        # Create backup dir if it doesn't already exist.
-        [[ -e "$backup_dir" ]] || mkdir -p "$backup_dir"
-        # Backup file / link / whatever.
-        mv "$dest" "$backup_dir"
-      fi
+      # if [[ -e "$dest" ]]; then
+      #   e_arrow "Backing up ~/$base."
+      #   # Set backup flag, so a nice message can be shown at the end.
+      #   backup=1
+      #   # Create backup dir if it doesn't already exist.
+      #   [[ -e "$backup_dir" ]] || mkdir -p "$backup_dir"
+      #   # Backup file / link / whatever.
+      #   mv "$dest" "$backup_dir"
+      # fi
     fi
     # Do stuff.
     "$1_do" "$base" "$file"
@@ -225,23 +223,6 @@ function is_arch() {
   [[ $OS == "arch" ]] || return 1
 }
 
-## OSX 
-# FALLTHROUGH=
-# if [[ "$INSTALLTYPE" == "full" ]]; then
-#   FALLTHROUGH=1
-# fi
-
-# if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "noxcode" ]]; then
-#   FALLTHROUGH=1
-# fi
-
-# if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "minimal" ]]; then
-#   FALLTHROUGH=1
-# fi
-
-# if [[ -n $FALLTHROUGH || "$INSTALLTYPE" == "base" ]]; then
-# fi
-
 ################################################################################
 ## FUNCTIONS END                                                               #
 ################################################################################
@@ -272,6 +253,7 @@ export DOTFILES_HOME="$USER_HOME/.dotfiles"
 export is_standard_user=false
 
 check_sudo
+
 
 # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
@@ -319,7 +301,7 @@ if [[ ! -d $DOTFILES_HOME ]]; then
   export new_dotfiles_install=1
   prompt_delay=15
   e_header "Downloading dotfiles"
-  git clone git://github.com/ravivcohen/dotfiles.git $DOTFILES_HOME
+  git clone --recursive git://github.com/ravivcohen/dotfiles.git $DOTFILES_HOME
   cd $DOTFILES_HOME
 elif [[ "$1" != "restart" ]]; then
   # Make sure we have the latest files.
@@ -342,9 +324,9 @@ export PATH
 shopt -s dotglob
 shopt -s nullglob
 
-# If backups are needed, this is where they'll go.
-backup_dir="$DOTFILES_HOME/backups/$(date "+%Y_%m_%d-%H_%M_%S")/"
-backup=
+# # If backups are needed, this is where they'll go.
+# backup_dir="$DOTFILES_HOME/backups/$(date "+%Y_%m_%d-%H_%M_%S")/"
+# backup=
 
 e_header "Running Init"
 do_stuff "init"
@@ -355,9 +337,9 @@ do_stuff "copy"
 do_stuff "link"
 
 # Alert if backups were made.
-if [[ "$backup" ]]; then
-  echo -e "\nBackups were moved to ~/${backup_dir#$HOME/}"
-fi
+# if [[ "$backup" ]]; then
+#   echo -e "\nBackups were moved to ~/${backup_dir#$HOME/}"
+# fi
 
 # Lest I forget to do a few additional things...
 if [[ "$new_dotfiles_install" && -e "$DOTFILES_HOME/conf/firsttime_reminder.sh" ]]; then

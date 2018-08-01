@@ -6,10 +6,3 @@ if [[ ! -e $USER_HOME/.oh-my-zsh ]]; then
     git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
     chsh -s /bin/zsh
 fi
-
-if is_arch; then
-    #TODO
-    if [[ $(whoami) == "vagrant" ]]; then
-        sudo chsh -s "$(which zsh)" vagrant
-    fi
-fi
