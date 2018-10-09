@@ -45,15 +45,11 @@ ZSH_DISABLE_COMPFIX="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
-# OSX
 if [[ $(uname) == "Darwin" ]] ; then
 	plugins=(git osx github brew battery aws screen)
-# Linux
 else
 	plugins=(git github battery)
 fi
-
-
 
 GPG_TTY=$(tty)
 export GPG_TTY
@@ -63,7 +59,7 @@ if [ -f "${HOME}/.gpg-agent-info" ]; then
     export SSH_AUTH_SOCK
 fi
 
-
+# Theme
 POWERLEVEL9K_MODE="nerdfont-complete"
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
@@ -93,4 +89,6 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir dir_writable root_indicator)
 
 ZSH_THEME="powerlevel9k/powerlevel9k"
 source $ZSH/oh-my-zsh.sh
+# Theme End
 
+source /Users/rc/ncc/configs/my_aliasxs.zsh
