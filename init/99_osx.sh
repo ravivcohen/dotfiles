@@ -24,7 +24,7 @@ if [[ ! -d "$USER_HOME/Library/Application Support/Sublime Text 3/" ]]; then
     if [[ -e "/Applications/Sublime Text.app/Contents/Resources/Sublime Text.icns" ]]; then
 
         e_header "Copying over Sublime Icon"
-        cp "$DOTFILES_HOME/conf/sublime/Sublime Text.icns" "/Applications/Sublime Text.app/Contents/Resources/"
+        sudo -u root cp "$DOTFILES_HOME/conf/sublime/Sublime Text.icns" "/Applications/Sublime Text.app/Contents/Resources/"
 
     fi
 
