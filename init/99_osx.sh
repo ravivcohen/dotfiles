@@ -20,7 +20,17 @@ if [[ ! -d "$USER_HOME/Library/Application Support/Sublime Text 3/" ]]; then
     # Link needed files from user directory
     ln -sF $DOTFILES_HOME/conf/sublime/user/* $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
 
+    # Chane Sublime ICON cause why not 
+    if [[ -e "/Applications/Sublime Text.app/Contents/Resources/Sublime Text.icns" ]]; then
+
+        e_header "Copying over Sublime Icon"
+        cp "$DOTFILES_HOME/conf/sublime/Sublime Text.icns" "/Applications/Sublime Text.app/Contents/Resources/"
+
+    fi
+
 fi
+
+
 
 ## SUBLIME
     

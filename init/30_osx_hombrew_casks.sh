@@ -17,11 +17,3 @@ if (( ${#casks[@]} > 0 )); then
   done
   brew cask cleanup
 fi
-
-# Chane Sublime ICON cause why not 
-if [[ -e "/Applications/Sublime Text.app/Contents/Resources/Sublime Text.icns" ]]; then
-
-    e_header "Copying over Sublime Icon"
-    cp "$DOTFILES_HOME/conf/sublime/Sublime Text.icns" "/Applications/Sublime Text.app/Contents/Resources/"
-
-fi
