@@ -25,8 +25,8 @@ export SUDO_PROMPT="Password for %p:"
 function check_sudo() {
   if [[ $(sudo -u root whoami) != "root" ]]; then
     e_error "Sorry, you need root to run parts of this script"
-    e_header "Setting up /etc/sudoers..."
-    read -p "Enter the username to use: " username
+    e_header "Setting up sudoers"
+    read -p "Enter the username and password to use: " username
     su $username -m -c "curl -s https://raw.githubusercontent.com/ravivcohen/dotfiles/master/conf/sudoers | sed 's/XXNAMEXX/$(whoami)/; s/XXRUNASXX/$username/' | sudo dd of=/etc/sudoers &> /dev/null"
     if [[ $(sudo -u root whoami) != "root" ]]; then
       e_error "Sorry, you need root to run parts of this script exiting."
@@ -61,8 +61,10 @@ function check_cmd_tools() {
     # in Apple's SUS catalog
     touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
     
-    # The only update will now be the CLI Tools 
-    softwareupdate -ia --verbose
+    cmd_line_tools=$(softwareupdate -l | awk '/\*\ Command Line Tools/ { $1=$1;print }' | tail -1 | sed 's/^[[ \t]]*//;s/[[ \t]]*$//;s/*//' | cut -c 2-)
+    #Install the command line tools
+    softwareupdate -i "$cmd_line_tools" --verbose
+
   fi
 }
 
