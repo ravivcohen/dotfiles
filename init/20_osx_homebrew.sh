@@ -6,12 +6,12 @@ is_osx || return 1
 
 # Install Homebrew recipes.
 recipes=(
+  openssl
+  gdbm
   python
   python@2
-  openssl
   "--HEAD universal-ctags"
   youtube-dl
-  gdbm 
   ssh-copy-id
   git  
   git-extras
@@ -49,15 +49,6 @@ done
 brewroot="$(brew --config | awk '/HOMEBREW_PREFIX/ {print $2}')"
 binroot=$brewroot/bin
 cellarroot=$brewroot/Cellar
-
-# # -rw-r--r-- 1 root wheel
-# if [[ "$(stat -L -f "%Sp:%Su:%Sg" /Library/LaunchDaemons/org.wireshark.ChmodBPF.plist)" != "-rw-r--r--:root:wheel" ]]; then
-#   # # Temp fix for wireshark interfaces
-#   curl "https://bugs.wireshark.org/bugzilla/attachment.cgi?id=3373" -o /tmp/ChmodBPF.tar.gz
-#   tar zxvf /tmp/ChmodBPF.tar.gz -C /tmp
-#   open /tmp/ChmodBPF/Install\ ChmodBPF.app
-# fi
-
 
 # Install Slate
 if [[ ! -e "/Applications/Slate.app" ]]; then
