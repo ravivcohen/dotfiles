@@ -6,27 +6,26 @@ is_osx || return 1
 
 # Install Homebrew recipes.
 recipes=(
+  python
+  python@2
   openssl
   "--HEAD universal-ctags"
   youtube-dl
-  pkg-config
-  readline 
-  sqlite 
   gdbm 
   ssh-copy-id
   git  
   git-extras
-  htop-osx 
+  htop-osx
   ack
   pcre 
   rename 
   p7zip 
   "lesspipe --with-syntax-highlighting"
-  python@2 
-  "vim --with-python@2 --with-override-system-vi"
+  macvim
   zsh 
   wget
   "nmap --with-pygtk"
+  coreutils
 )
 
 export PATH="/usr/local/bin:$PATH"

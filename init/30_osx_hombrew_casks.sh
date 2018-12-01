@@ -15,5 +15,5 @@ if (( ${#casks[@]} > 0 )); then
     e_header "Installing Homebrew recipe: $cask"
     brew cask install --appdir="/Applications" $cask
   done
-  brew cask cleanup
+  brew cleanup
 fi
