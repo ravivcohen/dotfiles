@@ -42,28 +42,27 @@ function check_cmd_tools() {
   # We assume if not CLI tools clean install and update the whole system
   if [[ $? != 0 ]]; then
     e_header "Installing XCode Command Line Tools and All Updates"
+    
+    # First we update the system, as we might not get latest cmd tools otherwise
+    # Check if the current updates will require a restart
+    restartrequired=`softwareupdate -l | grep restart`
+    
+    if [[ "$restartrequired" != "" ]]; then
+      echo 'bash -c "$(curl -fsSL https://raw.github.com/ravivcohen/dotfiles/master/bin/dotfiles)"' >> .profile
+      softwareupdate -iaR --verbose
+      e_header "Must Reboot After Update... Rebooting..."
+      exit
+    fi
+
+    softwareupdate -ia --verbose
+
+    # At this point all software updates and reboots have happned 
     # create the placeholder file that's checked by CLI updates' .dist code
     # in Apple's SUS catalog
     touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
-    # install all the updates
-    # Find the last listed update in the Software Update feed with "Command Line Tools" in the name
-    cmd_line_tools=$(softwareupdate -l | awk '/\*\ Command Line Tools/ { $1=$1;print }' | tail -1 | sed 's/^[[ \t]]*//;s/[[ \t]]*$//;s/*//' | cut -c 2-)
-    #Install the command line tools
-    softwareupdate -i "$cmd_line_tools" --verbose
-    # Remove the temp file
-    if [[ -f "/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress" ]]; then
-      rm -rf "/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress"
-    fi
-    # Install the rest of the updated
+    
+    # The only update will now be the CLI Tools 
     softwareupdate -ia --verbose
-    e_header "Must Reboot Damn you Apple  ... going down"
-    # This creates a .profile and will continue the install upon reboot.
-    # This works because:
-    # a. On a clean install before any mods upon issuing sudo reboot the terminal reopens as part of restore previous state
-    # b. One a clean install .profile does not exist so it easy to manipulate and later delete.
-    echo 'bash -c "$(curl -fsSL https://raw.github.com/ravivcohen/dotfiles/master/bin/dotfiles)"' >> .profile
-    sleep 5
-    sudo -u root reboot
   fi
 }
 
@@ -125,16 +124,6 @@ function do_stuff() {
         e_error "Skipping ~/$base, $skip."
         continue
       fi
-      # Destination file already exists in ~/. Back it up!
-      # if [[ -e "$dest" ]]; then
-      #   e_arrow "Backing up ~/$base."
-      #   # Set backup flag, so a nice message can be shown at the end.
-      #   backup=1
-      #   # Create backup dir if it doesn't already exist.
-      #   [[ -e "$backup_dir" ]] || mkdir -p "$backup_dir"
-      #   # Backup file / link / whatever.
-      #   mv "$dest" "$backup_dir"
-      # fi
     fi
     # Do stuff.
     "$1_do" "$base" "$file"
@@ -258,6 +247,10 @@ check_sudo
 # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+if [[ -e "$USER_HOME/.profile" ]]; then
+  e_header "Removing .profile"
+  rm -rf "$USER_HOME/.profile"
+fi
 
 if is_osx; then
   check_cmd_tools
@@ -270,13 +263,6 @@ if is_osx; then
     export is_standard_user=true
   fi    
 
-fi
-
-#sleep 10
-
-if [[ -e "$USER_HOME/.profile" ]]; then
-  e_header "Removing .profile"
-  rm -rf "$USER_HOME/.profile"
 fi
 
 # If Git is not installed, install it (Ubuntu only, since Git comes standard
