@@ -179,7 +179,7 @@ function set() {
     if [[ "$1" == "comp" ]]; then skip=1; fi
     for b in "${setdiffB[@]}"; do
       if [[ "$1" == "diff" ]]; then 
-        [[ "$(echo $a | awk '{ print $1 }')" == "$(echo $b | awk '{ print $1 }')" ]] && skip=1 && break
+        [[ "$(echo $a | awk '{ print $1 }')" =~ "$(echo $b | awk '{ print $1 }')" ]] && skip=1 && break
       elif [[ "$1" == "comp" ]]; then 
         [[ "$(echo $a | awk '{ print $1 }')" == "$(echo $b | awk '{ print $1 }')" ]] && skip= && break
       fi

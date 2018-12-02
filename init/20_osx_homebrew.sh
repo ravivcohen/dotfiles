@@ -10,7 +10,7 @@ recipes=(
   gdbm
   python
   python@2
-  "--HEAD universal-ctags"
+  "universal-ctags --HEAD"
   youtube-dl
   ssh-copy-id
   git  
