@@ -41,8 +41,6 @@ alias whois="whois -h whois-servers.net"
 # View HTTP traffic
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
-alias subl=st
-
 # Sort IPs
 alias sip='sort -n -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4'
 
