@@ -3,38 +3,36 @@ is_osx || return 1
 # Setup OSX for Personal Use
 # Setup the needed DIRS
 mkdir -p $USER_HOME/Virtual_Machines
-mkdir -p $USER_HOME/Documents
 
 ## SUBLIME
-
-if [[ ! -d "$USER_HOME/Library/Application Support/Sublime Text 3/" ]]; then
+if [[ -d "$USER_HOME/Library/Application Support/Sublime Text 3/" ]]; then
     
-    mkdir -p $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
-    mkdir -p $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
-
-    e_header "Downloading sublime-package-manager"
-    # Get the latest package manager
-    curl -fsSL https://packagecontrol.io/Package%20Control.sublime-package -o $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
-
-    e_header "Configuring Sublime"
-    # Link needed files from user directory
-    ln -sF $DOTFILES_HOME/conf/sublime/user/* $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
-
-    # Chane Sublime ICON cause why not 
-    if [[ -e "/Applications/Sublime Text.app/Contents/Resources/Sublime Text.icns" ]]; then
-
-        e_header "Copying over Sublime Icon"
-        sudo -u root cp "$DOTFILES_HOME/conf/sublime/Sublime Text.icns" "/Applications/Sublime Text.app/Contents/Resources/"
-
-    fi
-
+    rm -rf $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
+    rm -rf $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
 fi
 
+    
+mkdir -p $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
+mkdir -p $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
 
+e_header "Downloading sublime-package-manager"
+# Get the latest package manager
+curl -fsSL https://packagecontrol.io/Package%20Control.sublime-package -o $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
 
+e_header "Configuring Sublime"
+# Link needed files from user directory
+ln -sF $DOTFILES_HOME/conf/sublime/user/* $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
+
+# Change Sublime ICON cause why not 
+if [[ -e "/Applications/Sublime Text.app/Contents/Resources/Sublime Text.icns" ]]; then
+
+    e_header "Copying over Sublime Icon"
+    sudo -u root cp "$DOTFILES_HOME/conf/sublime/Sublime Text.icns" "/Applications/Sublime Text.app/Contents/Resources/"
+
+fi
 ## SUBLIME
     
-# OSX Config. Can safely be run everytime.
+# OSX user local configs
 e_header "Running OSX Local Config"
 source $DOTFILES_HOME/conf/osx/conf_osx.sh
 
@@ -45,7 +43,7 @@ if [[ ! -e ~/Library/Preferences/com.googlecode.iterm2.plist ]]; then
 
     # Open iTerm to set all files in place.
     open -a iTerm
-    sleep 1
+    sleep 10
     kill $(pgrep -f iTerm2)
 fi
 
@@ -53,5 +51,6 @@ fi
 defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool TRUE
 defaults write  ~/Library/Preferences/com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.iTerm/";
 ## iTERM
-osascript -e 'tell application "Finder" to set desktop picture to POSIX file "'$DOTFILES_HOME'/conf/bkrd.jpg"'
+
+osascript -e 'tell application "Finder" to set desktop picture to POSIX file "'$DOTFILES_HOME'/conf/pics/bkrd'$(( ( RANDOM % 7 )  + 1 ))'.jpg"'
         

@@ -20,29 +20,11 @@ PATH=/usr/local/bin:$(path_remove /usr/local/bin)
 PATH=/usr/local/sbin:$(path_remove /usr/local/sbin)
 export PATH
 
-#Some Sudo related stuff if your a STD user.
-if [[ $(groups | grep -q -e '\badmin\b')$? -ne 0 ]]; then
-    alias sudo="sudo -H -E TMPDIR=/tmp"
-    alias rodo="sudo -u root"
-fi
-
 ###firefox
 alias firefox='nohup /Applications/Firefox.app/Contents/MacOS/firefox-bin -p > /dev/null 2>&1 &'
 
 
 alias xpra='/Applications/Xpra.app/Contents/Helpers/Xpra'
-#XPRA Vagrant Stuff
-#so i can do something like
-#vagrant-xpra ssh:
-#vagrant-xpra webapp ssh:
-#whatever vm name im using
-vagrant-xpra () { 
-  if [ $# -le 1 ]; then 
-    xpra attach --encoding=rgb --no-microphone --no-speaker --ssh="vagrant ssh -- " ${@:1}
-  else 
-    xpra attach --encoding=rgb --no-microphone --no-speaker --ssh="vagrant ssh $1 -- " ${@:2} 
-  fi 
-}
 
 #xpra attach --encoding=h264 --quality=75 --no-microphone --no-speaker --opengl=yes  --dpi=72 --ssh="vagrant ssh webapp -- " ssh:2
 
@@ -87,22 +69,11 @@ fi
 # Recursively delete `.DS_Store` files
 alias dsstore="find . -name '*.DS_Store' -type f -ls -delete"
 
-#Burp
-burpdirectory="$HOME/Tools/burp/"
-logfilename="$(date +%F_%H-%M-%S)"
-
-alias burp='nohup java -jar -Xmx1024m ${burpdirectory}burp.jar >>${burpdirectory}/logs/${logfilename}_stdout.log 2>>${burpdirectory}/logs/${logfilename}_stderr.log &'
-
 alias edot="subl $HOME/.dotfiles/"
 
 alias ggl="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir=/Users/raviv/.google/chrome/rc > /dev/null 2>&1 &"
 alias chrome=ggl
 alias google=ggl
-
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin::/usr/local/MacGPG2/bin
-export PATH=/usr/texbin:$PATH
-export PATH=$PATH:$DOTFILES/bin
-
 
 # Brew ZSH requires this
 unalias run-help
