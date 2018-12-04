@@ -201,8 +201,8 @@ function assert() {
   ${modes[success]} "\"$actual\" ${equals[success]} \"$expected\""
 }
 
-# OS detection
-function Ï() {
+# OS detetion
+function is_osx() {
   [[ $OS == "osx" ]] || return 1
 }
 
