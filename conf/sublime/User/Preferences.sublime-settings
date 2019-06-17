@@ -5,7 +5,7 @@
 	"caret_extra_top": 1,
 	"caret_extra_width": 1,
 	"caret_style": "blink",
-	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"color_scheme": "Packages/Boxy Theme/schemes/Boxy Ocean.tmTheme",
 	"fade_fold_buttons": false,
 	"file_exclude_patterns":
 	[
@@ -13,8 +13,8 @@
 		".tags_sorted_by_file",
 		".gemtags"
 	],
-	"font_face": "FiraCode-Retina",
-	"font_size": 12,
+	"font_face": "Hack Nerd Font",
+	"font_size": 13,
 	"high_visibility_enabled_by_default": false,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,

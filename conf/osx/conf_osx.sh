@@ -329,7 +329,11 @@ tell application "Terminal"
     local allOpenedWindows
     local initialOpenedWindows
     local windowID
-    set themeName to "SolarizedDarkXterm-256color"
+    set themeName to "materialshell-dark"
+    set fontName to "Sauce Code Pro Medium Nerd Font Complete"
+    set fontSize to "12"
+    set rowSize to "30"
+    set columnSize to "118"
     (* Store the IDs of all the open terminal windows. *)
     set initialOpenedWindows to id of every window
     (* Open the custom theme so that it gets added to the list
@@ -340,23 +344,27 @@ tell application "Terminal"
     delay 1
     (* Set the custom theme as the default terminal theme. *)
     set default settings to settings set themeName
+    set font size of default settings to fontSize
+    set font name of default settings to fontName
+    set number of rows of default settings to rowSize
+    set number of columns of default settings to columnSize
     (* Get the IDs of all the currently opened terminal windows. *)
     set allOpenedWindows to id of every window
     repeat with windowID in allOpenedWindows
-        (* Close the additional windows that were opened in order
-           to add the custom theme to the list of terminal themes. *)
+        (* Close the additional windows that were opened in order to add the custom theme to the list of terminal themes. *)
         if initialOpenedWindows does not contain windowID then
             close (every window whose id is windowID)
-        (* Change the theme for the initial opened terminal windows
-           to remove the need to close them in order for the custom
-           theme to be applied. *)
+        (* Change the theme for the initial opened terminal windows to remove the need to close them in order for the custom theme to be applied. *)
         else
             set current settings of tabs of (every window whose id is windowID) to settings set themeName
+            set font size of current settings of tabs of (every window whose id is windowID) to fontSize
+            set font name of current settings of tabs of (every window whose id is windowID) to fontName
+            set number of rows of current settings of tabs of (every window whose id is windowID) to rowSize
+            set number of columns of current settings of tabs of (every window whose id is windowID) to columnSize
         end if
     end repeat
 end tell
 EOD
-
 # Disable the annoying line marks
 defaults write com.apple.Terminal ShowLineMarks -int 0
 

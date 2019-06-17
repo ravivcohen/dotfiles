@@ -6,6 +6,7 @@ link/.ssh/known_hosts
 *LOCAL*
 *.last-run
 *.cache/
+._SolarizedDarkXterm-256color.terminal
 
 # OS generated files #
 ######################
