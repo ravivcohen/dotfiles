@@ -7,21 +7,27 @@ mkdir -p $USER_HOME/Virtual_Machines
 ## SUBLIME
 if [[ -d "$USER_HOME/Library/Application Support/Sublime Text 3/" ]]; then
     
-    rm -rf $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
-    rm -rf $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+    rm -rf "$USER_HOME/Library/Application Support/Sublime Text 3/Installed Packages/"
+    rm -rf "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/"
 fi
 
     
 mkdir -p $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/
 mkdir -p $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+mkdir -p "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/Boxy Theme Addon - Font Face/"
+mkdir -p "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/Boxy Theme Addon - Unified Mode/"
+mkdir -p "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/Boxy Theme Addon - Widget Font Size/"
 
 e_header "Downloading sublime-package-manager"
 # Get the latest package manager
-curl -fsSL https://packagecontrol.io/Package%20Control.sublime-package -o $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package
+curl -fsSL https://packagecontrol.io/Package%20Control.sublime-package -o "$USER_HOME/Library/Application Support/Sublime Text 3/Installed Packages/Package Control.sublime-package"
 
 e_header "Configuring Sublime"
 # Link needed files from user directory
-ln -sF $DOTFILES_HOME/conf/sublime/user/* $USER_HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
+ln -sF $DOTFILES_HOME/conf/sublime/user/* "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/User/"
+ln -sF "$DOTFILES_HOME/conf/sublime/Boxy Theme Addon - Font Face/*" "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/Boxy Theme Addon - Font Face/"
+ln -sF "$DOTFILES_HOME/conf/sublime/Boxy Theme Addon - Unified Mode/*" "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/Boxy Theme Addon - Unified Mode/"
+ln -sF "$DOTFILES_HOME/conf/sublime/Boxy Theme Addon - Widget Font Size/*" "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/Boxy Theme Addon - Widget Font Size/"
 
 # Change Sublime ICON cause why not 
 if [[ -e "/Applications/Sublime Text.app/Contents/Resources/Sublime Text.icns" ]]; then

@@ -20,11 +20,11 @@ recipes=(
   pcre 
   rename 
   p7zip 
-  "lesspipe --with-syntax-highlighting"
+  lesspipe
   macvim
   zsh 
   wget
-  "nmap --with-pygtk"
+  nmap
   coreutils
 )
 

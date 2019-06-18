@@ -329,7 +329,7 @@ tell application "Terminal"
     local allOpenedWindows
     local initialOpenedWindows
     local windowID
-    set themeName to "materialshell-dark"
+    set themeName to "SolarizedDarkXterm-256color"
     set fontName to "Sauce Code Pro Medium Nerd Font Complete"
     set fontSize to "12"
     set rowSize to "30"

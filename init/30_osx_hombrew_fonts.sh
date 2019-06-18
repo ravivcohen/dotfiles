@@ -10,6 +10,7 @@ is_osx || return 1
 fonts=(
     font-hack-nerd-font
     font-sourcecodepro-nerd-font
+    font-meslo-nerd-font
  )
 
 fonts=($(setdiff "${fonts[*]}" "$(brew cask list 2>/dev/null)"))
