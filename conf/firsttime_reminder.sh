@@ -4,12 +4,11 @@
   if is_osx; then
   	open -a Safari
   	sleep 1
-	#gpgtools
-	open https://gpgtools.org/
 	#vmware-fusion
-	open https://my.vmware.com/web/vmware/login
-   # Latex
-    open https://www.tug.org/mactex/
+	open https://vmugadvantage.onthehub.com/
+    open https://account.jetbrains.com/login
+    open https://www.google.com/chrome/
+    open https://aka.ms/office-install
 fi
 
 

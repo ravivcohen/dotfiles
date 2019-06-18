@@ -72,7 +72,7 @@ alias dsstore="find . -name '*.DS_Store' -type f -ls -delete"
 
 alias edot="subl $HOME/.dotfiles/"
 
-alias ggl="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir=/Users/raviv/.google/chrome/rc > /dev/null 2>&1 &"
+alias ggl="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome > /dev/null 2>&1 &"
 alias chrome=ggl
 alias google=ggl
 
@@ -81,3 +81,5 @@ unalias run-help
 autoload run-help
 HELPDIR=/usr/local/share/zsh/helpfiles
 
+#VSCODE
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
