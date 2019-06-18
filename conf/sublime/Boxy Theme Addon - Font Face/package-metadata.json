@@ -1,0 +1,1 @@
+{"dependencies": [], "description": "Change the font face of the Sublime Text UI", "url": "https://github.com/ihodev/sublime-boxy-addon-font-face", "platforms": ["*"], "version": "3.2.0", "sublime_text": ">=3103"}

@@ -5,7 +5,7 @@
 	"caret_extra_top": 1,
 	"caret_extra_width": 1,
 	"caret_style": "blink",
-	"color_scheme": "Packages/Boxy Theme/schemes/Boxy Ocean.tmTheme",
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 	"fade_fold_buttons": false,
 	"file_exclude_patterns":
 	[
@@ -20,6 +20,9 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
+		"Boxy Theme",
+		"Boxy Theme Addon - Font Face",
+		"Boxy Theme Addon - Widget Font Size",
 		"Solarized Color Scheme",
 		"Vintage"
 	],
