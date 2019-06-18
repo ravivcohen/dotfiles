@@ -28,6 +28,7 @@ ln -sF $DOTFILES_HOME/conf/sublime/user/* "$USER_HOME/Library/Application Suppor
 ln -sF "$DOTFILES_HOME/conf/sublime/Boxy Theme Addon - Font Face/*" "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/Boxy Theme Addon - Font Face/"
 ln -sF "$DOTFILES_HOME/conf/sublime/Boxy Theme Addon - Unified Mode/*" "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/Boxy Theme Addon - Unified Mode/"
 ln -sF "$DOTFILES_HOME/conf/sublime/Boxy Theme Addon - Widget Font Size/*" "$USER_HOME/Library/Application Support/Sublime Text 3/Packages/Boxy Theme Addon - Widget Font Size/"
+ln -sF "$DOTFILES_HOME/conf/sublime/Boxy Theme.sublime-package" "$USER_HOME/Library/Application Support/Sublime Text 3/Installed Packages/Boxy Theme.sublime-package"
 
 # Change Sublime ICON cause why not 
 if [[ -e "/Applications/Sublime Text.app/Contents/Resources/Sublime Text.icns" ]]; then
