@@ -27,7 +27,8 @@ function check_sudo() {
     e_error "Sorry, you need root to run parts of this script"
     e_header "Setting up sudoers"
     read -p "Enter the username and password to use: " username
-    su $username -m -c "curl -s https://raw.githubusercontent.com/ravivcohen/dotfiles/master/conf/sudoers | sed 's/XXNAMEXX/$(whoami)/; s/XXRUNASXX/$username/' | sudo dd of=/etc/sudoers"
+    su $username -s /bin/bash -m -c "curl -s https://raw.githubusercontent.com/ravivcohen/dotfiles/master/conf/sudoers | sed 's/XXNAMEXX/$(whoami)/; s/XXRUNASXX/$username/' | sudo dd of=/etc/sudoers"
+    exit
     if [[ $(sudo -u root whoami) != "root" ]]; then
       e_error "Sorry, you need root to run parts of this script exiting."
       exit 1
