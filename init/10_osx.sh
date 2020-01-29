@@ -28,7 +28,7 @@ brew upgrade
 
 
 # Tap needed repo's
-taps=("caskroom/versions" "caskroom/fonts" "universal-ctags/universal-ctags")
+taps=("homebrew/cask-versions" "homebrew/cask-fonts" "universal-ctags/universal-ctags")
 taps=($(setdiff "${taps[*]}" "$(brew tap)"))
 if (( ${#taps[@]} > 0 )); then
   for a_tap in "${taps[@]}"; do
